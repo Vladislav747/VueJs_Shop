@@ -12,8 +12,13 @@
 
       <div class="spacer"/>
 
-      <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать Задачи...">
+      <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать товары...">
     </div>
+
+    <router-link id="cart" :to="{ name: 'cart' }">
+      <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
+    </router-link>
+
   </div>
 </template>
 
