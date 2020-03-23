@@ -251,11 +251,10 @@ export default {
   .spacer {
     background-position: center;
     background-size: cover;
-    height: 240px;
+    height: 100%;
     max-width: 100%;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
-    padding-top: 32%;
     text-align: center;
   }
 
