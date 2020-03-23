@@ -21,9 +21,7 @@ export default {
   methods:{
     changeTheme() {
      this.isBlackTheme = !this.isBlackTheme;
-     var iconTheme = document.getElementsByClassName("footer-icon")[0];
      var bodyElement = document.body;
-     console.log(bodyElement, "bodyElement");
 
       if(this.isBlackTheme){
         bodyElement.classList.toggle("bg-dark");

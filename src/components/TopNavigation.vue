@@ -2,7 +2,7 @@
   <div class="header bg-blue">
     <div class="max-width-block header-inner">
       <router-link id="task-list" :to="{ name: 'task-list' }">
-        <span class="top-desktop">Задачи</span>
+        <span class="top-desktop">Главная</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>
       <router-link id="task-add" :to="{ name: 'task-add' }">
@@ -16,7 +16,7 @@
     </div>
 
     <router-link id="cart" :to="{ name: 'cart' }">
-      <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
+      <font-awesome-icon icon="shopping-cart" size="2x" class="cart-icon"/>
     </router-link>
 
   </div>
@@ -126,6 +126,7 @@ export default {
   .top-icon {
     display: none;
   }
+
 }
 
 @media screen and (max-width: 550px) {

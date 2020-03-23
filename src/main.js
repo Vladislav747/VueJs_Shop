@@ -12,11 +12,12 @@ import {
   faEdit,
   faTrash,
   faPalette,
+  faShoppingCart,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome';
-library.add(faPlusCircle, faListUl, faFilter, faEdit, faTrash, faPalette);
+library.add(faPlusCircle, faListUl, faFilter, faEdit, faTrash, faPalette, faShoppingCart);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 import axios from 'axios';

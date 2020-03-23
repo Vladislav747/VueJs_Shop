@@ -33,9 +33,9 @@
     </div>
 
     <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Загружаю задачи</div>
+    <div v-if="isLoading" class="loading">Загружаю товары</div>
     <div v-if="noTasks" class="no-tasks">
-      <h3>Задачи не найдены</h3>Нажмите вверху на панели Добавить Новую задачу
+      <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
 
     <div id="tasks">

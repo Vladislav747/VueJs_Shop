@@ -4,22 +4,29 @@
       <div class="card-header">
         <div class="card-header--top">
           <div class="card-title" @click="viewTask(task.id)">{{ task.name }}</div>
-          <span class="card-sticker top-right" v-bind:class="classObject">{{ task.category }}</span>
+          <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
-
+        <div class="image"><img src="http://next.aspro-try.ru/upload/iblock/d3b/d3b22c157f168a2f12159765e3276d16.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/></div>
         <div class="description">{{ task.description }}</div>
+        <div class="price">{{ task.description }}</div>
       </div>
-
+     
       <div class="card-footer">
-        <div class="datetimeDeadline">{{ formatData }}</div>
+        <div class="price-block">
+          
+          <div class="counter_block">
+            <span class="minus" id="bx_3966226736_2506_quant_down">-</span>
+            <input type="text" class="text" id="bx_3966226736_2506_quantity" name="quantity" value="1">
+            <span class="plus" id="bx_3966226736_2506_quant_up" data-max="1000">+</span>
+          </div>
 
-        <div class="card-icons"> 
-          <a id="edit" @click.prevent="editTask()" class="card-icons--link">
-            <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
-          </a>
-          <a id="delete" @click.prevent="deleteTask()" class="card-icons--link">
-            <font-awesome-icon icon="trash" class="top-icon icon-size-xl" alt="Удалить задачу"/>
-          </a>
+          <div class="card-icons"> 
+            <a id="edit" @click.prevent="editTask()" class="card-icons--link">
+              <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
+            </a>
+          </div>
+
+          <div class="buy-block">Купить товар</div>
         </div>
       </div>
         
@@ -73,17 +80,7 @@ export default {
         break;
     }
       return className
-    },
-
-    formatData: function(){
-        return new Date(this.task.dateOfTask).toLocaleString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-      });
-    },
+    }
   
 },
 
@@ -160,8 +157,9 @@ export default {
 <style lang="scss" scoped> 
    
 .card {
-  padding: 16px;
-  width: 33.333%;
+  margin: 10px;
+  width: 30%;
+  border-radius: 10px;
 
   .card-inner {
     height: 100%;
@@ -198,6 +196,23 @@ export default {
       text-transform: uppercase;
       border-radius: 2px;
     }
+  }
+
+  .price{
+    font-weight: 700;
+    line-height: 15px;
+    white-space: normal;
+  }
+
+  .buy-block{
+      color: black;
+      float: right;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      padding: 3px 10px 2px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      background-color: #ffd83a;
   }
 
   .card-footer {
