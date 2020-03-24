@@ -6,28 +6,33 @@
           <div class="card-title" @click="viewTask(task.id)">{{ task.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
-        <div class="image"><img src="http://next.aspro-try.ru/upload/iblock/d3b/d3b22c157f168a2f12159765e3276d16.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/></div>
-        <div class="description">{{ task.description }}</div>
-        <div class="price">{{ task.description }}</div>
+        <div class="image">
+          <img src="../static/images/bed.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
+        </div>
       </div>
      
       <div class="card-footer">
+        <div class="description">{{ task.description }}</div>
         <div class="price-block">
-          
-          <div class="counter_block">
-            <span class="minus" id="bx_3966226736_2506_quant_down">-</span>
-            <input type="text" class="text" id="bx_3966226736_2506_quantity" name="quantity" value="1">
-            <span class="plus" id="bx_3966226736_2506_quant_up" data-max="1000">+</span>
-          </div>
+          <span class="price">10000 <span class="currency">руб/шт</span></span>
+        </div>
 
-          <div class="card-icons"> 
+        <div class="counter_block">
+          <span class="minus" id="bx_3966226736_2506_quant_down">-</span>
+          <input type="text" class="text" id="bx_3966226736_2506_quantity" name="quantity" value="1">
+          <span class="plus" id="bx_3966226736_2506_quant_up" data-max="1000">+</span>
+        </div>
+
+          <!-- <div class="card-icons"> 
             <a id="edit" @click.prevent="editTask()" class="card-icons--link">
               <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
             </a>
-          </div>
+          </div> -->
 
-          <div class="buy-block">Купить товар</div>
+        <div class="buy-block">
+          <button class="add-to-cart-btn">Купить товар</button>
         </div>
+        
       </div>
         
     </div>
@@ -47,7 +52,10 @@ export default {
         return {
           name: "",
           category: "",
-          description: ""
+          description: "",
+          price:"",
+          currency:"",
+          srcImage:"",
         };
       }
     }
@@ -212,18 +220,101 @@ export default {
       padding: 3px 10px 2px;
       text-transform: uppercase;
       border-radius: 2px;
-      background-color: #ffd83a;
+    
+
+
+      .add-to-cart-btn{
+        background: #5044ff;
+        color: #fff;
+        padding: 10px 30px;
+        font-size: 13px;
+        outline: none;
+        border: 1px solid #5044ff;
+        border-radius: 1000px;
+        transition: all .2s ease-in;
+        opacity: 0;
+
+        &:hover{
+          opacity: 1;
+        }
+      }
   }
 
   .card-footer {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     margin-top: 15px;
+    flex-direction: column;
 
     .datetimeDeadline {
       font-size: 1rem;
       font-weight: bold;
+    }
+
+    .price-block{
+      margin: auto;
+    }
+
+    .counter_block{
+      box-sizing: border-box;
+      border: 1px solid #f3f3f5;
+      background: #f3f3f5;
+      display: inline-block;
+      border-radius: 2px;
+      
+
+      >span:before{
+        display: inline-block;
+        content: "";
+        width: 24px;
+        height: 34px;
+        background: url(/bitrix/templates/aspro_next/images/svg/ai.svg) -80px -191px no-repeat;
+        vertical-align: middle;
+      }
+
+      input[type="text"]{
+        width: 34px;
+        border: 0;
+        border-left: 1px solid #f3f3f5;
+        border-right: 1px solid #f3f3f5;
+        background: #f3f3f5;
+        color: #666;
+        font-size: 13px;
+        height: 34px;
+        border-radius: 0;
+        text-align: center;
+        line-height: 13px;
+        padding: 7px 3px;
+      }
+
+      .minus{
+        line-height: 40px;
+        height: 34px;
+        width: 24px;
+        display: inline-block;
+        cursor: pointer;
+        vertical-align: top;
+
+        &:before{
+          background: url(../assets/minus-solid.svg);
+          vertical-align: middle;
+        }
+      }
+
+      .plus{
+        line-height: 40px;
+        height: 34px;
+        width: 24px;
+        display: inline-block;
+        cursor: pointer;
+
+        &:before{
+          background: url(../assets/plus-solid.svg);
+          vertical-align: middle;
+        }
+      }
+      
     }
 
     .card-icons {
