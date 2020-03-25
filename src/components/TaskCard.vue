@@ -7,7 +7,7 @@
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
         <div class="image">
-          <img src="../static/images/bed.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
+          <img src="../../static/images/bed.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
         </div>
       </div>
      
