@@ -37,7 +37,7 @@ Vue.config.productionTip = false
 
 import App from './App';
 import router from './router';
-import globalData from './globalFunctions';
+import globalData from './utility/globalFunctions';
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

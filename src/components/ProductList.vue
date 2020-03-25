@@ -1,5 +1,5 @@
 <template>
-  <div class="taskList max-width-block">
+  <div class="productList max-width-block">
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
       <div class="filterIcon" v-on:click="showFilter()">
         <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
@@ -39,20 +39,20 @@
     </div>
 
     <div id="tasks">
-      <task-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
+      <product-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
   </div>  
 </template>
 
 <script>
 import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
-import TaskCard from "./TaskCard.vue";
+import ProductCard from "./ProductCard.vue";
 
 export default {
-  name: "TaskList",
+  name: "ProductList",
 
   components: {
-    TaskCard
+    ProductCard
   },
 
   data() {
@@ -246,7 +246,7 @@ export default {
     }
 }
 
-.taskList {
+.productList {
   z-index: 1;
 }
 

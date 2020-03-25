@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import TaskList from '../components/TaskList.vue'
-import TaskAddEdit from '../components/TaskAddEdit.vue'
-import TaskDetail from '../components/TaskDetail.vue'
+import ProductList from '../components/ProductList.vue'
+import ProductAddEdit from '../components/ProductAddEdit.vue'
+import ProductDetail from '../components/ProductDetail.vue'
 
 Vue.use(Router)
 
@@ -12,24 +12,24 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'task-list',
-      component: TaskList
+      name: 'product-list',
+      component: ProductList
     },
     {
-      path: '/task/:id',
-      name: 'view-task',
-      component: TaskDetail
+      path: '/product/:id',
+      name: 'view-product',
+      component: ProductDetail
     },
     {
-      //вызывается с помощью компонента TaskList this.$router.push('task-add')
+      //вызывается с помощью компонента ProductList this.$router.push('task-add')
       path: '/task-add',
       name: 'task-add',
-      component: TaskAddEdit
+      component: ProductAddEdit
     },
     {
       path: '/task-edit/:id',
       name: 'task-edit',
-      component: TaskAddEdit
+      component: ProductAddEdit
     }
   ]
 })

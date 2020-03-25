@@ -1,7 +1,7 @@
 <template>
   <div class="header bg-blue">
     <div class="max-width-block header-inner">
-      <router-link id="task-list" :to="{ name: 'task-list' }">
+      <router-link id="task-list" :to="{ name: 'product-list' }">
         <span class="top-desktop">Главная</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>

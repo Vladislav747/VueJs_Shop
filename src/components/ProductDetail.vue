@@ -27,7 +27,7 @@ import Noty from "noty";
 import { showNoty } from "../utility";
 
 export default {
-  name: "TaskDetail",
+  name: "ProductDetail",
 
   data() {
     return {

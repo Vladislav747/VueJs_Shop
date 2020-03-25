@@ -32,12 +32,6 @@
       </label>
     </div>
 
-    <!-- <div class="row">
-      <label>Тэги:
-        <input-tag id="task-tag" v-model="task.tag"></input-tag>
-      </label>
-    </div>-->
-
     <div class="row">
       <label>
         Дата Дедлайна:
@@ -64,7 +58,7 @@ import DatePicker from "vue2-datepicker";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
-  name: "TaskAddEdit",
+  name: "ProductAddEdit",
 
   components: {
     DatePicker

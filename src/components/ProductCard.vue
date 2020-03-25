@@ -7,12 +7,12 @@
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
         <div class="image">
-          <img src="../../static/images/bed.jpg" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
+          <img :src="`${task.image}`" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
         </div>
       </div>
      
       <div class="card-footer">
-        <div class="description">{{ task.description }}</div>
+        <div class="description">{{ task.description }}{{}}</div>
         <div class="price-block">
           <span class="price">10000 <span class="currency">руб/шт</span></span>
         </div>
@@ -44,7 +44,7 @@ import Noty from "noty";
 import { showNoty } from "../utility";
 
 export default {
-  name: "TaskCard",
+  name: "ProductCard",
   props: {
     task: {
       type: Object,
@@ -99,7 +99,7 @@ export default {
      *
      */
     viewTask(id) {
-      this.$router.push({ name: "view-task", params: { id } });
+      this.$router.push({ name: "view-product", params: { id } });
     },
 
     /**
