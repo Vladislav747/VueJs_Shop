@@ -1,4 +1,4 @@
-let task = require('../models/task.js');
+let task = require('../models/product.js');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
@@ -27,8 +27,6 @@ router.post('/', (req, res) => {
     description: req.body.description,
     dateOfTask: req.body.dateOfTask
   };
-
- //newTask.tag = newTask.tag.join(",");
 
   task.create(newTask)
     .then(task => {

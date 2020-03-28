@@ -2,15 +2,23 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const database = require('./database');
+const cacheControl = require('express-cache-controller');
+
 
 let configs = require('./config/serverConfigs');
 let port = process.env.PORT || configs.defaultPort;
 
 var appRoot = require('app-root-path');
 
-let tasks = (process.env.typeDB === 'sqlite') ? require('./routes/tasks') : require('./routes/tasksM');
+let tasks = require('./routes/tasksM');
 
 let app = express();
+
+//Не кэшировать данные
+app.use(cacheControl({
+  noCache: true
+}));
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
