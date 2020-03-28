@@ -99,6 +99,10 @@ html, body {
   background-color: #2b87d8;
 }
 
+.bg-light-green{
+  background-color: #e5ede2;
+}
+
 .bg-dark{
   background-color: #232323;
 }

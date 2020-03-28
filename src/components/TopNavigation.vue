@@ -1,5 +1,5 @@
 <template>
-  <div class="header bg-blue">
+  <div class="header bg-light-green">
     <div class="max-width-block header-inner">
       <router-link id="task-list" :to="{ name: 'product-list' }">
         <span class="top-desktop">Главная</span>

@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-blue">
+  <footer class="bg-light-green">
     <div class="max-width-block footer-inner">
       <font-awesome-icon icon="palette" class="footer-icon icon-size-xl" alt="Удалить задачу"/>
       <input type="checkbox" class="theme-switch" id="change_theme" v-model="isBlackTheme" @click="changeTheme()">

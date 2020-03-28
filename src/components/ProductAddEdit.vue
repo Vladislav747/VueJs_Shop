@@ -34,6 +34,20 @@
 
     <div class="row">
       <label>
+        Url картинки товара:
+        <input id="task-image" v-model="task.srcImage" placeholder="../../static/images/"/>
+      </label>
+    </div>
+
+    <div class="row">
+      <label>
+        Цена товара:
+        <input type="number" id="task-price" v-model="task.price" placeholder="Цена товара"/>
+      </label>
+    </div>
+
+    <div class="row">
+      <label>
         Дата Дедлайна:
         <date-picker
           v-model="task.dateOfTask"
@@ -69,7 +83,9 @@ export default {
       task: {
         name: "",
         category: "В работе",
-        description: ""
+        description: "",
+        srcImage:"",
+        price:"",
       },
       isLoading:false,
       taskTypes: TASK_TYPES

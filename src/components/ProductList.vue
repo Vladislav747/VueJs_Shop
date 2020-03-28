@@ -1,7 +1,7 @@
 <template>
   <div class="productList max-width-block">
     <div v-if="!isLoading && !noTasks" class="filterWrapper">
-      <div class="filterIcon" v-on:click="showFilter()">
+      <div class="filterIcon bg-light-green" v-on:click="showFilter()">
         <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
       </div>
       
@@ -262,7 +262,6 @@ export default {
   right: 2px;
   position: fixed;
   top: 15%;
-  background-color: #2b87d8;
   padding: 10px 14px;
   border-radius: 25%;
   cursor: pointer;

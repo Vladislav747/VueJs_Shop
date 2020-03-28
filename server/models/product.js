@@ -22,7 +22,11 @@ let ProductSchema = new Schema({
         type: String,
         required: false
     },
-    urlPhoto: {
+    srcImage: {
+        type: String,
+        required: false
+    },
+    price: {
         type: String,
         required: false
     },

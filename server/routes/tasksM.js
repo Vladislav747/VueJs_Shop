@@ -1,10 +1,10 @@
-let task = require('../models/product.js');
+let product = require('../models/product.js');
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
-  task.find({})
+  product.find({})
     .then(tasks => {
       res.json(tasks);
     })
@@ -19,20 +19,21 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 
-  const newTask = {
+  const newProduct = {
     id: new mongoose.Types.ObjectId().toHexString(),
     name: req.body.name,
     category: req.body.category,
-    tag: req.body.tag,
+    srcImage: req.body.srcImage,
+    price: req.body.price,
     description: req.body.description,
-    dateOfTask: req.body.dateOfTask
+    dateOfTask: req.body.dateOfTask,
   };
 
-  task.create(newTask)
-    .then(task => {
+  product.create(newProduct)
+    .then(product => {
       res.json({
         message: 'success',
-        name: task.name
+        name: product.name
       })
     })
     .catch(errors => {
@@ -45,13 +46,14 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
  
-  task.findOneAndUpdate({
+  product.findOneAndUpdate({
       id: req.body.id
     }, {
       name: req.body.name,
       category: req.body.category,
       description: req.body.description,
-      dateOfTask: req.body.dateOfTask
+      srcImage: req.body.srcImage,
+      dateOfTask: req.body.dateOfTask,
     })
     .then(() => {
       res.json({
@@ -62,7 +64,7 @@ router.put('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  var taskFind = task.findOne({
+  var taskFind = product.findOne({
     id: req.params.id
   }).exec();
   taskFind.then(data => {
@@ -77,7 +79,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  task.deleteOne({
+  product.deleteOne({
       id: req.params.id
     })
     .then(() => {

@@ -7,14 +7,14 @@
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
         <div class="image">
-          <img :src="`${task.image}`" alt="Навигатор Garmin nuvi 2495LT" title="Навигатор Garmin nuvi 2495LT"/>
+          <img :src="require(`@/static/images/${task.srcImage}`)" :alt="`Image of ${task.srcImage}`" :title="`Title of ${task.srcImage}`" />
         </div>
       </div>
      
       <div class="card-footer">
-        <div class="description">{{ task.description }}{{}}</div>
+        <div class="description">{{ task.description }}</div>
         <div class="price-block">
-          <span class="price">10000 <span class="currency">руб/шт</span></span>
+          <span class="price">{{task.price}} <span class="currency">руб/шт</span></span>
         </div>
 
         <div class="counter_block">
@@ -153,6 +153,10 @@ export default {
           this.check.close();
           showNoty(error);
       }
+    },
+
+    showImagePath(){
+      return ""
     }
   },
 
@@ -188,6 +192,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 5%;
 
     .card-title {
       cursor: pointer;
@@ -210,6 +215,11 @@ export default {
     font-weight: 700;
     line-height: 15px;
     white-space: normal;
+  }
+
+  .image img{
+    width: 100%;
+    max-height: 280px;
   }
 
   .buy-block{
