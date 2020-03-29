@@ -3,18 +3,18 @@
     <div class="card-inner">
       <div class="card-header">
         <div class="card-header--top">
-          <div class="card-title" @click="viewTask(task.id)">{{ task.name }}</div>
+          <div class="card-title" @click="viewTask(product.id)">{{ product.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
         <div class="image">
-          <img :src="require(`@/static/images/${task.srcImage}`)" :alt="`Image of ${task.srcImage}`" :title="`Title of ${task.srcImage}`" />
+          <img :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
      
       <div class="card-footer">
-        <div class="description">{{ task.description }}</div>
+        <div class="description">{{ product.description }}</div>
         <div class="price-block">
-          <span class="price">{{task.price}} <span class="currency">руб/шт</span></span>
+          <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
         </div>
 
         <div class="counter_block">
@@ -46,7 +46,7 @@ import { showNoty } from "../utility";
 export default {
   name: "ProductCard",
   props: {
-    task: {
+    product: {
       type: Object,
       default: () => {
         return {
@@ -72,7 +72,7 @@ export default {
   classObject: function () {
     var className;
 
-    switch(this.task.category){
+    switch(this.product.category){
 
       case 'Просрочено':
         className = 'category_sticker expired_sticker';
@@ -106,7 +106,7 @@ export default {
      * Отредактировать задачу
      */
     editTask() {
-      this.$router.push({ name: "task-edit", params: { id: this.task.id } });
+      this.$router.push({ name: "product-edit", params: { id: this.product.id } });
     },
 
     /**
@@ -143,10 +143,10 @@ export default {
      */
     async realDelete() {
       try {
-        await this.$http.delete("tasks/" + this.task.id);
+        await this.$http.delete("products/" + this.product.id);
 
         this.check.close();
-        this.$router.push({ name: "task-list" });
+        this.$router.push({ name: "product-list" });
 
         showNoty("Задача Удалена.", "success");
       } catch (error) {

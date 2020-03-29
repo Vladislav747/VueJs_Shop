@@ -5,14 +5,14 @@ let mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
   product.find({})
-    .then(tasks => {
-      res.json(tasks);
+    .then(products => {
+      res.json(products);
     })
     .catch(errors => {
       res.json({
         message: 'error',
         errors: errors.errors
-      })
+      });
     });
 });
 
@@ -64,10 +64,10 @@ router.put('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  var taskFind = product.findOne({
+  var productFind = product.findOne({
     id: req.params.id
   }).exec();
-  taskFind.then(data => {
+  productFind.then(data => {
       res.json(data);
     })
     .catch(errors => {

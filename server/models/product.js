@@ -34,27 +34,12 @@ let ProductSchema = new Schema({
         type: Date,
         required: false
     }
-    }, 
-    {
-        collection: 'productList'
-    }
-);
-
-
-// ProductSchema.path('tag').set(function (v) {
-//     console.log(v);
-//     return v.join(',');
-// });
-
-// ProductSchema.path('tag').get(function (v) {
-//     console.log(v);
-//     return v.split(',');
-// });
-
+}, 
+{
+    collection: 'productList'
+});
 
 // Create collection and add schema
 var Product = mongoose.model('Product', ProductSchema);
-
-
 
 module.exports = Product;

@@ -1,11 +1,11 @@
 <template>
-  <div class="task-container">
+  <div class="product-container">
     <div v-if="isLoading" class="lds-dual-ring"></div>
-    <div v-if="!isLoading" class="task">
+    <div v-if="!isLoading" class="product">
       <div class="header-task">
         <div class="header-title">
           <h3>
-            Имя: {{ task.name }}
+            Название товара: {{ task.name }}
           </h3>
         </div>
         <div class="category">
@@ -14,8 +14,6 @@
       </div>
 
       <div class="description">Описание: {{ task.description }}</div>
-
-      <div class="datetimeDeadline">Дата Дедлайна: {{ formatData }}</div>
 
     </div>
   </div>
@@ -34,7 +32,10 @@ export default {
       task: {
         name: "",
         category: "",
-        description: ""
+        description: "",
+        price:"",
+        currency:"",
+        srcImage:"",
       },
       isLoading:true,
     };
@@ -45,15 +46,7 @@ export default {
   },
 
   computed: {
-    formatData: function(){
-        return new Date(this.task.dateOfTask).toLocaleString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-      });
-    },
+    
   },
 
   methods: {
@@ -62,7 +55,7 @@ export default {
      */
     async getTask() {
       try {
-        const response = await this.$http.get("tasks/" + this.$route.params.id);
+        const response = await this.$http.get("products/" + this.$route.params.id);
 
         if (response.data === null) {
           //Перенаправление на страницу
@@ -120,7 +113,7 @@ export default {
      */
     async realDelete() {
       try {
-        await this.$http.delete("tasks/" + this.task.id);
+        await this.$http.delete("products/" + this.task.id);
 
         this.check.close();
         this.$router.push({ name: "task-list" });
@@ -144,7 +137,7 @@ export default {
   max-width:940px !important;
 }
 
-.task {
+.product {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;

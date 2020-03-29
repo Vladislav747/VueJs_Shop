@@ -92,21 +92,6 @@ export default {
     /**
      * Получить задачи
      */
-    async getTasks() {
-      try {
-        const response = await this.$http.get("tasks");
-        this.tasks = response.data;
-        this.$emit("remove", this.tasks);
-        this.$emit("get-tasks", this.tasks);
-        //Создается копия массива
-        this.filteredTasks = this.tasks.slice();
-      } catch (error) {
-        showNoty("Ошибка вывода списка задач  " + error);
-      }
-
-      this.$parent.$children[0].tasks = this.filteredTasks;
-      this.isLoading = false;
-    },
 
     /**
      * Фильтровать задачу по категории
@@ -219,16 +204,6 @@ export default {
     }
 }
 
-.taskList {
-  z-index: 1;
-}
-
-#tasks {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -16px;
-  padding: 16px 0;
-}
 
 .filterIcon {
   transition: 0.5s linear;
@@ -268,13 +243,6 @@ export default {
   }
 }
 
-
-@media screen and (max-width: 800px){
-   #tasks{
-        justify-content: center;
-
-  }
-}
 
 .no-tasks {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),

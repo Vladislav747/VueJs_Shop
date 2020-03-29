@@ -2,7 +2,7 @@
   <div id="main-wrapper">
     <top-navigation
       @search="updateSearch"
-      @get-tasks="get-tasks"
+      @get-products="get-products"
       />
     <div class="content-wrapper">
       <router-view :search="searchText"/>

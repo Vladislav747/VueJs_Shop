@@ -5,7 +5,7 @@
         <span class="top-desktop">Главная</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>
-      <router-link id="task-add" :to="{ name: 'task-add' }">
+      <router-link id="product-add" :to="{ name: 'product-add' }">
         <span class="top-desktop">Создать</span>
         <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
       </router-link>
@@ -31,12 +31,12 @@ export default {
   data() {
     return {
       searchText: "",
-      tasks: ["a"],
+      products: [],
       blackTheme: false,
     };
   },
 
-  props: ["tasks1"],
+  props: [],
 
   computed: {
     isHome() {
@@ -49,10 +49,10 @@ export default {
   },
 
   mounted: function() {
-    bus.$on("remove", function(tasks) {
+    bus.$on("remove", function(products) {
      
       var vm = this;
-      vm.tasks = tasks;
+      vm.products = products;
     });
 
     this.$root.$on('changeTheme', this.changeTheme);
@@ -64,17 +64,17 @@ export default {
      * Поиск задач по имени (name)
      */
     searchText: function() {
-      var tasks = this.tasks;
-      var searchedTasks = [];
+      var products = this.products;
+      var searchedProducts = [];
       var str = new RegExp(this.searchText);
-      tasks.forEach(element => {
+      products.forEach(element => {
         var found = str.test(element.name);
         if (found) {
-          searchedTasks.push(element);
+          searchedProducts.push(element);
         }
       });
 
-      this.$parent.$children[1].filteredTasks = searchedTasks;
+      this.$parent.$children[1].filteredProducts = searchedProducts;
     },
   }
 };

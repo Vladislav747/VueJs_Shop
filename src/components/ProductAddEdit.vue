@@ -1,10 +1,10 @@
 <template>
   <form v-if="task">
     <h2 v-if="!isEdit">
-      Создать задачу
+      Создать новый товар
     </h2>
     <h2 v-else>
-      Редактировать задачу
+      Редактировать данные о товаре
     </h2>
 
     <span class="required">- обязательное поле</span>
@@ -59,8 +59,8 @@
     </div>
 
     <div class=formEdit-wrapper>
-      <button id="save" class="formEdit-button" type="submit" @click.prevent="validateForm(true)">Сохранить Задачу</button>
-      <button id="save-new" class="formEdit-button" @click.prevent="validateForm(false)">Сохранить и Начать Новую Задачу</button>
+      <button id="save" class="formEdit-button" type="submit" @click.prevent="validateForm(true)">Сохранить Товар</button>
+      <button id="save-new" class="formEdit-button" @click.prevent="validateForm(false)">Сохранить Товар и Создать Новый Товар</button>
       <button id="cancel" class="formEdit-button" @click.prevent="cancel()">Отмена</button>
     </div>
   </form>
@@ -118,7 +118,7 @@ export default {
      */
     async getTask() {
       try {
-        const response = await this.$http.get("tasks/" + this.$route.params.id);
+        const response = await this.$http.get("products/" + this.$route.params.id);
 
         if (response.data === null) {
           this.$router.push({ name: "task-list" });
@@ -141,8 +141,8 @@ export default {
     async saveTask(isComplete) {
       try {
         const response = this.isEdit
-          ? await this.$http.put("tasks", this.task)
-          : await this.$http.post("tasks", this.task);
+          ? await this.$http.put("products", this.task)
+          : await this.$http.post("products", this.task);
 
         if (this.checkErrors(response) && isComplete) {
           this.$router.push({

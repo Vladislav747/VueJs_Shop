@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import ProductList from '../components/ProductList.vue'
-import ProductAddEdit from '../components/ProductAddEdit.vue'
-import ProductDetail from '../components/ProductDetail.vue'
+import ProductList from '../components/ProductList.vue';
+import ProductAddEdit from '../components/ProductAddEdit.vue';
+import ProductDetail from '../components/ProductDetail.vue';
+import Cart from '../components/Cart.vue';
 
 Vue.use(Router)
 
@@ -21,15 +22,21 @@ export default new Router({
       component: ProductDetail
     },
     {
-      //вызывается с помощью компонента ProductList this.$router.push('task-add')
-      path: '/task-add',
-      name: 'task-add',
+      //вызывается с помощью компонента ProductList this.$router.push('product-add')
+      path: '/product-add',
+      name: 'product-add',
       component: ProductAddEdit
     },
     {
-      path: '/task-edit/:id',
-      name: 'task-edit',
+      path: '/product-edit/:id',
+      name: 'product-edit',
       component: ProductAddEdit
-    }
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
+    },
+    
   ]
 })
