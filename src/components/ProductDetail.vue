@@ -10,13 +10,38 @@
           <span>{{ product.category }}</span>
         </div>
       </div>
-
+      <div class="image">
+          <img :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
+      </div>
       <div class="description">
         <div class="description__title">
             <h4>Описание:</h4>
         </div>
         <div class="description__text">
             <p>{{ product.description }}</p>
+        </div>
+      </div>
+
+      <div class="price-block">
+        <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
+      </div>
+
+      <div class="counter_block">
+        <span class="minus"></span>
+        <input type="text" class="text" name="quantity" value="1">
+        <span class="plus" data-max="1000"></span>
+      </div>
+
+    </div>
+
+    <div class="reviews-container">
+
+      <div class="reviews">
+        <div class="reviews__title">
+            <h4>Отзывы:</h4>
+        </div>
+        <div class="reviews__text">
+            <p>Заглушка отзывы</p>
         </div>
       </div>
     </div>
@@ -97,10 +122,6 @@ export default {
 //preloader
 @import "../scss/preloader.scss";
 
-#container{
-  max-width:940px !important;
-}
-
 .product {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
     0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -127,8 +148,16 @@ export default {
     }
   }
 
+  .image {
+      background-position: center;
+      background-size: cover;
+      min-height: 240px;
+      text-align: center;
+      
+  }
+
   .description {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     word-break: break-word;
   }
 
@@ -147,21 +176,22 @@ export default {
         margin-left: 3rem;
       }
     }
+    
 
-    .image {
-      flex: 0 0 50%;
-    }
-
-    .image {
-      background-position: center;
-      background-size: cover;
-      min-height: 240px;
-    }
+    
   }
 
-  .tag{
-    margin:10px 0;
-  }
+  
 
+}
+
+.reviews-container{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 60%;
+  margin: 1rem auto;
+  min-height: 300px;
 }
 </style>

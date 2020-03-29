@@ -23,12 +23,6 @@
           <span class="plus" data-max="1000"></span>
         </div>
 
-          <!-- <div class="card-icons"> 
-            <a id="edit" @click.prevent="editTask()" class="card-icons--link">
-              <font-awesome-icon icon="edit" class="top-icon icon-size-xl" alt="Редактировать задачу"/>
-            </a>
-          </div> -->
-
         <div class="buy-block">
           <button class="add-to-cart-btn">Купить товар</button>
         </div>
