@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { showNoty, TASK_TYPES } from "../utility";
+import { showNoty, PRODUCT_CATEGORIES } from "../utility";
 import DatePicker from "vue2-datepicker";
 import { required, maxLength } from "vuelidate/lib/validators";
 
@@ -88,7 +88,7 @@ export default {
         price:"",
       },
       isLoading:false,
-      taskTypes: TASK_TYPES
+      taskTypes: PRODUCT_CATEGORIES
     };
   },
 

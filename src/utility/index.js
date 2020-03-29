@@ -9,16 +9,15 @@ export const showNoty = function (text, type = 'error') {
   }).show()
 }
 
-export const TASK_TYPES = [
-  'Просрочено',
-  'В работе',
-  'Сделано'
+export const PRODUCT_CATEGORIES = [
+  'Мясо',
+  'Рыба',
+  'Хлеб',
+  'Вода',
 ];
 
 //Для тестирования в случае если нету никаких заданий
-export const defaultTasks = [];
-
-export const tags = [];
+export const defaultProducts = [];
 
 export const DEADLINE_TYPES = [
   'Просроченные Задачи',

@@ -18,9 +18,9 @@
         </div>
 
         <div class="counter_block">
-          <span class="minus" id="bx_3966226736_2506_quant_down">-</span>
-          <input type="text" class="text" id="bx_3966226736_2506_quantity" name="quantity" value="1">
-          <span class="plus" id="bx_3966226736_2506_quant_up" data-max="1000">+</span>
+          <span class="minus"></span>
+          <input type="text" class="text" name="quantity" value="1">
+          <span class="plus" data-max="1000"></span>
         </div>
 
           <!-- <div class="card-icons"> 
@@ -231,8 +231,6 @@ export default {
       text-transform: uppercase;
       border-radius: 2px;
     
-
-
       .add-to-cart-btn{
         background: #5044ff;
         color: #fff;
@@ -263,7 +261,8 @@ export default {
     }
 
     .price-block{
-      margin: auto;
+      margin: 0, auto;
+      padding: 15px;
     }
 
     .counter_block{
@@ -273,12 +272,11 @@ export default {
       display: inline-block;
       border-radius: 2px;
       
-
       >span:before{
         display: inline-block;
         content: "";
         width: 24px;
-        height: 34px;
+        height: 29px;
         background: url(/bitrix/templates/aspro_next/images/svg/ai.svg) -80px -191px no-repeat;
         vertical-align: middle;
       }
@@ -294,14 +292,13 @@ export default {
         height: 34px;
         border-radius: 0;
         text-align: center;
+        vertical-align: top;
         line-height: 13px;
         padding: 7px 3px;
       }
 
       .minus{
         line-height: 40px;
-        height: 34px;
-        width: 24px;
         display: inline-block;
         cursor: pointer;
         vertical-align: top;
@@ -314,8 +311,6 @@ export default {
 
       .plus{
         line-height: 40px;
-        height: 34px;
-        width: 24px;
         display: inline-block;
         cursor: pointer;
 
@@ -361,7 +356,7 @@ export default {
 
   .description {
     word-wrap: break-word;
-    margin-top: 15px;
+    padding: 15px;
   }
 
   .tag {

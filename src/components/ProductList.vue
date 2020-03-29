@@ -38,14 +38,14 @@
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
 
-    <div id="tasks">
+    <div class="products">
       <product-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
     </div>
   </div>  
 </template>
 
 <script>
-import { showNoty, TASK_TYPES, DEADLINE_TYPES } from "../utility";
+import { showNoty, PRODUCT_CATEGORIES, DEADLINE_TYPES } from "../utility";
 import ProductCard from "./ProductCard.vue";
 
 export default {
@@ -62,7 +62,7 @@ export default {
       filteredTasks: [],
       filterCategory: "",
       filterDateDeadline: "",
-      taskTypes: TASK_TYPES,
+      taskTypes: PRODUCT_CATEGORIES,
       deadlineTypes: DEADLINE_TYPES,
       filteredTasksTime: [],
       filteredTasksDeadline: []
@@ -250,7 +250,7 @@ export default {
   z-index: 1;
 }
 
-#tasks {
+.products {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -16px;
@@ -297,7 +297,7 @@ export default {
 
 
 @media screen and (max-width: 800px){
-   #tasks{
+   .products{
         justify-content: center;
 
   }
