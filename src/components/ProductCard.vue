@@ -18,9 +18,9 @@
         </div>
 
         <div class="counter_block">
-          <span class="minus"></span>
-          <input type="text" v-model="product.quantity" class="text" name="quantity">
-          <span class="plus" data-max="1000">{{product.quantity}}</span>
+          <span class="minus" @click="decreaseQuantity(quantity)"></span>
+          <input type="text" v-model="quantity" class="text" name="quantity" value="1">
+          <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
         </div>
 
         <div class="buy-block">
@@ -42,8 +42,8 @@ export default {
   props: {
     product: {
       type: Object,
-      default: () => {
-        return {
+      default: function() {
+        return{
           name: "",
           category: "",
           description: "",
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       blackTheme: false,
+      quantity: 1,
     };
   },
 
@@ -107,12 +108,20 @@ export default {
       //Если есть экземпляр то закрыть окно
       this.check.close();
     },
-
-   
+    
     addProductToCart(product){
       console.log(product, "`Works ProductCard ${product.quantity}`");
-      console.log()
-    }
+    },
+
+    increaseQuantity(quantity){
+      this.quantity += 1;
+
+    },
+    decreaseQuantity(quantity){
+      if(this.quantity > 1){
+        this.quantity -= 1;
+      }
+    },
   },
 
   mounted: function() {
@@ -229,6 +238,7 @@ export default {
       background: #f3f3f5;
       display: inline-block;
       border-radius: 2px;
+      padding: 5px;
       
       >span:before{
         display: inline-block;
@@ -252,7 +262,8 @@ export default {
         text-align: center;
         vertical-align: top;
         line-height: 13px;
-        padding: 7px 3px;
+        padding: 20px 3px;
+        font-weight: 700;
       }
 
       .minus{
