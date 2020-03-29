@@ -1,33 +1,43 @@
-<template>
-  <div class="productList max-width-block">
-    
-    <filter-products/>
+<template>  
 
-    <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Загружаю товары</div>
-    <div v-if="noTasks" class="no-tasks">
-      <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
-    </div>
+  <div v-if="!isLoading && !noTasks" class="filterWrapper bg-light-green">
+      <div class="filterIcon bg-light-green" v-on:click="showFilter()">
+        <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
+      </div>
 
-    <div class="products">
-      <product-card v-for="task in filteredTasks" :key="task._id" :task="task"/>
+    <div  id="filter">
+        <p class="filterWrapper-text">Фильтр</p>
+
+        <div class="filter-inner">
+
+            <!-- Фильтр по категориям  -->
+            <div class="filter-property">
+                <span class="filter-property--title">Категория продуктов:</span>
+                <select class="filter-property--body" v-model="filterCategory">
+                    <option></option>
+                    <option v-for="type in productCategories" :key="type">{{ type }}</option>
+                </select>
+            </div>
+
+            <!-- Фильтр по Дедлайну  -->
+            <div class="filter-property">
+                <span class="filter-property--title">Срочность:</span>
+                <select class="filter-property--body" v-model="filterDateDeadline">
+                    <option></option>
+                    <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+                </select>
+            </div>
+        </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
 import { showNoty, PRODUCT_CATEGORIES, DEADLINE_TYPES } from "../utility";
-import ProductCard from "./ProductCard.vue";
-import FilterProducts from "./FilterProducts.vue";
 
 export default {
-  name: "ProductList",
-
-  components: {
-    ProductCard,
-    FilterProducts
-  },
-
+  name: "FilterProducts",
+  
   data() {
     return {
       isLoading: true,
@@ -35,7 +45,7 @@ export default {
       filteredTasks: [],
       filterCategory: "",
       filterDateDeadline: "",
-      taskTypes: PRODUCT_CATEGORIES,
+      productCategories:  PRODUCT_CATEGORIES,
       deadlineTypes: DEADLINE_TYPES,
       filteredTasksTime: [],
       filteredTasksDeadline: []
@@ -149,14 +159,6 @@ export default {
     }
   },
 
-  /**
-   * Переход на добавление задачи
-   * @param {object} task - объект текущей задачи
-   *
-   */
-  addTask() {
-    this.$router.push("task-add");
-  }
 };
 </script>
 
@@ -166,8 +168,6 @@ export default {
   margin-bottom: 1em;
   text-align: center;
 }
-
-
 
 .filterWrapper-text {
   font-size: 20px;
@@ -219,11 +219,11 @@ export default {
     }
 }
 
-.productList {
+.taskList {
   z-index: 1;
 }
 
-.products {
+#tasks {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -16px;
@@ -270,7 +270,7 @@ export default {
 
 
 @media screen and (max-width: 800px){
-   .products{
+   #tasks{
         justify-content: center;
 
   }
