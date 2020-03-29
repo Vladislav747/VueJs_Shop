@@ -50,7 +50,42 @@ export default {
 },
 
   methods: {
-   
+       /**
+     * Отображение оповещение задачи
+     */
+    deleteProductFromCart() {
+      this.check = new Noty({
+        text: "Удаление товара нельзя будет отменить.<br>Вы уверены?",
+        type: "alert",
+        layout: "topCenter",
+        buttons: [
+          Noty.button("Да", "danger", () => this.realDelete(), {
+            id: "delete-yes"
+          }),
+          Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
+        ]
+      });
+
+      this.check.show();
+    },
+
+     /**
+     * Удаление задачи
+     */
+    async realDelete() {
+      try {
+        await this.$http.delete("products/" + this.product.id);
+
+        this.check.close();
+        this.$router.push({ name: "product-list" });
+
+        showNoty("Задача Удалена.", "success");
+      } catch (error) {
+          this.check.close();
+          showNoty(error);
+      }
+    },
+
   },
 
 };

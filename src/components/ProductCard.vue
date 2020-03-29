@@ -1,9 +1,9 @@
 <template>
   <section class="card">
     <div class="card-inner">
-      <div class="card-header">
+      <div class="card-header" @click="viewTask(product.id)">
         <div class="card-header--top">
-          <div class="card-title" @click="viewTask(product.id)">{{ product.name }}</div>
+          <div class="card-title">{{ product.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
         <div class="image">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="buy-block">
-          <button class="add-to-cart-btn">Купить товар</button>
+          <button @click="addProductToCart(product)" class="add-to-cart-btn">Купить товар</button>
         </div>
         
       </div>
@@ -97,31 +97,6 @@ export default {
     },
 
     /**
-     * Отредактировать задачу
-     */
-    editTask() {
-      this.$router.push({ name: "product-edit", params: { id: this.product.id } });
-    },
-
-    /**
-     * Отображение оповещение задачи
-     */
-    deleteTask() {
-      this.check = new Noty({
-        text: "Удаление задачи нельзя будет отменить.<br>Вы уверены?",
-        type: "alert",
-        layout: "topCenter",
-        buttons: [
-          Noty.button("Да", "danger", () => this.realDelete(), {
-            id: "delete-yes"
-          }),
-          Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
-        ]
-      });
-
-      this.check.show();
-    },
-    /**
      * Закрыть всплывающее окно
      */
     closeCheck() {
@@ -132,25 +107,9 @@ export default {
       this.check.close();
     },
 
-    /**
-     * Удаление задачи
-     */
-    async realDelete() {
-      try {
-        await this.$http.delete("products/" + this.product.id);
-
-        this.check.close();
-        this.$router.push({ name: "product-list" });
-
-        showNoty("Задача Удалена.", "success");
-      } catch (error) {
-          this.check.close();
-          showNoty(error);
-      }
-    },
-
-    showImagePath(){
-      return ""
+   
+    addProductToCart(product){
+      console.log(product, "Works ProductCard");
     }
   },
 
@@ -166,6 +125,7 @@ export default {
   margin: 10px;
   width: 30%;
   border-radius: 10px;
+  cursor: pointer;
 
   .card-inner {
     height: 100%;
@@ -189,7 +149,6 @@ export default {
     margin-bottom: 5%;
 
     .card-title {
-      cursor: pointer;
       font-weight: bold;
       padding-top: 2px;
     }
@@ -224,6 +183,8 @@ export default {
       padding: 3px 10px 2px;
       text-transform: uppercase;
       border-radius: 2px;
+      margin: 1rem 0;
+      
     
       .add-to-cart-btn{
         background: #5044ff;
@@ -235,6 +196,7 @@ export default {
         border-radius: 1000px;
         transition: all .2s ease-in;
         opacity: 0;
+        cursor: pointer;
 
         &:hover{
           opacity: 1;

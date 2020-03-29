@@ -149,11 +149,10 @@ export default {
   }
 
   .image {
-      background-position: center;
-      background-size: cover;
-      min-height: 240px;
-      text-align: center;
-      
+    background-position: center;
+    background-size: cover;
+    min-height: 240px;
+    text-align: center;
   }
 
   .description {

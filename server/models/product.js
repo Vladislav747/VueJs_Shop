@@ -30,6 +30,10 @@ let ProductSchema = new Schema({
         type: String,
         required: false
     },
+    manufacturer: {
+        type: String,
+        required: false
+    },
     dateOfTask: {
         type: Date,
         required: false

@@ -47,6 +47,15 @@
     </div>
 
     <div class="row">
+      <label class="short-label">
+        Производитель:
+        <select id="task-manufacturer" class="formEdit-input" v-model="task.manufacturer" placeholder="Производитель товара" >
+          <option v-for="manufacturer in manufacturerList" :key="manufacturer">{{ manufacturer }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="row">
       <label>
         Дата Дедлайна:
         <date-picker
@@ -86,9 +95,11 @@ export default {
         description: "",
         srcImage:"",
         price:"",
+        manufacturer:"",
       },
       isLoading:false,
-      taskTypes: PRODUCT_CATEGORIES
+      taskTypes: PRODUCT_CATEGORIES,
+      manufacturerList:["Bosch", "Samsung"],
     };
   },
 

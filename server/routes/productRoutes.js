@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
     price: req.body.price,
     description: req.body.description,
     dateOfTask: req.body.dateOfTask,
+    manufacturer: req.body.manufacturer,
   };
 
   product.create(newProduct)

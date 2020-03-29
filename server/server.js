@@ -63,7 +63,7 @@ app.use((err, req, res, next) => {
 
 //We can now use only  MongoDb  database
 
-  console.log("You are now using mongodb databas");
+  console.log("You are now using mongodb database");
   //Config DB and start it
   require('./config/db');
   // Start server
