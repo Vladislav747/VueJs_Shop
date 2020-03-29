@@ -19,8 +19,8 @@
 
         <div class="counter_block">
           <span class="minus"></span>
-          <input type="text" class="text" name="quantity" value="1">
-          <span class="plus" data-max="1000"></span>
+          <input type="text" v-model="product.quantity" class="text" name="quantity">
+          <span class="plus" data-max="1000">{{product.quantity}}</span>
         </div>
 
         <div class="buy-block">
@@ -49,8 +49,9 @@ export default {
           description: "",
           price:"",
           currency:"",
+          quantity: 1,
           srcImage:"",
-        };
+        }
       }
     }
   },
@@ -109,7 +110,8 @@ export default {
 
    
     addProductToCart(product){
-      console.log(product, "Works ProductCard");
+      console.log(product, "`Works ProductCard ${product.quantity}`");
+      console.log()
     }
   },
 
@@ -231,8 +233,8 @@ export default {
       >span:before{
         display: inline-block;
         content: "";
-        width: 24px;
-        height: 29px;
+        width: 14px;
+        height: 17px;
         background: url(/bitrix/templates/aspro_next/images/svg/ai.svg) -80px -191px no-repeat;
         vertical-align: middle;
       }
