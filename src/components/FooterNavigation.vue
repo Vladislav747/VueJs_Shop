@@ -38,11 +38,11 @@ export default {
 
 footer{
   padding: 20px;
-}
 
-.footer-icon{
-  margin: 0 10px;
-  color: color;
+	.footer-icon{
+		margin: 0 10px;
+		color: color;
+	}
 }
 
 //Checkbox theme switcher

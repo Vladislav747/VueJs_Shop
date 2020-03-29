@@ -75,14 +75,14 @@ export default {
   },
 
   mounted() {
-    this.getTasks();
+    this.getProducts();
   },
 
   methods: {
     /**
      * Получить задачи
      */
-    async getTasks() {
+    async getProducts() {
       try {
         const response = await this.$http.get("products");
         this.products = response.data;

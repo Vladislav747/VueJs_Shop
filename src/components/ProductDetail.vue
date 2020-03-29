@@ -2,19 +2,23 @@
   <div class="product-container">
     <div v-if="isLoading" class="lds-dual-ring"></div>
     <div v-if="!isLoading" class="product">
-      <div class="header-task">
+      <div class="header-product">
         <div class="header-title">
-          <h3>
-            Название товара: {{ task.name }}
-          </h3>
+          <h3>{{ product.name }}</h3>
         </div>
         <div class="category">
-          <span>{{ task.category }}</span>
+          <span>{{ product.category }}</span>
         </div>
       </div>
 
-      <div class="description">Описание: {{ task.description }}</div>
-
+      <div class="description">
+        <div class="description__title">
+            <h4>Описание:</h4>
+        </div>
+        <div class="description__text">
+            <p>{{ product.description }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +33,7 @@ export default {
 
   data() {
     return {
-      task: {
+      product: {
         name: "",
         category: "",
         description: "",
@@ -42,7 +46,7 @@ export default {
   },
 
   mounted() {
-    this.getTask();
+    this.getProduct();
   },
 
   computed: {
@@ -53,49 +57,25 @@ export default {
     /**
      * Получить задачу
      */
-    async getTask() {
+    async getProduct() {
       try {
         const response = await this.$http.get("products/" + this.$route.params.id);
 
+        //Если по какой то причине товара не существует в базе данных или произошла ошибка
         if (response.data === null) {
-          //Перенаправление на страницу
-          this.$router.push({ name: "task-list" });
-          showNoty("Requested task not found.");
+          //Перенаправление на общую страницу товаров
+          this.$router.push({ name: "products-list" });
+          showNoty("Requested product not found.");
           return;
         }
 
-        this.task = response.data;
+        this.product = response.data;
         this.isLoading = false;
       } catch (error) {
-        showNoty("TaskDetail " + error);
+        showNoty("ProductDetail " + error);
       }
     },
 
-    /**
-     * Отредактировать задачу
-     */
-    editTask() {
-      this.$router.push({ name: "task-edit", params: { id: this.task.id } });
-    },
-
-    /**
-     * Отображение оповещение задачи
-     */
-    deleteTask() {
-      this.check = new Noty({
-        text: "Удаление задачи нельзя будет отменить.<br>Вы уверены?",
-        type: "alert",
-        layout: "topCenter",
-        buttons: [
-          Noty.button("Да", "danger", () => this.realDelete(), {
-            id: "delete-yes"
-          }),
-          Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
-        ]
-      });
-
-      this.check.show();
-    },
 
     /**
      * Закрыть всплывающее окно
@@ -108,22 +88,6 @@ export default {
       this.check.close();
     },
 
-    /**
-     * Удаление задачи
-     */
-    async realDelete() {
-      try {
-        await this.$http.delete("products/" + this.task.id);
-
-        this.check.close();
-        this.$router.push({ name: "task-list" });
-
-        showNoty("Задача Удалена.", "success");
-      } catch (error) {
-        this.check.close();
-        showNoty(error);
-      }
-    }
   }
 };
 </script>
@@ -146,6 +110,11 @@ export default {
   margin: 1rem auto;
   min-height: 300px;
 
+  .header-product{
+    display: flex;
+    justify-content: space-between;
+  }
+
   h3,
   h4 {
     margin-bottom: 1rem;
@@ -163,9 +132,9 @@ export default {
     word-break: break-word;
   }
 
-.datetineDeadline{
-  margin-bottom:1rem;
-}
+  .datetineDeadline{
+    margin-bottom:1rem;
+  }
 
   .tags {
     display: flex;
@@ -195,32 +164,4 @@ export default {
   }
 
 }
-
-.header-task{
-  display: flex;
-  justify-content: space-between;
-}
-
-.vue-input-tag-wrapper {
-  border: 0px;
-}
-
-footer {
-  background-color: #2b87d8;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  display: flex;
-  margin-bottom: 1em;
-  padding: 1em;
-
-  a {
-    color: #fff;
-    cursor: pointer;
-    line-height: 28px;
-    margin-right: 1em;
-    text-decoration: none;
-  } 
-}
-
-
 </style>
