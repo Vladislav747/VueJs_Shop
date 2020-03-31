@@ -1,78 +1,56 @@
 <template>
-  <form v-if="task">
-    <h2 v-if="!isEdit">
-      Создать новый товар
-    </h2>
-    <h2 v-else>
-      Редактировать данные о товаре
-    </h2>
+<div class="form-wrapper">
+    <form v-if="task" class="form-add-edit">
+      <h2 v-if="!isEdit">
+        Создать новый товар
+      </h2>
+      <h2 v-else>
+        Редактировать данные о товаре
+      </h2>
 
-    <span class="required">- обязательное поле</span>
+      <span class="required">- обязательное поле</span>
 
-    <div class="row">
-      <label class="short-label">
-        Имя:
-        <input id="task-name" v-model="task.name" class="formEdit-input" type="text" placeholder="Заполните поле"/>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label">Имя:</label>
+        <input id="task-name" v-model="task.name" class="form__input" type="text" placeholder="Имя"/>
+      </div>
 
-    <div class="row">
-      <label class="short-label">
-        Категория:
-        <select id="task-category" v-model="task.category" class="formEdit-input">
-          <option v-for="type in taskTypes" :key="type">{{ type }}</option>
-        </select>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label">Категория:</label>
+          <select id="task-category"  class="form__input" v-model="task.category">
+            <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+          </select>
+      </div>
 
-    <div class="row">
-      <label>
-        Описание:
-        <textarea id="task-description" v-model="task.description" placeholder="Заполните поле"/>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label" >Описание:</label>
+          <textarea id="task-description" class="form__input" v-model="task.description" placeholder="Заполните поле"/>
+      </div>
 
-    <div class="row">
-      <label>
-        Url картинки товара:
-        <input id="task-image" v-model="task.srcImage" placeholder="../../static/images/"/>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label">Url картинки товара:</label>
+          <input id="task-image" class="form__input" v-model="task.srcImage" placeholder="../../static/images/"/>
+      </div>
 
-    <div class="row">
-      <label>
-        Цена товара:
-        <input type="number" id="task-price" v-model="task.price" placeholder="Цена товара"/>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label">Цена товара: </label>
+          <input type="number" id="task-price" class="form__input" v-model="task.price" placeholder="Цена товара"/>
+      </div>
 
-    <div class="row">
-      <label class="short-label">
-        Производитель:
-        <select id="task-manufacturer" class="formEdit-input" v-model="task.manufacturer" placeholder="Производитель товара" >
-          <option v-for="manufacturer in manufacturerList" :key="manufacturer">{{ manufacturer }}</option>
-        </select>
-      </label>
-    </div>
+      <div class="row">
+        <label class="short-label">Производитель:</label>
+          <select id="task-manufacturer" class="form__input" v-model="task.manufacturer" placeholder="Производитель товара" >
+            <option v-for="manufacturer in manufacturerList" :key="manufacturer">{{ manufacturer }}</option>
+          </select>
+      </div>
 
-    <div class="row">
-      <label>
-        Дата Дедлайна:
-        <date-picker
-          v-model="task.dateOfTask"
-          type="datetime"
-          lang="en"
-          format="YYYY-MM-DD hh:mm:ss"
-        ></date-picker>
-      </label>
-    </div>
-
-    <div class=formEdit-wrapper>
-      <button id="save" class="formEdit-button" type="submit" @click.prevent="validateForm(true)">Сохранить Товар</button>
-      <button id="save-new" class="formEdit-button" @click.prevent="validateForm(false)">Сохранить Товар и Создать Новый Товар</button>
-      <button id="cancel" class="formEdit-button" @click.prevent="cancel()">Отмена</button>
-    </div>
-  </form>
+      <div class=form-add-edit__controls>
+        <button id="save" class="form__btn" type="submit" @click.prevent="validateForm(true)">Сохранить Товар</button>
+        <button id="save-new" class="form__btn" @click.prevent="validateForm(false)">Сохранить Товар и Создать Новый Товар</button>
+        <button id="cancel" class="form__btn" @click.prevent="cancel()">Отмена</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -258,182 +236,144 @@ export default {
 
 <style lang="scss" scoped>
 
-form {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  width: 80%;
-  margin: auto;
+.form-wrapper{
+  margin: 20px auto;
+  max-width: 650px;
 
-
-  textarea#task-description:placeholder-shown,
-  input:placeholder-shown{
-    background: pink;
-  }
+  .form-add-edit {
     
-  h2 {
-    margin-bottom: 1rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    width: 100%;
+    margin: auto;
 
-    span {
-      border-left: 20px solid pink;
-      color: #999;
-      font-size: 0.7rem;
-      font-weight: normal;
-      margin-left: 2rem;
-      padding-left: 0.4rem;
+    textarea#task-description:placeholder-shown,
+    input:placeholder-shown{
+      background: pink;
+    }
+      
+    h2 {
+      margin-bottom: 1rem;
+
+      span {
+        border-left: 20px solid pink;
+        color: #999;
+        font-size: 0.7rem;
+        font-weight: normal;
+        margin-left: 2rem;
+        padding-left: 0.4rem;
+      }
+
+      span.required {
+        font-size: 1rem;
+      }
     }
 
-    span.required {
+    [required] {
+      border-left: 20px solid pink !important;
+    }
+
+    .row {
+      border-bottom: 1px solid #ccc;
+      line-height: 3rem;
+      padding-bottom: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+
+      .short-label {
+        display: inline-block;
+        width: 100%;
+        font-weight: 600;
+      }
+
+    }
+
+    
+    @media screen and (max-width: 725px) {
+      .short-label {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .short-label {
+        .form__input{
+          width: 50%;
+        }
+      }
+    }
+    
+    .form__input {
+      background: #fff;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      height: 2rem;
       font-size: 1rem;
-    }
-  }
-
-  [required] {
-    border-left: 20px solid pink !important;
-  }
-
-  .row {
-    border-bottom: 1px solid #ccc;
-    line-height: 3rem;
-    padding-bottom: 3px;
-  }
-
-  .short-label {
-    display: inline-block;
-    width: 49%;
-  }
-
-  @media screen and (max-width: 725px) {
-    .short-label {
+      line-height: 1.5rem;
+      outline: 0;
+      padding: 2px 7px;
       width: 100%;
     }
-  }
 
-  @media screen and (max-width: 425px) {
-    .short-label {
-      .formEdit-input{
-        width: 50%;
+    textarea.form__input {
+      height: 5rem;
+    }
+
+    .preview {
+      display: block;
+
+      img {
+        vertical-align: top;
+      }
+    }
+
+    .form-add-edit__controls{
+      padding: 10px;
+      margin: 0 -5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .form__btn{
+        margin: 0.5rem 5px;
+        background-color: #2b87d8;
+        border: 1px solid #1c5f9a;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+        outline: 0;
+        padding: 15px;
+        transition: all 0.2s ease-in-out;
+        width: 65%;
+
+        &:hover{
+          background-color: darken(#2b87d8, 5%);
+        }
+
+        &:active{
+          background-color: darken(#2b87d8, 10%);
+        }
+      }
+    }
+
+    @media screen and (max-width: 425px) {
+      .form-add-edit__controls {
+        display: flex;
+        flex-direction: column;
+
+        .form__btn{
+          width: 70%;
+          margin: 5px auto;
+        }
       }
     }
   }
-  
-
-  input,
-  select,
-  form textarea {
-    background: #fff;
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    height: 2rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    max-width: 100%;
-    outline: 0;
-    padding: 2px 7px;
-    width: 48%;
-  }
-
-  input:hover,
-  select:hover,
-  textarea:hover {
-    border-color: #777;
-  }
-
-  input:active,
-  input:focus,
-  select:active,
-  select:focus,
-  textarea:active,
-  textarea:focus {
-    border-color: #333;
-  }
-
-  textarea {
-    display: block;
-    height: 100px;
-    margin-bottom: 1rem;
-    width: 100%;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select {
-    float: right;
-    margin-right: 1rem;
-    margin-top: 9px;
-    width: 45%;
-  }
-
-   @media screen and (max-width: 725px) {
-    input[type="text"],
-    input[type="number"],
-    select {
-      margin-right: 0;
-    }
-  }
-
-
-  input[type="text"]#task-tag {
-    padding-right: 100px;
-  }
-
-  .preview {
-    display: block;
-
-    img {
-      vertical-align: top;
-    }
-  }
-
-  button {
-    background-color: #2b87d8;
-    border: 1px solid #1c5f9a;
-    border-radius: 3px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 1rem;
-    outline: 0;
-    padding: 10px;
-    transition: all 0.2s ease-in-out;
-  }
-
-  button:hover {
-    background-color: darken(#2b87d8, 5%);
-  }
-
-  button:active {
-    background-color: darken(#2b87d8, 10%);
-  }
-
-  .formEdit-wrapper{
-    padding: 10px;
-    margin: 0 -5px;
-  }
-
-  @media screen and (max-width: 425px) {
-    .formEdit-wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-
-  .formEdit-button{
-    margin: 0 5px;
-  }
-
-   @media screen and (max-width: 425px) {
-    .formEdit-wrapper {
-      display: flex;
-      flex-direction: column;
-
-    .formEdit-button{
-      width: 70%;
-      margin: 5px auto;
-    }
-    }
-
-  }
 
 }
+
+
 </style>

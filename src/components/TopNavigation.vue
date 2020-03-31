@@ -131,7 +131,6 @@ export default {
 
 @media screen and (max-width: 550px) {
   .header {
-    flex-wrap: wrap;
 
     input {
       margin: 1rem auto 0;
