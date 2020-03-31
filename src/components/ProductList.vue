@@ -1,7 +1,15 @@
 <template>
   <div class="productList max-width-block">
     
-    <filter-products />
+    <filter-products
+
+      v-bind:products="products"
+      v-bind:isLoading="isLoading"
+      v-bind:noTasks="noTasks"
+      v-on:filter_tasks="filterResults"
+      v-on:clear_results="filterResults"
+
+     />
 
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю товары</div>
@@ -16,7 +24,7 @@
 </template>
 
 <script>
-import { showNoty, PRODUCT_CATEGORIES, DEADLINE_TYPES } from "../utility";
+import { showNoty } from "../utility";
 import ProductCard from "./ProductCard.vue";
 import FilterProducts from "./FilterProducts.vue";
 
@@ -32,13 +40,7 @@ export default {
     return {
       isLoading: true,
       products: [],
-      filteredProducts: [],
-      filterCategory: "",
-      filterDateDeadline: "",
-      taskTypes: PRODUCT_CATEGORIES,
-      deadlineTypes: DEADLINE_TYPES,
-      filteredTasksTime: [],
-      filteredTasksDeadline: []
+      filteredProducts: []
     };
   },
 
@@ -47,30 +49,6 @@ export default {
       return (
         this.isLoading === false && (this.tasks && this.tasks.length === 0)
       );
-    }
-  },
-
-  watch: {
-    filterCategory: function() {
-      if (this.filteredTasksDeadline.length === 0) {
-        this.filteredTasksTime = this.tasks.filter(this.filterTask);
-      } else {
-        this.filteredTasksTime = this.filteredTasksDeadline.filter(
-          this.filterTask
-        );
-      }
-      this.filteredProducts = this.filteredTasksTime;
-    },
-
-    filterDateDeadline: function() {
-      if (this.filteredTasksTime.length === 0) {
-        this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
-      } else {
-        this.filteredTasksDeadline = this.filteredTasksTime.filter(
-          this.filterTaskDeadline
-        );
-      }
-      this.filteredProducts = this.filteredTasksDeadline;
     }
   },
 
@@ -98,14 +76,10 @@ export default {
       this.isLoading = false;
     },
 
-    /**
-   * Переход на добавление продукта
-   * @param {object} product - объект текущей задачи
-   *
-   */
-    addTask() {
-      this.$router.push("product-add");
-    }
+    async filterResults(data){
+      console.log(data, "filteredProducts filterResults");
+      this.filteredProducts = data;
+    },
 
   },
 
@@ -136,8 +110,6 @@ export default {
     text-align: center;
   }
 }
-
-
 
 @media screen and (max-width: 800px) {
 

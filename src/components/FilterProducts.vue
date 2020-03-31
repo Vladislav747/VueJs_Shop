@@ -27,20 +27,35 @@
                     <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
                 </select>
             </div>
+
+            <div class="clear-result__wrapper">
+              <button @click="clearResults()" class="clear-results__btn">Сбросить результаты</button>
+          </div>
+
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import { showNoty, PRODUCT_CATEGORIES, DEADLINE_TYPES } from "../utility";
+import {PRODUCT_CATEGORIES, DEADLINE_TYPES} from "../utility";
 
 export default {
   name: "FilterProducts",
+
+  props:{
+    // isLoading: "",
+    // noTasks:"",
+    products: {
+      type: Array,
+      default: [],
+    },
+  },
   
   data() {
     return {
-      isLoading: true,
+      isLoading: false,
+      noTasks: false,
       tasks: [],
       filteredTasks: [],
       filterCategory: "",
@@ -52,46 +67,35 @@ export default {
     };
   },
 
-  computed: {
-    noTasks() {
-      return (
-        this.isLoading === false && (this.tasks && this.tasks.length === 0)
-      );
-    }
-  },
-
   watch: {
     filterCategory: function() {
+
+      console.log("filteredTasksTime");
       if (this.filteredTasksDeadline.length === 0) {
-        this.filteredTasksTime = this.tasks.filter(this.filterTask);
+        this.filteredTasksTime = this.products.filter(this.filterTask);
       } else {
-        this.filteredTasksTime = this.filteredTasksDeadline.filter(
-          this.filterTask
-        );
+        this.filteredTasksTime = this.filteredTasksDeadline.filter(this.filterTask);
       }
       this.filteredTasks = this.filteredTasksTime;
+      console.log("filterCategory");
+      this.$emit('filter_tasks', this.filteredTasks);
     },
 
     filterDateDeadline: function() {
       if (this.filteredTasksTime.length === 0) {
-        this.filteredTasksDeadline = this.tasks.filter(this.filterTaskDeadline);
+        this.filteredTasksDeadline = this.products.filter(this.filterTaskDeadline);
       } else {
         this.filteredTasksDeadline = this.filteredTasksTime.filter(
           this.filterTaskDeadline
         );
       }
       this.filteredTasks = this.filteredTasksDeadline;
+      console.log("filterDateDeadline");
+      this.$emit('filter_tasks', this.filteredTasks);
     }
   },
 
-  mounted() {
-    this.getTasks();
-  },
-
   methods: {
-    /**
-     * Получить задачи
-     */
 
     /**
      * Фильтровать задачу по категории
@@ -141,13 +145,36 @@ export default {
         }
       }
       divFilter.classList.toggle("show");
-    }
+    },
+
+     /* Очистить результаты фильтрации */
+    clearResults() {
+     
+      this.$emit('clear_results', this.products);
+
+    },
+
+
   },
 
 };
 </script>
 
 <style lang="scss" scoped>
+
+.filterIcon {
+  transition: 0.5s linear;
+  right: 8px;
+  position: fixed;
+  top: 15%;
+  padding: 10px 14px;
+  border-radius: 25%;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 1px #c5c5c5;
+  svg {
+    color: white;
+  }
+}
 
 #filter {
   margin-bottom: 1em;
@@ -202,21 +229,19 @@ export default {
         }
       }
     }
-}
 
+  .clear-result__wrapper{
 
-.filterIcon {
-  transition: 0.5s linear;
-  right: 2px;
-  position: fixed;
-  top: 15%;
-  padding: 10px 14px;
-  border-radius: 25%;
-  cursor: pointer;
-  box-shadow: 0px 0px 5px 1px #c5c5c5;
-  svg {
-    color: white;
-  }
+    text-align: center;
+    margin: 20px 0;
+
+    .clear-results__btn{
+    outline: none;
+    padding: 10px;
+    border: 1px solid black;
+  
+    }
+  } 
 }
 
 @media screen and (max-width: 800px) {
@@ -242,18 +267,5 @@ export default {
     }
   }
 }
-
-
-.no-tasks {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  text-align: center;
-}
-
-.loading {
-  text-align: center;
-}
-
 
 </style>

@@ -12,6 +12,9 @@
       </div>
      
       <div class="card-footer">
+        <div class="category">
+          
+          Категория {{ product.category}}</div>
         <div class="description">{{ product.description }}</div>
         <div class="price-block">
           <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>

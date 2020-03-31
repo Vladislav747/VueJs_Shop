@@ -14,13 +14,17 @@
           <img :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
       </div>
       <div class="description">
+        
         <div class="description__title">
             <h4>Описание:</h4>
         </div>
+
         <div class="description__text">
             <p>{{ product.description }}</p>
         </div>
       </div>
+
+
 
       <div class="price-block">
         <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
