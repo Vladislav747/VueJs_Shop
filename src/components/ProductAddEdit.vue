@@ -18,7 +18,7 @@
       <div class="row">
         <label class="short-label">Категория:</label>
           <select id="task-category"  class="form__input" v-model="task.category">
-            <option v-for="type in taskTypes" :key="type">{{ type }}</option>
+            <option v-for="type in productTypes" :key="type">{{ type }}</option>
           </select>
       </div>
 
@@ -55,15 +55,10 @@
 
 <script>
 import { showNoty, PRODUCT_CATEGORIES } from "../utility";
-import DatePicker from "vue2-datepicker";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   name: "ProductAddEdit",
-
-  components: {
-    DatePicker
-  },
 
   data() {
     return {
@@ -76,7 +71,7 @@ export default {
         manufacturer:"",
       },
       isLoading:false,
-      taskTypes: PRODUCT_CATEGORIES,
+      productTypes: PRODUCT_CATEGORIES,
       manufacturerList:["Bosch", "Samsung"],
     };
   },

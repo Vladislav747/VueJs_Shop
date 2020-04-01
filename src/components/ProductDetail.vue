@@ -129,7 +129,7 @@ export default {
 
 <style lang="scss" scoped>
 
-//preloader
+//preloader styles
 @import "../scss/preloader.scss";
 
 .product-container {

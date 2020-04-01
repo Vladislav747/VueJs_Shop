@@ -85,10 +85,11 @@ export default {
   watch: {
     filterCategory: function() {
 
-      if (this.productManufactures.length === 0) {
+      if (this.filteredManufacturesArray.length === 0) {
+        console.log(this.products, "filterCategory");
         this.filteredCategoriesArray = this.products.filter(this.filterProductCategory);
       } else {
-        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterProductCategory);
+        this.filteredCategoriesArray = this.filteredManufacturesArray.filter(this.filterProductCategory);
       }
       this.filteredProducts = this.filteredCategoriesArray;
 
@@ -98,12 +99,16 @@ export default {
 
     filterManufacturer: function() {
 
+
       if (this.filteredCategoriesArray.length === 0) {
         this.filteredManufacturesArray = this.products.filter(this.filterProductManufacturer);
       } else {
+      
         this.filteredManufacturesArray = this.filteredCategoriesArray.filter(this.filterProductManufacturer);
       }
-      this.filteredProducts = this.filteredCategoriesArray;
+      this.filteredProducts = this.filteredManufacturesArray;
+
+      console.log(this.filteredManufacturesArray, "filterManufacturer");
       
       this.$emit('filter_products', this.filteredProducts);
     },
@@ -143,10 +148,12 @@ export default {
      *
      */
     filterProductManufacturer(product) {
-      if (this.filterCategory !== "") {
-        return product.category.toString() === this.filterCategory.toString();
+      
+      if (this.filterManufacturer !== "" && product.hasOwnProperty('manufacturer') ) {
+        console.log(product.manufacturer.toString() === this.filterManufacturer.toString(), "check")
+        return product.manufacturer.toString() === this.filterManufacturer.toString();
       } else {
-        return true;
+        return false;
       }
     },
 
