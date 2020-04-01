@@ -10,8 +10,8 @@
           <span>{{ product.category }}</span>
         </div>
       </div>
-      <div class="image">
-          <img :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
+      <div class="image-wrapper">
+          <img class="product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
       </div>
       <div class="description">
         
@@ -31,9 +31,9 @@
       </div>
 
       <div class="counter_block">
-        <span class="minus"></span>
-        <input type="text" class="text" name="quantity" value="1">
-        <span class="plus" data-max="1000"></span>
+        <span class="minus" @click="decreaseQuantity(quantity)"></span>
+        <input type="text" v-model="quantity" class="text" name="quantity" value="1">
+        <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
       </div>
 
     </div>
@@ -69,6 +69,7 @@ export default {
         price:"",
         currency:"",
         srcImage:"",
+        quantity: 1,
       },
       isLoading:true,
     };
@@ -152,11 +153,23 @@ export default {
     }
   }
 
-  .image {
+  .image-wrapper {
     background-position: center;
     background-size: cover;
-    min-height: 240px;
     text-align: center;
+
+    .product-image{
+      width: auto;
+      max-height: 280px;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .image-wrapper {
+      .product-image{
+      max-width: 140px;
+      max-height: 280px;
+      }
+    }
   }
 
   .description {
@@ -164,29 +177,71 @@ export default {
     word-break: break-word;
   }
 
-  .datetineDeadline{
-    margin-bottom:1rem;
-  }
+  .counter_block{
+    box-sizing: border-box;
+    border: 1px solid #f3f3f5;
+    background: #f3f3f5;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 5px;
+    
+    >span:before{
+      display: inline-block;
+      content: "";
+      width: 14px;
+      height: 17px;
+      background: url(/bitrix/templates/aspro_next/images/svg/ai.svg) -80px -191px no-repeat;
+      vertical-align: middle;
+    }
 
-  .tags {
-    display: flex;
+    input[type="text"]{
+      width: 34px;
+      border: 0;
+      border-left: 1px solid #f3f3f5;
+      border-right: 1px solid #f3f3f5;
+      background: #f3f3f5;
+      color: #666;
+      font-size: 13px;
+      height: 34px;
+      border-radius: 0;
+      text-align: center;
+      vertical-align: top;
+      line-height: 13px;
+      padding: 20px 3px;
+      font-weight: 700;
+    }
 
-    .times {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+    .minus{
+      line-height: 40px;
+      display: inline-block;
+      cursor: pointer;
+      vertical-align: top;
 
-      span {
-        margin-left: 3rem;
+      &:before{
+        background: url(../assets/minus-solid.svg);
+        vertical-align: middle;
       }
     }
-    
+
+    .plus{
+      line-height: 40px;
+      display: inline-block;
+      cursor: pointer;
+
+      &:before{
+        background: url(../assets/plus-solid.svg);
+        vertical-align: middle;
+      }
+    }
+      
+  }    
 
     
-  }
+}
 
   
 
-}
+
 
 .reviews-container{
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),

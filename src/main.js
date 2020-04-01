@@ -2,9 +2,7 @@ import Vue from 'vue';
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
-import {
-  library
-} from '@fortawesome/fontawesome-svg-core';
+import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faPlusCircle,
   faListUl,
@@ -15,14 +13,14 @@ import {
   faShoppingCart,
 } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  FontAwesomeIcon
-} from '@fortawesome/vue-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+
+import axios from 'axios';
 
 library.add(faPlusCircle, faListUl, faFilter, faEdit, faTrash, faPalette, faShoppingCart);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-import axios from 'axios';
+
 const clientConfigs = require('./config/clientConfigs');
 
 const api = axios.create({

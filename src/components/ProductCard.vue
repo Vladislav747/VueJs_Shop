@@ -6,8 +6,8 @@
           <div class="card-title">{{ product.name }}</div>
           <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
         </div>
-        <div class="image">
-          <img :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
+        <div class="image-wrapper">
+          <img class= "product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
      
@@ -184,9 +184,16 @@ export default {
     white-space: normal;
   }
 
-  .image img{
+  .image-wrapper .product-image{
     width: 100%;
     max-height: 280px;
+  }
+
+  @media screen and (max-width: 550px) {
+    .image-wrapper .product-image{
+      max-width: 140px;
+      max-height: 280px;
+    }
   }
 
   .buy-block{
@@ -224,11 +231,6 @@ export default {
     justify-content: space-between;
     margin-top: 15px;
     flex-direction: column;
-
-    .datetimeDeadline {
-      font-size: 1rem;
-      font-weight: bold;
-    }
 
     .price-block{
       margin: 0, auto;

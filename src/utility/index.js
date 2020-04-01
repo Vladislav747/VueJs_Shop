@@ -19,8 +19,8 @@ export const PRODUCT_CATEGORIES = [
 //Для тестирования в случае если нету никаких заданий
 export const defaultProducts = [];
 
-export const DEADLINE_TYPES = [
-  'Просроченные Задачи',
-  'Непросроченные Задачи'
+export const PRODUCT_MANUFACTURES = [
+  'Bosch',
+  'Samsung'
 ];
 

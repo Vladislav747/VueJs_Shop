@@ -21,12 +21,19 @@
 
             <!-- Фильтр по Дедлайну  -->
             <div class="filter-property">
-                <span class="filter-property--title">Срочность:</span>
-                <select class="filter-property--body" v-model="filterDateDeadline">
+                <span class="filter-property--title">Производитель:</span>
+                <select class="filter-property--body" v-model="filterManufacturer">
                     <option></option>
-                    <option v-for="type in deadlineTypes" :key="type">{{ type }}</option>
+                    <option v-for="type in productManufactures" :key="type">{{ type }}</option>
                 </select>
             </div>
+
+            <div class="filter-property">
+                <span class="filter-property--title">Цена:</span>
+                <vue-slider v-model="filterPrice"></vue-slider>
+            </div>
+
+            
 
             <div class="clear-result__wrapper">
               <button @click="clearResults()" class="clear-results__btn">Сбросить результаты</button>
@@ -38,10 +45,16 @@
 </template>
 
 <script>
-import {PRODUCT_CATEGORIES, DEADLINE_TYPES} from "../utility";
+import {PRODUCT_CATEGORIES, PRODUCT_MANUFACTURES} from "../utility";
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
 
 export default {
   name: "FilterProducts",
+
+  components:{
+    VueSlider
+  },
 
   props:{
     // isLoading: "",
@@ -59,33 +72,50 @@ export default {
       tasks: [],
       filteredTasks: [],
       filterCategory: "",
-      filterDateDeadline: "",
+      filterManufacturer: "",
+      filterPrice:"",
       productCategories:  PRODUCT_CATEGORIES,
-      deadlineTypes: DEADLINE_TYPES,
-      filteredTasksTime: [],
-      filteredTasksDeadline: []
+      productManufactures: PRODUCT_MANUFACTURES,
+      filteredCategoriesArray: [],
+      filteredTasksDeadline: [],
+      
     };
   },
 
   watch: {
     filterCategory: function() {
 
-      console.log("filteredTasksTime");
       if (this.filteredTasksDeadline.length === 0) {
-        this.filteredTasksTime = this.products.filter(this.filterTask);
+        this.filteredCategoriesArray = this.products.filter(this.filterTask);
       } else {
-        this.filteredTasksTime = this.filteredTasksDeadline.filter(this.filterTask);
+        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterTask);
       }
-      this.filteredTasks = this.filteredTasksTime;
-      console.log("filterCategory");
+      this.filteredTasks = this.filteredCategoriesArray;
+
       this.$emit('filter_tasks', this.filteredTasks);
     },
 
+
+    filterManufacturer: function() {
+
+      if (this.filteredTasksDeadline.length === 0) {
+        this.filteredCategoriesArray = this.products.filter(this.filterTask);
+      } else {
+        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterTask);
+      }
+      this.filteredTasks = this.filteredCategoriesArray;
+      
+      this.$emit('filter_tasks', this.filteredTasks);
+    },
+
+
+
+
     filterDateDeadline: function() {
-      if (this.filteredTasksTime.length === 0) {
+      if (this.filteredCategoriesArray.length === 0) {
         this.filteredTasksDeadline = this.products.filter(this.filterTaskDeadline);
       } else {
-        this.filteredTasksDeadline = this.filteredTasksTime.filter(
+        this.filteredTasksDeadline = this.filteredCategoriesArray.filter(
           this.filterTaskDeadline
         );
       }

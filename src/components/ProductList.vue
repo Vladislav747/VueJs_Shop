@@ -95,7 +95,6 @@ export default {
   .products {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -16px;
     padding: 16px 0;
   }
 
