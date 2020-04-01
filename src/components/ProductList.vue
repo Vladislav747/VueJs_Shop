@@ -6,7 +6,7 @@
       v-bind:products="products"
       v-bind:isLoading="isLoading"
       v-bind:noTasks="noTasks"
-      v-on:filter_tasks="filterResults"
+      v-on:filter_products="filterResults"
       v-on:clear_results="filterResults"
 
      />
@@ -17,7 +17,7 @@
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
 
-    <div class="products">
+    <div v-else class="products">
       <product-card v-for="product in filteredProducts" :key="product._id" :product="product"/>
     </div>
   </div>  

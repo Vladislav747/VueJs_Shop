@@ -1,25 +1,29 @@
 <template>
-  <section class="card">
-    <div class="card-inner">
-      <div class="card-header" @click="viewTask(product.id)">
-        <div class="card-header--top">
-          <div class="card-title">{{ product.name }}</div>
-          <span class="card-sticker top-right" v-bind:class="classObject">Оценка</span>
+  <section class="product">
+    <div class="product-inner">
+      <div class="product-header" @click="viewTask(product.id)">
+        <div class="product-header--top">
+          <div class="product-title">{{ product.name }}</div>
+          <span class="product-sticker top-right">Оценка</span>
         </div>
         <div class="image-wrapper">
           <img class= "product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
-     
-      <div class="card-footer">
+
+      <div class="product-properties">
         <div class="category">
-          
-          Категория {{ product.category}}</div>
-        <div class="description">{{ product.description }}</div>
+          Категория: {{ product.category}}</div>
+          <div class="manufacturer">
+          Производитель: {{ product.manufacturer}}</div>
+        <div class="description">Описание:{{ product.description }}</div>
         <div class="price-block">
           <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
         </div>
-
+      </div> 
+     
+      <div class="product-footer">
+       
         <div class="counter_block">
           <span class="minus" @click="decreaseQuantity(quantity)"></span>
           <input type="text" v-model="quantity" class="text" name="quantity" value="1">
@@ -50,6 +54,7 @@ export default {
           name: "",
           category: "",
           description: "",
+          manufacturer:"",
           price:"",
           currency:"",
           quantity: 1,
@@ -68,26 +73,6 @@ export default {
 
   computed: {
 
-  classObject: function () {
-    var className;
-
-    switch(this.product.category){
-
-      case 'Просрочено':
-        className = 'category_sticker expired_sticker';
-        break;
-      case 'В работе':
-        className = 'category_sticker inwork_sticker';
-        break;
-      case 'Сделано':
-        className = 'category_sticker ready_sticker';
-        break;
-      default:
-        className = 'category_sticker';
-        break;
-    }
-      return className
-    }
   
 },
 
@@ -135,13 +120,13 @@ export default {
 
 <style lang="scss" scoped> 
    
-.card {
+.product {
   margin: 10px;
   width: 30%;
   border-radius: 10px;
   cursor: pointer;
 
-  .card-inner {
+  .product-inner {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -156,18 +141,18 @@ export default {
     }
   }
 
-  .card-header--top {
+  .product-header--top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 5%;
 
-    .card-title {
+    .product-title {
       font-weight: bold;
       padding-top: 2px;
     }
 
-    .card-sticker {
+    .product-sticker {
       color: black;
       float: right;
       font-size: 0.9rem;
@@ -225,17 +210,22 @@ export default {
       }
   }
 
-  .card-footer {
+  .product-properties{
+
+    .price-block{
+      margin: 0 auto;
+      padding: 15px;
+      text-align: center;
+    }
+
+  }
+
+  .product-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 15px;
     flex-direction: column;
-
-    .price-block{
-      margin: 0, auto;
-      padding: 15px;
-    }
 
     .counter_block{
       box-sizing: border-box;
@@ -296,10 +286,10 @@ export default {
       
     }
 
-    .card-icons {
+    .product-icons {
       margin-right: -10px;
 
-      .card-icons--link {
+      .product-icons--link {
         display: inline-block;
         padding: 0 10px;
         cursor: pointer;
@@ -328,28 +318,16 @@ export default {
     text-align: center;
   }
 
-  .description {
+  .product-properties {
     word-wrap: break-word;
     padding: 15px;
   }
 
-  .tag {
-    border: #eee 2px;
-    border-radius: 25px;
-    background: #73ad21;
-    padding: 20px;
-    width: 200px;
-    height: 70px;
-  }
-
-  .vue-input-tag-wrapper {
-    border: 0px;
-  }
 }
 
 @media screen and (max-width: 550px) {
 
-  .card {
+  .product {
     flex: 0 0 100%;
     padding: 5%;
 
@@ -361,7 +339,7 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-  .card {
+  .product {
     flex: 0 0 calc(50% - calc(1rem * 0.55));
   }
  

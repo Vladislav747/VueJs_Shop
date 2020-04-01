@@ -23,11 +23,10 @@ router.post('/', (req, res) => {
     id: new mongoose.Types.ObjectId().toHexString(),
     name: req.body.name,
     category: req.body.category,
-    srcImage: req.body.srcImage,
-    price: req.body.price,
-    description: req.body.description,
-    dateOfTask: req.body.dateOfTask,
     manufacturer: req.body.manufacturer,
+    srcImage: req.body.srcImage,
+    description: req.body.description,
+    price: req.body.price,
   };
 
   product.create(newProduct)

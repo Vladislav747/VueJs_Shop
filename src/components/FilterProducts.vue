@@ -69,15 +69,15 @@ export default {
     return {
       isLoading: false,
       noTasks: false,
-      tasks: [],
-      filteredTasks: [],
+      filteredProducts: [],
       filterCategory: "",
       filterManufacturer: "",
       filterPrice:"",
       productCategories:  PRODUCT_CATEGORIES,
       productManufactures: PRODUCT_MANUFACTURES,
       filteredCategoriesArray: [],
-      filteredTasksDeadline: [],
+      filteredManufacturesArray: [],
+      filteredPrice:[]
       
     };
   },
@@ -85,33 +85,30 @@ export default {
   watch: {
     filterCategory: function() {
 
-      if (this.filteredTasksDeadline.length === 0) {
-        this.filteredCategoriesArray = this.products.filter(this.filterTask);
+      if (this.productManufactures.length === 0) {
+        this.filteredCategoriesArray = this.products.filter(this.filterProductCategory);
       } else {
-        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterTask);
+        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterProductCategory);
       }
-      this.filteredTasks = this.filteredCategoriesArray;
+      this.filteredProducts = this.filteredCategoriesArray;
 
-      this.$emit('filter_tasks', this.filteredTasks);
+      this.$emit('filter_products', this.filteredProducts);
     },
 
 
     filterManufacturer: function() {
 
-      if (this.filteredTasksDeadline.length === 0) {
-        this.filteredCategoriesArray = this.products.filter(this.filterTask);
+      if (this.filteredCategoriesArray.length === 0) {
+        this.filteredManufacturesArray = this.products.filter(this.filterProductManufacturer);
       } else {
-        this.filteredCategoriesArray = this.filteredTasksDeadline.filter(this.filterTask);
+        this.filteredManufacturesArray = this.filteredCategoriesArray.filter(this.filterProductManufacturer);
       }
-      this.filteredTasks = this.filteredCategoriesArray;
+      this.filteredProducts = this.filteredCategoriesArray;
       
-      this.$emit('filter_tasks', this.filteredTasks);
+      this.$emit('filter_products', this.filteredProducts);
     },
 
-
-
-
-    filterDateDeadline: function() {
+    filterPrice: function() {
       if (this.filteredCategoriesArray.length === 0) {
         this.filteredTasksDeadline = this.products.filter(this.filterTaskDeadline);
       } else {
@@ -119,9 +116,9 @@ export default {
           this.filterTaskDeadline
         );
       }
-      this.filteredTasks = this.filteredTasksDeadline;
-      console.log("filterDateDeadline");
-      this.$emit('filter_tasks', this.filteredTasks);
+      this.filteredProducts = this.filteredTasksDeadline;
+      console.log("filterPrice");
+      this.$emit('filter_products', this.filteredProducts);
     }
   },
 
@@ -129,19 +126,32 @@ export default {
 
     /**
      * Фильтровать задачу по категории
-     * @param {object} task - объект текущей задачи
+     * @param {object} product - продукт
      *
      */
-    filterTask(task) {
+    filterProductCategory(product) {
       if (this.filterCategory !== "") {
-        return task.category.toString() === this.filterCategory.toString();
+        return product.category.toString() === this.filterCategory.toString();
       } else {
         return true;
       }
     },
 
     /**
-     * Фильтровать задачу по деадлайну
+     * Фильтровать задачу по производителю
+     * @param {object} product - продукт
+     *
+     */
+    filterProductManufacturer(product) {
+      if (this.filterCategory !== "") {
+        return product.category.toString() === this.filterCategory.toString();
+      } else {
+        return true;
+      }
+    },
+
+    /**
+     * Фильтровать задачу по цене
      * @param {object} task - объект текущей задачи
      *
      */
@@ -149,7 +159,7 @@ export default {
       var dateDeadline = new Date(task.dateOfTask).getTime();
       var nowDate = new Date().getTime();
 
-      switch (this.filterDateDeadline) {
+      switch (this.filterPrice) {
         case "Непросроченные Задачи":
           return dateDeadline >= nowDate;
 
