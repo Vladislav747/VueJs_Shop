@@ -5,6 +5,7 @@
         <span class="top-desktop">Главная</span>
         <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
       </router-link>
+
       <router-link id="product-add" :to="{ name: 'product-add' }">
         <span class="top-desktop">Создать</span>
         <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
@@ -12,12 +13,22 @@
 
       <div class="spacer"/>
 
-      <input v-if="isHome" v-model="searchText" type="search" placeholder="Искать товары...">
+      <input v-if="isHome" class="" v-model="searchText" type="search" placeholder="Искать товары...">
+    </div>
+    
+    <div class="icon-wrapper">
+      <router-link id="cart" :to="{ name: 'cart' }">
+        <font-awesome-icon icon="shopping-cart" size="2x" class="cart-icon"/>
+        <span class="top-desktop">Корзина</span>
+      </router-link>
     </div>
 
-    <router-link id="cart" :to="{ name: 'cart' }">
-      <font-awesome-icon icon="shopping-cart" size="2x" class="cart-icon"/>
-    </router-link>
+    <div class="icon-wrapper">
+      <router-link id="login-form" :to="{ name: 'login-form' }">
+        <font-awesome-icon icon="sign-in-alt" size="2x"/>
+        <span class="top-desktop">Войти</span>
+      </router-link>
+    </div>
 
   </div>
 </template>
@@ -89,15 +100,17 @@ export default {
   display: flex;
   padding: 1em;
 
+
   .header-inner {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   a {
     color: #fff;
     line-height: 28px;
-    margin-right: 1em;
+    margin-right: 2rem;
     text-decoration: none;
   }
 
@@ -127,6 +140,17 @@ export default {
     display: none;
   }
 
+  input[type="search"]{
+    margin-right: 3rem;
+    height: 45px;
+  }
+
+  .icon-wrapper{
+    #login-form, #cart{
+      display: inline-grid;
+    }
+  }
+
 }
 
 @media screen and (max-width: 550px) {
@@ -135,9 +159,6 @@ export default {
     input {
       margin: 1rem auto 0;
       width: 100%;
-    }
-    .top-desktop {
-      display: none;
     }
     .top-icon {
       display: block;

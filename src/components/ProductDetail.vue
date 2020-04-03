@@ -6,43 +6,49 @@
     
     <div class="product">
 
+      <div class="left-col">
 
-      <div class="header-product">
-        <div class="header-title">
-          <h3>{{ product.name }}</h3>
+        <div class="header-product">
+          <div class="header-title">
+            <h3>{{ product.name }}</h3>
+          </div>
         </div>
-        <div class="category">
-          <span>{{ product.category }}</span>
-        </div>
-      </div>
 
-
-      <div class="image-wrapper">
+        <div class="image-wrapper">
           <img class="product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
-      </div>
-      <div class="description">
-        
-        <div class="description__title">
-            <h4>Описание:</h4>
-        </div>
-
-        <div class="description__text">
-            <p>{{ product.description }}</p>
         </div>
       </div>
 
+      <div class="right-col">
+        <div class="description">
+          
+          <div class="description__title">
+              <h4>Описание:</h4>
+          </div>
 
+          <div class="description__text">
+              <p>{{ product.description }}</p>
+          </div>
+        </div>
 
-      <div class="price-block">
-        <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
+        <div class="category">
+          <span><h4>Категория</h4>{{ product.category }}</span>
+        </div>
+
+        <div class="price-block">
+          <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
+        </div>
+
+        <div class="counter_block">
+          <span class="minus" @click="decreaseQuantity(quantity)"></span>
+          <input type="text" v-model="quantity" class="text" name="quantity" value="1">
+          <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
+        </div>
+
+        <div class="buy-block">
+            <button @click="addProductToCart(product)" class="add-to-cart-btn">Купить товар</button>
+        </div>
       </div>
-
-      <div class="counter_block">
-        <span class="minus" @click="decreaseQuantity(quantity)"></span>
-        <input type="text" v-model="quantity" class="text" name="quantity" value="1">
-        <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
-      </div>
-
     </div>
 
     <div class="reviews-container">
@@ -123,6 +129,16 @@ export default {
       this.check.close();
     },
 
+    increaseQuantity(quantity){
+      this.quantity += 1;
+
+    },
+    decreaseQuantity(quantity){
+      if(this.quantity > 1){
+        this.quantity -= 1;
+      }
+    },
+
   }
 };
 </script>
@@ -146,15 +162,28 @@ export default {
     padding: 1rem;
     width: 100%;
     min-height: 300px;
+    display: flex;
 
-    .header-product{
-      display: flex;
-      justify-content: space-between;
-    }
 
-    h3,
-    h4 {
-      margin-bottom: 1rem;
+    .left-col{
+
+      .header-product{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      h3,
+      h4 {
+        margin-bottom: 1rem;
+
+
+      }
+
+
+
+
+
+  
 
       span {
         color: #737373;
@@ -162,18 +191,56 @@ export default {
         font-size: 1rem;
         font-weight: normal;
       }
+
+
     }
 
-    .image-wrapper {
-      background-position: center;
-      background-size: cover;
-      text-align: center;
+    .right-col{
 
-      .product-image{
-        max-width: 100%;
-        max-height: 100%;
+      .image-wrapper {
+        background-position: center;
+        background-size: cover;
+        text-align: center;
+
+        .product-image{
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
+
+
+      .buy-block{
+      color: black;
+      float: right;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      padding: 3px 10px 2px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin: 1rem 0;
+      
+    
+      .add-to-cart-btn{
+        background: #5044ff;
+        color: #fff;
+        padding: 10px 30px;
+        font-size: 13px;
+        outline: none;
+        border: 1px solid #5044ff;
+        border-radius: 1000px;
+        transition: all .2s ease-in;
+        opacity: 0;
+        cursor: pointer;
+
+          &:hover{
+            opacity: 1;
+          }
       }
     }
+
+    }
+
+    
 
     @media screen and (max-width: 550px) {
       .image-wrapper {
@@ -248,6 +315,8 @@ export default {
       }  
     }
     /*Input counter block styles*/
+
+
   }
 
   .reviews-container{

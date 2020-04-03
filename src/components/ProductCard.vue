@@ -43,6 +43,7 @@
 <script>
 import Noty from "noty";
 import { showNoty } from "../utility";
+import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "ProductCard",
@@ -97,9 +98,9 @@ export default {
       this.check.close();
     },
     
-    addProductToCart(product){
-      console.log(product, "`Works ProductCard ${product.quantity}`");
-    },
+    // addProductToCart(product){
+    //   console.log(product, "`Works ProductCard ${product.quantity}`");
+    // },
 
     increaseQuantity(quantity){
       this.quantity += 1;
@@ -110,6 +111,10 @@ export default {
         this.quantity -= 1;
       }
     },
+
+    ...mapActions({
+      addProductToCart: 'addProductToCart'
+    })
   },
 
   mounted: function() {
@@ -208,7 +213,7 @@ export default {
           opacity: 1;
         }
       }
-  }
+    }
 
   .product-properties{
 

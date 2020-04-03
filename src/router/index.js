@@ -5,6 +5,9 @@ import ProductList from '../components/ProductList.vue';
 import ProductAddEdit from '../components/ProductAddEdit.vue';
 import ProductDetail from '../components/ProductDetail.vue';
 import Cart from '../components/Cart.vue';
+import LoginForm from '../components/LoginForm.vue';
+import RegistrationForm from '../components/RegistrationForm.vue';
+
 
 Vue.use(Router)
 
@@ -28,14 +31,19 @@ export default new Router({
       component: ProductAddEdit
     },
     {
-      path: '/product-edit/:id',
-      name: 'product-edit',
-      component: ProductAddEdit
-    },
-    {
       path: '/cart',
       name: 'cart',
       component: Cart
+    },
+    {
+      path: '/login-form',
+      name: 'login-form',
+      component: LoginForm
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegistrationForm
     },
     
   ]

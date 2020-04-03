@@ -37,5 +37,9 @@ export default { // actions = mehtods
         context.commit('setCheckoutStatus','fail')
       }
     )
+  },
+
+  sendFile(imageData){
+    
   }
 }

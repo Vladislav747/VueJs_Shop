@@ -8,9 +8,8 @@
       v-bind:noTasks="noTasks"
       v-on:filter_products="filterResults"
       v-on:clear_results="filterResults"
-
+        
      />
-
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="loading">Загружаю товары</div>
     <div v-if="noTasks" class="no-tasks">
@@ -77,7 +76,6 @@ export default {
     },
 
     async filterResults(data){
-      console.log(data, "filteredProducts filterResults");
       this.filteredProducts = data;
     },
 

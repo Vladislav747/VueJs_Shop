@@ -61,7 +61,7 @@ export default {
     // noTasks:"",
     products: {
       type: Array,
-      default: [],
+      default: () => {},
     },
   },
   
@@ -86,7 +86,7 @@ export default {
     filterCategory: function() {
 
       if (this.filteredManufacturesArray.length === 0) {
-        console.log(this.products, "filterCategory");
+
         this.filteredCategoriesArray = this.products.filter(this.filterProductCategory);
       } else {
         this.filteredCategoriesArray = this.filteredManufacturesArray.filter(this.filterProductCategory);
@@ -99,7 +99,6 @@ export default {
 
     filterManufacturer: function() {
 
-
       if (this.filteredCategoriesArray.length === 0) {
         this.filteredManufacturesArray = this.products.filter(this.filterProductManufacturer);
       } else {
@@ -107,8 +106,6 @@ export default {
         this.filteredManufacturesArray = this.filteredCategoriesArray.filter(this.filterProductManufacturer);
       }
       this.filteredProducts = this.filteredManufacturesArray;
-
-      console.log(this.filteredManufacturesArray, "filterManufacturer");
       
       this.$emit('filter_products', this.filteredProducts);
     },
@@ -122,7 +119,7 @@ export default {
         );
       }
       this.filteredProducts = this.filteredTasksDeadline;
-      console.log("filterPrice");
+  
       this.$emit('filter_products', this.filteredProducts);
     }
   },
@@ -135,7 +132,7 @@ export default {
      *
      */
     filterProductCategory(product) {
-      if (this.filterCategory !== "") {
+      if (this.filterCategory !== "" && product.hasOwnProperty('category')) {
         return product.category.toString() === this.filterCategory.toString();
       } else {
         return true;
@@ -149,8 +146,7 @@ export default {
      */
     filterProductManufacturer(product) {
       
-      if (this.filterManufacturer !== "" && product.hasOwnProperty('manufacturer') ) {
-        console.log(product.manufacturer.toString() === this.filterManufacturer.toString(), "check")
+      if (this.filterManufacturer !== "" && product.hasOwnProperty('manufacturer')) {
         return product.manufacturer.toString() === this.filterManufacturer.toString();
       } else {
         return false;

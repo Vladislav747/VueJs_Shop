@@ -6,8 +6,7 @@
       </h2>
       <h2 v-else>
         Редактировать данные о товаре
-      </h2>
-
+      </h2> 
       <span class="required">- обязательное поле</span>
 
       <div class="row">
@@ -28,8 +27,8 @@
       </div>
 
       <div class="row">
-        <label class="short-label">Url картинки товара:</label>
-          <input id="task-image" class="form__input" v-model="task.srcImage" placeholder="../../static/images/"/>
+        <label class="short-label">Картинка товара:</label>
+          <input id="task-image" class="form__input" type="file" ref="file"/>
       </div>
 
       <div class="row">

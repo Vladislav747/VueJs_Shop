@@ -1,7 +1,9 @@
 import shop from '@/api/shop'
 
+console.log(shop, 'check');
+
 export default { // = computed properties
-  availableProducts(state,getters) {
+  availableProducts(state=shop, getters) {
     return state.products.filter(product => product.inventory > 0)
   },
   cartProducts(state) {
