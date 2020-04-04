@@ -37,11 +37,20 @@ export default new Vuex.Store({
       img: 'bed.jpg',
       inventory: 20
     }],
-    cart:[],
+    cart:[{
+      id: 14,
+      title: 'Stripe Rag Rug',
+      price: 29.99,
+      category: 'decor',
+      sale: true,
+      img: 'bed.jpg',
+      inventory: 20
+    },],
     cartItems:0,
     checkoutStatus: null,
     highprice: 1500,
-    sale: false
+    sale: false,
+    currency: "руб/шт",
   },
   getters,
   actions,

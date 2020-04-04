@@ -16,13 +16,15 @@
           <span class="product-cart-quantity">Quantity: {{product.quantity}}</span>
         </li>
       </ul>
+       <!-- <product-card class="cart-product-card" v-for="product in products" :key="product._id" :product="product"/> -->
+
       <div class="cart-checkout">
         <h3>Cart total : </h3>
         <p>{{ total | currency}}</p>
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button>
         <p class="status" v-if="$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p> -->
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button> -->
-        <button class="btn-primary" @click="checkout">Checkout</button>
+        <button class="btn-primary" @click="$store.dispatch('checkout')">Checkout</button>
         <!-- <p class="status" v-if="checkoutStatus">{{checkoutStatus}}</p> -->
       </div>
     </div>
@@ -33,9 +35,14 @@
 import Noty from "noty";
 import { showNoty } from "../utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
+import ProductCard from "./ProductCard.vue";
 
 export default {
     name: "Cart",
+
+    components: {
+      ProductCard
+    },
 
     computed: {
       ...mapGetters({

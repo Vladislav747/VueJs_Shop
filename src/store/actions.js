@@ -11,6 +11,11 @@ export default { // actions = mehtods
   // },
 
   addProductToCart(context, product) {
+
+    console.log("addProductToCart");
+
+    console.log(product.product, "product")
+    console.log(product.quantity, "quantity")
     // if(product.inventory > 0)
     if(context.getters.productInStock(product)){
       const cartItem  = context.state.cart.find(item => item.id === product.id)

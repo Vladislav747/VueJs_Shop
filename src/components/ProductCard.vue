@@ -31,7 +31,7 @@
         </div>
 
         <div class="buy-block">
-          <button @click="addProductToCart(product)" class="add-to-cart-btn btn-primary">Купить товар</button>
+          <button @click="addProductToCart({product, quantity})" class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
         
       </div>
@@ -123,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss"> 
    
 .product {
   margin: 10px;
@@ -198,7 +198,7 @@ export default {
       
     
       .add-to-cart-btn{
-        
+
         &:hover{
           opacity: 1;
         }
@@ -290,16 +290,6 @@ export default {
         cursor: pointer;
       }
     }    
-  }
-
-  .inwork_sticker{
-    background-color: #ffd83a;
-  }
-  .expired_sticker{
-    background-color: #ff4f4f;
-  }
-  .ready_sticker{
-    background-color: #6ecc6e;
   }
 
   .image,
