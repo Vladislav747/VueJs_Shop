@@ -1,7 +1,13 @@
 export default { // = computed properties
 
   getProducts(state){
-    return state.products
+    const response = this.$http.get("products");
+    var products = response.data;
+
+    state.products = products;
+
+    return state.products;
+
   },
   // availableProducts(state, getters) {
   //   return state.products.filter(product => product.inventory > 0)

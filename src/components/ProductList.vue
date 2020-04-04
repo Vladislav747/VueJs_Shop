@@ -26,6 +26,7 @@
 import { showNoty } from "../utility";
 import ProductCard from "./ProductCard.vue";
 import FilterProducts from "./FilterProducts.vue";
+import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "ProductList",
@@ -48,11 +49,15 @@ export default {
       return (
         this.isLoading === false && (this.tasks && this.tasks.length === 0)
       );
-    }
+    },
+    ...mapGetters({
+        products:'getProducts',
+    
+      }),
   },
 
   mounted() {
-    this.getProducts();
+    // this.getProducts();
   },
 
   methods: {
