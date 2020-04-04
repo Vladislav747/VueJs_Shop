@@ -31,7 +31,7 @@
         </div>
 
         <div class="buy-block">
-          <button @click="addProductToCart(product)" class="add-to-cart-btn">Купить товар</button>
+          <button @click="addProductToCart(product)" class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
         
       </div>
@@ -198,17 +198,7 @@ export default {
       
     
       .add-to-cart-btn{
-        background: #5044ff;
-        color: #fff;
-        padding: 10px 30px;
-        font-size: 13px;
-        outline: none;
-        border: 1px solid #5044ff;
-        border-radius: 1000px;
-        transition: all .2s ease-in;
-        opacity: 0;
-        cursor: pointer;
-
+        
         &:hover{
           opacity: 1;
         }

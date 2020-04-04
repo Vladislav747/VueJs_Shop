@@ -65,5 +65,6 @@ new Vue({
   el: '#app',
   data: globalData,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  store,
 });

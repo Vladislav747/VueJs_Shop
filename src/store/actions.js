@@ -1,14 +1,14 @@
 import shop from '@/api/shop'
 
 export default { // actions = mehtods
-  fetchProducts(context) {
-    return new Promise(function(resolve, reject) {
-      shop.getProducts(products => {
-        context.commit('setProducts',products)
-        resolve();
-      })
-    })
-  },
+  // fetchProducts(context) {
+  //   return new Promise(function(resolve, reject) {
+  //     shop.getProducts(products => {
+  //       context.commit('setProducts',products)
+  //       resolve();
+  //     })
+  //   })
+  // },
 
   addProductToCart(context, product) {
     // if(product.inventory > 0)

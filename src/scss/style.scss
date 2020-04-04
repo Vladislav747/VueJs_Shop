@@ -2,6 +2,15 @@
 html, body {
     box-sizing: border-box;
     height: 100vh;
+
+
+    .icon-size-m{
+      font-size: 1em;
+    }
+    
+    .icon-size-xl{
+      font-size: 2em;
+    }
   }
   
   *,
@@ -13,13 +22,7 @@ html, body {
     font-family: "Roboto", sans-serif;
   }
   
-  .icon-size-m{
-    font-size: 1em;
-  }
   
-  .icon-size-xl{
-    font-size: 2em;
-  }
   
   .overlay {
       position: fixed;
@@ -124,5 +127,51 @@ html, body {
         border: 1px solid #CA5A65;
         color: #fff;
       }
+
     }
+
+
+  
+  }
+
+  button{
+    &.btn-primary{
+      background: #fff;
+      color: #5044ff;
+      padding: 10px 30px;
+      font-size: 13px;
+      outline: none;
+      border: 1px solid #5044ff;
+      border-radius: 1000px;
+      transition: all .2s ease-in;
+      opacity: 1;
+      cursor: pointer;
+
+      &:hover{
+        background: #5044ff;
+        color: #fff;
+      }
+    }
+
+    &.shop-cart{
+      background: #fff;
+      color: #6de97d;
+      padding: 10px 30px;
+      font-size: 13px;
+      outline: none;
+      border: 1px solid #6de97d;
+      border-radius: 1000px;
+      transition: all .2s ease-in;
+      opacity: 1;
+      cursor: pointer;
+
+      &:hover{
+        background: #6de97d;
+        color: #fff;
+      }
+    }
+
+
+
+
   }
