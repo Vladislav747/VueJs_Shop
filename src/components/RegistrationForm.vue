@@ -81,6 +81,4 @@ export default {
 
 <style lang="scss" scoped> 
     @import "../scss/components/RegistrationForm.scss";
-
-
 </style>
