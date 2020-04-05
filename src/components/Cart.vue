@@ -41,7 +41,7 @@
             </div>
             </td>
             <td>
-              <button class="btn-primary red-style" @click="deleteProductFromCart(product)">Удалить из корзины</button>
+              <button class="btn-primary red-style" @click="deleteProductCart(product)">Удалить из корзины</button>
             </td>
           </tr>
         </tbody>

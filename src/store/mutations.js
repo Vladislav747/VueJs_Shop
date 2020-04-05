@@ -3,16 +3,18 @@ export default { // setting and updating the state
     state.products = products
   },
 
-  pushProductToCart(state,productId) {
+  pushProductToCart(state,product) {
     state.cart.push({
-      id: productId,
-      quantity: 1
+      id: product.id,
+      quantity: product.quantity,
     })
     state.cartItems++
   },
 
-  popProductFromCart(){
-
+  popProductFromCart(state, productId){
+    
+    state.cart = state.cart.filter(item => item.id !== productId);
+    console.log(state.cart, "popProductFromCart");
   },
 
   incrementItemQty(state,cartItem) {
@@ -37,6 +39,7 @@ export default { // setting and updating the state
   },
 
   setDisplayPerPage(state, quantity){
+    console.log(quantity, 'setDisplayPerPage mutation')
     state.totalProducts = quantity;
   }
 }

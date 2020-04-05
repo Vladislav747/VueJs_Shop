@@ -15,7 +15,7 @@ export default { // actions = mehtods
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
         console.log(productResult.length, "Total products");
-        context.commit('setProducts', productResult);
+        context.commit('setDisplayPerPage', productResult.length);
       })
     },
 
@@ -34,13 +34,15 @@ export default { // actions = mehtods
     if(context.getters.productInStock(productMod)){
       const cartItem  = context.state.cart.find(item => item.id === productMod.id)
       if(!cartItem) {
-        context.commit('pushProductToCart',productMod.id)
+        context.commit('pushProductToCart',productMod)
       }
       else {
-        context.commit('incrementItemQty',cartItem)
+        //context.commit('incrementItemQty',cartItem)
+        context.commit('pushProductToCart',productMod)
       }
 
-      context.commit('decrementProductInventory',productMod)
+      //уменьшить на складе количество товара
+      //context.commit('decrementProductInventory',productMod)
 
     }
   },
@@ -49,8 +51,12 @@ export default { // actions = mehtods
 
     console.log("delteProductCart");
 
-    console.log(product.product, "product")
+    console.log(product, "product Delete")
     console.log(product.quantity, "quantity")
+    context.commit('popProductFromCart',product.id)
+
+
+    
   },
 
   changeDisplayQuantity(context, displayQuantity){
