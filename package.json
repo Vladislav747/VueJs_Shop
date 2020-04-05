@@ -8,9 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "debug": "cd ./server && node --nolazy --inspect-brk=9229 server.js",
-    "server_and_client": "PORT=8080 npm run start & PORT=8081 npm run serve",
-    "start": "cd ./server && node server.js",
-    "start_sqlite": "cd ./server && $typeDB=sqlite node server.js"
+    "start": "cd ./server && node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",

@@ -1,14 +1,22 @@
 import shop from '@/api/shop'
 
 export default { // actions = mehtods
-  // fetchProducts(context) {
-  //   return new Promise(function(resolve, reject) {
-  //     shop.getProducts(products => {
-  //       context.commit('setProducts',products)
-  //       resolve();
-  //     })
-  //   })
-  // },
+
+   fetchProducts(context) {
+       fetch("http://localhost:8080/products",
+        {
+          method: 'GET',
+          mode: "cors"
+        }
+      ).then(products => {
+        var result = products.text();
+        return result;
+      }).then((res) => {
+        var productResult = JSON.parse(res);
+        context.commit('setProducts', productResult);
+      })
+    },
+
 
   addProductToCart(context, product) {
 
@@ -16,17 +24,21 @@ export default { // actions = mehtods
 
     console.log(product.product, "product")
     console.log(product.quantity, "quantity")
-    // if(product.inventory > 0)
-    if(context.getters.productInStock(product)){
-      const cartItem  = context.state.cart.find(item => item.id === product.id)
+
+
+    var productMod = product.product;
+    productMod.quantity = product.quantity;
+
+    if(context.getters.productInStock(productMod)){
+      const cartItem  = context.state.cart.find(item => item.id === productMod.id)
       if(!cartItem) {
-        context.commit('pushProductToCart',product.id)
+        context.commit('pushProductToCart',productMod.id)
       }
       else {
         context.commit('incrementItemQty',cartItem)
       }
 
-      context.commit('decrementProductInventory',product)
+      context.commit('decrementProductInventory',productMod)
 
     }
   },

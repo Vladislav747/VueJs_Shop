@@ -1,31 +1,49 @@
 <template>
    <div class="shopping-cart">
-    <!-- <div v-if="$store.state.cart.length <= 0" class="empty-cart"> -->
-    <div  class="empty-cart">
-      <p>Your cart is currently empty.</p>
+    <div v-if="$store.state.cart.length <= 0"  class="empty-cart">
+      <p>Ваша корзина пуста.</p>
       <router-link to="/">
-        <button class="shop-cart">Shop Now!</button>
+        <button class="shop-cart">Вернуться в каталог</button>
       </router-link>
     </div>
-    <div  class="shopping-cart-items">
-      <ul>
-        <li v-for="product in products" class="cart-product-card" v-bind:key >
-          <img :src="require(`@/static/images/${product.img}`)" :alt="`Image of ${product.title}`">
-          <span class="product-title">{{product.title}}</span>
-          <span class="product-price"> {{product.price | currency}}</span>
-          <span class="product-cart-quantity">Quantity: {{product.quantity}}</span>
-        </li>
-      </ul>
-       <!-- <product-card class="cart-product-card" v-for="product in products" :key="product._id" :product="product"/> -->
+    <div v-else class="shopping-cart-items">
+      <table class="cart-product-card">
+        <thead>
+          <tr>
+            <td>Название товара</td>
+            <td>Изображение товара</td>
+            <td>Цена</td>
+            <td>Количество товара</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="product in products" :key="product._id" >
+            <td>
+              <span class="product-title">{{product.title}}</span>
+            </td>
+            <td>
+              <img :src="require(`@/static/images/${product.img}`)" :alt="`Image of ${product.title}`">
+            </td>
+            <td>
+              <span class="product-price">{{product.price | currency}}</span>
+            </td>
+            <td>
+              <span class="product-cart-quantity">{{product.quantity}}</span>
+            </td>
+            <td>
+              <button class="btn-primary red-style">Удалить из корзины</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <div class="cart-checkout">
-        <h3>Cart total : </h3>
+        <h3>Сумма корзины : </h3>
         <p>{{ total | currency}}</p>
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button>
         <p class="status" v-if="$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p> -->
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button> -->
-        <button class="btn-primary" @click="$store.dispatch('checkout')">Checkout</button>
-        <!-- <p class="status" v-if="checkoutStatus">{{checkoutStatus}}</p> -->
+        <button class="btn-primary" @click="$store.dispatch('checkout')">Оформить заказ</button>
       </div>
     </div>
   </div>
@@ -35,18 +53,16 @@
 import Noty from "noty";
 import { showNoty } from "../utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
-import ProductCard from "./ProductCard.vue";
+
 
 export default {
     name: "Cart",
 
-    components: {
-      ProductCard
-    },
-
     computed: {
       ...mapGetters({
-        products:'getProducts',
+        products:'cartProducts',
+        total:'cartTotal',
+        currency: 'cartCurrency',
     
       }),
       ...mapState({
@@ -105,19 +121,40 @@ export default {
 
 <style lang="scss" scoped> 
 
+.shopping-cart{
+
   .empty-cart {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%,-45%);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-45%);
+
+    p{
+      margin-bottom: 30px;
+    }
+  }
+
+  .shopping-cart-items {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cart-product-card {
+    display: table;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    border: 1px solid #000;
+
+    td{
+      padding: 20px;
+      border: 1px solid #000;
+      text-align: center;
+    }
+  }
+
 }
-.empty-cart p {
-  margin-bottom: 30px;
-}
-.shopping-cart-items {
-  display: flex;
-  flex-direction: row;
-}
+
+
 ul {
   display: flex;
   flex-wrap: wrap;
@@ -135,18 +172,13 @@ ul {
   margin-bottom: 20px;
   font-size: 18px;
 }
-.cart-product-card {
-  display: flex;
-  flex-direction: column;
-  margin-right: 40px;
-  margin-bottom: 40px;
-}
+
 .product-price {
   margin-bottom: 5px;
 }
 img {
-  width: 180px;
-  height: 240px;
+  max-height: 100px;
+  max-width: 100px;
 }
 @media(max-width: 600px) {
   .shopping-cart-items {

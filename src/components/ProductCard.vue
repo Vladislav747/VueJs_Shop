@@ -17,6 +17,7 @@
           <div class="manufacturer">
           Производитель: {{ product.manufacturer}}</div>
         <div class="description">Описание:{{ product.description }}</div>
+        <div class="stock">В наличии:{{ product.stock }}</div>
         <div class="price-block">
           <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
         </div>
@@ -31,7 +32,7 @@
         </div>
 
         <div class="buy-block">
-          <button @click="addProductToCart({product, quantity})" class="add-to-cart-btn btn-primary">Купить товар</button>
+          <button @click="addProductToCart({product, quantity})" class="add-to-cart-btn btn-primary">В корзину</button>
         </div>
         
       </div>
@@ -58,7 +59,7 @@ export default {
           manufacturer:"",
           price:"",
           currency:"",
-          quantity: 1,
+          stock:"",
           srcImage:"",
         }
       }
@@ -67,7 +68,6 @@ export default {
 
   data() {
     return {
-      blackTheme: false,
       quantity: 1,
     };
   },

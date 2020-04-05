@@ -11,7 +11,7 @@
         
      />
     <!-- Если есть isLoading то ставим Loader -->
-    <div v-if="isLoading" class="loading">Загружаю товары</div>
+    <div v-if="isLoading" class="lds-dual-ring"></div>
     <div v-if="noTasks" class="no-tasks">
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
@@ -38,9 +38,7 @@ export default {
 
   data() {
     return {
-      isLoading: true,
-      products: [],
-      filteredProducts: []
+      isLoading: false
     };
   },
 
@@ -50,14 +48,22 @@ export default {
         this.isLoading === false && (this.tasks && this.tasks.length === 0)
       );
     },
+
+    filteredProducts() {
+      return this.$store.state.products
+    },
     ...mapGetters({
-        products:'getProducts',
-    
+        productInStock:'productInStock',
       }),
   },
 
   mounted() {
-    // this.getProducts();
+    //this.getProducts();
+  },
+
+  created(){
+    this.isLoading = true;
+    this.fetchProducts().then(() => this.isLoading = false).catch((error) => {showNoty("Ошибка вывода списка товаров  " + error);});
   },
 
   methods: {
@@ -84,6 +90,10 @@ export default {
       this.filteredProducts = data;
     },
 
+    ...mapActions({
+      fetchProducts: 'fetchProducts',
+    })
+
   },
 
   
@@ -91,6 +101,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+//preloader styles
+@import "../scss/preloader.scss";
 
 .productList {
   z-index: 1;

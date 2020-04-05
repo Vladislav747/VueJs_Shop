@@ -151,6 +151,17 @@ html, body {
         background: #5044ff;
         color: #fff;
       }
+
+    }
+
+    &.red-style{
+      background: #fff;
+      color: #000;
+      border-color: #e6270e;
+      &:hover{
+        background: #e6270e;
+        color: #fff;
+      }
     }
 
     &.shop-cart{

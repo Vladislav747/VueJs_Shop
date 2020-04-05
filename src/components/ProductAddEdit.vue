@@ -1,11 +1,8 @@
 <template>
 <div class="form-wrapper">
     <form v-if="task" class="form-add-edit">
-      <h2 v-if="!isEdit">
+      <h2>
         Создать новый товар
-      </h2>
-      <h2 v-else>
-        Редактировать данные о товаре
       </h2> 
       <span class="required">- обязательное поле</span>
 
@@ -104,8 +101,8 @@ export default {
         const response = await this.$http.get("products/" + this.$route.params.id);
 
         if (response.data === null) {
-          this.$router.push({ name: "task-list" });
-          showNoty("Задача не Найдена.");
+          this.$router.push({ name: "product-list" });
+          showNoty("Товар не найден");
           return;
         }
 
@@ -129,17 +126,17 @@ export default {
 
         if (this.checkErrors(response) && isComplete) {
           this.$router.push({
-            path: this.isEdit ? "/task/" + this.task.id : "/"
+            path: this.isEdit ? "/product/" + this.task.id : "/"
           });
           showNoty(
-            `Task ${response.data.name} ` +
+            `Product ${response.data.name} ` +
               (this.isEdit ? "Отредактировано" : "Добавлено"),
             "success"
           );
           return;
         }
       } catch (e) {
-        showNoty("Ошибка с добавлением задачи. Попробуйте еще раз!");
+        showNoty("Ошибка с добавлением продукта. Попробуйте еще раз!");
         return;
       }
 
@@ -151,7 +148,7 @@ export default {
      *
      */
     resetForm() {
-      this.task = {
+      this.product = {
         name: "",
         category: "В работе",
         description: "",

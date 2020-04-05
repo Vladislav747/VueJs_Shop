@@ -1,24 +1,23 @@
 export default { // = computed properties
 
-  getProducts(state){
-    const response = this.$http.get("products");
-    var products = response.data;
-
-    state.products = products;
-
-    return state.products;
-
+  cartCurrency(state){
+    return state.currency;
   },
-  // availableProducts(state, getters) {
-  //   return state.products.filter(product => product.inventory > 0)
-  // },
+
+  availableProducts(state, getters) {
+    return state.products.filter(product => product.inventory > 0)
+  },
+
   cartProducts(state) {
+    console.log(state.cart);
     return state.cart.map(cartItem => {
       const product = state.products.find(product => product.id === cartItem.id)
       return {
-        title: product.title,
+        title: product.name,
+        category: product.category,
+        manufacturer: product.manufacturer,
         price: product.price,
-        img: product.img,
+        img: product.srcImage,
         quantity: cartItem.quantity
       }
     })
@@ -34,7 +33,9 @@ export default { // = computed properties
   },
 
   productInStock() {
+    
     return(product) => {
+      console.log(product, "productInStock")
       return product.quantity > 0
     }
   }
