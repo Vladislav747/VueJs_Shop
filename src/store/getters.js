@@ -8,6 +8,10 @@ export default { // = computed properties
     return state.products.filter(product => product.inventory > 0)
   },
 
+  productTotalPages(state){
+    return state.totalPages;
+  },
+
   cartProducts(state) {
     return state.cart.map(cartItem => {
       const product = state.products.find(product => product.id === cartItem.id)

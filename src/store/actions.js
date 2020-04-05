@@ -14,14 +14,17 @@ export default { // actions = mehtods
       }).then((res) => {
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
-        console.log(productResult.length, "Total products");
         context.commit('setTotalItems', productResult.length);
+        
       })
     },
 
     fetchProductsPagination(context){
       console.log("fetchProductsPagination");
-      
+      var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
+      console.log(totalPages, "totalPages fetchProductsPagination");
+      context.commit('setTotalPages', totalPages);
+
     },
 
 

@@ -20,6 +20,7 @@ export default new Vuex.Store({
     currency: "руб",
     displayQuantity: 3,
     currentPage: 1,
+    totalPages: 1,
     comments:[],
   },
   getters,

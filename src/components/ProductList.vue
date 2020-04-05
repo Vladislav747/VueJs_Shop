@@ -26,6 +26,7 @@
       <div  class="products">
         <product-card v-for="product in filteredProducts" :key="product._id" :product="product"/>
       </div>
+      <pagination></pagination>
     </div>
 
     
@@ -66,8 +67,8 @@ export default {
       return this.$store.state.products
     },
     ...mapGetters({
-        productInStock:'productInStock',
-      }),
+      productInStock:'productInStock',
+    }),
   },
 
   mounted() {

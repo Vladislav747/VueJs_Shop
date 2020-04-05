@@ -34,7 +34,7 @@ export default { // setting and updating the state
     state.highprice = event
   },
   toggleSale(state) {
-    state.sale = !state.sale
+    state.sale = !state.sale;
   },
 
   setDisplayPerPage(state, quantityPerPage){
