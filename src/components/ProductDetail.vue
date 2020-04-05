@@ -20,7 +20,7 @@
       </div>
 
       <div class="right-col">
-        <div class="description">
+        <div class="description product-section">
           
           <div class="description__title">
               <h4>Описание:</h4>
@@ -31,22 +31,24 @@
           </div>
         </div>
 
-        <div class="category">
+        <div class="category product-section">
           <span><h4>Категория</h4>{{ product.category }}</span>
         </div>
 
-        <div class="price-block">
-          <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
+        <div class="price-block product-section">
+          <span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
         </div>
 
-        <div class="counter_block">
-          <span class="minus" @click="decreaseQuantity(quantity)"></span>
-          <input type="text" v-model="quantity" class="text" name="quantity" value="1">
-          <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
+        <div class="quantity-block product-section">
+          <div class="counter-block">
+            <span class="minus" @click="decreaseQuantity(quantity)"></span>
+            <input type="text" v-model="quantity" class="text" name="quantity" value="1">
+            <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
+          </div>
         </div>
 
         <div class="buy-block">
-            <button @click="addProductToCart(product)" class="add-to-cart-btn">Купить товар</button>
+            <button @click="addProductToCart(product)" class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
       </div>
     </div>
@@ -67,11 +69,17 @@
 
 <script>
 import Noty from "noty";
-
+import {mapState, mapGetters, mapActions} from 'vuex'
 import { showNoty } from "../utility";
 
 export default {
   name: "ProductDetail",
+
+  computed: {
+    ...mapGetters({
+      currency: 'cartCurrency',
+    }),
+  },
 
   data() {
     return {
@@ -175,15 +183,7 @@ export default {
       h3,
       h4 {
         margin-bottom: 1rem;
-
-
       }
-
-
-
-
-
-  
 
       span {
         color: #737373;
@@ -196,6 +196,11 @@ export default {
     }
 
     .right-col{
+
+      margin-left: 50px;
+      display: flex;
+      flex-direction: column;
+
 
       .image-wrapper {
         background-position: center;
@@ -210,32 +215,15 @@ export default {
 
 
       .buy-block{
-      color: black;
-      float: right;
-      font-size: 0.9rem;
-      border-radius: 5px;
-      padding: 3px 10px 2px;
-      text-transform: uppercase;
-      border-radius: 2px;
-      margin: 1rem 0;
+        color: black;
+        float: right;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        padding: 3px 10px 2px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        margin: 1rem 0;
       
-    
-      .add-to-cart-btn{
-        background: #5044ff;
-        color: #fff;
-        padding: 10px 30px;
-        font-size: 13px;
-        outline: none;
-        border: 1px solid #5044ff;
-        border-radius: 1000px;
-        transition: all .2s ease-in;
-        opacity: 0;
-        cursor: pointer;
-
-          &:hover{
-            opacity: 1;
-          }
-      }
     }
 
     }
@@ -251,13 +239,13 @@ export default {
       }
     }
 
-    .description {
+    .product-section {
       margin: 1rem 0;
       word-break: break-word;
     }
 
     /*Input counter block styles*/
-    .counter_block{
+    .counter-block{
       box-sizing: border-box;
       border: 1px solid #f3f3f5;
       background: #f3f3f5;

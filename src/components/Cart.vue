@@ -6,6 +6,7 @@
         <button class="shop-cart">Вернуться в каталог</button>
       </router-link>
     </div>
+
     <div v-else class="shopping-cart-items">
       <table class="cart-product-card">
         <thead>
@@ -25,7 +26,7 @@
               <img :src="require(`@/static/images/${product.img}`)" :alt="`Image of ${product.title}`">
             </td>
             <td>
-              <span class="product-price">{{product.price | currency}}</span>
+              <span class="product-price">{{product.price}} {{currency}}</span>
             </td>
             <td>
               <span class="product-cart-quantity">{{product.quantity}}</span>
@@ -39,7 +40,7 @@
 
       <div class="cart-checkout">
         <h3>Сумма корзины : </h3>
-        <p>{{ total | currency}}</p>
+        <p>{{ total}}  {{currency}}</p>
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button>
         <p class="status" v-if="$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p> -->
         <!-- <button :disabled="$store.state.cart.length <= 0" @click="$store.dispatch('checkout')">Checkout</button> -->

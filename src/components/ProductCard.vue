@@ -19,7 +19,7 @@
         <div class="description">Описание:{{ product.description }}</div>
         <div class="stock">В наличии:{{ product.stock }}</div>
         <div class="price-block">
-          <span class="price">{{product.price}} <span class="currency">руб/шт</span></span>
+          <span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
         </div>
       </div> 
      
@@ -72,11 +72,6 @@ export default {
     };
   },
 
-  computed: {
-
-  
-},
-
   methods: {
     /**
      * Переход на детальное отображение задачи
@@ -97,10 +92,6 @@ export default {
       //Если есть экземпляр то закрыть окно
       this.check.close();
     },
-    
-    // addProductToCart(product){
-    //   console.log(product, "`Works ProductCard ${product.quantity}`");
-    // },
 
     increaseQuantity(quantity){
       this.quantity += 1;
@@ -118,8 +109,17 @@ export default {
   },
 
   mounted: function() {
-      this.$root.$on('changeTheme', this.changeTheme);
+    this.$root.$on('changeTheme', this.changeTheme);
   },
+
+  computed: {
+    ...mapGetters({
+      currency: 'cartCurrency',
+    }),
+  },
+
+
+  
 };
 </script>
 

@@ -16,7 +16,7 @@ export default new Vuex.Store({
     checkoutStatus: null,
     highprice: 1500,
     sale: false,
-    currency: "руб/шт",
+    currency: "руб",
   },
   getters,
   actions,
