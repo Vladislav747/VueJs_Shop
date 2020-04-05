@@ -15,8 +15,13 @@ export default { // actions = mehtods
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
         console.log(productResult.length, "Total products");
-        context.commit('setDisplayPerPage', productResult.length);
+        context.commit('setTotalItems', productResult.length);
       })
+    },
+
+    fetchProductsPagination(context){
+      console.log("fetchProductsPagination");
+      
     },
 
 
@@ -48,23 +53,22 @@ export default { // actions = mehtods
   },
 
   deleteProductCart(context, product) {
-
-    console.log("delteProductCart");
-
-    console.log(product, "product Delete")
-    console.log(product.quantity, "quantity")
-    context.commit('popProductFromCart',product.id)
-
+    const cartItem  = context.state.cart.find(item => item.id === product.id)
+    
+    if(cartItem) {
+      context.commit('popProductFromCart',product.id);
+    }
+    else {
+      console.log("Нет такого товара в корзине " + product.id);
+    }
 
     
   },
 
   changeDisplayQuantity(context, displayQuantity){
-    console.log("changeDisplayQuantity");
-    console.log(product.quantity, "displayQuantity")
+    context.commit('setDisplayPerPage', Number.parseInt(displayQuantity));
 
   },
-
 
   checkout(context) {
     shop.buyProducts(

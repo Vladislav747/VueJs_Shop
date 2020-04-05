@@ -19,7 +19,7 @@
     <div v-else class="products-wrapper">
       <div class="display-quantity">
         <label class="short-label">Выводить на странице:</label>
-        <select class="display-quantity__select" v-model="displayQuantity">
+        <select class="display-quantity__select" v-model="displayQuantity" @change="changeDisplayQuantity(displayQuantity)">
           <option v-for="type in quantityTypes" :key="type">{{ type }}</option>
         </select>
       </div>
@@ -103,7 +103,7 @@ export default {
 
     ...mapActions({
       fetchProducts: 'fetchProducts',
-      
+      changeDisplayQuantity: 'changeDisplayQuantity',
     })
 
   },
@@ -116,44 +116,6 @@ export default {
 
 //preloader styles
 @import "../scss/preloader.scss";
-
-.productList {
-  z-index: 1;
-
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 16px 0;
-  }
-
-  .no-tasks {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-      0 3px 1px -2px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .loading {
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 800px) {
-
-  .card:nth-child(3n) {
-    margin-right: 1em;
-  }
-
-  .card:nth-child(2n) {
-    margin-right: 0;
-  }
-}
-
-@media screen and (max-width: 768px){
-   .products{
-        justify-content: center;
-
-  }
-}
+@import "../scss/components/ProductList.scss";
 
 </style>

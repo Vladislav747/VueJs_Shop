@@ -8,18 +8,17 @@ export default { // setting and updating the state
       id: product.id,
       quantity: product.quantity,
     })
-    state.cartItems++
+    state.cartItems++;
   },
 
   popProductFromCart(state, productId){
-    
     state.cart = state.cart.filter(item => item.id !== productId);
-    console.log(state.cart, "popProductFromCart");
+    state.cartItems--;
   },
 
   incrementItemQty(state,cartItem) {
-    cartItem.quantity++
-    state.cartItems++
+    cartItem.quantity++;
+    state.cartItems++;
   },
   decrementProductInventory(state,product) {
     product.inventory--
@@ -38,8 +37,18 @@ export default { // setting and updating the state
     state.sale = !state.sale
   },
 
-  setDisplayPerPage(state, quantity){
-    console.log(quantity, 'setDisplayPerPage mutation')
-    state.totalProducts = quantity;
+  setDisplayPerPage(state, quantityPerPage){
+    console.log(quantityPerPage, 'setDisplayPerPage mutation')
+    state.displayQuantity = quantityPerPage;
+  },
+
+  setTotalItems(state, totalQuantity){
+    console.log(totalQuantity, 'setTotalItems mutation');
+    state.totalProducts = totalQuantity;
+  },
+
+  setCurrentPage(state, currentPage){
+    console.log(currentPage, 'setCurrentPage mutation');
+    state.currentPage = currentPage;
   }
 }

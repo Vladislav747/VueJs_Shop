@@ -1,4 +1,6 @@
 
+@import url(//db.onlinewebfonts.com/c/3dad38b96d1a28deaba765fa3a16697f?family=GT+Eesti+Pro+Display);
+
 html, body {
     box-sizing: border-box;
     height: 100vh;
@@ -11,6 +13,9 @@ html, body {
     .icon-size-xl{
       font-size: 2em;
     }
+
+
+    
   }
   
   *,
@@ -243,4 +248,17 @@ html, body {
         vertical-align: middle;
       }
     }  
+  }
+
+  span.price{
+    font-weight: 700;
+    font-family: "GTEestiProDisplay";
+    font-size: 18px;
+    line-height: 15px;
+    white-space: normal;
+  }
+
+  .price-block{
+    justify-content: center;
+    align-items: center;
   }

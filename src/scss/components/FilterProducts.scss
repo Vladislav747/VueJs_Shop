@@ -1,0 +1,105 @@
+.filterIcon {
+    transition: 0.5s linear;
+    right: 8px;
+    position: fixed;
+    top: 15%;
+    padding: 10px 14px;
+    border-radius: 25%;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 1px #c5c5c5;
+    svg {
+      color: white;
+    }
+  }
+  
+  #filter {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  
+  .filterWrapper-text {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .filterWrapper {
+    right: -100%;
+    top: 0;
+    height: 100%;
+    position: fixed;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: none;
+    z-index: 2;
+    transition: right 0.2s linear;
+    padding: 20px;
+    &.show {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
+      visibility: visible;
+      transition-delay: 0s;
+      right: 0px;
+    }
+    &.show .filterIcon {
+      display: none;
+    }
+  
+      .filter-inner {
+        .filter-property {
+          margin: 10px 0;
+          text-align: left;
+  
+          .filter-property--title {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+          }
+  
+          select {
+            &.filter-property--body {
+              border-radius: 3px;
+              outline: 0;
+              padding: 5px;
+              width: 100%;
+            }
+          }
+        }
+      }
+  
+    .clear-result__wrapper{
+  
+      text-align: center;
+      margin: 20px 0;
+  
+      .clear-results__btn{
+      outline: none;
+      padding: 10px;
+      border: 1px solid black;
+    
+      }
+    } 
+  }
+  
+  @media screen and (max-width: 800px) {
+    #filter {
+      select {
+        width: 40%;
+      }
+    }
+  
+    .card:nth-child(3n) {
+      margin-right: 1em;
+    }
+  
+    .card:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 550px) {
+    #filter {
+      select {
+        width: 60%;
+      }
+    }
+  }

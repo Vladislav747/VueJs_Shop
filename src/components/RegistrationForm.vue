@@ -80,46 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
+    @import "../scss/components/RegistrationForm.scss";
 
-
-.login-form__wrapper{
-
-    width: 100vw;
-    min-height: 100vh;
-    padding: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .form__inner{
-        padding: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 450px;
-        width: 30vw;
-
-        .login-form{
-            width: 20vw;
-
-            input + p.error{
-                color:red;
-            }   
-
-            .form__btn{
-                display: flex;
-                justify-content: center;
-                align-items: top;
-            }
-        }
-
-      
-    }
-
-
-    
-
-}
 
 </style>
