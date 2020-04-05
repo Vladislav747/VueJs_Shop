@@ -4,20 +4,26 @@
       <div class="product-header" @click="viewTask(product.id)">
         <div class="product-header--top">
           <div class="product-title">{{ product.name }}</div>
-          <span class="product-sticker top-right">Оценка</span>
         </div>
         <div class="image-wrapper">
           <img class= "product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
-
+      
+      <star-rating-card></star-rating-card>
       <div class="product-properties">
-        <div class="category">
-          Категория: {{ product.category}}</div>
-          <div class="manufacturer">
-          Производитель: {{ product.manufacturer}}</div>
+        <div class="category property-section">
+          Категория: {{ product.category}}
+        </div>
+        <div class="manufacturer property-section">
+          Производитель: {{ product.manufacturer}}
+        </div>
         <!-- <div class="description">Описание:{{ product.description }}</div> -->
-        <div class="stock">В наличии:{{ product.stock }}</div>
+        <div class="stock-block property-section">
+          <div class="stock">
+            В наличии: {{ product.stock }}
+          </div>
+        </div>
         <div class="price-block">
           <span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
         </div>
@@ -45,9 +51,11 @@
 import Noty from "noty";
 import { showNoty } from "../utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
+import StarRatingCard from '../components/StarRatingCard.vue';
 
 export default {
   name: "ProductCard",
+
   props: {
     product: {
       type: Object,
@@ -64,6 +72,10 @@ export default {
         }
       }
     }
+  },
+
+  components: {
+    StarRatingCard
   },
 
   data() {

@@ -4,11 +4,17 @@
     .products-wrapper{
       padding: 16px;
     }
+
+    .display-quantity{
+      float: right;
+      padding: 20px;
+    }
   
     .products {
       display: flex;
       flex-wrap: wrap;
       padding: 16px 0;
+      float: left;
     }
   
     .no-tasks {

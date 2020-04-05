@@ -23,7 +23,7 @@
 
         <div class="description product-section">
           
-          <div class="description__title">
+          <div class="description__title property-title">
               <h4>Описание:</h4>
           </div>
 
@@ -31,10 +31,22 @@
               <p>{{ product.description }}</p>
           </div>
         </div>
+        
+
+        <div class="manufacturer product-section">
+          
+          <div class="manufacturer__title property-title">
+              <h4>Производитель:</h4>
+          </div>
+
+          <div class="manufacturer__text property-value">
+              <p>{{ product.manufacturer }}</p>
+          </div>
+        </div>
 
         <div class="category product-section">
           
-          <div class="category__title">
+          <div class="category__title property-title">
               <h4>Категория:</h4>
           </div>
 
@@ -62,17 +74,7 @@
       </div>
     </div>
 
-    <div class="reviews-container">
-
-      <div class="reviews">
-        <div class="reviews__title">
-            <h4>Отзывы:</h4>
-        </div>
-        <div class="reviews__text">
-            <p>Заглушка отзывы</p>
-        </div>
-      </div>
-    </div>
+    <comment-form></comment-form>
   </div>
 </template>
 
@@ -80,7 +82,7 @@
 import Noty from "noty";
 import {mapState, mapGetters, mapActions} from 'vuex'
 import { showNoty } from "../utility";
-
+import CommentForm from '../components/CommentForm.vue'
 export default {
   name: "ProductDetail",
 
@@ -88,6 +90,10 @@ export default {
     ...mapGetters({
       currency: 'cartCurrency',
     }),
+  },
+
+  components: {
+    CommentForm
   },
 
   data() {

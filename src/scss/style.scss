@@ -142,18 +142,19 @@ html, body {
   button{
     &.btn-primary{
       background: #fff;
-      color: #5044ff;
+      color: #005bff;
       padding: 10px 30px;
       font-size: 13px;
       outline: none;
-      border: 1px solid #5044ff;
-      border-radius: 1000px;
+      border: 1px solid #005bff;
+      border-radius: 10px;
       transition: all .2s ease-in;
       opacity: 1;
       cursor: pointer;
+      font-weight: 700;
 
       &:hover{
-        background: #5044ff;
+        background: #005bff;
         color: #fff;
       }
 
