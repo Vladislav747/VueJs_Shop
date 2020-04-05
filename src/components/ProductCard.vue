@@ -16,7 +16,7 @@
           Категория: {{ product.category}}</div>
           <div class="manufacturer">
           Производитель: {{ product.manufacturer}}</div>
-        <div class="description">Описание:{{ product.description }}</div>
+        <!-- <div class="description">Описание:{{ product.description }}</div> -->
         <div class="stock">В наличии:{{ product.stock }}</div>
         <div class="price-block">
           <span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
@@ -104,7 +104,7 @@ export default {
     },
 
     ...mapActions({
-      addProductToCart: 'addProductToCart'
+      addProductToCart: 'addProductToCart',
     })
   },
 

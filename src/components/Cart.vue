@@ -11,6 +11,7 @@
       <table class="cart-product-card">
         <thead>
           <tr>
+            <td>Выбрать товар</td>
             <td>Название товара</td>
             <td>Изображение товара</td>
             <td>Цена</td>
@@ -18,7 +19,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in products" :key="product._id" >
+          <tr v-for="product in products" :key="product.id" >
+            <td>
+              <input type="checkbox" class="product-checkbox"></input>
+            </td>
             <td>
               <span class="product-title">{{product.title}}</span>
             </td>
@@ -29,10 +33,15 @@
               <span class="product-price">{{product.price}} {{currency}}</span>
             </td>
             <td>
-              <span class="product-cart-quantity">{{product.quantity}}</span>
+              <!-- <span class="product-cart-quantity">{{product.quantity}}</span> -->
+              <div class="counter-block">
+                <span class="minus" @click="decreaseQuantity(product)"></span>
+                <input type="text" v-model="product.quantity" class="text" name="quantity" value="1" ref="product">
+                <span class="plus" @click="increaseQuantity(product)" data-max="1000"></span>
+            </div>
             </td>
             <td>
-              <button class="btn-primary red-style">Удалить из корзины</button>
+              <button class="btn-primary red-style" @click="deleteProductFromCart(product)">Удалить из корзины</button>
             </td>
           </tr>
         </tbody>
@@ -80,15 +89,16 @@ export default {
 
      methods: {
        /**
-     * Отображение оповещение задачи
-     */
-      deleteProductFromCart() {
+       * Отображение оповещение задачи
+       */
+      deleteProductFromCart(product) {
+        console.log(product, "deleteProductFromCart");
         this.check = new Noty({
-          text: "Удаление товара нельзя будет отменить.<br>Вы уверены?",
+          text: "Вы точно хотите удалить товар?",
           type: "alert",
           layout: "topCenter",
           buttons: [
-            Noty.button("Да", "danger", () => this.realDelete(), {
+            Noty.button("Да", "danger", () => this.deleteProductCart(), {
               id: "delete-yes"
             }),
             Noty.button("Нет", "", () => this.closeCheck(), { id: "delete-no" })
@@ -98,22 +108,34 @@ export default {
         this.check.show();
       },
 
-     /**
-     * Удаление задачи
+      /**
+     * Закрыть всплывающее окно
      */
-    async realDelete() {
-      try {
-        await this.$http.delete("products/" + this.product.id);
-
-        this.check.close();
-        this.$router.push({ name: "product-list" });
-
-        showNoty("Задача Удалена.", "success");
-      } catch (error) {
-          this.check.close();
-          showNoty(error);
+    closeCheck() {
+      if (!this.check) {
+        return;
       }
+      //Если есть экземпляр то закрыть окно
+      this.check.close();
     },
+
+
+      increaseQuantity(product){
+        product.quantity += 1;
+        this.$forceUpdate()
+      },
+
+      decreaseQuantity(product){
+        if(product.quantity > 1){
+          product.quantity -= 1;
+        }
+        this.$forceUpdate()
+      },
+
+      ...mapActions({
+        fetchProducts: 'fetchProducts',
+        deleteProductCart: 'deleteProductCart',
+    })
 
   },
 

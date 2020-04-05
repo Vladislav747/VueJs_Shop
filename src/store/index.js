@@ -11,12 +11,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state : {
     products:[],
+    totalProducts: 0,
     cart:[],
     cartItems:0,
     checkoutStatus: null,
     highprice: 1500,
     sale: false,
     currency: "руб",
+    displayQuantity: 3,
+    currentPage: 1,
   },
   getters,
   actions,

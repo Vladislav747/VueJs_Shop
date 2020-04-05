@@ -10,6 +10,11 @@ export default { // setting and updating the state
     })
     state.cartItems++
   },
+
+  popProductFromCart(){
+
+  },
+
   incrementItemQty(state,cartItem) {
     cartItem.quantity++
     state.cartItems++
@@ -29,5 +34,9 @@ export default { // setting and updating the state
   },
   toggleSale(state) {
     state.sale = !state.sale
+  },
+
+  setDisplayPerPage(state, quantity){
+    state.totalProducts = quantity;
   }
 }

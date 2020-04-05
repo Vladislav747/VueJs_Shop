@@ -186,3 +186,61 @@ html, body {
 
 
   }
+
+  /*Input counter block styles*/
+  .counter-block{
+    box-sizing: border-box;
+    border: 1px solid #f3f3f5;
+    background: #f3f3f5;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 5px;
+    
+    >span:before{
+      display: inline-block;
+      content: "";
+      width: 14px;
+      height: 17px;
+      vertical-align: middle;
+    }
+
+    input[type="text"]{
+      width: 34px;
+      border: 0;
+      border-left: 1px solid #f3f3f5;
+      border-right: 1px solid #f3f3f5;
+      background: #f3f3f5;
+      color: #666;
+      font-size: 13px;
+      height: 34px;
+      border-radius: 0;
+      text-align: center;
+      vertical-align: top;
+      line-height: 13px;
+      padding: 20px 3px;
+      font-weight: 700;
+    }
+
+    .minus{
+      line-height: 40px;
+      display: inline-block;
+      cursor: pointer;
+      vertical-align: top;
+
+      &:before{
+        background: url(./assets/minus-solid.svg);
+        vertical-align: middle;
+      }
+    }
+
+    .plus{
+      line-height: 40px;
+      display: inline-block;
+      cursor: pointer;
+
+      &:before{
+        background: url(./assets/plus-solid.svg);
+        vertical-align: middle;
+      }
+    }  
+  }

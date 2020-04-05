@@ -2,13 +2,11 @@
   <div class="productList max-width-block">
     
     <filter-products
-
       v-bind:products="products"
       v-bind:isLoading="isLoading"
       v-bind:noTasks="noTasks"
       v-on:filter_products="filterResults"
       v-on:clear_results="filterResults"
-        
      />
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
@@ -16,9 +14,21 @@
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
 
-    <div v-else class="products">
-      <product-card v-for="product in filteredProducts" :key="product._id" :product="product"/>
+    
+
+    <div v-else class="products-wrapper">
+      <div class="display-quantity">
+        <label class="short-label">Выводить на странице:</label>
+        <select class="display-quantity__select" v-model="displayQuantity">
+          <option v-for="type in quantityTypes" :key="type">{{ type }}</option>
+        </select>
+      </div>
+      <div  class="products">
+        <product-card v-for="product in filteredProducts" :key="product._id" :product="product"/>
+      </div>
     </div>
+
+    
   </div>  
 </template>
 
@@ -38,7 +48,8 @@ export default {
 
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      quantityTypes: [3, 6, 9],
     };
   },
 
@@ -92,6 +103,7 @@ export default {
 
     ...mapActions({
       fetchProducts: 'fetchProducts',
+      
     })
 
   },

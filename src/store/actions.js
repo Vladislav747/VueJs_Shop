@@ -14,6 +14,8 @@ export default { // actions = mehtods
       }).then((res) => {
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
+        console.log(productResult.length, "Total products");
+        context.commit('setProducts', productResult);
       })
     },
 
@@ -42,6 +44,21 @@ export default { // actions = mehtods
 
     }
   },
+
+  deleteProductCart(context, product) {
+
+    console.log("delteProductCart");
+
+    console.log(product.product, "product")
+    console.log(product.quantity, "quantity")
+  },
+
+  changeDisplayQuantity(context, displayQuantity){
+    console.log("changeDisplayQuantity");
+    console.log(product.quantity, "displayQuantity")
+
+  },
+
 
   checkout(context) {
     shop.buyProducts(

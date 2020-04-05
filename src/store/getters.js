@@ -9,10 +9,10 @@ export default { // = computed properties
   },
 
   cartProducts(state) {
-    console.log(state.cart);
     return state.cart.map(cartItem => {
       const product = state.products.find(product => product.id === cartItem.id)
       return {
+        id: product.id,
         title: product.name,
         category: product.category,
         manufacturer: product.manufacturer,
@@ -23,12 +23,6 @@ export default { // = computed properties
     })
   },
   cartTotal(state,getters) {
-    // let total = 0;
-    // getters.cartProducts.forEach(product => {
-    //   total = total + product.price * product.quantity
-    // })
-    // return total;
-
     return getters.cartProducts.reduce((total,product) => total + product.price * product.quantity, 0)
   },
 
