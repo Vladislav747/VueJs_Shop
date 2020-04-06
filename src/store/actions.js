@@ -3,7 +3,7 @@ import shop from '@/api/shop'
 export default { // actions = mehtods
 
    fetchProducts(context) {
-       fetch("http://localhost:8080/products",
+       fetch("https://napoleon-shop.herokuapp.com/products",
         {
           method: 'GET',
           mode: "cors"
@@ -24,6 +24,15 @@ export default { // actions = mehtods
 
       var products = context.state.products;
       var currentPage = context.state.currentPage;
+      var displayPerPage = context.state.displayQuantity;
+
+      if (currentPage > 1){
+
+      } else{
+
+      }
+
+
 
 
     },
