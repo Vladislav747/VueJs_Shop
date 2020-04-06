@@ -84,6 +84,8 @@ export default { // actions = mehtods
     context.commit('setDisplayPerPage', Number.parseInt(displayQuantity));
     var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
     context.commit('setTotalPages', totalPages);
+
+    context.dispatch('fetchProductsPagination');
   },
 
   changeCurrentPage(context, currentPage){
