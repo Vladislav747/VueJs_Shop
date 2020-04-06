@@ -21,9 +21,10 @@ export default { // actions = mehtods
 
     fetchProductsPagination(context){
       console.log("fetchProductsPagination");
-      var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
-      console.log(totalPages, "totalPages fetchProductsPagination");
-      context.commit('setTotalPages', totalPages);
+
+      var products = context.state.products;
+
+      //context.commit('setTotalPages', totalPages);
 
     },
 
@@ -70,7 +71,15 @@ export default { // actions = mehtods
 
   changeDisplayQuantity(context, displayQuantity){
     context.commit('setDisplayPerPage', Number.parseInt(displayQuantity));
+    var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
+    console.log(totalPages, "totalPages changeDisplayQuantity");
+    context.commit('setTotalPages', totalPages);
+  },
 
+  changeCurrentPage(context, currentPage)
+  {
+    console.log(currentPage, "currentPage changeCurrentPage");
+    context.commit('setCurrentPage', currentPage);
   },
 
   checkout(context) {

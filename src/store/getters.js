@@ -4,7 +4,7 @@ export default { // = computed properties
     return state.currency;
   },
 
-  availableProducts(state, getters) {
+  availableProducts(state) {
     return state.products.filter(product => product.inventory > 0)
   },
 

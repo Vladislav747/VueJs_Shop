@@ -38,17 +38,23 @@ export default { // setting and updating the state
   },
 
   setDisplayPerPage(state, quantityPerPage){
-    console.log(quantityPerPage, 'setDisplayPerPage mutation')
     state.displayQuantity = quantityPerPage;
-  },
-
-  setTotalItems(state, totalQuantity){
-    console.log(totalQuantity, 'setTotalItems mutation');
-    state.totalProducts = totalQuantity;
   },
 
   setCurrentPage(state, currentPage){
     console.log(currentPage, 'setCurrentPage mutation');
     state.currentPage = currentPage;
+  },
+
+  setTotalPages(state, totalPages){
+    console.log(totalPages, 'setTotalPages mutation');
+    state.totalPages = totalPages;
+  },
+
+  setTotalItems(state, totalQuantity){
+    console.log(totalQuantity, 'setTotalItems mutation');
+    state.totalProducts = totalQuantity;
   }
+
+  
 }
