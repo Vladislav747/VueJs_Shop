@@ -23,8 +23,8 @@ export default { // actions = mehtods
       console.log("fetchProductsPagination");
 
       var products = context.state.products;
+      var currentPage = context.state.currentPage;
 
-      //context.commit('setTotalPages', totalPages);
 
     },
 

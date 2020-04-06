@@ -29,7 +29,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const clientConfigs = require('./config/clientConfigs');
 const api = axios.create({
-  baseURL: clientConfigs.baseURLDevelopment
+  baseURL: clientConfigs.baseURLProduction
 });
 
 // change base Vue http plugin to axios plugin with our url
