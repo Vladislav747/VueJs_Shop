@@ -153,6 +153,15 @@ html, body {
       cursor: pointer;
       font-weight: 700;
 
+      &.active{
+        background: #005bff;
+        color: #fff;
+
+        &:hover{
+          opacity: 0.8;
+        }
+      }
+
       &:hover{
         background: #005bff;
         color: #fff;

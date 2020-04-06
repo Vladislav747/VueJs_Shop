@@ -2,13 +2,21 @@
     <div class="pagination__wrapper">
        <div class="pagination">
            <div v-if="hasPrev" class="pagination__left">
-               <a href="#" @click="changeCurrentPage(prevPage)">Предыдущая</a>
+               <a href="#" @click="prevPage">Предыдущая</a>
             </div>
             <div class="pagination__mid">
-                <span>{{currentPage}} из {{totalPages}}</span>
+                <div class="btn-group">
+                    <div class="page-wrapper" v-for="p in totalPages" :key="p">
+                        <button
+                            class="btn btn-primary"
+                            :class="{'active' : (p == currentPage)}" 
+                            @click.prevent="changeCurrentPage(p)">{{p}}
+                        </button>
+                    </div>
+                </div>
             </div>
            <div v-if="hasNext" class="pagination__right">
-               <a href="#" @click="changeCurrentPage(nextPage)">Следующая</a>
+               <a href="#" @click="nextPage">Следующая</a>
             </div>
        </div>
     </div>
@@ -28,12 +36,12 @@ export default {
     },
 
     computed: {
-        nextPage: function () {
-            return this.currentPage + 1
-        },
-        prevPage: function () {
-            return this.currentPage - 1
-        },
+        // nextPage: function () {
+        //     return this.currentPage + 1
+        // },
+        // prevPage: function () {
+        //     return this.currentPage - 1
+        // },
 
         hasPrev: function(){
             return this.currentPage > 1;
@@ -42,7 +50,6 @@ export default {
         hasNext: function(){
             return this.currentPage < this.totalPages;
         },
-
         ...mapState({
             currentPage: state => state.currentPage,
             displayQuantity: state => state.displayQuantity,
@@ -56,7 +63,9 @@ export default {
 
     methods: {
        ...mapActions({
-            'changeCurrentPage' :  'changeCurrentPage'
+            'changeCurrentPage' :  'changeCurrentPage',
+            'nextPage' : 'changeNextPage',
+            'prevPage' : 'changePrevPage',
        })
        
     }

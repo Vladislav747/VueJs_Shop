@@ -54,6 +54,11 @@ export default { // setting and updating the state
   setTotalItems(state, totalQuantity){
     console.log(totalQuantity, 'setTotalItems mutation');
     state.totalProducts = totalQuantity;
+  },
+
+  setCurrentListProducts(state, currentListProducts){
+    console.log(currentListProducts, 'setCurrentListProducts mutation');
+    state.currentListProducts = currentListProducts;
   }
 
   

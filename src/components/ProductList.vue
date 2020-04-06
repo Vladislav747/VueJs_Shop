@@ -64,10 +64,10 @@ export default {
     },
 
     filteredProducts() {
-      return this.$store.state.products
+      return this.$store.state.currentListProducts
     },
     ...mapGetters({
-      productInStock:'productInStock',
+      productInStock: 'productInStock',
     }),
   },
 

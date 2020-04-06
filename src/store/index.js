@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
-import {shop} from '@/api/shop'
 
 
 Vue.use(Vuex)
@@ -20,7 +19,8 @@ export default new Vuex.Store({
     currency: "руб",
     displayQuantity: 3,
     currentPage: 1,
-    totalPages: 1,
+    totalPages: "",
+    currentListProducts: [],
     comments:[],
   },
   getters,

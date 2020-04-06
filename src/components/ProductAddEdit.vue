@@ -1,6 +1,6 @@
 <template>
 <div class="form-wrapper">
-    <form v-if="task" class="form-add-edit">
+    <form v-if="product" class="form-add-edit">
       <h2>
         Создать новый товар
       </h2> 
@@ -8,34 +8,34 @@
 
       <div class="row">
         <label class="short-label">Имя:</label>
-        <input id="task-name" v-model="task.name" class="form__input" type="text" placeholder="Имя"/>
+        <input id="product-name" v-model="product.name" class="form__input" type="text" placeholder="Имя"/>
       </div>
 
       <div class="row">
         <label class="short-label">Категория:</label>
-          <select id="task-category"  class="form__input" v-model="task.category">
+          <select id="product-category"  class="form__input" v-model="product.category">
             <option v-for="type in productTypes" :key="type">{{ type }}</option>
           </select>
       </div>
 
       <div class="row">
         <label class="short-label" >Описание:</label>
-          <textarea id="task-description" class="form__input" v-model="task.description" placeholder="Заполните поле"/>
+          <textarea id="product-description" class="form__input" v-model="product.description" placeholder="Заполните поле"/>
       </div>
 
       <div class="row">
         <label class="short-label">Картинка товара:</label>
-          <input id="task-image" class="form__input" type="file" ref="file"/>
+          <input id="product-image" class="form__input" type="file" ref="file"/>
       </div>
 
       <div class="row">
         <label class="short-label">Цена товара: </label>
-          <input type="number" id="task-price" class="form__input" v-model="task.price" placeholder="Цена товара"/>
+          <input type="number" id="product-price" class="form__input" v-model="product.price" placeholder="Цена товара"/>
       </div>
 
       <div class="row">
         <label class="short-label">Производитель:</label>
-          <select id="task-manufacturer" class="form__input" v-model="task.manufacturer" placeholder="Производитель товара" >
+          <select id="product-manufacturer" class="form__input" v-model="product.manufacturer" placeholder="Производитель товара" >
             <option v-for="manufacturer in manufacturerList" :key="manufacturer">{{ manufacturer }}</option>
           </select>
       </div>
@@ -58,7 +58,7 @@ export default {
 
   data() {
     return {
-      task: {
+      product: {
         name: "",
         category: "В работе",
         description: "",
@@ -73,7 +73,7 @@ export default {
   },
 
   validations: {
-    task: {
+    product: {
       name: { required },
       description: { required, max: maxLength(2048) }
     }
@@ -106,7 +106,7 @@ export default {
           return;
         }
 
-        this.task = response.data;
+        this.product = response.data;
       } catch (error) {
         showNoty(error);
       }
@@ -121,12 +121,12 @@ export default {
     async saveTask(isComplete) {
       try {
         const response = this.isEdit
-          ? await this.$http.put("products", this.task)
-          : await this.$http.post("products", this.task);
+          ? await this.$http.put("products", this.product)
+          : await this.$http.post("products", this.product);
 
         if (this.checkErrors(response) && isComplete) {
           this.$router.push({
-            path: this.isEdit ? "/product/" + this.task.id : "/"
+            path: this.isEdit ? "/product/" + this.product.id : "/"
           });
           showNoty(
             `Product ${response.data.name} ` +
@@ -205,13 +205,13 @@ export default {
      *
      */
     validateForm(isComplete) {
-      this.$v.task.$touch();
-      if (this.$v.task.$error) {
-        if (this.$v.task.name.$error) {
+      this.$v.product.$touch();
+      if (this.$v.product.$error) {
+        if (this.$v.product.name.$error) {
           showNoty("Имя должно быть заполнено");
         }
 
-        if (this.$v.task.description.$error) {
+        if (this.$v.product.description.$error) {
           showNoty(
             "Описание должно быть заполнено и не может быть более 2048 символов"
           );

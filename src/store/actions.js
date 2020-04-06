@@ -15,7 +15,10 @@ export default { // actions = mehtods
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
         context.commit('setTotalItems', productResult.length);
-        
+        var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
+        context.commit('setTotalPages', totalPages);
+
+        context.dispatch('fetchProductsPagination');
       })
     },
 
@@ -25,26 +28,24 @@ export default { // actions = mehtods
       var products = context.state.products;
       var currentPage = context.state.currentPage;
       var displayPerPage = context.state.displayQuantity;
+      var totalProducts = context.state.totalProducts;
+      var startIndex, endIndex;
 
       if (currentPage > 1){
-
+        startIndex = (currentPage-1) * displayPerPage;
+        endIndex = Math.min(startIndex + displayPerPage - 1, totalProducts + 1);
       } else{
-
+        startIndex = 0;
+        endIndex = displayPerPage;
       }
 
-
-
+      var currentListProducts = products.slice(startIndex, endIndex);
+      context.commit("setCurrentListProducts", currentListProducts);
 
     },
 
 
   addProductToCart(context, product) {
-
-    console.log("addProductToCart");
-
-    console.log(product.product, "product")
-    console.log(product.quantity, "quantity")
-
 
     var productMod = product.product;
     productMod.quantity = product.quantity;
@@ -79,17 +80,34 @@ export default { // actions = mehtods
   },
 
   changeDisplayQuantity(context, displayQuantity){
+
     context.commit('setDisplayPerPage', Number.parseInt(displayQuantity));
     var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
-    console.log(totalPages, "totalPages changeDisplayQuantity");
     context.commit('setTotalPages', totalPages);
   },
 
-  changeCurrentPage(context, currentPage)
-  {
-    console.log(currentPage, "currentPage changeCurrentPage");
+  changeCurrentPage(context, currentPage){
+    
     context.commit('setCurrentPage', currentPage);
+    context.dispatch('fetchProductsPagination');
+
   },
+
+  changePrevPage(context){
+    var currentPage = context.state.currentPage;
+    currentPage--;
+    context.commit('setCurrentPage', currentPage);
+    context.dispatch('fetchProductsPagination');
+  },
+
+  changeNextPage(context){
+    var currentPage = context.state.currentPage;
+    currentPage++;
+    context.commit('setCurrentPage', currentPage);
+    context.dispatch('fetchProductsPagination');
+  },
+
+
 
   checkout(context) {
     shop.buyProducts(
