@@ -6,8 +6,21 @@
     }
 
     .display-quantity{
-      float: right;
+      float: left;
       padding: 20px;
+      position: relative;
+      font-family: Arial;
+      width: 200px;
+
+      select{
+        display: none;
+      }
+
+      .select-selected {
+        background-color: DodgerBlue;
+      }
+      
+      
     }
   
     .products {

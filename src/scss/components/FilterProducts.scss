@@ -1,3 +1,56 @@
+
+/* For Input*/
+$track-color: #346d1f !default;
+$thumb-color: #607d8b !default;
+$contrast: 5% !default;
+
+$thumb-radius: 12px !default;
+$thumb-height: 24px !default;
+$thumb-width: 24px !default;
+$thumb-shadow-size: 4px !default;
+$thumb-shadow-blur: 4px !default;
+$thumb-shadow-color: rgba(0, 0, 0, .2) !default;
+$thumb-border-width: 2px !default;
+$thumb-border-color: #346d1f !default;
+
+
+$track-border-width: 2px !default;
+$track-height: 8px !default;
+$track-width: 100% !default;
+$track-shadow-size: 1px !default;
+$track-shadow-blur: 1px !default;
+$track-shadow-color: rgba(0, 0, 0, .2) !default;
+$track-border-color: #346d1f !default;
+
+
+$track-radius: 5px !default;
+$primary-color: #346d1f;
+$ie-bottom-track-color: darken($track-color, $contrast) !default;
+
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+  box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+}
+
+
+@mixin track {
+  cursor: default;
+  height: $track-height;
+  transition: all .2s ease;
+  width: $track-width;
+}
+
+@mixin thumb {
+  @include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+  background: $thumb-color;
+  border: $thumb-border-width solid $thumb-border-color;
+  border-radius: $thumb-radius;
+  box-sizing: border-box;
+  cursor: default;
+  height: $thumb-height;
+  width: $thumb-width;
+}
+
+
 .filterIcon {
     transition: 0.5s linear;
     right: 8px;
@@ -47,6 +100,8 @@
         .filter-property {
           margin: 10px 0;
           text-align: left;
+          padding: 10px 0;
+          border-bottom: 1px solid rgb(194, 194, 194);
   
           .filter-property--title {
             font-size: 15px;
@@ -63,8 +118,158 @@
               width: 100%;
             }
           }
+
+          input[type='range'].slider {
+            -webkit-appearance: none;
+            width: 100%;
+            margin: 25px 0 5px;
+          }
+          
+          input[type='range'].slider:focus {
+            outline: none;
+          }
+          
+          input[type='range'].slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4.3px;
+            cursor: pointer;
+            -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+                    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+            background: #5044ff;
+            border-radius: 13.7px;
+            border: 0px solid rgba(1, 1, 1, 0);
+          }
+          
+          input[type='range'].slider::-webkit-slider-thumb {
+            -webkit-box-shadow: 0px 0px 0px rgba(0, 0, 62, 0), 0px 0px 0px rgba(0, 0, 88, 0);
+                    box-shadow: 0px 0px 0px rgba(0, 0, 62, 0), 0px 0px 0px rgba(0, 0, 88, 0);
+            border: 1.9px solid #3e63ea;
+            height: 17px;
+            width: 17px;
+            border-radius: 31px;
+            background: #ffffff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -6.35px;
+          }
+          
+          input[type='range'].slider:focus::-webkit-slider-runnable-track {
+            background: #5576ed;
+          }
+          
+          input[type='range'].slider::-moz-range-track {
+            width: 100%;
+            height: 4.3px;
+            cursor: pointer;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+            background: #5044ff;
+            border-radius: 13.7px;
+            border: 0px solid rgba(1, 1, 1, 0);
+          }
+          
+          input[type='range'].slider::-moz-range-thumb {
+            box-shadow: 0px 0px 0px rgba(0, 0, 62, 0), 0px 0px 0px rgba(0, 0, 88, 0);
+            border: 1.9px solid #3e63ea;
+            height: 17px;
+            width: 17px;
+            border-radius: 31px;
+            background: #ffffff;
+            cursor: pointer;
+          }
+          
+          input[type='range'].slider::-ms-track {
+            width: 100%;
+            height: 4.3px;
+            cursor: pointer;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+          }
+          
+          input[type='range'].slider::-ms-fill-lower {
+            background: #2752e7;
+            border: 0px solid rgba(1, 1, 1, 0);
+            border-radius: 27.4px;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+          }
+          
+          input[type='range'].slider::-ms-fill-upper {
+            background: #5044ff;
+            border: 0px solid rgba(1, 1, 1, 0);
+            border-radius: 27.4px;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0), 0px 0px 0px rgba(13, 13, 13, 0);
+          }
+          
+          input[type='range'].slider::-ms-thumb {
+            box-shadow: 0px 0px 0px rgba(0, 0, 62, 0), 0px 0px 0px rgba(0, 0, 88, 0);
+            border: 1.9px solid #3e63ea;
+            height: 17px;
+            width: 17px;
+            border-radius: 31px;
+            background: #ffffff;
+            cursor: pointer;
+            height: 4.3px;
+          }
+          
+          input[type='range'].slider:focus::-ms-fill-lower {
+            background: #5044ff;
+          }
+          
+          input[type='range'].slider:focus::-ms-fill-upper {
+            background: #5576ed;
+          }
+        }
+     
+
+          
+
+
+          .min{
+            float: left;
+          }
+
+          .max{
+            float: right;
+          }
+
+
+          /* Checkbox */
+
+          .checkbox-control{
+            position: relative;
+            display: inline-block;
+          }
+
+
+          .checkbox-box{
+            width: 18px;
+            height: 18px;
+            border: 2px solid #131313;
+            position: relative;
+            cursor: pointer;
+            float: left;
+            top: 2px;
+            margin-right: 10px;
+          }
+
+          input[type=checkbox]:checked~.checkbox-box:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 2px;
+            left: 2px;
+            background: $primary-color;
+          }
+
+          input[type=checkbox] {
+            opacity: 0;
+            position: absolute;
+          }
+
         }
       }
+      
   
     .clear-result__wrapper{
   
@@ -78,7 +283,7 @@
     
       }
     } 
-  }
+  
   
   @media screen and (max-width: 800px) {
     #filter {

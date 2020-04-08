@@ -8,10 +8,14 @@
           <p>Заглушка отзывы</p>
         </div>
       </div>
-      <form>
+      <form @submit.prevent="onUpload">
         <h4>Оставить новый отзыв</h4>
         <label for="commentText">Текст комментария</label>
-        <textarea name="comment" id="commentText" cols="30" rows="10"></textarea>
+        <textarea 
+            name="comment" 
+            id="commentText" 
+            cols="30" 
+            rows="10"></textarea>
       </form>
     </div>
 </template>
@@ -23,6 +27,12 @@ import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
     name: "CommentForm",
+
+    data(){
+      return {
+
+      }
+    },
 
      computed: {
         ...mapGetters({

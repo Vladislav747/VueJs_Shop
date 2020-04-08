@@ -1,31 +1,58 @@
 <template>
   <div class="header bg-light-green">
     <div class="max-width-block header-inner">
-      <router-link id="task-list" :to="{ name: 'product-list' }">
+      <router-link 
+          id="task-list" 
+          :to="{ name: 'product-list' }">
         <span class="top-desktop">Главная</span>
-        <font-awesome-icon icon="list-ul" size="2x" class="top-icon"/>
+        <font-awesome-icon 
+            icon="list-ul" 
+            size="2x" 
+            class="top-icon"/>
       </router-link>
 
-      <router-link id="product-add" :to="{ name: 'product-add' }">
+      <router-link 
+          id="product-add" 
+          :to="{ name: 'product-add' }">
         <span class="top-desktop">Создать</span>
-        <font-awesome-icon icon="plus-circle" size="2x" class="top-icon"/>
+        <font-awesome-icon 
+            icon="plus-circle" 
+            size="2x" 
+            class="top-icon"/>
       </router-link>
 
       <div class="spacer"/>
 
-      <input v-if="isHome" class="" v-model="searchText" type="search" placeholder="Искать товары...">
+      <input 
+          v-if="isHome" 
+          class="searchInput" 
+          v-model="searchText" 
+          type="search" 
+          placeholder="Искать товары...">
     </div>
     
-    <div class="icon-wrapper">
-      <router-link id="cart" :to="{ name: 'cart' }">
-        <font-awesome-icon icon="shopping-cart" size="2x" class="cart-icon"/>
+    <div class="icon-wrapper cart-link">
+      <router-link 
+          id="cart" 
+          :to="{ name: 'cart' }">
+        <div 
+            v-if="hasCartItems" 
+            class="cart-link__count">{{cartItems}}</div>
+        <font-awesome-icon 
+            icon="shopping-cart" 
+            size="2x" 
+            class="cart-icon"/>
         <span class="top-desktop">Корзина</span>
       </router-link>
     </div>
 
     <div class="icon-wrapper">
-      <router-link id="login-form" :to="{ name: 'login-form' }">
-        <font-awesome-icon icon="sign-in-alt" size="2x"/>
+      <router-link  
+          id="login-form" 
+          :to="{ name: 'login-form' }">
+        <font-awesome-icon 
+            icon="sign-in-alt" 
+            size="2x"/>
         <span class="top-desktop">Войти</span>
       </router-link>
     </div>
@@ -35,6 +62,7 @@
 
 <script>
 import { bus } from "../utility/bus.js";
+import {mapState} from 'vuex'
 
 export default {
   name: "TopNavigation",
@@ -52,7 +80,16 @@ export default {
   computed: {
     isHome() {
       return this.$route.path === "/";
-    }
+    },
+
+    hasCartItems : function(){
+      console.log(this.cartItems > 0, "CartItems")
+      return this.cartItems > 0
+    },
+    ...mapState({
+      cartItems: state => state.cartItems,
+
+    }),
   },
 
   methods:{

@@ -1,8 +1,10 @@
 <template>
   <div class="productList max-width-block">
     
+
+    <!-- v-bind:products="products" -->
     <filter-products
-      v-bind:products="products"
+      
       v-bind:isLoading="isLoading"
       v-bind:noTasks="noTasks"
       v-on:filter_products="filterResults"
@@ -19,12 +21,22 @@
     <div v-else class="products-wrapper">
       <div class="display-quantity">
         <label class="short-label">Выводить на странице:</label>
-        <select class="display-quantity__select" v-model="displayQuantity" @change="changeDisplayQuantity(displayQuantity)">
-          <option v-for="type in quantityTypes" :key="type">{{ type }}</option>
+
+          <!-- v-model="displayQuantity"  -->
+        <select 
+            class="display-quantity__select" 
+          
+            @change="changeDisplayQuantity(type)">
+          <option 
+              v-for="type in quantityTypes" 
+              :key="type">{{ type }}</option>
         </select>
       </div>
       <div  class="products">
-        <product-card v-for="product in filteredProducts" :key="product._id" :product="product"/>
+        <product-card 
+            v-for="product in filteredProducts" 
+            :key="product._id" 
+            :product="product"/>
       </div>
       <pagination></pagination>
     </div>

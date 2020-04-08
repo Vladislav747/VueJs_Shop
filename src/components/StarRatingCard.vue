@@ -8,8 +8,13 @@
             v-on:click="set(rating)" 
             v-on:mouseover="star_over(rating)" 
             v-on:mouseout="star_out">
-                <input class="star-rating star-rating__checkbox" type="radio" :value="rating" :name="name"
-            v-model="value" :disabled="disabled">★</label>
+                <input 
+                    class="star-rating star-rating__checkbox" 
+                    type="radio" 
+                    :value="rating" 
+                    :name="name"
+                    v-model="value" 
+                    :disabled="disabled">★</label>
         </div>
     </div>
 </template>
@@ -23,6 +28,8 @@ export default {
 
     props: {
         value: "",
+        disabled: false,
+        name: "",
     },
 
     data() {

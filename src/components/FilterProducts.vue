@@ -28,11 +28,37 @@
                 </select>
             </div>
 
+            <!-- Фильтр по цене  -->
             <div class="filter-property">
                 <span class="filter-property--title">Цена:</span>
-                <vue-slider v-model="filterPrice"></vue-slider>
+                <!-- <vue-slider v-model="filterPrice"></vue-slider> -->
+                <input 
+                  class="price-slider"
+                  id="pricerange"
+                  tabindex="0"
+                  :value="pricerange"
+                  type="range"
+                  :min="min"
+                  :max="max"
+                  step="0.1"
+                  @input="updateHighPrice($event)"
+                />
+                <span class="min">${{ min }}</span>
+                <span class="max">${{ max }}</span>
             </div>
 
+             <!-- Фильтр по свойству sale  -->
+            <div class="filter-property">
+              <label class="checkbox-control">
+                <span class="filter-property--title">Товары Sale:</span>
+                <input 
+                  type="checkbox"
+                  class="sale-property" 
+                  v-model="check" 
+                  @change="updateSale"> 
+                <div class="checkbox-box"></div>
+              </label>
+            </div>
             
 
             <div class="clear-result__wrapper">
@@ -77,8 +103,10 @@ export default {
       productManufactures: PRODUCT_MANUFACTURES,
       filteredCategoriesArray: [],
       filteredManufacturesArray: [],
-      filteredPrice:[]
-      
+      filteredPrice:[],
+      min: 0,
+      max: 2000,
+      check: this.checked,
     };
   },
 
@@ -86,7 +114,6 @@ export default {
     filterCategory: function() {
 
       if (this.filteredManufacturesArray.length === 0) {
-
         this.filteredCategoriesArray = this.products.filter(this.filterProductCategory);
       } else {
         this.filteredCategoriesArray = this.filteredManufacturesArray.filter(this.filterProductCategory);
@@ -122,6 +149,15 @@ export default {
   
       this.$emit('filter_products', this.filteredProducts);
     }
+  },
+
+  computed:{
+    pricerange() {
+      return this.$store.state.highprice
+    },
+    checked() {
+      return this.$store.state.sale;
+    },
   },
 
   methods: {
@@ -194,6 +230,10 @@ export default {
     clearResults() {
      
       this.$emit('clear_results', this.products);
+
+    },
+
+    updateSale(){
 
     },
 

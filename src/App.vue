@@ -14,6 +14,7 @@
 
 <script>
 import TopNavigation from './components/TopNavigation'
+import CategoriesNavigation from './components/CategoriesNavigation'
 import FooterNavigation from './components/FooterNavigation';
 
 export default {

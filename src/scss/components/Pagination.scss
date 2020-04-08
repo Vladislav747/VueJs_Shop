@@ -12,10 +12,13 @@
     }
 
     &__left{
-        float: left;
+      
+        & a{
+            float:right;
+        }
     }
     &__right{
-        float: right;
+        float: left;
     }
 
     &__mid{
