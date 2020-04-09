@@ -15,14 +15,14 @@
             name="comment" 
             id="commentText" 
             cols="30" 
-            rows="10"></textarea>
+            rows="10" />
+        <input type="file" accept="image/png" ref="file" @change="handleFileUpload()" name="myFile" >
+        <button type="submit">Отправить</button>
       </form>
     </div>
 </template>
 
 <script>
-import Noty from "noty";
-import { showNoty } from "../utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -30,7 +30,7 @@ export default {
 
     data(){
       return {
-
+        file: '',
       }
     },
 
@@ -44,7 +44,10 @@ export default {
 
 
     methods: {
-      
+      handleFileUpload(){
+        this.file = this.$refs.file.files[0];
+        console.log(this.file);
+      }
   },
 
 };

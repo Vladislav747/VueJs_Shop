@@ -1,14 +1,17 @@
 <template>
-  <div class="header__sub bg-light-green">
-    <div class="max-width-block header-inner">
-      
-      <div class="spacer"/>
+  <div class="categories-menu bg-light-green">
+    <nav class="max-width-block categories-menu__inner">
 
-      <router-link to="/meat">Мясо</router-link>
-      <router-link to="/fish">Рыба</router-link>
+      <ul class=menu-group>
+        <li>
+          <router-link class="menu-item"  to="/meat">Мясо</router-link>
+        </li>
+        <li>
+            <router-link class="menu-item" to="/fish">Рыба</router-link>
+        </li>
+      </ul>
 
-
-    </div>
+    </nav>
   </div>
 </template>
 
@@ -44,13 +47,7 @@ export default {
   },
 
   mounted: function() {
-    bus.$on("remove", function(products) {
-     
-      var vm = this;
-      vm.products = products;
-    });
-
-    this.$root.$on('changeTheme', this.changeTheme);
+  
   },
 
   watch: {

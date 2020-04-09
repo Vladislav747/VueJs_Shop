@@ -1,15 +1,19 @@
 <template>
-  <div id="main-wrapper">
-    <top-navigation
-      @search="updateSearch"
-      @get-products="get-products"
-      />
-    <div class="content-wrapper">
-      <router-view :search="searchText"/>
+  <div id="app">
+    <div id="main-wrapper">
+      <top-navigation
+        @search="updateSearch"
+        @get-products="get-products"
+        />
+        <categories-navigation />
+      <div class="content-wrapper">
+        <router-view :search="searchText"/>
+      </div>
     </div>
+ 
     <footer-navigation />
+  
   </div>
-
 </template>
 
 <script>
@@ -23,6 +27,7 @@ export default {
   components: {
     TopNavigation,
     FooterNavigation,
+    CategoriesNavigation,
   },
   data () {
     return {

@@ -1,0 +1,42 @@
+$menu-item-color: #579740;
+
+.menu-group{
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    overflow: hidden;
+
+    .menu-group li{
+        float: left;
+        position: relative;
+        width:auto;
+    }
+
+    a.menu-item{
+        padding: 10px;
+        background: $menu-item-color;
+        color: #FFFFFF;
+        display: block;
+        font: bold 12px/20px sans-serif;
+        padding: 10px 25px;
+        text-align: center;
+        -webkit-transition: all .25s ease;
+        -moz-transition: all .25s ease;
+        -ms-transition: all .25s ease;
+        -o-transition: all .25s ease;
+        transition: all .25s ease;
+
+        &:hover{
+            background: #000000;
+            
+        }
+    }
+
+}

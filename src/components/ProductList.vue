@@ -50,7 +50,7 @@ import { showNoty } from "../utility";
 import ProductCard from "./ProductCard.vue";
 import FilterProducts from "./FilterProducts.vue";
 import Pagination from "./Pagination.vue";
-import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "ProductList",

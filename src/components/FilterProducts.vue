@@ -33,7 +33,7 @@
                 <span class="filter-property--title">Цена:</span>
                 <!-- <vue-slider v-model="filterPrice"></vue-slider> -->
                 <input 
-                  class="price-slider"
+                  class="slider"
                   id="pricerange"
                   tabindex="0"
                   :value="pricerange"
@@ -48,16 +48,18 @@
             </div>
 
              <!-- Фильтр по свойству sale  -->
-            <div class="filter-property">
+            <div class="filter-property sale-property">
+              
               <label class="checkbox-control">
-                <span class="filter-property--title">Товары Sale:</span>
-                <input 
-                  type="checkbox"
-                  class="sale-property" 
-                  v-model="check" 
-                  @change="updateSale"> 
-                <div class="checkbox-box"></div>
+              <p class="filter-property--title">Товары Sale:</p>
+              <input 
+                type="checkbox"
+                class="sale-property" 
+                v-model="check" 
+                @change="updateSale">
+              <div class="checkbox-box"></div> 
               </label>
+
             </div>
             
 
@@ -72,14 +74,13 @@
 
 <script>
 import {PRODUCT_CATEGORIES, PRODUCT_MANUFACTURES} from "../utility";
-import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 
 export default {
   name: "FilterProducts",
 
   components:{
-    VueSlider
+    
   },
 
   props:{
@@ -234,8 +235,12 @@ export default {
     },
 
     updateSale(){
-
+    //Заглушка
     },
+
+    updateHighPrice(){
+      //Заглушка
+    }
 
 
   },

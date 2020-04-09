@@ -38,7 +38,7 @@
         </div>
 
         <div class="buy-block">
-          <button @click="addProductToCart({product, quantity})" class="add-to-cart-btn btn-primary">В корзину</button>
+          <button @click="addProductCart(product, quantity)" class="add-to-cart-btn btn-primary">В корзину</button>
         </div>
         
       </div>
@@ -113,6 +113,25 @@ export default {
       if(this.quantity > 1){
         this.quantity -= 1;
       }
+    },
+
+    addProductCart(product, quantity){
+      //Заносим данные в session Storage
+
+      var productItem = [{product, quantity}]
+
+      
+      if (localStorage.getItem('cart')) {
+        var cartItems = JSON.parse(localStorage.getItem('cart'));
+        cartItems[Object.keys(cartItems).length] = productItem;
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+      } else {
+        var cartItems = {};
+        cartItems[Object.keys(cartItems).length] = productItem;
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+      }
+      
+      this.addProductToCart({product, quantity});
     },
 
     ...mapActions({

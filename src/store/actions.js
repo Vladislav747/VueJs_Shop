@@ -124,7 +124,12 @@ export default { // actions = mehtods
     )
   },
 
-  sendFile(imageData){
+
+  cleanCart(context){
+    context.commit('emptyCart');
+  },
+
+  sendFile(context, imageData){
     
   }
 }

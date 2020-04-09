@@ -42,9 +42,6 @@ Object.defineProperty(Vue.prototype, '$http', {
 //Set up false turn off  warning about work in production mode when we launch volume.
 Vue.config.productionTip = false
 
-
-
-
 const firebaseConfig = {
     apiKey: "AIzaSyCN7IH8XsmkF49HtcN8PA_7FxPx3KNmit0",
     authDomain: "users-napoleon-it.firebaseapp.com",

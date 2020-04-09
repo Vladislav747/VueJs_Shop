@@ -4,7 +4,7 @@
       <router-link 
           id="task-list" 
           :to="{ name: 'product-list' }">
-        <span class="top-desktop">Главная</span>
+        <img src='../assets/shopify.svg' alt="Логотип" class="top-logo">
         <font-awesome-icon 
             icon="list-ul" 
             size="2x" 
@@ -14,7 +14,7 @@
       <router-link 
           id="product-add" 
           :to="{ name: 'product-add' }">
-        <span class="top-desktop">Создать</span>
+        <span class="top-desktop">Создать товар</span>
         <font-awesome-icon 
             icon="plus-circle" 
             size="2x" 
@@ -83,7 +83,6 @@ export default {
     },
 
     hasCartItems : function(){
-      console.log(this.cartItems > 0, "CartItems")
       return this.cartItems > 0
     },
     ...mapState({
