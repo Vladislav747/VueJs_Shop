@@ -114,12 +114,15 @@ export default {
         this.quantity -= 1;
       }
     },
-
+    // TODO: Изменение количества одного и того же товара - изменение в localStorage и vuex 
+    
     addProductCart(product, quantity){
 
       //Заносим данные в localStorage
       var productItem = [{product, quantity}]
       console.log(productItem, 'productItem');
+      
+      var totalItems, totalSum;
       
       if (localStorage.getItem('cart')) {
         var cartItems = JSON.parse(localStorage.getItem('cart'));
@@ -137,12 +140,25 @@ export default {
           cartItems[Object.keys(cartItems).length] = productItem;
           localStorage.setItem('cart', JSON.stringify(cartItems));
           this.addProductToCart({product, quantity});
+
+          totalSum = parseInt(localStorage.getItem('totalSum'));
+          totalItems = parseInt(localStorage.getItem('totalItems'));
+
+          var productSum = parseInt(product.price) * parseInt(quantity);
+
+          localStorage.setItem('totalSum', totalSum + productSum);
+          localStorage.setItem('totalItems', totalItems + 1);
         }
-      } else {
+      } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
         var cartItems = {};
         cartItems[Object.keys(cartItems).length] = productItem;
         localStorage.setItem('cart', JSON.stringify(cartItems));
 
+        var productSum = parseInt(product.price) * parseInt(quantity);
+        localStorage.setItem('totalSum', productSum);
+        totalItems = 1;
+        
+        localStorage.setItem('totalItems', totalItems);
         this.addProductToCart({product, quantity});
       }
       

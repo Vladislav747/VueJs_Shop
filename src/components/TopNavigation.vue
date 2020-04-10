@@ -13,7 +13,8 @@
 
       <router-link 
           id="product-add" 
-          :to="{ name: 'product-add' }">
+          :to="{ name: 'product-add' }"
+          v-if="isAdmin">
         <span class="top-desktop">Создать товар</span>
         <font-awesome-icon 
             icon="plus-circle" 
@@ -37,7 +38,7 @@
           :to="{ name: 'cart' }">
         <div 
             v-if="hasCartItems" 
-            class="cart-link__count">{{cartItems}}</div>
+            class="cart-link__count">{{cartCount}}</div>
         <font-awesome-icon 
             icon="shopping-cart" 
             size="2x" 
@@ -61,7 +62,6 @@
 </template>
 
 <script>
-import { bus } from "../utility/bus.js";
 import {mapState} from 'vuex'
 
 export default {
@@ -72,6 +72,7 @@ export default {
       searchText: "",
       products: [],
       blackTheme: false,
+      cartCount: 0,
     };
   },
 
@@ -83,7 +84,19 @@ export default {
     },
 
     hasCartItems : function(){
-      return this.cartItems > 0
+
+      //Проверяем данные либо из VUEX контейнера либо из localStorage
+      var localCartItems = localStorage.getItem('totalItems');
+      var cartItemsCount = (this.cartItems > 0) ? this.cartItems : localCartItems;
+      if(cartItemsCount > 0){
+        this.cartCount = cartItemsCount;
+      }
+      return cartItemsCount > 0
+    },
+
+    //TODO: Сделать так чтобы при наличие определенного ключа можно было добавлять това
+    isAdmin(){
+
     },
     ...mapState({
       cartItems: state => state.cartItems,
@@ -96,12 +109,6 @@ export default {
   },
 
   mounted: function() {
-    bus.$on("remove", function(products) {
-     
-      var vm = this;
-      vm.products = products;
-    });
-
     this.$root.$on('changeTheme', this.changeTheme);
   },
 

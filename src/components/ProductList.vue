@@ -20,17 +20,14 @@
 
     <div v-else class="products-wrapper">
       <div class="display-quantity">
-        <label class="short-label">Выводить на странице:</label>
-
-          <!-- v-model="displayQuantity"  -->
-        <select 
-            class="display-quantity__select" 
-          
-            @change="changeDisplayQuantity(type)">
-          <option 
-              v-for="type in quantityTypes" 
-              :key="type">{{ type }}</option>
-        </select>
+        <p class="short-label">Выводить на странице:</p>
+        <button 
+          class="display-quantity__btn bg-light-green" 
+          v-for="type in quantityTypes"
+          :key="type"
+          @change="changeDisplayQuantity(type)"
+        >{{ type }}</button>
+        
       </div>
       <div  class="products">
         <product-card 
