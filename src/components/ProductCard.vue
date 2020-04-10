@@ -116,22 +116,37 @@ export default {
     },
 
     addProductCart(product, quantity){
-      //Заносим данные в session Storage
 
+      //Заносим данные в localStorage
       var productItem = [{product, quantity}]
-
+      console.log(productItem, 'productItem');
       
       if (localStorage.getItem('cart')) {
         var cartItems = JSON.parse(localStorage.getItem('cart'));
-        cartItems[Object.keys(cartItems).length] = productItem;
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        //console.log(cartItems, "cartItems productAdd");
+        var cartItem = false;
+        Object.entries(cartItems).forEach(function (item) {
+          // console.log(item["1"]["0"]["product"]["id"], "product ID");
+          // console.log(product.id, "product ID");
+          if(item["1"]["0"]["product"]["id"] == product.id){
+           cartItem = true;
+          }
+        });
+        // console.log(cartItem, 'value');
+        if(!cartItem) {
+          cartItems[Object.keys(cartItems).length] = productItem;
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          this.addProductToCart({product, quantity});
+        }
       } else {
         var cartItems = {};
         cartItems[Object.keys(cartItems).length] = productItem;
         localStorage.setItem('cart', JSON.stringify(cartItems));
+
+        this.addProductToCart({product, quantity});
       }
       
-      this.addProductToCart({product, quantity});
+      
     },
 
     ...mapActions({

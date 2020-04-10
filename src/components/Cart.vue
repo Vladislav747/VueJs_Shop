@@ -1,6 +1,6 @@
 <template>
    <div class="shopping-cart">
-    <div v-if="$store.state.cart.length == 0 && !useStorage"  class="empty-cart">
+    <div v-if="carts == 0 && !useStorage"  class="empty-cart">
       <p>Ваша корзина пуста.</p>
       <router-link to="/">
         <button class="shop-cart">Вернуться в каталог</button>
@@ -24,13 +24,13 @@
         <tbody>
           <tr v-for="cart in carts" :key="cart.id" >
             <td>
-              <input type="checkbox" class="product-checkbox"></input>
+              <input type="checkbox" class="product-checkbox" />
             </td>
             <td>
-              <span class="product-title">{{cart.title}}</span>
+              <span class="product-title">{{cart.name}}</span>
             </td>
             <td>
-              <!-- <img :src="require(`@/static/images/${cart.img}`)" :alt="`Image of ${cart.title}`"> -->
+              <img :src="require(`@/static/images/${cart.srcImage}`)" :alt="`Image of ${cart.title}`">
             </td>
             <td>
               <span class="product-price">{{cart.price}} {{currency}}</span>
