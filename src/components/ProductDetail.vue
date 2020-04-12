@@ -74,7 +74,10 @@
       </div>
     </div>
 
-    <comment-form></comment-form>
+    <comment-form 
+      :product_id="product.id"
+      :profile_autor="`Владислав Кудряков`"
+    />
   </div>
 </template>
 
@@ -99,6 +102,7 @@ export default {
   data() {
     return {
       product: {
+        id: "",
         name: "",
         category: "",
         description: "",

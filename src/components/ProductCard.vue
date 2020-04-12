@@ -126,16 +126,15 @@ export default {
       
       if (localStorage.getItem('cart')) {
         var cartItems = JSON.parse(localStorage.getItem('cart'));
-        //console.log(cartItems, "cartItems productAdd");
         var cartItem = false;
+
+        /* Проверяем что нет подобного объект уже в нашем localStorage */
         Object.entries(cartItems).forEach(function (item) {
-          // console.log(item["1"]["0"]["product"]["id"], "product ID");
-          // console.log(product.id, "product ID");
           if(item["1"]["0"]["product"]["id"] == product.id){
            cartItem = true;
           }
         });
-        // console.log(cartItem, 'value');
+
         if(!cartItem) {
           cartItems[Object.keys(cartItems).length] = productItem;
           localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -150,18 +149,17 @@ export default {
           localStorage.setItem('totalItems', totalItems + 1);
         }
       } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
-        var cartItems = {};
-        cartItems[Object.keys(cartItems).length] = productItem;
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+          var cartItems = {};
+          cartItems[Object.keys(cartItems).length] = productItem;
+          localStorage.setItem('cart', JSON.stringify(cartItems));
 
-        var productSum = parseInt(product.price) * parseInt(quantity);
-        localStorage.setItem('totalSum', productSum);
-        totalItems = 1;
-        
-        localStorage.setItem('totalItems', totalItems);
-        this.addProductToCart({product, quantity});
+          var productSum = parseInt(product.price) * parseInt(quantity);
+          localStorage.setItem('totalSum', productSum);
+          totalItems = 1;
+          
+          localStorage.setItem('totalItems', totalItems);
+          this.addProductToCart({product, quantity});
       }
-      
       
     },
 

@@ -1,0 +1,112 @@
+$color-form-btn: #ABABAB;
+$background-form-btn: #fff;
+$border-form-btn: #ABABAB;
+
+.form-review{
+    margin-top: 30px;
+    padding: 10px 100px;
+
+    .form-header{
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    
+        .form-profile{
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+    
+        .form-rating{
+            display: inline-block;
+            vertical-align: middle;
+        }
+    
+    }
+
+    .form-body{
+        margin-top: 10px;
+
+        .form-actions{
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 10px 0;
+
+            .form-btn{
+               color: $color-form-btn;
+               border-color: $border-form-btn;
+               margin: 0 10px 0 0;
+               background: $background-form-btn;
+
+               &:hover{
+                   color: $background-form-btn;
+                   background: $color-form-btn;
+               }
+            }
+        }
+    }
+    
+
+    .textarea-control{
+        padding-right: 25%;
+        padding: 6px 8px;
+        font-size: 13px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+    }
+}
+
+
+
+.reviews__title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .review__author{
+        width: 50%;
+        display: inline-block;
+        padding-right: 5px;
+        max-height: 40px;
+        vertical-align: middle;
+        font-size: 16px;
+        line-height: 1.25;
+        color: #001a34;
+        font-weight: 700;
+        overflow: hidden;
+    }
+}
+    .review__date{
+        width: 50%;
+    }
+
+    .reviews__text{
+
+        margin-top: 16px;
+
+        p.reviews-title{
+            font-size: 14px;
+            line-height: 1.29;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+    }
+
+

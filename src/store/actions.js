@@ -1,4 +1,6 @@
 import shop from '@/api/shop'
+// import firebase from "firebase/app";
+// import 'firebase/storage';
 
 export default { // actions = mehtods
 
@@ -129,7 +131,9 @@ export default { // actions = mehtods
     context.commit('emptyCart');
   },
 
-  sendFile(context, imageData){
-    
+  async sendFile(file){
+    await firebase.storage().ref().put(file).then(() => {
+      console.log('Uploaded a blob or file')
+    }).catch((e) => {console.log(e);})
   }
 }
