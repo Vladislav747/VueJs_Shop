@@ -26,6 +26,7 @@
       <div class="right-col">
         <div class="product-rating">
           <star-rating-card
+            :value="averageRating"
             :disabled="true"
           />
         </div>
@@ -70,14 +71,26 @@
 
         <div class="quantity-block">
           <div class="counter-block">
-            <span class="minus" @click="decreaseQuantity(quantity)"></span>
-            <input type="text" v-model="quantity" class="text" name="quantity" value="1">
-            <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
+            <span 
+              class="minus" 
+              @click="decreaseQuantity(quantity)"></span>
+            <input 
+              type="text" 
+              v-model="quantity" 
+              class="text" 
+              name="quantity" 
+              value="1">
+            <span 
+              class="plus" 
+              @click="increaseQuantity(quantity)" 
+              data-max="1000"></span>
           </div>
         </div>
 
         <div class="buy-block">
-            <button @click="addProductToCart(product)" class="add-to-cart-btn btn-primary">Купить товар</button>
+            <button 
+              @click="addProductToCart(product)" 
+              class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
       </div>
     </div>
@@ -86,6 +99,7 @@
       :product_id="product.id"
       :profile_autor="profile_autor"
       :right_leave_review="canUserLeaveReview"
+      v-on:average_rating="putRatingInCard"
     />
   </div>
 </template>
@@ -116,6 +130,7 @@ export default {
         price:"",
         currency:"",
         srcImage:"",
+        averageRating: '',
         
       },
       isLoading:true,
@@ -208,6 +223,12 @@ export default {
         this.quantity -= 1;
       }
     },
+
+     putRatingInCard(data){
+       console.log(data, 'putRatingInCard');
+        this.averageRating = data;
+        
+     }, 
 
 
   }

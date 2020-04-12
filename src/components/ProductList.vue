@@ -35,7 +35,7 @@
             :key="product._id" 
             :product="product"/>
       </div>
-      <pagination></pagination>
+      <pagination />
     </div>
 
     
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { showNoty } from "../utility";
+import { showNoty } from "@/utility";
 import ProductCard from "./ProductCard.vue";
 import FilterProducts from "./FilterProducts.vue";
 import Pagination from "./Pagination.vue";

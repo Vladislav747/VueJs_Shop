@@ -1,19 +1,20 @@
 <template>
   <section class="product">
     <div class="product-inner">
-      <div class="product-header" @click="viewTask(product.id)">
+      <div 
+        class="product-header" 
+        @click="viewTask(product.id)">
         <div class="product-header--top">
           <div class="product-title">{{ product.name }}</div>
         </div>
         <div class="image-wrapper">
-          <img class= "product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
+          <img 
+            class="product-image" 
+            :src="require(`@/static/images/${product.srcImage}`)" 
+            :alt="`Image of ${product.srcImage}`" 
+            :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
-      
-      <star-rating-card
-        :disabled="true"
-        />
-
       <div class="product-properties">
         <div class="category property-section">
           Категория: {{ product.category}}
@@ -35,13 +36,25 @@
       <div class="product-footer">
        
         <div class="counter_block">
-          <span class="minus" @click="decreaseQuantity(quantity)"></span>
-          <input type="text" v-model="quantity" class="text" name="quantity" value="1">
-          <span class="plus" @click="increaseQuantity(quantity)" data-max="1000"></span>
+          <span 
+            class="minus" 
+            @click="decreaseQuantity(quantity)"></span>
+          <input 
+            type="text" 
+            v-model="quantity" 
+            class="text" 
+            name="quantity" 
+            value="1">
+          <span 
+            class="plus" 
+            @click="increaseQuantity(quantity)" 
+            data-max="1000"></span>
         </div>
 
         <div class="buy-block">
-          <button @click="addProductCart(product, quantity)" class="add-to-cart-btn btn-primary">В корзину</button>
+          <button 
+            @click="addProductCart(product, quantity)" 
+            class="add-to-cart-btn btn-primary">В корзину</button>
         </div>
         
       </div>
@@ -54,7 +67,6 @@
 import Noty from "noty";
 import { showNoty } from "@/utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
-import StarRatingCard from '@/components/StarRatingCard.vue';
 
 export default {
   name: "ProductCard",
@@ -75,10 +87,6 @@ export default {
         }
       }
     }
-  },
-
-  components: {
-    StarRatingCard
   },
 
   data() {

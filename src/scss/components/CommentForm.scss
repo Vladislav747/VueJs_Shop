@@ -4,7 +4,7 @@ $border-form-btn: #ABABAB;
 
 .form-review{
     margin-top: 30px;
-    padding: 10px 100px;
+    padding: 10px 30px;
 
     .form-header{
         display: flex;
@@ -88,31 +88,57 @@ $border-form-btn: #ABABAB;
 }
 
 
+.reviews{
+    padding: 10px 30px;
+    
+    
 
-.reviews__title{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+    .review{
+        margin-bottom: 40px;
+        background: #f3f3f3;
+        padding: 10px 5px;
+        border-radius: 4px;
 
-    .review__author{
-        width: 50%;
-        display: inline-block;
-        padding-right: 5px;
-        max-height: 40px;
-        vertical-align: middle;
-        font-size: 16px;
-        line-height: 1.25;
-        color: #001a34;
-        font-weight: 700;
-        overflow: hidden;
+        .reviews__title{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+
+            .review__author{
+                width: 50%;
+                display: inline-block;
+                padding-right: 5px;
+                max-height: 40px;
+                vertical-align: middle;
+                font-size: 16px;
+                line-height: 1.25;
+                color: #001a34;
+                font-weight: 700;
+                overflow: hidden;
+
+                &p{
+                    text-align: left;
+                }
+            }
+
+                .review__date{
+                    width: 50%;
+                }
+
+
+            }
+        
+        
+
+    .reviews__rating{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
     }
-}
-    .review__date{
-        width: 50%;
-    }
+   
 
     .reviews__text{
-
+        text-align: left;
         margin-top: 16px;
 
         p.reviews-title{
@@ -122,5 +148,15 @@ $border-form-btn: #ABABAB;
             margin-bottom: 8px;
         }
     }
+
+
+    }
+
+   
+
+
+    
+}
+
 
 

@@ -1,7 +1,9 @@
 <template>
     <div class="reviews-container">
       <div class="reviews" >
+        
         <ul v-if="!getReviews && this.reviews.length > 0">
+        <h3>Отзывы о товаре</h3>
           <li 
             class="review"
             v-for="review in reviews"
@@ -16,10 +18,18 @@
               </div>
               
             </div>
+            <div class="reviews__rating">
+              <p class="rating-title">Оценка товара</p>
+              <star-rating-card
+                :value="review.rating"
+                :disabled="true"
+              />
+            </div>
             <div class="reviews__text">
-              <p class=reviews-title>Комментарий</p>
+              <p class="reviews-title">Комментарий</p>
               <p>{{review.text}}</p>
             </div>
+            
           </li>
         </ul>
         <div 
@@ -119,7 +129,26 @@ export default {
         imageData: null,
         picture: null,
         uploadValue: 0,
-        reviews:[],
+        reviews:[
+          {
+            id_review: "id_review",
+            title: "this.product_review_title",
+            text: "this.product_comment",
+            product_id: 'Товар нелохой но я видел лучше',
+            rating: 5,
+            autor_login: 'Владислав Кудряков',
+            date: '14 декабря 2020',
+          },
+          {
+          id_review: "id_review",
+          title: "this.product_review_title",
+          text: "this.product_comment",
+          product_id: 'Товар нелохой но я видел лучше',
+          rating: 4,
+          autor_login: 'Владислав Кудряков',
+          date: '14 декабря 2020',
+        }
+        ],
       }
     },
 
@@ -132,20 +161,22 @@ export default {
 
       var reviews = [];
       var self = this;
-      const productCollection = db.collection('product_comments')
+      // const productCollection = db.collection('product_comments')
 
-        productCollection.where("product_id", "==", this.product_id)
-        .get().then((docs)=>{
+      //   productCollection.where("product_id", "==", this.product_id)
+      //   .get().then((docs)=>{
 
-          docs.forEach(function (doc) {
-            var reviewItem = doc.data();  
-            reviews.push(reviewItem)
-          })
-        })
+      //     docs.forEach(function (doc) {
+      //       var reviewItem = doc.data();  
+      //       reviews.push(reviewItem)
+      //     })
+      //   })
            
-        this.reviews = reviews;
-
-
+        // this.reviews = reviews;
+        if(this.reviews.length > 0){
+          this.getAverageRating(this.reviews);
+        }
+        
 
         return false;
         
@@ -210,17 +241,32 @@ export default {
 
     //Получить среднюю оценку по товару
     getAverageRating(reviews){
-      const reviewsRating = reviews.map(getPopularity);
+      const reviewsRating = reviews.map(this.getRating);
+
+      const ratingTotal = reviewsRating.reduce(this.addRating, 0);
+
+      // Вычисляем и выводим в консоль среднее значение.
+      const averageRating = ratingTotal / reviewsRating.length;
+      console.log("Average rating:", averageRating);
+      this.$emit('average_rating', averageRating);
+      
+
+
+
     },
 
-
+    //Выбрать именно rating
     getRating(review) {
       return review.rating;
-    }, 
+    },
+
+    addRating(prev, next) {
+      return prev + next;
+    },
       
-      ...mapActions({
-         sendFile: 'sendFile',
-      })
+    ...mapActions({
+        sendFile: 'sendFile',
+    })
   },
 
 };
