@@ -41,7 +41,7 @@
                     </div>
                     <div class="form__btn field">
                         <input 
-                            type="button" 
+                            type="submit" 
                             value="Регистрация" 
                             class="ui button secondary"
                             @click.prevent="registerForm" 
@@ -73,14 +73,7 @@ export default {
             password:"",
         };
     },
-
-    computed: {
-        // ...mapState({
-        // checkoutStatus: 'checkoutStatus'
-        // })
-    },
     
-
     methods: {
       
         /**
@@ -90,7 +83,6 @@ export default {
            
             console.log((this.login, this.password),"registerForm");
             var seed = generateRandomSeed();
-            
 
             var nowDate = new Date().toLocaleString('ru',
             {
@@ -102,23 +94,43 @@ export default {
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
 
-            usersCollection.doc('user_'+ seed).set({
-                id_user: 'user_'+ seed,
-                login: this.login,
-                password: this.password,
-                date_registered: nowDate,
-            }).then(() =>{
-                console.log("Успешно зарегистрирован")
-                var loginedLocal = localStorage.getItem("isLogined");
-                console.log(loginedLocal, "loginedLocal");
-                if(!loginedLocal){
-                    localStorage.setItem("isLogined", "true");
-                }
-            })
+            var loginUser = this.login;
+            var passwordUser = this.password;
+            
+            usersCollection.where("login", "==", loginUser)
+                .get().then((docs)=>{
+                    docs.forEach(function (doc) {
+                    var user = doc.data();
+                    console.log(user)
+                    if(user.login == loginUser){
+                       console.log("Такой пользователь уже есть "+loginUser);
+                    }else{
+                           usersCollection.doc('user_'+ seed).set({
+                            id_user: 'user_'+ seed,
+                            login: loginUser,
+                            password: passwordUser,
+                            date_registered: nowDate,
+                        }).then(() =>{
+                            console.log("Успешно зарегистрирован")
+                            var loginedLocal = localStorage.getItem("isLogined");
+                            console.log(loginedLocal, "loginedLocal");
+                            if(!loginedLocal){
+                                localStorage.setItem("isLogined", "true");
+                                localStorage.setItem("userLogin", loginUser);
+                            }
+                        })
+                    }
+                    })
+                })
+            
+
+
+            
         },
 
         checkForm(){
-            console.log()
+            console.log("checkForm");
+
         }
     }
 }

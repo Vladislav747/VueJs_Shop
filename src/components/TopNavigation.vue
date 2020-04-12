@@ -48,14 +48,26 @@
     </div>
 
     <div class="icon-wrapper">
-      <router-link  
-          id="login-form" 
-          :to="{ name: 'login-form' }">
-        <font-awesome-icon 
-            icon="sign-in-alt" 
-            size="2x"/>
-        <span class="top-desktop">Войти</span>
-      </router-link>
+       <div 
+        class="profile-container"
+         v-if="isLogined">
+          <div class="profile-inner">
+            <img src="https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-200w.jpeg" alt="" class="profile-img">
+          </div>
+          <span class="top-desktop">Владислав</span>
+      </div>
+      <div 
+        class="loginSection"
+        v-else >
+        <router-link  
+            id="login-form" 
+            :to="{ name: 'login-form' }">
+          <font-awesome-icon 
+              icon="sign-in-alt" 
+              size="2x"/>
+          <span class="top-desktop">Войти</span>
+        </router-link>
+      </div>    
     </div>
 
   </div>
@@ -94,9 +106,23 @@ export default {
       return cartItemsCount > 0
     },
 
-    //TODO: Сделать так чтобы при наличие определенного ключа можно было добавлять това
-    isAdmin(){
+  
+    isLogined(){
+      var loginedLocal = localStorage.getItem("isLogined");
+      if(loginedLocal){
+        return loginedLocal == 'true';
+      } else{
+        return false;
+      }
+    },
 
+    isAdmin(){
+       var adminLocal = localStorage.getItem("isAdmin");
+      if(adminLocal){
+        return adminLocal == 'true';
+      } else{
+        return false;
+      }
     },
     ...mapState({
       cartItems: state => state.cartItems,

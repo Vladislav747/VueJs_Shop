@@ -10,7 +10,10 @@
         </div>
       </div>
       
-      <star-rating-card></star-rating-card>
+      <star-rating-card
+        :disabled="true"
+        />
+
       <div class="product-properties">
         <div class="category property-section">
           Категория: {{ product.category}}
@@ -49,9 +52,9 @@
 
 <script>
 import Noty from "noty";
-import { showNoty } from "../utility";
+import { showNoty } from "@/utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
-import StarRatingCard from '../components/StarRatingCard.vue';
+import StarRatingCard from '@/components/StarRatingCard.vue';
 
 export default {
   name: "ProductCard",

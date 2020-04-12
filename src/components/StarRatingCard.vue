@@ -14,7 +14,8 @@
                     :value="rating" 
                     :name="name"
                     v-model="value" 
-                    :disabled="disabled">★</label>
+                    :disabled="disabled"
+                >★</label>
         </div>
     </div>
 </template>
@@ -79,6 +80,7 @@ export default {
 
         if (!this.disabled) {
             this.temp_value = value;
+            console.log(value, "StarRatingCard");
             return this.value = value;
         }
         }

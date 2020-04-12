@@ -93,8 +93,6 @@ export default {
 
             console.log((this.login, this.password),"loginForm");
             
-            
-
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
             var user;
@@ -111,6 +109,8 @@ export default {
                         console.log(loginedLocal, "loginedLocal");
                         if(!loginedLocal){
                             localStorage.setItem("isLogined", "true");
+                            localStorage.setItem("userLogin", user.login);
+                            // localStorage.setItem("boughtProducts", );
                         }
 
                     }else{
@@ -118,6 +118,9 @@ export default {
                     }
                 })
             })
+
+             localStorage.setItem("isLogined", "true");
+            localStorage.setItem("userLogin", this.login);
 
         },
 

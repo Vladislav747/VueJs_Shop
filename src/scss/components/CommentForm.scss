@@ -35,6 +35,21 @@ $border-form-btn: #ABABAB;
 
     .form-body{
         margin-top: 10px;
+        font-size: 15px;
+
+        .form-title{
+            float: left;
+            width: 100%;
+            padding: 6px 8px;
+        }
+
+        .textarea-control{
+            padding-right: 25%;
+            padding: 6px 8px;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 15px 0;
+        }
 
         .form-actions{
             display: -webkit-flex;
@@ -46,7 +61,7 @@ $border-form-btn: #ABABAB;
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
-            padding: 10px 0;
+            padding: 0;
 
             .form-btn{
                color: $color-form-btn;
@@ -63,14 +78,13 @@ $border-form-btn: #ABABAB;
     }
     
 
-    .textarea-control{
-        padding-right: 25%;
-        padding: 6px 8px;
-        font-size: 13px;
-        width: 100%;
-        box-sizing: border-box;
-        margin: 0;
-    }
+    
+}
+
+
+.no-form{
+    width: 100%;
+    padding: 10px;
 }
 
 

@@ -74,7 +74,6 @@ export default {
         getCarts(){
           console.log(this.carts.length, "Store Carts");
           var fetchCarts = localStorage.getItem("cart");
-          console.log(typeof fetchCarts);
           if(!fetchCarts && this.carts.length == 0){
 
             return false;

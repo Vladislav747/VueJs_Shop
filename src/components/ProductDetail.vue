@@ -15,14 +15,22 @@
         </div>
 
         <div class="image-wrapper">
-          <img class="product-image" :src="require(`@/static/images/${product.srcImage}`)" :alt="`Image of ${product.srcImage}`" :title="`Title of ${product.srcImage}`" />
+          <img 
+            class="product-image" 
+            :src="require(`@/static/images/${product.srcImage}`)" 
+            :alt="`Image of ${product.srcImage}`" 
+            :title="`Title of ${product.srcImage}`" />
         </div>
       </div>
 
       <div class="right-col">
+        <div class="product-rating">
+          <star-rating-card
+            :disabled="true"
+          />
+        </div>
+        <div class="description product-section">      
 
-        <div class="description product-section">
-          
           <div class="description__title property-title">
               <h4>Описание:</h4>
           </div>
@@ -76,7 +84,8 @@
 
     <comment-form 
       :product_id="product.id"
-      :profile_autor="`Владислав Кудряков`"
+      :profile_autor="profile_autor"
+      :right_leave_review="canUserLeaveReview"
     />
   </div>
 </template>
@@ -86,20 +95,17 @@ import Noty from "noty";
 import {mapState, mapGetters, mapActions} from 'vuex'
 import { showNoty } from "../utility";
 import CommentForm from '../components/CommentForm.vue'
+import StarRatingCard from '@/components/StarRatingCard.vue';
+
 export default {
   name: "ProductDetail",
 
-  computed: {
-    ...mapGetters({
-      currency: 'cartCurrency',
-    }),
-  },
-
   components: {
-    CommentForm
+    CommentForm,
+    StarRatingCard,
   },
 
-  data() {
+   data() {
     return {
       product: {
         id: "",
@@ -114,8 +120,45 @@ export default {
       },
       isLoading:true,
       quantity: 1,
+      profile_autor: "Владислав Кудряков",
+
     };
   },
+
+  computed: {
+    
+    //Только пользователь который купил этот товар может оставлять отзывы на него
+    canUserLeaveReview: function(){
+      var localLogin = localStorage.getItem('userLogin');
+      var localLogged = localStorage.getItem('isLogined');
+
+      if(localLogin && localLogged){
+        this.profile_autor = localLogin;
+      }
+      
+      //Товары которые клиент приобрел
+      console.log(this.product.id, "canUserLeaveReview");
+      var boughtItemsId = ['5e838243ab5db71bf8408716'];
+
+
+      var ourProduct = boughtItemsId.find(elem=> elem == this.product.id); 
+      
+      if(ourProduct){
+        return true;
+      }else{
+        return false;
+      }
+      
+    },
+
+    ...mapGetters({
+      currency: 'cartCurrency',
+    }),
+  },
+
+  
+
+ 
 
   mounted() {
     this.getProduct();
@@ -165,6 +208,7 @@ export default {
         this.quantity -= 1;
       }
     },
+
 
   }
 };

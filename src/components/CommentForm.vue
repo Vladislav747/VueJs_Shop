@@ -1,12 +1,12 @@
 <template>
     <div class="reviews-container">
       <div class="reviews" >
-        <ul v-if="getReviews">
+        <ul v-if="!getReviews && this.reviews.length > 0">
           <li 
             class="review"
             v-for="review in reviews"
             :key="review.id"
-          >
+            >
             <div class="reviews__title">
               <div class="review__author">
                 <p>{{review.autor_login}}</p>
@@ -22,13 +22,17 @@
             </div>
           </li>
         </ul>
-        <div class="no-reviews">
+        <div 
+          class="no-reviews"
+          v-else
+          >
           <p>Нет отзывов</p>
         </div>
       </div>
+
       <form 
         class="form-review" 
-        v-if="ifBought" 
+        v-if="right_leave_review"
         @submit.prevent="onUpload">
 
 
@@ -36,7 +40,7 @@
         <div class="form-header">
           <div class="form-profile">
             Пользователь
-            {{profile_autor}} Заглушка
+            {{profile_autor}}
           </div>
           <div class="form-rating">
             Оцените этот товар
@@ -63,10 +67,6 @@
 
           </span>
           
-          <!-- <input type="file" accept="image/png" ref="file" @change="handleFileUpload" name="myFile" >
-          <img class="preview" :src="picture" style="width: 200px">
-          <br>
-          <progress id="progress" :value="uploadValue" max="100"></progress> -->
           <div class="form-actions" >
             <button 
                 type="submit"
@@ -81,9 +81,13 @@
           </div>
           
         </div>
-
-       
       </form>
+      <div 
+        class="no-form"
+        v-else
+      >
+       <h4>Для того чтобы оставить отзыв вам нужно приобрести данный товар</h4>
+      </div>
     </div>
 </template>
 
@@ -103,6 +107,7 @@ export default {
     props:{
       product_id: '',
       profile_autor:'',
+      right_leave_review: '',
     },
 
     data(){
@@ -119,48 +124,32 @@ export default {
     },
 
      computed: {
-       //TODO: Только если пользователь купил товар - localStorage 
-      ifBought(){
-                //firebase utils
-        // const db = firebase.firestore();
 
-        // // firebase collections
-        
-        // const commentsCollection = db.collection('product_comments')
-        // console.log(commentsCollection, "CommentForm");
-        return true;
-      },
 
       getReviews(){
 
       const db = firebase.firestore();
 
       var reviews = [];
+      var self = this;
+      const productCollection = db.collection('product_comments')
 
-        db.collection("product_comments").where("product_id", "==", this.product_id)
+        productCollection.where("product_id", "==", this.product_id)
         .get().then((docs)=>{
 
           docs.forEach(function (doc) {
             var reviewItem = doc.data();  
             reviews.push(reviewItem)
-            return reviews;
           })
         })
            
         this.reviews = reviews;
 
-        //Проверяем что отзывы пришли и если все хорошо загружаем
-        if (this.reviews.length > 0){
-          return true;
-        } else {
-          return false;
-        }
 
 
+        return false;
         
       },
-
-
 
     ...mapGetters({
     }),
@@ -193,10 +182,7 @@ export default {
     },
 
     cancel(){
-      console.log("Cancel Заглушка - Доделать!");
-
-      
-        
+      console.log("Cancel Заглушка - Доделать!"); 
     },
 
     createReview(){
@@ -221,6 +207,16 @@ export default {
       })
 
     },
+
+    //Получить среднюю оценку по товару
+    getAverageRating(reviews){
+      const reviewsRating = reviews.map(getPopularity);
+    },
+
+
+    getRating(review) {
+      return review.rating;
+    }, 
       
       ...mapActions({
          sendFile: 'sendFile',
