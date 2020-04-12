@@ -1,27 +1,30 @@
 <template>
     <div class="reviews-container">
-      <div class="reviews">
-        <ul>
+      <div class="reviews" >
+        <ul v-if="getReviews">
           <li 
             class="review"
             v-for="review in reviews"
             :key="review.id"
           >
-          <div class="reviews__title">
-            <div class="review__author">
-              <p>{{review.autor_login}}</p>
+            <div class="reviews__title">
+              <div class="review__author">
+                <p>{{review.autor_login}}</p>
+              </div>
+              <div class="review__date">
+                <h4>{{review.date}}</h4>
+              </div>
+              
             </div>
-            <div class="review__date">
-              <h4>{{review.date}}</h4>
+            <div class="reviews__text">
+              <p class=reviews-title>Комментарий</p>
+              <p>{{review.text}}</p>
             </div>
-            
-          </div>
-          <div class="reviews__text">
-            <p class=reviews-title>Комментарий</p>
-            <p>{{review.text}}</p>
-          </div>
           </li>
         </ul>
+        <div class="no-reviews">
+          <p>Нет отзывов</p>
+        </div>
       </div>
       <form 
         class="form-review" 
@@ -37,7 +40,7 @@
           </div>
           <div class="form-rating">
             Оцените этот товар
-            <star-rating-card></star-rating-card>
+            <star-rating-card />
           </div>
 
         </div>
@@ -64,7 +67,7 @@
           <img class="preview" :src="picture" style="width: 200px">
           <br>
           <progress id="progress" :value="uploadValue" max="100"></progress> -->
-          <div class="form-actions" v-if="getReviews">
+          <div class="form-actions" >
             <button 
                 type="submit"
                 class="btn-primary form-btn"
@@ -88,6 +91,7 @@
 import {mapState, mapGetters, mapActions} from 'vuex'
 import StarRatingCard from '../components/StarRatingCard.vue';
 import firebase from 'firebase/app';
+import {generateRandomSeed } from "../utility"
 
 export default {
     name: "CommentForm",
@@ -121,7 +125,7 @@ export default {
         // const db = firebase.firestore();
 
         // // firebase collections
-        // const usersCollection = db.collection('users')
+        
         // const commentsCollection = db.collection('product_comments')
         // console.log(commentsCollection, "CommentForm");
         return true;
@@ -133,27 +137,26 @@ export default {
 
       var reviews = [];
 
-         db.collection("product_comments").where("product_id", "==", this.product_id)
-          .get().then((docs)=>{
+        db.collection("product_comments").where("product_id", "==", this.product_id)
+        .get().then((docs)=>{
 
           docs.forEach(function (doc) {
             var reviewItem = doc.data();  
             reviews.push(reviewItem)
             return reviews;
           })
-          })
-         
-        
-
-        
-
-
-        console.log(reviews);
+        })
+           
         this.reviews = reviews;
 
+        //Проверяем что отзывы пришли и если все хорошо загружаем
+        if (this.reviews.length > 0){
+          return true;
+        } else {
+          return false;
+        }
 
-       
-        return true;
+
         
       },
 
@@ -200,7 +203,7 @@ export default {
       console.log("Create Review");
 
       const db = firebase.firestore();
-      var id_review = Math.random().toString(36).substr(2, 10);
+      var id_review = generateRandomSeed();
       var nowDate = new Date().toLocaleString('ru',
         {
           day: 'numeric',
