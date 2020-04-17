@@ -21,12 +21,15 @@
     <div v-else class="products-wrapper">
       <div class="display-quantity">
         <p class="short-label">Выводить на странице:</p>
-        <button 
-          class="display-quantity__btn bg-light-green" 
-          v-for="type in quantityTypes"
-          :key="type"
+        <select 
+          class="display-quantity__btn" 
           @change="changeDisplayQuantity(type)"
-        >{{ type }}</button>
+        >
+			<option
+				v-for="type in quantityTypes"
+				:key="type">{{ type }}
+			</option>
+		</select>
         
       </div>
       <div  class="products">
@@ -80,9 +83,7 @@ export default {
     }),
   },
 
-  mounted() {
-    //this.getProducts();
-  },
+   
 
   created(){
     this.isLoading = true;

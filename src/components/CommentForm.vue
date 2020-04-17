@@ -2,7 +2,7 @@
     <div class="reviews-container">
       <div class="reviews" >
         
-        <ul v-if="!getReviews && this.reviews.length > 0">
+        <ul v-if="this.reviews.length > 0">
         <h3>Отзывы о товаре</h3>
           <li 
             class="review"
@@ -69,9 +69,9 @@
             <textarea
               v-model="product_comment"
               placeholder="Оцените приобретенный товар"
-              maxlength="20000"
-              name="comment" 
               class="textarea-control" 
+              maxlength="20000"
+              name="comment"
               cols="10" 
               rows="8" />
 
@@ -106,6 +106,7 @@ import {mapState, mapGetters, mapActions} from 'vuex'
 import StarRatingCard from '../components/StarRatingCard.vue';
 import firebase from 'firebase/app';
 import {generateRandomSeed } from "../utility"
+import throttle from '@/utility/throttle.js'
 
 export default {
     name: "CommentForm",
@@ -129,58 +130,19 @@ export default {
         imageData: null,
         picture: null,
         uploadValue: 0,
-        reviews:[
-          {
-            id_review: "id_review",
-            title: "this.product_review_title",
-            text: "this.product_comment",
-            product_id: 'Товар нелохой но я видел лучше',
-            rating: 5,
-            autor_login: 'Владислав Кудряков',
-            date: '14 декабря 2020',
-          },
-          {
-          id_review: "id_review",
-          title: "this.product_review_title",
-          text: "this.product_comment",
-          product_id: 'Товар нелохой но я видел лучше',
-          rating: 4,
-          autor_login: 'Владислав Кудряков',
-          date: '14 декабря 2020',
-        }
-        ],
+        reviews:[],
       }
     },
 
      computed: {
 
-
-      getReviews(){
-
-      const db = firebase.firestore();
-
-      var reviews = [];
-      var self = this;
-      // const productCollection = db.collection('product_comments')
-
-      //   productCollection.where("product_id", "==", this.product_id)
-      //   .get().then((docs)=>{
-
-      //     docs.forEach(function (doc) {
-      //       var reviewItem = doc.data();  
-      //       reviews.push(reviewItem)
-      //     })
-      //   })
-           
-        // this.reviews = reviews;
-        if(this.reviews.length > 0){
-          this.getAverageRating(this.reviews);
-        }
-        
-
-        return false;
-        
+      throttleGetReviews: function(){
+        let DELAY = 1000;
+        console.log(this);
+        throttle(this.getReviews, DELAY);
+        return true;
       },
+
 
     ...mapGetters({
     }),
@@ -188,6 +150,11 @@ export default {
       
     })
   },
+
+  mounted() {
+       console.log(this.product_id, "mounted")
+       this.getReviews();
+    },
 
 
     methods: {
@@ -216,9 +183,17 @@ export default {
       console.log("Cancel Заглушка - Доделать!"); 
     },
 
+    
+
+
+
     createReview(){
       console.log("Create Review");
 
+      //Очищаем форму
+      document.getElementsByClassName('form-title')[0].value = '';
+      document.getElementsByClassName('textarea-control')[0].value = '';
+      
       const db = firebase.firestore();
       var id_review = generateRandomSeed();
       var nowDate = new Date().toLocaleString('ru',
@@ -237,10 +212,46 @@ export default {
           date: nowDate,
       })
 
+
+        //Обновляем отзывы
+        this.getReviews()
     },
+
+
+    async getReviews(){
+
+      const db = firebase.firestore();
+
+      var reviews = [];
+      this.reviews = [];
+      var _this = this;
+      const productCollection = db.collection('product_comments')
+
+
+        await productCollection.where("product_id", "==", this.product_id)
+        .get().then((docs)=>{
+
+          docs.forEach(function (doc) {
+            var reviewItem = doc.data(); 
+            console.log(reviewItem); 
+             _this.reviews.push(reviewItem)
+            console.log( _this.reviews, "Check"); 
+          })
+        })
+           
+        // reviews = reviews;
+        if(_this.reviews.length > 0){
+          _this.getAverageRating(_this.reviews);
+        }
+        
+
+        // return false;
+        
+      },
 
     //Получить среднюю оценку по товару
     getAverageRating(reviews){
+
       const reviewsRating = reviews.map(this.getRating);
 
       const ratingTotal = reviewsRating.reduce(this.addRating, 0);
@@ -249,10 +260,7 @@ export default {
       const averageRating = ratingTotal / reviewsRating.length;
       console.log("Average rating:", averageRating);
       this.$emit('average_rating', averageRating);
-      
-
-
-
+    
     },
 
     //Выбрать именно rating

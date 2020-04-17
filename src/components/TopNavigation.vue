@@ -4,12 +4,16 @@
       <router-link 
           id="task-list" 
           :to="{ name: 'product-list' }">
-        <img src='../assets/shopify.svg' alt="Логотип" class="top-logo">
-        <font-awesome-icon 
-            icon="list-ul" 
-            size="2x" 
-            class="top-icon"/>
+        <img 
+          src='../assets/shopify.svg' 
+          alt="Логотип" 
+          class="top-logo">
+        
       </router-link>
+       <font-awesome-icon 
+            icon="bars" 
+            size="2x" 
+            class="top-icon bars-menu"/>
 
       <router-link 
           id="product-add" 
@@ -29,7 +33,14 @@
           class="searchInput" 
           v-model="searchText" 
           type="search" 
-          placeholder="Искать товары...">
+          placeholder="Искать товары..."
+          />
+          <font-awesome-icon 
+            icon="search" 
+            size="2x" 
+            class="top-icon search-icon"
+            v-if="isHome" 
+          />
     </div>
     
     <div class="icon-wrapper cart-link">

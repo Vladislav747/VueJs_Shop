@@ -1,11 +1,12 @@
 import shop from '@/api/shop'
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
 // import 'firebase/storage';
+import {baseURLDevelopment, baseURLProduction} from '../config/clientConfigs.js';
 
 export default { // actions = mehtods
 
    fetchProducts(context) {
-       fetch("https://napoleon-shop.herokuapp.com/products",
+       fetch(baseURLProduction + 'products',
         {
           method: 'GET',
           mode: "cors"
@@ -135,5 +136,36 @@ export default { // actions = mehtods
     await firebase.storage().ref().put(file).then(() => {
       console.log('Uploaded a blob or file')
     }).catch((e) => {console.log(e);})
-  }
+  },
+
+  fetchReviews(context, product_id){
+
+    const db = firebase.firestore();
+
+    const productCollection = db.collection('product_comments')
+
+      
+      productCollection.where("product_id", "==", this.product_id)
+      .get().then((docs)=>{
+
+        var reviews = [];
+
+        docs.forEach(function (doc) {
+          var reviewItem = doc.data(); 
+          console.log(reviewItem); 
+          reviews.push(reviewItem)
+        })
+        console.log( reviews, "Check"); 
+      }).then((res) => {
+        
+        console.log(res, "")
+      })
+         
+      // reviews = reviews;
+      if(_this.reviews.length > 0){
+        _this.getAverageRating(_this.reviews);
+      }
+      
+
+  },
 }

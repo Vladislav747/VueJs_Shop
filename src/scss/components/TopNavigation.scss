@@ -73,6 +73,10 @@
       height: 45px;
       width: 80%;
     }
+
+    .search-icon{
+      display: none;
+    }
   
     .icon-wrapper{
       #login-form, #cart{
@@ -102,16 +106,55 @@
       }
   
   }
+
+
+  @media screen and (max-width: 1024px) {
+      
+
+  }
+
+   @media screen and (max-width: 768px) {
+      
+
+  }
+
   
-  @media screen and (max-width: 550px) {
-    .header {
+  @media screen and (max-width: 320px) {
+
+    .header{
+      z-index: 999;
+    }
+
+    .header .header-inner {
+
+      align-items: end;
+      
   
       input {
         margin: 1rem auto 0;
         width: 100%;
       }
+
       .top-icon {
         display: block;
+        color: white;
+      }
+
+      input.searchInput{
+        display: none;
+      }
+
+      .search-icon{
+        display: block;
+        margin: 0 30px 10px 0px;
+      }
+
+      .top-logo{
+        display: none;
+      }
+
+      .bars-menu{
+        margin: 0 20px 0 0;
       }
     }
   }

@@ -12,6 +12,7 @@ $menu-item-color: #579740;
     -webkit-box-flex: 1;
     flex-grow: 1;
     overflow: hidden;
+    
 
     .menu-group li{
         float: left;
@@ -24,8 +25,8 @@ $menu-item-color: #579740;
         background: $menu-item-color;
         color: #FFFFFF;
         display: block;
-        font: bold 12px/20px sans-serif;
-        padding: 10px 25px;
+        font: bold 14px/20px sans-serif;
+        padding: 10px 45px;
         text-align: center;
         -webkit-transition: all .25s ease;
         -moz-transition: all .25s ease;
@@ -40,3 +41,26 @@ $menu-item-color: #579740;
     }
 
 }
+
+ @media screen and (max-width: 1024px) {
+      
+
+  }
+
+   @media screen and (max-width: 768px) {
+      
+
+  }
+
+
+  @media screen and (max-width: 320px) {
+      ul.menu-group{
+          width: 100%;
+
+          li{
+              border: 1px solid white;
+              width: 60%;
+          }
+      }
+
+  }

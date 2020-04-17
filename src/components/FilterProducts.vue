@@ -54,10 +54,10 @@
               <p class="filter-property--title">Товары Sale:</p>
               <input 
                 type="checkbox"
-                class="sale-property" 
-                v-model="check" 
+                class="styled-checkbox" 
+                v-model="check"
                 @change="updateSale">
-              <div class="checkbox-box"></div> 
+              <span class="checkbox-box"></span> 
               </label>
 
             </div>

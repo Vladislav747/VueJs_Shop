@@ -7,11 +7,12 @@ import store from '@/store/index'
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faPlusCircle,
-  faListUl,
   faFilter,
   faPalette,
   faShoppingCart,
   faSignInAlt,
+  faSearch,
+  faBars,
 
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,8 +26,11 @@ import 'firebase/firestore';
 
 Vue.use(Vuelidate);
 
-library.add(faPlusCircle, faListUl, faFilter, faPalette, faShoppingCart, faSignInAlt);
+library.add(faPlusCircle, faFilter, faPalette, faShoppingCart, faSignInAlt, faSearch, faBars);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+import { BootstrapVue } from 'bootstrap-vue';
+Vue.use(BootstrapVue)
 
 const clientConfigs = require('./config/clientConfigs');
 const api = axios.create({

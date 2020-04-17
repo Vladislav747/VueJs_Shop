@@ -1,14 +1,15 @@
 <template>
-  <div class="categories-menu bg-light-green">
+  <div class="categories-menu">
     <nav class="max-width-block categories-menu__inner">
 
       <ul class=menu-group>
-        <li>
-          <router-link class="menu-item"  to="/meat">Мясо</router-link>
+        <li v-for="menu in categoriesList" :key="menu.menu_title">
+          <router-link 
+            class="menu-item"  
+            :to= menu.menu_title>{{menu.menu_title}}</router-link>
         </li>
-        <li>
-            <router-link class="menu-item" to="/fish">Рыба</router-link>
-        </li>
+
+      
       </ul>
 
     </nav>
@@ -23,23 +24,47 @@ export default {
 
   data() {
     return {
-      searchText: "",
-      products: [],
-      blackTheme: false,
+      categoriesList: [
+        {
+          menu_title: "Мясо",
+          menu_link: "/meat"
+        },
+        {
+          menu_title: "Рыба",
+          menu_link: "/fish"
+        },
+         {
+          menu_title: "Подгузники",
+          menu_link: "/diapers"
+        },
+        {
+          menu_title: "Одежда",
+          menu_link: "/clothes"
+        },
+        {
+          menu_title: "Билеты",
+          menu_link: "/tickets"
+        },
+        {
+          menu_title: "Книги",
+          menu_link: "/books"
+        },
+        {
+          menu_title: "Электроника",
+          menu_link: "/electronics"
+        },
+        {
+          menu_title: "Аптека",
+          menu_link: "/med"
+        }
+      ]
     };
   },
 
   props: [],
 
   computed: {
-    isHome() {
-      return this.$route.path === "/";
-    },
-
-    hasCartItems : function(){
-      console.log(this.cartItems > 0, "CartItems")
-      return this.cartItems > 0
-    },
+  
   },
 
   methods:{
@@ -52,23 +77,9 @@ export default {
 
   watch: {
 
-    /**
-     * Поиск задач по имени (name)
-     */
-    searchText: function() {
-      var products = this.products;
-      var searchedProducts = [];
-      var str = new RegExp(this.searchText);
-      products.forEach(element => {
-        var found = str.test(element.name);
-        if (found) {
-          searchedProducts.push(element);
-        }
-      });
+  },
 
-      this.$parent.$children[1].filteredProducts = searchedProducts;
-    },
-  }
+
 };
 </script>
 

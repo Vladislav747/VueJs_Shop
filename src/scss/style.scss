@@ -30,7 +30,99 @@ html, body {
 	    padding: 0;
     }
 
-    
+      /* Checkbox style */
+
+	  .checkbox-control{
+		position: relative;
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		margin-bottom: 12px;
+		cursor: pointer;
+		font-size: 22px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+
+		input[type=checkbox] {
+			opacity: 0;
+			position: absolute;
+			cursor: pointer;
+			height: 0;
+			width: 0;
+		  }
+
+		/* Create a custom checkbox */
+		.checkbox-box {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 25px;
+			width: 25px;
+			background-color: #eee;
+		}
+		
+		/* On mouse-over, add a grey background color */
+		.checkbox-control:hover input ~ .checkbox-box {
+			background-color: #ccc;
+		}
+		
+		/* When the checkbox is checked, add a blue background */
+		.checkbox-control input:checked ~ .checkbox-box {
+			background-color: #2196F3;
+		}
+		
+		/* Create the checkbox-box/indicator (hidden when not checked) */
+		.checkbox-box:after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+		
+		/* Show the checkbox-box when checked */
+		.checkbox-control input:checked ~ .checkbox-box:after {
+			display: block;
+		}
+		
+		/* Style the checkbox-box/indicator */
+		.checkbox-control .checkbox-box:after {
+			left: 9px;
+			top: 5px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+
+	  }
+
+
+	 
+
+
+
+	  input[type=checkbox]:checked~.checkbox-box {
+		content: "x";
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		top: 2px;
+		left: 2px;
+		color:black;
+	  }
+
+	  input[type=checkbox].styled-checkbox:hover~.checkbox-box {
+		background-color: #ccc;
+	  }
+
+
+
+	  /*END Checkbox style */
 
 
     
@@ -86,6 +178,16 @@ html, body {
   
   .bg-grey{
     background-color: #C3C1C0;
+  }
+
+  .green-style{
+	color: #fff;
+	background: #579740;
+
+	&:hover{
+	  background: #386129;
+	  
+	}
   }
   
   body.bg-dark{
@@ -158,8 +260,8 @@ html, body {
 
   button{
     &.btn-primary{
-      background: #fff;
-      color: #005bff;
+      background: #005bff;
+      color: #fff;
       padding: 10px 30px;
       font-size: 13px;
       outline: none;
@@ -180,25 +282,25 @@ html, body {
       }
 
       &:hover{
-        background: #005bff;
+        background: #0049cc;
         color: #fff;
       }
 
     }
 
     &.red-style{
-      background: #fff;
-      color: #e6270e;
+      background: #e6270e;
+      color: #fff;
       border-color: #e6270e;
       &:hover{
-        background: #e6270e;
+        background: #b81f0b;
         color: #fff;
       }
     }
 
     &.shop-cart{
-      background: #fff;
-      color: #6de97d;
+      background: #6de97d;
+      color: #fff;
       padding: 10px 30px;
       font-size: 13px;
       outline: none;
@@ -209,7 +311,7 @@ html, body {
       cursor: pointer;
 
       &:hover{
-        background: #6de97d;
+        background: #32e048;
         color: #fff;
       }
     }

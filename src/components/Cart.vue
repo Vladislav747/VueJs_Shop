@@ -8,48 +8,40 @@
     </div>
 
     <div v-else class="shopping-cart-items">
-      <table class="cart-product-card">
-        <thead>
-          <tr>
-            <td>Выбрать товар</td>
-            <td>Название товара</td>
-            <td>Изображение товара</td>
-            <td>Цена</td>
-            <td>Количество товара</td>
-            <td> 
-              <button class="btn-primary" @click="deleteAllCart()">Очистить корзину</button>
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="cart in carts" :key="cart.id" >
-            <td>
-              <input type="checkbox" class="product-checkbox" />
-            </td>
-            <td>
-              <span class="product-title">{{cart.name}}</span>
-            </td>
-            <td>
-              <img :src="require(`@/static/images/${cart.srcImage}`)" :alt="`Image of ${cart.title}`">
-            </td>
-            <td>
-              <span class="product-price">{{cart.price}} {{currency}}</span>
-            </td>
-            <td>
-              <div class="counter-block">
-                <span class="minus" @click="decreaseQuantity(cart)"></span>
-                <input type="text" v-model="cart.quantity" class="text" name="quantity" value="1" ref="product">
-                <span class="plus" @click="increaseQuantity(cart)" data-max="1000"></span>
-            </div>
-            </td>
-            <td>
-              <button class="btn-primary red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <ul class="cart-product-card">
+		<li v-for="cart in carts" :key="cart.id">
+
+			<label class="checkbox-control">
+			<p class="filter-property--title">Выбрать</p>
+			<input 
+				type="checkbox"
+				class="styled-checkbox" 
+				v-model="check" 
+				@change="updateSale"
+			>
+			<span class="checkbox-box"></span> 
+			</label>
+
+			<div class="card-row">
+				<span class="product-title">{{cart.name}}</span>
+			</div>
+			<img :src="require(`@/static/images/${cart.srcImage}`)" :alt="`Image of ${cart.title}`">
+			<div class="card-row">
+				<span class="product-price">{{cart.price}} {{currency}}</span>
+			</div>
+			<div class="card-row">
+				<div class="counter-block cart-counter">
+					<span class="minus" @click="decreaseQuantity(cart)"></span>
+					<input type="text" v-model="cart.quantity" class="text" name="quantity" value="1" ref="product">
+					<span class="plus" @click="increaseQuantity(cart)" data-max="1000"></span>
+				</div>
+			</div>
+			<button class="btn-primary red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</button>
+		</li>
+      </ul>
 
       <div class="cart-checkout">
+		  <button class="btn-primary" @click="deleteAllCart()">Очистить корзину</button>
         <div v-if="hasSum" class="cart-sum">
           <h3>Сумма корзины : </h3>
           <p>{{ total}}  {{currency}}</p>
@@ -59,6 +51,7 @@
           <button class="btn-primary green-style" @click="$store.dispatch('checkout')">Оформить заказ</button>
         </div>
       </div>
+	  
     </div>
   </div>
 </template>

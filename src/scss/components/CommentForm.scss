@@ -96,7 +96,7 @@ $border-form-btn: #ABABAB;
     .review{
         margin-bottom: 40px;
         background: #f3f3f3;
-        padding: 10px 5px;
+        padding: 20px;
         border-radius: 4px;
 
         .reviews__title{
@@ -140,6 +140,7 @@ $border-form-btn: #ABABAB;
     .reviews__text{
         text-align: left;
         margin-top: 16px;
+        word-break: break-word;
 
         p.reviews-title{
             font-size: 14px;
