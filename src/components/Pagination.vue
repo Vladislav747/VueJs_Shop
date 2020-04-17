@@ -1,24 +1,20 @@
 <template>
     <div class="pagination__wrapper">
-       <div class="pagination">
-           <div v-if="hasPrev" class="pagination__left">
-               <a href="#" @click="prevPage">Предыдущая</a>
-            </div>
-            <div class="pagination__mid">
-                <div class="btn-group">
-                    <div class="page-wrapper" v-for="p in totalPages" :key="p">
-                        <button
-                            class="btn btn-primary"
-                            :class="{'active' : (p == currentPage)}" 
-                            @click.prevent="changeCurrentPage(p)">{{p}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-           <div v-if="hasNext" class="pagination__right">
-               <a href="#" @click="nextPage">Следующая</a>
-            </div>
-       </div>
+           <ul class="pagination">
+               <li class="page-wrapper">
+                   <a href="#" v-bind:class="{ 'disabled': !hasPrev}" @click.prevent="prevPage">Предыдущая</a>
+                </li>
+                <li class="page-wrapper" v-for="p in totalPages" :key="p">
+                    <button
+                        class="btn btn-primary"
+                        :class="{'active' : (p == currentPage)}" 
+                        @click.prevent="changeCurrentPage(p)">{{p}}
+                    </button>
+                </li>
+                <li class="page-wrapper">
+                    <a href="#" v-bind:class="{ 'disabled': !hasNext}" @click.prevent="nextPage">Следующая</a>
+                </li>
+           </ul>
     </div>
 </template>
 
@@ -36,13 +32,7 @@ export default {
     },
 
     computed: {
-        // nextPage: function () {
-        //     return this.currentPage + 1
-        // },
-        // prevPage: function () {
-        //     return this.currentPage - 1
-        // },
-
+        
         hasPrev: function(){
             return this.currentPage > 1;
         },
