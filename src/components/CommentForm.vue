@@ -54,7 +54,10 @@
           </div>
           <div class="form-rating">
             Оцените этот товар
-            <star-rating-card />
+            <star-rating-card
+              v-model="product_rating"
+              v-on:star_rating="rateProduct"
+             />
           </div>
 
         </div>
@@ -131,13 +134,14 @@ export default {
         picture: null,
         uploadValue: 0,
         reviews:[],
+        product_rating: 0,
       }
     },
 
      computed: {
 
       throttleGetReviews: function(){
-        let DELAY = 1000;
+        let DELAY = 2000;
         console.log(this);
         throttle(this.getReviews, DELAY);
         return true;
@@ -159,7 +163,7 @@ export default {
 
     methods: {
 
-        handleFileUpload(){
+      handleFileUpload(){
         this.uploadValue=0;
         this.picture=null;
         this.imageData = event.target.files[0];
@@ -181,6 +185,10 @@ export default {
 
     cancel(){
       console.log("Cancel Заглушка - Доделать!"); 
+    },
+
+    rateProduct(id){
+      this.product_rating = id;
     },
 
     
@@ -207,7 +215,7 @@ export default {
           title: this.product_review_title,
           text: this.product_comment,
           product_id: this.product_id,
-          rating: 5,
+          rating: this.product_rating,
           autor_login: this.profile_autor,
           date: nowDate,
       })
@@ -221,27 +229,21 @@ export default {
     async getReviews(){
 
       const db = firebase.firestore();
-
-      var reviews = [];
       this.reviews = [];
       var _this = this;
       const productCollection = db.collection('product_comments')
-
 
         await productCollection.where("product_id", "==", this.product_id)
         .get().then((docs)=>{
 
           docs.forEach(function (doc) {
             var reviewItem = doc.data(); 
-            console.log(reviewItem); 
-             _this.reviews.push(reviewItem)
-            console.log( _this.reviews, "Check"); 
+            _this.reviews.push(reviewItem)
           })
         })
            
-        // reviews = reviews;
         if(_this.reviews.length > 0){
-          _this.getAverageRating(_this.reviews);
+          this.getAverageRating(_this.reviews);
         }
         
 

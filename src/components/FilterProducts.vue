@@ -1,7 +1,12 @@
 <template>  
 
-  <div v-if="!isLoading && !noTasks" class="filterWrapper bg-light-green">
-      <div class="filterIcon bg-light-green" v-on:click="showFilter()">
+  <div 
+    v-if="!isLoading && !noTasks" 
+    class="filterWrapper bg-light-green">
+      <div 
+        class="filterIcon bg-light-green" 
+        @click="showFilter">
+
         <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
       </div>
 
@@ -13,9 +18,13 @@
             <!-- Фильтр по категориям  -->
             <div class="filter-property">
                 <span class="filter-property--title">Категория продуктов:</span>
-                <select class="filter-property--body" v-model="filterCategory">
+                <select 
+                  class="filter-property--body" 
+                  v-model="filterCategory">
                     <option></option>
-                    <option v-for="type in productCategories" :key="type">{{ type }}</option>
+                    <option 
+                      v-for="type in productCategories" 
+                      :key="type">{{ type }}</option>
                 </select>
             </div>
 
@@ -24,7 +33,9 @@
                 <span class="filter-property--title">Производитель:</span>
                 <select class="filter-property--body" v-model="filterManufacturer">
                     <option></option>
-                    <option v-for="type in productManufactures" :key="type">{{ type }}</option>
+                    <option 
+                      v-for="type in productManufactures" 
+                      :key="type">{{ type }}</option>
                 </select>
             </div>
 

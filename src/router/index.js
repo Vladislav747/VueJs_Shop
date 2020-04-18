@@ -7,6 +7,7 @@ import ProductDetail from '../components/ProductDetail.vue';
 import Cart from '../components/Cart.vue';
 import LoginForm from '../components/LoginForm.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
+import Checkout from '../components/Checkout.vue';
 
 
 Vue.use(Router)
@@ -45,6 +46,12 @@ export default new Router({
       name: 'register',
       component: RegistrationForm
     },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: Checkout
+    },
+
     
   ]
 })

@@ -20,14 +20,14 @@
     }
   
     .product-header--top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: center;
       margin-bottom: 5%;
   
       .product-title {
-        font-weight: bold;
+        font-weight: 600;
         padding-top: 2px;
+        font-size: 18px;
+
       }
   
       .product-sticker {
@@ -43,7 +43,7 @@
   
   
     .image-wrapper .product-image{
-      width: 100%;
+      width: auto;
       max-height: 280px;
     }
   

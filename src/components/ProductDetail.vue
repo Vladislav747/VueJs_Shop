@@ -26,8 +26,8 @@
       <div class="right-col">
         <div class="product-rating">
           <star-rating-card
-            :value="averageRating"
             :disabled="true"
+            ref="starComponent"
           />
         </div>
         <div class="description product-section">      
@@ -112,6 +112,20 @@ import CommentForm from '../components/CommentForm.vue'
 import StarRatingCard from '@/components/StarRatingCard.vue';
 
 export default {
+
+
+  /*
+    TODO:
+      У каждого товара есть страница с информацией о нем: наименовение, изображение, описание,
+     стоимость и пользовательская оценка.На странице любой  
+     зарегистрированный пользователь может оставить к товару комментарий. 
+     Комментарии видят все пользователи, но отвечать на них не могут. 
+     Комментарий может оставить любой пользователь, а поставить товару оценку
+      только тот, кто уже купил.
+     Оценка считается как средняя оценка всех пользователей.
+  
+  
+  */
   name: "ProductDetail",
 
   components: {
@@ -225,9 +239,8 @@ export default {
     },
 
      putRatingInCard(data){
-       console.log(data, 'putRatingInCard');
-        this.averageRating = data;
-        
+        var starRatingComponent = this.$refs.starComponent;
+        starRatingComponent.value = data;   
      }, 
 
 
