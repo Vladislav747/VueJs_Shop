@@ -2,29 +2,41 @@
   <div class="header bg-light-green">
     <div class="max-width-block header-inner">
       <router-link 
-          id="task-list" 
-          :to="{ name: 'product-list' }">
+        id="task-list" 
+        :to="{ name: 'product-list' }">
         <img 
           src='../assets/shopify.svg' 
           alt="Логотип" 
           class="top-logo">
         
       </router-link>
-       <font-awesome-icon 
-            icon="bars" 
-            size="2x" 
-            class="top-icon bars-menu"/>
+      <font-awesome-icon 
+        icon="bars" 
+        size="2x" 
+        class="top-icon bars-menu"
+      />
 
       <router-link 
-          id="product-add" 
-          :to="{ name: 'product-add' }"
-          v-if="isAdmin">
+        id="product-add" 
+        :to="{ name: 'product-add' }"
+        v-if="isAdmin"
+      >
         <span class="top-desktop">Создать товар</span>
         <font-awesome-icon 
-            icon="plus-circle" 
-            size="2x" 
-            class="top-icon"/>
+          icon="plus-circle" 
+          size="2x" 
+          class="top-icon"/>
       </router-link>
+
+      <div class="categories">
+        <ul class="menu-group">
+          <li class="menu-item"><router-link :to="{ name: 'books' }">Книги</router-link></li>
+          <li class="menu-item"><router-link :to="{ name: 'clothes' }">Одежда</router-link></li>
+          <li class="menu-item"><router-link :to="{ name: 'electronics' }">Электроника</router-link></li>
+          <li class="menu-item"><router-link :to="{ name: 'food' }">Еда</router-link></li>
+          <li class="menu-item"><router-link :to="{ name: 'med' }">Медтовары</router-link></li>
+        </ul>
+      </div>
 
       <div class="spacer"/>
 
@@ -96,6 +108,14 @@ export default {
       products: [],
       blackTheme: false,
       cartCount: 0,
+      acceptRoutes:[
+        "/",
+        "/med",
+        "/food",
+        "/clothes",
+        "/electronics",
+        "/books",
+      ]
     };
   },
 
@@ -103,7 +123,7 @@ export default {
 
   computed: {
     isHome() {
-      return this.$route.path === "/";
+      return this.acceptRoutes.includes(this.$route.path);
     },
 
     hasCartItems : function(){
@@ -173,7 +193,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/components/TopNavigation.scss";
-
+@import "../scss/components/CategoriesNavigation.scss";
 
 
 </style>

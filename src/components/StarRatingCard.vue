@@ -4,7 +4,7 @@
             <label 
                 class="star-rating__star" 
                 v-for="rating in ratings" 
-                :class="{'is-selected': ((value >= rating) && value != null), 'is-disabled': disabled}" 
+                :class="{'is-selected': ((value_stars >= rating) && value_stars != null), 'is-disabled': disabled}" 
                 v-on:click="set(rating)" 
                 v-on:mouseover="star_over(rating)" 
                 v-on:mouseout="star_out">
@@ -13,7 +13,7 @@
                     type="radio" 
                     :value="rating" 
                     :name="name"
-                    v-model="value" 
+                    v-model="value_stars"
                     :disabled="disabled"
                 >★</label>
         </div>
@@ -36,9 +36,15 @@ export default {
     data() {
         return {
             temp_value: null,
-            ratings: [1, 2, 3, 4, 5]
+            ratings: [1, 2, 3, 4, 5],
+            value_stars: 0,
         };
     },
+
+    created(){
+        this.value_stars = this.value;
+    },
+
     
     methods: {
         /*
@@ -48,8 +54,8 @@ export default {
             var self = this;
 
             if (!this.disabled) {
-                this.temp_value = this.value;
-                return this.value = index;
+                this.temp_value = this.value_stars;
+                return this.value_stars = index;
             }
 
         },
@@ -61,7 +67,7 @@ export default {
             var self = this;
 
             if (!this.disabled) {
-                return this.value = this.temp_value;
+                return this.value_stars = this.temp_value;
             }
         },
 
@@ -73,7 +79,7 @@ export default {
             if (!this.disabled) {
                 this.temp_value = value;
                 console.log(value, "StarRatingCard");
-                return this.value = value;
+                return this.value_stars = value;
             }
 
             this.$emit('star_rating', value);

@@ -41,10 +41,16 @@
       }
     }
   
-  
-    .image-wrapper .product-image{
-      width: auto;
-      max-height: 280px;
+    .image-wrapper {
+
+      text-align: center;
+
+      .product-image{
+        width: auto;
+        max-height: 280px;
+
+      }
+ 
     }
   
     @media screen and (max-width: 550px) {

@@ -5,9 +5,8 @@
         @search="updateSearch"
         @get-products="get-products"
         />
-        <categories-navigation />
       <div class="content-wrapper">
-        <router-view :search="searchText"/>
+        <router-view :search="searchText" />
       </div>
     </div>
  
@@ -18,7 +17,6 @@
 
 <script>
 import TopNavigation from './components/TopNavigation'
-import CategoriesNavigation from './components/CategoriesNavigation'
 import FooterNavigation from './components/FooterNavigation';
 
 export default {
@@ -27,7 +25,6 @@ export default {
   components: {
     TopNavigation,
     FooterNavigation,
-    CategoriesNavigation,
   },
   data () {
     return {
