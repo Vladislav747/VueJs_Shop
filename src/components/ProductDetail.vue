@@ -14,13 +14,22 @@
           </div>
         </div>
 
-        <div class="image-wrapper">
-          <img 
-            class="product-image" 
-            :src="require(`@/static/images/${product.srcImage}`)" 
-            :alt="`Image of ${product.srcImage}`" 
-            :title="`Title of ${product.srcImage}`" />
+
+        <div class="product-image-wrapper">
+          <div class="image-wrapper">
+            <img 
+              class="product-image" 
+              :src="require(`@/static/images/${product.srcImage}`)" 
+              :alt="`Image of ${product.srcImage}`" 
+              :title="`Title of ${product.srcImage}`" />
+          </div>
+
+          <div class="product-sale" v-if="product.sale">
+              Акция
+          </div>
+
         </div>
+        
       </div>
 
       <div class="right-col">
@@ -30,15 +39,32 @@
             ref="starComponent"
           />
         </div>
-        <div class="description product-section">      
 
-          <div class="description__title property-title">
-              <h4>Описание:</h4>
+        <div class="stock-block property-section">
+          <div 
+            class="stock available"
+            v-if="inStock(product.stock)"
+          >
+            В наличии
           </div>
+          <div 
+            class="stock not-available" 
+            v-else
+          >
+            Нет в наличии
+          </div>
+        </div>
 
-          <div class="description__text property-value">
-              <p>{{ product.description }}</p>
-          </div>
+
+          <div class="product-section desctiption">
+
+            <div class="description__title property-title">
+                <h4>Описание:</h4>
+            </div>
+
+            <div class="description__text property-value">
+                <p>{{ product.description }}</p>
+            </div>
         </div>
         
 
@@ -89,7 +115,7 @@
 
         <div class="buy-block">
             <button 
-              @click="addProductToCart(product)" 
+              @click="addProductCart(product, quantity)" 
               class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
       </div>
@@ -105,11 +131,11 @@
 </template>
 
 <script>
-import Noty from "noty";
-import {mapState, mapGetters, mapActions} from 'vuex'
-import { showNoty } from "../utility";
+import {mapGetters, mapActions} from 'vuex'
+import { showNoty } from "@/utility";
 import CommentForm from '../components/CommentForm.vue'
 import StarRatingCard from '@/components/StarRatingCard.vue';
+import FirebaseShop from "@/utility/FirebaseShop.js";
 
 export default {
 
@@ -145,6 +171,7 @@ export default {
         currency:"",
         srcImage:"",
         averageRating: '',
+        sale:'',
         
       },
       isLoading:true,
@@ -166,17 +193,16 @@ export default {
       }
       
       //Товары которые клиент приобрел
-      console.log(this.product.id, "canUserLeaveReview");
-      var boughtItemsId = ['5e838243ab5db71bf8408716'];
-
-
-      var ourProduct = boughtItemsId.find(elem=> elem == this.product.id); 
-      
-      if(ourProduct){
-        return true;
-      }else{
-        return false;
+      var boughtItemsId = JSON.parse(localStorage.getItem("boughtItems"));
+      if(boughtItemsId){
+        
+          var product = this.product;
+         var ourProduct = boughtItemsId.some(function(elem){
+           return elem.id == product.id
+         })
       }
+ 
+     return ourProduct;
       
     },
 
@@ -205,7 +231,7 @@ export default {
         if (response.data === null) {
           //Перенаправление на общую страницу товаров
           this.$router.push({ name: "products-list" });
-          showNoty("Requested product not found.");
+          showNoty("Такой продукт не найден");
           return;
         }
 
@@ -228,11 +254,11 @@ export default {
       this.check.close();
     },
 
-    increaseQuantity(quantity){
+    increaseQuantity(){
       this.quantity += 1;
 
     },
-    decreaseQuantity(quantity){
+    decreaseQuantity(){
       if(this.quantity > 1){
         this.quantity -= 1;
       }
@@ -240,8 +266,65 @@ export default {
 
      putRatingInCard(data){
         var starRatingComponent = this.$refs.starComponent;
-        starRatingComponent.value = data;   
-     }, 
+        starRatingComponent.value_stars = data;   
+     },
+
+     // TODO: Изменение количества одного и того же товара - изменение в localStorage и vuex 
+    
+    addProductCart(product, quantity){
+
+      //Заносим данные в localStorage
+      var productItem = [{product, quantity}]
+      
+      var totalItems, totalSum;
+      
+      if (localStorage.getItem('cart')) {
+        var cartItems = JSON.parse(localStorage.getItem('cart'));
+        var cartItem = false;
+
+        /* Проверяем что нет подобного объект уже в нашем localStorage */
+        Object.entries(cartItems).forEach(function (item) {
+          if(item["1"]["0"]["product"]["id"] == product.id){
+           cartItem = true;
+          }
+        });
+
+        if(!cartItem) {
+          cartItems[Object.keys(cartItems).length] = productItem;
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+          this.addProductToCart({product, quantity});
+
+          totalSum = parseInt(localStorage.getItem('totalSum'));
+          totalItems = parseInt(localStorage.getItem('totalItems'));
+
+          var productSum = parseInt(product.price) * parseInt(quantity);
+
+          localStorage.setItem('totalSum', totalSum + productSum);
+          localStorage.setItem('totalItems', totalItems + 1);
+        }
+      } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
+          var cartItems = {};
+          cartItems[Object.keys(cartItems).length] = productItem;
+          localStorage.setItem('cart', JSON.stringify(cartItems));
+
+          var productSum = parseInt(product.price) * parseInt(quantity);
+          localStorage.setItem('totalSum', productSum);
+          totalItems = 1;
+          
+          localStorage.setItem('totalItems', totalItems);
+          this.addProductToCart({product, quantity});
+      }
+      
+    },
+
+    inStock(stockQunatity){
+      return stockQunatity > 0;
+    },
+
+
+    ...mapActions({
+      addProductToCart: 'addProductToCart',
+    })
 
 
   }

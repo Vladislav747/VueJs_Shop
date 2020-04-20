@@ -13,14 +13,17 @@
     .shopping-cart-items {
       display: flex;
       flex-direction: row;
+      min-width: 1000px;
 
       .shopping-cart__left{
         padding: 20px;
-
+        width: 70%;
+        
         .shopping-cart-title{
           background: #d2eec7;
           border-radius: 10px;
           padding: 20px;
+          text-align: center;
         }
 
         ul.cart-product-card {
@@ -55,6 +58,11 @@
     
           .product-price {
             margin-bottom: 5px;
+            font-weight: 700;
+            font-family: "GTEestiProDisplay";
+            font-size: 18px;
+            line-height: 15px;
+            white-space: normal;
           }
         
           img {
@@ -81,12 +89,21 @@
         .cart-checkout {
           flex: 1;
           justify-content: center;
+
+          .cart-sum{
+
+            p.sum {
+              font-weight: 700;
+              font-family: "GTEestiProDisplay";
+              font-size: 18px;
+              line-height: 15px;
+              white-space: normal;
+              margin-top: 10px;
+              margin-bottom: 20px;
+            }
+            
+          }
       
-          p{
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-size: 18px;
-          }  
         }
 
 

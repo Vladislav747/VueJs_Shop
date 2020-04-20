@@ -59,7 +59,22 @@ export default { // setting and updating the state
   setCurrentListProducts(state, currentListProducts){
     console.log(currentListProducts, 'setCurrentListProducts mutation');
     state.currentListProducts = currentListProducts;
-  }
+  },
+
+  pushSelectedToCart(state,product) {
+    state.selectedItems.push({
+      id: product.id,
+      quantity: product.quantity,
+    })
+  },
+
+  popSelectedFromCart(state, productId){
+    state.selectedItems = state.selectedItems.filter(item => item.id !== productId);
+  },
+
+  addFilteredProducts(state, filterProducts){
+    state.filteredItems = filterProducts;
+  },
 
   
 }

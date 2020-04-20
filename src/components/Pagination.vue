@@ -57,7 +57,6 @@ export default {
             'nextPage' : 'changeNextPage',
             'prevPage' : 'changePrevPage',
        })
-       
     }
 }
 </script>

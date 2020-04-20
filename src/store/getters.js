@@ -26,6 +26,21 @@ export default { // = computed properties
       }
     })
   },
+
+  cartSelected(state) {
+    return state.selectedItems.map(cartItem => {
+      const product = state.products.find(product => product.id === cartItem)
+      return {
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        manufacturer: product.manufacturer,
+        price: product.price,
+        quantity: cartItem.quantity
+      }
+    })
+  },
+  
   cartTotal(state,getters) {
     return getters.cartProducts.reduce((total,product) => total + product.price * product.quantity, 0)
   },

@@ -42,7 +42,7 @@
 
       <form 
         class="form-review" 
-        v-if="right_leave_review"
+        v-if="userLogged"
         @submit.prevent="onUpload">
 
 
@@ -52,7 +52,10 @@
             Пользователь
             {{profile_autor}}
           </div>
-          <div class="form-rating">
+          <div 
+             class="form-rating"
+             :class="{'hidden': canUserLeaveRating}"
+            >
             Оцените этот товар
             <star-rating-card
               v-model="product_rating"
@@ -71,7 +74,7 @@
           <span class="textarea-wrapper">
             <textarea
               v-model="product_comment"
-              placeholder="Оцените приобретенный товар"
+              placeholder="Комментарий о товаре"
               class="textarea-control" 
               maxlength="20000"
               name="comment"
@@ -99,7 +102,7 @@
         class="no-form"
         v-else
       >
-       <h4>Для того чтобы оставить отзыв вам нужно приобрести данный товар</h4>
+       <h4>Для того чтобы оставить отзыв вам нужно зарегистрироваться</h4>
       </div>
     </div>
 </template>
@@ -145,6 +148,12 @@ export default {
         console.log(this);
         throttle(this.getReviews, DELAY);
         return true;
+      },
+
+  
+      userLogged: function(){
+        var logged = localStorage.getItem("isLogined");
+        return logged;
       },
 
 
@@ -220,7 +229,6 @@ export default {
           date: nowDate,
       })
 
-
         //Обновляем отзывы
         this.getReviews()
     },
@@ -246,9 +254,6 @@ export default {
           this.getAverageRating(_this.reviews);
         }
         
-
-        // return false;
-        
       },
 
     //Получить среднюю оценку по товару
@@ -272,6 +277,10 @@ export default {
 
     addRating(prev, next) {
       return prev + next;
+    },
+
+    canUserLeaveRating(){
+      return this.right_leave_review == false;
     },
       
     ...mapActions({

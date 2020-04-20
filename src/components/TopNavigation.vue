@@ -19,7 +19,6 @@
       <router-link 
         id="product-add" 
         :to="{ name: 'product-add' }"
-        v-if="isAdmin"
       >
         <span class="top-desktop">Создать товар</span>
         <font-awesome-icon 
@@ -30,11 +29,12 @@
 
       <div class="categories">
         <ul class="menu-group">
-          <li class="menu-item"><router-link :to="{ name: 'books' }">Книги</router-link></li>
-          <li class="menu-item"><router-link :to="{ name: 'clothes' }">Одежда</router-link></li>
-          <li class="menu-item"><router-link :to="{ name: 'electronics' }">Электроника</router-link></li>
-          <li class="menu-item"><router-link :to="{ name: 'food' }">Еда</router-link></li>
-          <li class="menu-item"><router-link :to="{ name: 'med' }">Медтовары</router-link></li>
+          <li class="menu-item" v-for="category in categoriesList" :key="category">
+            <a
+                href="#"
+                @click.prevent="chooseCategory(category)">{{category}}
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -75,7 +75,10 @@
         class="profile-container"
          v-if="isLogined">
           <div class="profile-inner">
-            <img src="https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-200w.jpeg" alt="" class="profile-img">
+            <img 
+              :src="require(`@/static/images/avatar.jpeg`)"
+              alt="Профиль"
+              class="profile-img">
           </div>
           <span class="top-desktop">Владислав</span>
       </div>
@@ -97,7 +100,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
+import {bus} from '@/utility/bus.js'
 
 export default {
   name: "TopNavigation",
@@ -105,21 +109,29 @@ export default {
   data() {
     return {
       searchText: "",
-      products: [],
       blackTheme: false,
       cartCount: 0,
       acceptRoutes:[
         "/",
-        "/med",
-        "/food",
-        "/clothes",
-        "/electronics",
-        "/books",
-      ]
+      ],
+      categoriesList:[
+        "Книги",
+        "Одежда",
+        "Электроника",
+        "Еда",
+        "Медтовары"
+      ],
     };
   },
 
-  props: [],
+  methods: {
+
+    ...mapActions({
+      addFilterProducts: 'addFilterProducts',
+      chooseCategory: 'chooseCategory',
+    })
+
+  },
 
   computed: {
     isHome() {
@@ -157,12 +169,17 @@ export default {
     },
     ...mapState({
       cartItems: state => state.cartItems,
+      products: state => state.products,
 
     }),
   },
 
-  methods:{
-  
+  created(){
+    //Ловим событие для шапки и пересчета корзины
+    bus.$on('totalItemsChanged', (item)=>{
+      this.cartCount = item;
+    });
+    
   },
 
   mounted: function() {
@@ -176,6 +193,7 @@ export default {
      */
     searchText: function() {
       var products = this.products;
+      console.log(this.products, "Search")
       var searchedProducts = [];
       var str = new RegExp(this.searchText);
       products.forEach(element => {
@@ -185,7 +203,10 @@ export default {
         }
       });
 
-      this.$parent.$children[1].filteredProducts = searchedProducts;
+      bus.$emit("filter_search", searchedProducts);
+      this.addFilterProducts(searchedProducts);
+
+
     },
   }
 };

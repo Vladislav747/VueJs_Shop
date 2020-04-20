@@ -5,6 +5,10 @@ html, body {
     box-sizing: border-box;
     height: 100vh;
 
+    .content-wrapper{
+      min-height: 500px;
+    }
+
 
     .icon-size-m{
       font-size: 1em;
@@ -107,6 +111,10 @@ html, body {
     .selected{
       background: #e6eee7;
       border-radius: 10px;
+    }
+
+    .hidden{
+      opacity: 0;
     }
 
 

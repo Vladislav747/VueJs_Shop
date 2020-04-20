@@ -7,25 +7,36 @@
         <div class="product-header--top">
           <div class="product-title">{{ product.name }}</div>
         </div>
-        <div class="image-wrapper">
-          <img 
-            class="product-image" 
-            :src="require(`@/static/images/${product.srcImage}`)" 
-            :alt="`Image of ${product.srcImage}`" 
-            :title="`Title of ${product.srcImage}`" />
+        <div class="product-image-wrapper">
+          <div class="image-wrapper">
+            <img 
+              class="product-image" 
+              :src="require(`@/static/images/${product.srcImage}`)" 
+              :alt="`Image of ${product.srcImage}`" 
+              :title="`Title of ${product.srcImage}`" />
+          </div>
+          
+          <div class="product-sale" v-if="product.sale">
+              <span>Акция</span>
+          </div>
         </div>
       </div>
       <div class="product-properties">
-        <div class="category property-section">
-          Категория: {{ product.category}}
-        </div>
         <div class="manufacturer property-section">
           Производитель: {{ product.manufacturer}}
         </div>
-        <!-- <div class="description">Описание:{{ product.description }}</div> -->
         <div class="stock-block property-section">
-          <div class="stock">
-            В наличии: {{ product.stock }}
+          <div 
+            class="stock available"
+            v-if="inStock(product.stock)"
+          >
+            В наличии
+          </div>
+          <div 
+            class="stock not-available" 
+            v-else
+          >
+            Нет в наличии
           </div>
         </div>
         <div class="price-block">
@@ -64,9 +75,7 @@
 </template>
 
 <script>
-import Noty from "noty";
-import { showNoty } from "@/utility";
-import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "ProductCard",
@@ -131,7 +140,6 @@ export default {
 
       //Заносим данные в localStorage
       var productItem = [{product, quantity}]
-      console.log(productItem, 'productItem');
       
       var totalItems, totalSum;
       
@@ -174,6 +182,10 @@ export default {
       
     },
 
+    inStock(stockQunatity){
+      return stockQunatity > 0;
+    },
+
     ...mapActions({
       addProductToCart: 'addProductToCart',
     })
@@ -184,6 +196,8 @@ export default {
   },
 
   computed: {
+
+   
     ...mapGetters({
       currency: 'cartCurrency',
     }),

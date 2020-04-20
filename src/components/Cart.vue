@@ -17,20 +17,36 @@
           <li 
             v-for="cart in carts" 
             :key="cart.id" 
-            @click="chooseItem(cart)" 
-            :class="{ 'selected': isSelected(cart.id) }">
-
-            <div class="card-row">
-              <span class="product-title">{{cart.name}}</span>
-            </div>
-            <img :src="require(`@/static/images/${cart.srcImage}`)" :alt="`Image of ${cart.title}`">
-            <div class="card-row">
-              <span class="product-price">{{cart.price}} {{currency}}</span>
+            :class="{'selected': isSelected(cart)}"
+          >
+            <div 
+              class="product-top"
+              @click="chooseItem(cart)" 
+            >
+              <div class="card-row">
+                <span 
+                  class="product-title"
+                  >{{cart.name}}
+                  </span>
+              </div>
+              <img 
+                :src="require(`@/static/images/${cart.srcImage}`)" 
+                :alt="`Image of ${cart.title}`"
+              >
+              <div class="card-row">
+                <span class="product-price">{{cart.price}} {{currency}}</span>
+              </div>
             </div>
             <div class="card-row">
               <div class="counter-block cart-counter">
                 <span class="minus" @click="decreaseQuantity(cart)"></span>
-                <input type="text" v-model="cart.quantity" class="text" name="quantity" value="1" ref="product">
+                <input 
+                  type="text" 
+                  v-model="cart.quantity" 
+                  class="text" 
+                  name="quantity" 
+                  value="1" 
+                  ref="product">
                 <span class="plus" @click="increaseQuantity(cart)" data-max="1000"></span>
               </div>
             </div>
@@ -41,9 +57,9 @@
       <div class="shopping-cart__right">
         <div class="cart-checkout">
           <div v-if="hasSum" class="cart-sum">
-            <h3>Сумма корзины : </h3>
-            <p>{{ total}}  {{currency}}</p>
-            <button class="btn-primary green-style" @click="checkout()">Оформить заказ</button>
+            <span>Сумма корзины : </span>
+            <p class="sum">{{ total}}  {{currency}}</p>
+            <button class="btn-primary green-style" @click="checkout">Оформить заказ</button>
           </div>
         </div> 
       </div>  
@@ -53,6 +69,8 @@
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
+import {bus} from '@/utility/bus.js'
+import firebase from 'firebase/app';
 
 
 export default {
@@ -61,14 +79,19 @@ export default {
   Страница с корзиной, в нее складываются товары, количеством товаров в корзине можно управлять.
    При перезаходе на сайт корзина не очищается. 
    Должна быть возможность выделить только нужные товары и купить их. Есть кнопка купить.
-  
-  
   */
     name: "Cart",
 
+    data() {
+      return {
+        carts: [],
+        total: "",
+        selectedItems:[],
+      };
+    },
+
     computed: {
         getCarts(){
-          console.log(this.carts.length, "Store Carts");
           var fetchCarts = localStorage.getItem("cart");
           if(!fetchCarts && this.carts.length == 0){
 
@@ -80,8 +103,6 @@ export default {
           } else{
              this.carts = this.cartsItems;
           }
-
-          console.log(this.carts, "Store Carts");
 
           return this.carts.length > 0;
         },
@@ -101,26 +122,15 @@ export default {
         },
 
 
-
-
-      
       ...mapGetters({
         currency: 'cartCurrency',
-        cartsItems: 'cartProducts'
+        cartsItems: 'cartProducts',
+        cartSelected: 'cartSelected',
       }),
       ...mapState({
           checkoutStatus: 'checkoutStatus',
       })
     },
-    
-    data() {
-      return {
-        carts: [],
-        total: "",
-        selectedItems:[],
-      };
-    },
-
 
     methods: {
 
@@ -140,6 +150,10 @@ export default {
         localStorage.removeItem("cart");
         localStorage.removeItem('totalSum');
         localStorage.removeItem('totalItems');
+        localStorage.removeItem('selectedItems');
+
+        //Генерируем событие для шапки и пересчета кол-ва товаров в корзине
+        bus.$emit('totalItemsChanged', '');
         this.cleanCart();
         this.carts = [];
       },
@@ -151,6 +165,7 @@ export default {
         var newSum;
         console.log(cart, "Товар к удалению");
         console.log(fetchCarts);
+        //Плохая структура массива данных поэтому приходится отлавливать
         for (let [key, value] of Object.entries(fetchCarts)) {
           if(value["0"].product.id == cart.id){
 
@@ -159,6 +174,9 @@ export default {
             newSum = totalSum - parseInt(value["0"]["product"]["price"]) * parseInt(value["0"]["quantity"]);
             localStorage.setItem('totalSum', newSum);
             localStorage.setItem('totalItems', totalItems - 1);
+
+            //Генерируем событие для шапки и пересчета кол-ва товаров в корзине
+            bus.$emit('totalItemsChanged', totalItems - 1);
           }
         }
 
@@ -166,6 +184,8 @@ export default {
         this.carts = this.mapObjectToArr("cart");
         this.total = newSum;
         this.deleteProductCart(cart);
+
+       
         
       },
 
@@ -183,55 +203,91 @@ export default {
       },
 
       chooseItem(item){
-        console.log(item);
+        console.log(item, "selected");
         console.log(this.selectedItems);
+        var selectedElement = this.selectedItems.find(el => el.id === item.id);
 
-        if(this.selectedItems.includes(item.id)){
+        if(selectedElement){
           var oldSelected = this.selectedItems;
-          this.selectedItems = oldSelected.filter(element => element !== item.id);
-          console.log(this.selectedItems, "check");
+          this.selectedItems = oldSelected.filter(element => element.id !== item.id);
+          this.deleteSelectedItem(item.id);
+
           //Очищаем данные в localStorage
           var localOldSelected = JSON.parse(localStorage.getItem("selectedItems"));
-          var newLocalSelected = localOldSelected.filter(element => element !== item.id);
+          var newLocalSelected = localOldSelected.filter(element => element.id !== item.id);
           localStorage.setItem('selectedItems', JSON.stringify(newLocalSelected));
           
         }else{
-          this.selectedItems.push(item.id);
+          var id = item.id;
+          var quantity = item.quantity;
+          var newEl = {id, quantity};
+          this.selectedItems.push(newEl);
+          this.addSelectedItem(newEl);
           
           //Чтобы не терять данные при перезагрузке страницы
           var selectedItems = JSON.parse(localStorage.getItem("selectedItems"));
           if(!selectedItems){
             localStorage.setItem('selectedItems', JSON.stringify(this.selectedItems));
           }else{
-            selectedItems.push(item.id);
+            selectedItems.push(newEl);
             localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
           }
-          
-          
-
         }
       },
 
-      isSelected(item){
-        return this.selectedItems.includes(item);
+      isSelected(el){
+        var selectedElement =  this.selectedItems.find(item => item.id === el.id);
+        return selectedElement !== undefined;
       },
 
       checkout(){
         if(this.selectedItems.length > 0){
           console.log("Заказ оформлен только выбранные товары " + this.selectedItems);
-          this.$router.push({ name: 'checkout'}) // -> /user/123
+          this.createOrder(this.selectedItems);
+          this.$router.push({ name: 'checkout'})
         }else{
           console.log("Заказ оформлен " + this.carts);
-          this.$router.push({ name: 'checkout'}) // -> /user/123
+          this.$router.push({ name: 'checkout'})
+          this.createOrder(this.carts);
         }
-
-        //$store.dispatch('checkout');
       },
+
+      /**
+         * Сделать заказ
+         */
+         createOrder(carts) {
+
+            console.log("createOrder");
+            
+            const db = firebase.firestore();
+            const usersCollection = db.collection('users')
+            const user = localStorage.getItem("userLogin");
+
+            var idCarts = carts.map(function(element) {
+              return element.id;
+            });
+
+
+            usersCollection.where("login", "==", user)
+            .get().then((foundUsers)=>{
+                console.log(foundUsers.docs, "order");
+                foundUsers.docs.forEach(function (doc) {
+                  console.log(doc, "Cart");
+                  var userRef = usersCollection.doc(doc.id);
+                   userRef.update({
+                     goods: idCarts
+                  })
+                })
+            })
+
+        },
 
       ...mapActions({
         fetchProducts: 'fetchProducts',
         deleteProductCart: 'deleteProductCart',
         cleanCart: 'cleanCart',
+        addSelectedItem: 'addSelectedItem',
+        deleteSelectedItem: 'deleteSelectedItem',
       })
 
     },

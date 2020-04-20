@@ -15,24 +15,12 @@
 
         <div class="filter-inner">
 
-            <!-- Фильтр по категориям  -->
-            <div class="filter-property">
-                <span class="filter-property--title">Категория продуктов:</span>
-                <select 
-                  class="filter-property--body" 
-                  v-model="filterCategory">
-                    <option></option>
-                    <option 
-                      v-for="type in productCategories" 
-                      :key="type">{{ type }}</option>
-                </select>
-            </div>
-
-            <!-- Фильтр по Дедлайну  -->
+            <!-- Фильтр по Производителю  -->
             <div class="filter-property">
                 <span class="filter-property--title">Производитель:</span>
-                <select class="filter-property--body" v-model="filterManufacturer">
-                    <option></option>
+                <select 
+                    class="filter-property--body" 
+                    @change="filterManufacturer($event.target.value)">
                     <option 
                       v-for="type in productManufactures" 
                       :key="type">{{ type }}</option>
@@ -41,21 +29,35 @@
 
             <!-- Фильтр по цене  -->
             <div class="filter-property">
-                <span class="filter-property--title">Цена:</span>
+                <span class="filter-property--title">Цена: {{priceData}}</span>
                 <!-- <vue-slider v-model="filterPrice"></vue-slider> -->
                 <input 
                   class="slider"
                   id="pricerange"
                   tabindex="0"
-                  :value="pricerange"
                   type="range"
                   :min="min"
                   :max="max"
                   step="0.1"
-                  @input="updateHighPrice($event)"
+                  v-model="priceData"
+                  @input="updateHighPrice($event.target.value)"
                 />
-                <span class="min">${{ min }}</span>
-                <span class="max">${{ max }}</span>
+                <span class="min">от {{ min }} руб</span>
+                <span class="max">до {{ priceData }} руб</span>
+            </div>
+
+            <!-- Фильтр по свойству наличию  -->
+            <div class="filter-property stock-property">
+              
+              <label class="checkbox-control">
+              <p class="filter-property--title">В наличии:</p>
+              <input 
+                type="checkbox"
+                v-model="stock"
+                @change="updateStock">
+              <span class="checkbox-box"></span> 
+              </label>
+
             </div>
 
              <!-- Фильтр по свойству sale  -->
@@ -65,7 +67,7 @@
               <p class="filter-property--title">Товары Sale:</p>
               <input 
                 type="checkbox"
-                v-model="check"
+                v-model="sale"
                 @change="updateSale">
               <span class="checkbox-box"></span> 
               </label>
@@ -83,19 +85,14 @@
 </template>
 
 <script>
-import {PRODUCT_CATEGORIES, PRODUCT_MANUFACTURES} from "../utility";
+import {PRODUCT_MANUFACTURES} from "../utility";
 import 'vue-slider-component/theme/default.css'
+import {mapActions} from 'vuex'
 
 export default {
   name: "FilterProducts",
 
-  components:{
-    
-  },
-
   props:{
-    // isLoading: "",
-    // noTasks:"",
     products: {
       type: Array,
       default: () => {},
@@ -108,116 +105,46 @@ export default {
       noTasks: false,
       filteredProducts: [],
       filterCategory: "",
-      filterManufacturer: "",
       filterPrice:"",
-      productCategories:  PRODUCT_CATEGORIES,
       productManufactures: PRODUCT_MANUFACTURES,
       filteredCategoriesArray: [],
       filteredManufacturesArray: [],
       filteredPrice:[],
       min: 0,
-      max: 2000,
-      check: this.checked,
+      max: 100000,
+      sale: false,
+      stock: false,
+      priceData: 100000,
     };
   },
 
-  watch: {
-    filterCategory: function() {
-
-      if (this.filteredManufacturesArray.length === 0) {
-        this.filteredCategoriesArray = this.products.filter(this.filterProductCategory);
-      } else {
-        this.filteredCategoriesArray = this.filteredManufacturesArray.filter(this.filterProductCategory);
-      }
-      this.filteredProducts = this.filteredCategoriesArray;
-
-      this.$emit('filter_products', this.filteredProducts);
-    },
-
-
-    filterManufacturer: function() {
-
-      if (this.filteredCategoriesArray.length === 0) {
-        this.filteredManufacturesArray = this.products.filter(this.filterProductManufacturer);
-      } else {
-      
-        this.filteredManufacturesArray = this.filteredCategoriesArray.filter(this.filterProductManufacturer);
-      }
-      this.filteredProducts = this.filteredManufacturesArray;
-      
-      this.$emit('filter_products', this.filteredProducts);
-    },
-
-    filterPrice: function() {
-      if (this.filteredCategoriesArray.length === 0) {
-        this.filteredTasksDeadline = this.products.filter(this.filterTaskDeadline);
-      } else {
-        this.filteredTasksDeadline = this.filteredCategoriesArray.filter(
-          this.filterTaskDeadline
-        );
-      }
-      this.filteredProducts = this.filteredTasksDeadline;
-  
-      this.$emit('filter_products', this.filteredProducts);
-    }
-  },
 
   computed:{
-    pricerange() {
+    highPrice() {
+      return this.$store.state.highprice
+    },
+    minPrice() {
       return this.$store.state.highprice
     },
     checked() {
       return this.$store.state.sale;
     },
+
+
   },
 
   methods: {
 
     /**
-     * Фильтровать задачу по категории
-     * @param {object} product - продукт
-     *
-     */
-    filterProductCategory(product) {
-      if (this.filterCategory !== "" && product.hasOwnProperty('category')) {
-        return product.category.toString() === this.filterCategory.toString();
-      } else {
-        return true;
-      }
-    },
-
-    /**
      * Фильтровать задачу по производителю
-     * @param {object} product - продукт
+     * @param {object} manufacturer - производитель
      *
      */
-    filterProductManufacturer(product) {
+    filterManufacturer(manufacturer) {
+      console.log(manufacturer, "filterManufacturer");
       
-      if (this.filterManufacturer !== "" && product.hasOwnProperty('manufacturer')) {
-        return product.manufacturer.toString() === this.filterManufacturer.toString();
-      } else {
-        return false;
-      }
-    },
-
-    /**
-     * Фильтровать задачу по цене
-     * @param {object} task - объект текущей задачи
-     *
-     */
-    filterTaskDeadline(task) {
-      var dateDeadline = new Date(task.dateOfTask).getTime();
-      var nowDate = new Date().getTime();
-
-      switch (this.filterPrice) {
-        case "Непросроченные Задачи":
-          return dateDeadline >= nowDate;
-
-        case "Просроченные Задачи":
-          return dateDeadline < nowDate;
-
-        default:
-          return true;
+      if (manufacturer !== "") {
+        this.filterManufacturerAction(manufacturer);
       }
     },
 
@@ -239,18 +166,37 @@ export default {
 
      /* Очистить результаты фильтрации */
     clearResults() {
-     
       this.$emit('clear_results', this.products);
-
     },
 
     updateSale(){
-    //Заглушка
+      console.log(this.sale,"updateSale");
+      if(this.sale){
+        this.filterSaleAction();
+      }
     },
 
-    updateHighPrice(){
-      //Заглушка
-    }
+    updateStock(){
+      console.log(this.stock,  "updateStock");
+      if(this.stock){
+        this.filterStockAction();
+      }
+      
+    },
+    
+    updateHighPrice(value){
+        console.log(value, 'updateHighPrice');
+        this.filterPriceAction(value);
+    },
+
+    ...mapActions({
+            'filterManufacturerAction' :  'filterManufacturerAction',
+            'filterSaleAction' : 'filterSaleAction',
+            'filterStockAction' : 'filterStockAction',
+            'filterPriceAction' : 'filterPriceAction',
+       })
+
+
 
 
   },

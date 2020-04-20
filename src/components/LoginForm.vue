@@ -57,9 +57,8 @@
 </template>
 
 <script>
-import Noty from "noty";
 import { showNoty } from "../utility";
-import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
 
@@ -105,22 +104,16 @@ export default {
                     console.log(user)
                     if(user.password == password){
                         console.log("Залогинен", "loginForm");
-                        var loginedLocal = localStorage.getItem("isLogined");
-                        console.log(loginedLocal, "loginedLocal");
-                        if(!loginedLocal){
                             localStorage.setItem("isLogined", "true");
                             localStorage.setItem("userLogin", user.login);
-                            // localStorage.setItem("boughtProducts", );
-                        }
+                            localStorage.setItem("boughtItems", JSON.stringify(user.goods));
+                        
 
                     }else{
                         console.log("Ошибка с паролем", "loginForm");
                     }
                 })
             })
-
-             localStorage.setItem("isLogined", "true");
-            localStorage.setItem("userLogin", this.login);
 
         },
 

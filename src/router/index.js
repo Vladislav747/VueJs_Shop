@@ -9,12 +9,6 @@ import LoginForm from '@/components/LoginForm.vue';
 import RegistrationForm from '@/components/RegistrationForm.vue';
 import Checkout from '@/components/Checkout.vue';
 
-//Sections
-import Books from '@/sections/Books.vue'
-import Clothes from '@/sections/Clothes.vue'
-import Electronics from '@/sections/Electronics.vue'
-import Food from '@/sections/Food.vue'
-import Med from '@/sections/Med.vue'
 
 Vue.use(Router)
 
@@ -57,32 +51,5 @@ export default new Router({
       name: 'checkout',
       component: Checkout
     },
-    {
-      path: '/books',
-      name: 'books',
-      component: Books
-    },
-    {
-      path: '/electronics',
-      name: 'electronics',
-      component: Electronics
-    },
-    {
-      path: '/clothes',
-      name: 'clothes',
-      component: Clothes
-    },
-    {
-      path: '/med',
-      name: 'med',
-      component: Med
-    },
-    {
-      path: '/food',
-      name: 'food',
-      component: Food
-    },
-
-    
   ]
 })

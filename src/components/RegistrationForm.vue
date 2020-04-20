@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import Noty from "noty";
 import { showNoty, generateRandomSeed } from "../utility";
 import {mapState, mapGetters, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
@@ -81,9 +80,9 @@ export default {
          */
         registerForm() {
            
-            console.log((this.login, this.password),"registerForm");
-            var seed = generateRandomSeed();
+            console.log(this.login, "registerForm");
 
+            var seed = generateRandomSeed();
             var nowDate = new Date().toLocaleString('ru',
             {
                 day: 'numeric',
@@ -98,42 +97,59 @@ export default {
             var passwordUser = this.password;
             
             usersCollection.where("login", "==", loginUser)
-                .get().then((docs)=>{
-                    docs.forEach(function (doc) {
-                    var user = doc.data();
-                    console.log(user)
-                    if(user.login == loginUser){
-                       console.log("Такой пользователь уже есть "+loginUser);
-                    }else{
-                           usersCollection.doc('user_'+ seed).set({
-                            id_user: 'user_'+ seed,
+                .get().then((foundUsers)=>{
+                    var user;
+                    var result = foundUsers.docs.some(function (doc) {
+                        user = doc.data();
+                        console.log(user);
+                        if(user.login == loginUser){
+                            console.log("Такой пользователь уже есть "+ loginUser);
+                            return true;
+                        }
+                    });
+                    
+                    if(!result){
+                        var user = {
+                            seed: seed,
                             login: loginUser,
                             password: passwordUser,
-                            date_registered: nowDate,
-                        }).then(() =>{
-                            console.log("Успешно зарегистрирован")
-                            var loginedLocal = localStorage.getItem("isLogined");
-                            console.log(loginedLocal, "loginedLocal");
-                            if(!loginedLocal){
-                                localStorage.setItem("isLogined", "true");
-                                localStorage.setItem("userLogin", loginUser);
-                            }
-                        })
+                            date: nowDate,
+                        }
+                        this.insertUsertoDatabase(user, 'users');
                     }
-                    })
+                    
+                    
+        
                 })
-            
-
-
-            
         },
 
         checkForm(){
             console.log("checkForm");
 
-        }
-    }
+        },
+
+        insertUsertoDatabase(user, collectionName){
+            const db = firebase.firestore();
+            const collection = db.collection(collectionName);
+
+            collection.doc('user_'+ user.seed).set({
+                id_user: 'user_'+ user.seed,
+                login: user.login,
+                password: user.password,
+                date_registered: user.date,
+            }).then(() =>{
+                console.log("Успешно зарегистрирован")
+                var loginedLocal = localStorage.getItem("isLogined");
+                console.log(loginedLocal, "loginedLocal");
+                if(!loginedLocal){
+                    localStorage.setItem("isLogined", "true");
+                    localStorage.setItem("userLogin", user.login);
+                }
+            })
+        },
+    },
 }
+
 </script>
 
 <style lang="scss" scoped> 
