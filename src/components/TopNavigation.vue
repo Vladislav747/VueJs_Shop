@@ -31,8 +31,8 @@
         <ul class="menu-group">
           <li class="menu-item" v-for="category in categoriesList" :key="category">
             <a
-                href="#"
-                @click.prevent="chooseCategory(category)">{{category}}
+              href="#"
+              @click.prevent="chooseCategory(category)">{{category}}
             </a>
           </li>
         </ul>
@@ -41,60 +41,64 @@
       <div class="spacer"/>
 
       <input 
-          v-if="isHome" 
-          class="searchInput" 
-          v-model="searchText" 
-          type="search" 
-          placeholder="Искать товары..."
-          />
-          <font-awesome-icon 
-            icon="search" 
-            size="2x" 
-            class="top-icon search-icon"
-            v-if="isHome" 
-          />
-    </div>
-    
-    <div class="icon-wrapper cart-link">
-      <router-link 
-          id="cart" 
-          :to="{ name: 'cart' }">
-        <div 
+        v-if="isHome" 
+        class="searchInput" 
+        v-model="searchText" 
+        type="search" 
+        placeholder="Искать товары..."
+      />
+      <font-awesome-icon 
+        icon="search" 
+        size="2x" 
+        class="top-icon search-icon"
+        v-if="isHome" 
+      />
+
+      <div class="icon-wrapper cart-link">
+        <router-link 
+            title="Корзина"
+            id="cart" 
+            :to="{ name: 'cart' }">
+          <div 
             v-if="hasCartItems" 
-            class="cart-link__count">{{cartCount}}</div>
-        <font-awesome-icon 
+            class="cart-link__count">{{cartCount}}
+          </div>
+          <font-awesome-icon 
             icon="shopping-cart" 
             size="2x" 
             class="cart-icon"/>
-        <span class="top-desktop">Корзина</span>
-      </router-link>
-    </div>
-
-    <div class="icon-wrapper">
-       <div 
-        class="profile-container"
-         v-if="isLogined">
-          <div class="profile-inner">
-            <img 
-              :src="require(`@/static/images/avatar.jpeg`)"
-              alt="Профиль"
-              class="profile-img">
-          </div>
-          <span class="top-desktop">Владислав</span>
-      </div>
-      <div 
-        class="loginSection"
-        v-else >
-        <router-link  
-            id="login-form" 
-            :to="{ name: 'login-form' }">
-          <font-awesome-icon 
-              icon="sign-in-alt" 
-              size="2x"/>
-          <span class="top-desktop">Войти</span>
         </router-link>
-      </div>    
+      </div>
+
+      <div class="icon-wrapper">
+        <div 
+          class="profile-container"
+          v-if="isLogined">
+            <div class="profile-inner">
+              <img 
+                :src="require(`@/static/images/avatar.jpeg`)"
+                alt="Профиль"
+                class="profile-img">
+            </div>
+        </div>
+        
+        <div 
+          class="loginSection"
+          v-else >
+          <router-link
+              title="Войти"
+              id="login-form" 
+              :to="{ name: 'login-form' }">
+            <font-awesome-icon 
+                icon="sign-in-alt" 
+                size="2x"/>
+            
+          </router-link>
+        </div>    
+      </div>
     </div>
+        
+    
 
   </div>
 </template>
