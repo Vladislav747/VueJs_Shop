@@ -8,8 +8,8 @@
           src='../assets/shopify.svg' 
           alt="Логотип" 
           class="top-logo">
-        
       </router-link>
+      
       <font-awesome-icon 
         icon="bars" 
         size="2x" 

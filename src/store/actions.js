@@ -227,4 +227,87 @@ export default { // actions = mehtods
     context.commit('addFilteredProducts', filterProducts);
     context.dispatch('fetchProductsPagination');
   },
+
+
+  sortItemsAction(context, sortProperty, reverseOrder){
+
+    var products = context.state.products;
+
+    function sortPrice(a, b){
+      return a.price - b.price;
+    }
+    function sortPriceReverse(a, b){
+        return b.price - a.price;
+    }
+
+    function sortRating(a, b){
+      return a.rating - b.rating;
+    }
+
+    function sortRatingReverse(a, b){
+      return b.rating - a.rating;
+    }
+
+    function sortName(a, b){
+      return a.name - b.name;
+    }
+
+
+    function sortNameReverse(a, b){
+      return a.name - b.name;
+    }
+
+    function sortManufacturer(a, b){
+      return b.rating - a.rating;
+    }
+
+    function sortManufacturerReverse(a, b){
+      return a.rating - b.rating;
+    }
+
+
+
+
+    switch(sortProperty){
+      
+      case 'price':
+        if(reverseOrder){
+          products.sort(sortPrice).reverse();
+        }else{
+          products.sort(sortPrice);
+        }
+
+      break;
+
+      case 'rating':
+        if(reverseOrder){
+          products.sort(sortPriceReverse);
+        }else{
+          products.sort(sortPrice);
+        }
+
+      break;
+
+      case 'name':
+        if(reverseOrder){
+          products.sort(sortPriceReverse);
+        }else{
+          products.sort(sortPrice);
+        }
+      break;
+
+      case 'manufacturer':
+        if(reverseOrder){
+          products.sort(sortPriceReverse);
+        }else{
+          products.sort(sortPrice);
+        }
+      break;
+
+        
+
+    }
+    
+
+  },
 }

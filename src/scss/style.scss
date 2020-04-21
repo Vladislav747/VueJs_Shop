@@ -252,6 +252,29 @@ html, body {
   }
 
   button{
+
+    &.btn{
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: .5rem .75rem;
+      font-size: 1rem;
+      line-height: 1.25;
+      border-radius: .25rem;
+      transition: all .15s ease-in-out;
+      cursor: pointer;
+
+      &.active{
+        background: #ccc;
+      }
+    }
     &.btn-primary{
       background: #005bff;
       color: #fff;

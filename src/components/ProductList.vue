@@ -4,7 +4,6 @@
 
     <!-- v-bind:products="products" -->
     <filter-products
-      
       v-bind:isLoading="isLoading"
       v-bind:noTasks="noTasks"
       v-on:filter_products="filterResults"
@@ -15,6 +14,8 @@
     <div v-if="noTasks" class="no-tasks">
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
+
+    
 
     <div v-else class="products-wrapper">
       <div class="display-quantity">
@@ -28,9 +29,13 @@
             :value="type"
             :key="type">{{ type }}
           </option>
-		</select>
+		    </select>
         
       </div>
+      
+
+      <sort-products />
+
       <div  class="products">
         <product-card 
             v-for="product in filteredProducts" 
@@ -49,6 +54,7 @@ import { showNoty } from "@/utility";
 import ProductCard from "./ProductCard.vue";
 import FilterProducts from "./FilterProducts.vue";
 import Pagination from "./Pagination.vue";
+import SortProducts from './SortProducts.vue';
 import {mapGetters, mapActions} from 'vuex'
 import {bus} from '@/utility/bus.js'
 
@@ -71,6 +77,7 @@ export default {
     ProductCard,
     FilterProducts,
     Pagination,
+    SortProducts,
   },
 
   data() {

@@ -76,7 +76,7 @@
             
 
             <div class="clear-result__wrapper">
-              <button @click="clearResults()" class="clear-results__btn">Сбросить результаты</button>
+              <button @click="clearResults" class="clear-results__btn">Сбросить результаты</button>
           </div>
 
         </div>
@@ -111,10 +111,10 @@ export default {
       filteredManufacturesArray: [],
       filteredPrice:[],
       min: 0,
-      max: 100000,
+      max: 10000,
       sale: false,
       stock: false,
-      priceData: 100000,
+      priceData: 10000,
     };
   },
 
@@ -166,7 +166,7 @@ export default {
 
      /* Очистить результаты фильтрации */
     clearResults() {
-      this.$emit('clear_results', this.products);
+      
     },
 
     updateSale(){
