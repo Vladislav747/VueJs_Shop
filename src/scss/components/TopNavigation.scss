@@ -16,6 +16,10 @@
       line-height: 28px;
       margin-right: 2rem;
       text-decoration: none;
+
+      &:hover svg *{
+        fill: #bebebe;
+      }
     }
 
 
@@ -54,13 +58,16 @@
         min-width: 20px;
         height: 20px;
         border-radius: 100%;
-        top: -5px;
-        right: 44px;
-        background: #86deb7;
+        top: 0;
+        right: 0;
+        background: #619a81;
         color: #fff;
         font-size: 12px;
         font-weight: 700;
-        text-align: center
+        line-height: 21px;
+        text-align: center;
+        padding: 0 4px;
+        transform: translate(50%, -35%);
       }
     }
   
