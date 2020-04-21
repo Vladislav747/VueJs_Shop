@@ -54,23 +54,25 @@
         v-if="isHome" 
       />
 
-      <div class="icon-wrapper cart-link">
-        <router-link 
-            title="Корзина"
-            id="cart" 
-            :to="{ name: 'cart' }">
-          <div 
-            v-if="hasCartItems" 
-            class="cart-link__count">{{cartCount}}
-          </div>
-          <font-awesome-icon 
-            icon="shopping-cart" 
-            size="2x" 
-            class="cart-icon"/>
-        </router-link>
-      </div>
+      <div class="icons-block">
 
-      <div class="icon-wrapper">
+        <div class="icon-wrapper cart-link">
+          <router-link 
+              title="Корзина"
+              id="cart" 
+              :to="{ name: 'cart' }">
+            <div 
+              v-if="hasCartItems" 
+              class="cart-link__count">{{cartCount}}
+            </div>
+            <font-awesome-icon 
+              icon="shopping-cart" 
+              size="2x" 
+              class="cart-icon"/>
+          </router-link>
+        </div>
+
+        <div class="icon-wrapper">
         <div 
           class="profile-container"
           v-if="isLogined">
@@ -90,12 +92,21 @@
               id="login-form" 
               :to="{ name: 'login-form' }">
             <font-awesome-icon 
-                icon="sign-in-alt" 
-                size="2x"/>
-            
+              icon="sign-in-alt" 
+              size="2x"
+            />
           </router-link>
         </div>    
       </div>
+
+
+
+
+      </div>
+
+      
+
+      
     </div>
         
     

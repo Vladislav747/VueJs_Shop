@@ -10,6 +10,7 @@
             type="button"  
             class="btn btn-sort"
             data-sort="price"
+            data-order=true
             @click="sortItems($event.target)">Цене</button>
         <button 
             type="button" 

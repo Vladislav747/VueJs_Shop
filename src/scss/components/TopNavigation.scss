@@ -14,8 +14,8 @@
     a {
       color: #fff;
       line-height: 28px;
-      margin-right: 2rem;
       text-decoration: none;
+      position: relative;
 
       &:hover svg *{
         fill: #bebebe;
@@ -47,6 +47,12 @@
   
     input[type="text"]:focus {
       width: 400px;
+    }
+
+    .icons-block{
+      display: flex;
+      align-items: center
+      
     }
 
     .cart-link{
@@ -86,6 +92,9 @@
     }
   
     .icon-wrapper{
+
+      margin-left: 2rem;
+      
       #login-form, #cart{
         display: inline-grid;
       }
