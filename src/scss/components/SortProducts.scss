@@ -1,8 +1,20 @@
 .btn-group-sort{
     display: inline-flex;
-    vertical-align: middle;
+    align-items: center;
 
     .btn-sort{
         margin: 0 5px;
-    }
+
+        &:hover{
+            background: #bebebe;
+        }
+    } 
 }
+
+@media screen and (max-width: 320px){
+    .btn-group-sort{
+        flex-direction: column;
+        
+ 
+   }
+ }

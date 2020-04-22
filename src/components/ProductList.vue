@@ -1,8 +1,6 @@
 <template>
   <div class="productList max-width-block">
     
-
-    <!-- v-bind:products="products" -->
     <filter-products
       v-bind:isLoading="isLoading"
       v-bind:noTasks="noTasks"
@@ -15,26 +13,28 @@
       <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
     </div>
 
-    
-
     <div v-else class="products-wrapper">
-      <div class="display-quantity">
-        <p class="short-label">Выводить на странице:</p>
-        <select 
-          class="display-quantity__btn" 
-          @change="changeDisplayQuantity($event.target.value)"
-        >
-          <option
-            v-for="type in quantityTypes"
-            :value="type"
-            :key="type">{{ type }}
-          </option>
-		    </select>
-        
+
+      <div class="products-list-controls">
+        <div class="display-quantity">
+          <p>Выводить на странице:</p>
+          <select 
+            class="display-quantity__btn" 
+            @change="changeDisplayQuantity($event.target.value)"
+          >
+            <option
+              v-for="type in quantityTypes"
+              :value="type"
+              :key="type">{{ type }}
+            </option>
+          </select>
       </div>
       
 
       <sort-products />
+
+      </div>
+      
 
       <div  class="products">
         <product-card 
@@ -118,7 +118,6 @@ export default {
       console.log(elements, "filter_search");
       console.log(this, "filter_search");
         if(elements.length > 0){
-          console.log("blya");
           this.filteredItems = elements;
           console.log(this.filteredItems, "blya2");
           this.$forceUpdate();

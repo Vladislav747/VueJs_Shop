@@ -117,9 +117,14 @@
    
   
   }
-  
-  
-  @media(max-width: 600px) {
+
+
+  @media screen and (max-width: 1024px) {
+      
+
+  }
+
+   @media screen and (max-width: 768px) {
     .shopping-cart-items {
       flex-direction: column;
     }
@@ -132,4 +137,10 @@
     img {
       width: auto;
     }
+
+  }
+
+
+  @media screen and (max-width: 320px) {
+
   }

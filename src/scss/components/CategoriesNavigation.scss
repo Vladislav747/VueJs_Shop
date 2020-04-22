@@ -14,32 +14,30 @@ $menu-item-color: #579740;
     overflow: hidden;
     
 
-    .menu-group li{
-        float: left;
-        position: relative;
-        width:auto;
-    }
+        li{
+            float: left;
+            position: relative;
+            width:auto;
 
-    a.menu-item{
-        font-size: 18px;
-        padding: 10px;
-        background: $menu-item-color;
-        color: #FFFFFF;
-        display: block;
-        font: bold 14px/20px sans-serif;
-        padding: 10px 45px;
-        text-align: center;
-        -webkit-transition: all .25s ease;
-        -moz-transition: all .25s ease;
-        -ms-transition: all .25s ease;
-        -o-transition: all .25s ease;
-        transition: all .25s ease;
-
-        &:hover{
-            background: #000000;
-            
+        a{
+            background: #579740;
+            color: #FFFFFF;
+            display: block;
+            margin: 0 5px;
+            font: bold 18px/20px sans-serif;
+            padding: 10px 15px;
+            text-align: center;
+            -webkit-transition: all .25s ease;
+            transition: all .25s ease;
+    
+            &:hover{
+                background: #000000;
+                
+            }
         }
     }
+
+    
 
 }
 
@@ -55,13 +53,44 @@ $menu-item-color: #579740;
 
 
   @media screen and (max-width: 320px) {
+
+    .categories{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 14%;
+        z-index: 998;
+        animation-duration: 2s;
+        animation: slidein;
+        animation-iteration-count: infinite;
+
+        @keyframes slidein {
+
+            from {
+                height: 0%;
+                width: 0;
+            }
+
+            to{
+                height: 100%;
+                width:100%;
+            }
+            
+        }
+
+        &.not-shown{
+            height: 0;
+            width: 0%;
+        }
+
       ul.menu-group{
-          width: 100%;
+        
 
           li{
               border: 1px solid white;
-              width: 60%;
+              width: 100%;
           }
       }
+    }
 
   }

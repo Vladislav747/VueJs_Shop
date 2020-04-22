@@ -20,6 +20,10 @@
       &:hover svg *{
         fill: #bebebe;
       }
+
+      &#task-list{
+        margin-right: 50px;
+      }
     }
 
 
@@ -81,10 +85,12 @@
       display: none;
     }
   
-    input[type="search"]{
+    input[type="search"].searchInput{
       margin-right: 3rem;
       height: 45px;
       width: 25%;
+      padding: 0 20px;
+      
     }
 
     .search-icon{
@@ -139,11 +145,13 @@
 
     .header{
       z-index: 999;
+      position: relative;
     }
 
     .header .header-inner {
-
+      z-index: 999;
       align-items: end;
+      position: relative;
       
   
       input {

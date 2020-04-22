@@ -9,15 +9,22 @@
           alt="Логотип" 
           class="top-logo">
       </router-link>
-      
-      <font-awesome-icon 
-        icon="bars" 
-        size="2x" 
-        class="top-icon bars-menu"
-      />
+
+      <a 
+        href="#" 
+        class="mobile-menu"
+        @click.prevent="showMobileMenu">
+          <font-awesome-icon 
+            icon="bars" 
+            size="2x" 
+            class="top-icon bars-menu"
+          />
+        </a>
+       
 
       <router-link 
         id="product-add" 
+        v-if="isAdmin"
         :to="{ name: 'product-add' }"
       >
         <span class="top-desktop">Создать товар</span>
@@ -27,7 +34,10 @@
           class="top-icon"/>
       </router-link>
 
-      <div class="categories">
+      <div 
+        class="categories"
+        :class="{'not-shown': HideMobileMenu}"
+        ref="categoriesMenu">
         <ul class="menu-group">
           <li class="menu-item" v-for="category in categoriesList" :key="category">
             <a
@@ -136,10 +146,15 @@ export default {
         "Еда",
         "Медтовары"
       ],
+      HideMobileMenu: true,
     };
   },
 
   methods: {
+
+    showMobileMenu(){
+      this.HideMobileMenu = !this.HideMobileMenu;
+    },
 
     ...mapActions({
       addFilterProducts: 'addFilterProducts',

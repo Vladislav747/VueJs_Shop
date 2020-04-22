@@ -10,28 +10,31 @@
             type="button"  
             class="btn btn-sort"
             data-sort="price"
-            data-order=true
+            :data-order="priceOrder"
             @click="sortItems($event.target)">Цене</button>
         <button 
             type="button" 
             class="btn btn-sort" 
             data-sort="name"
+            :data-order="nameOrder"
             @click="sortItems($event.target)">Наименованию</button>
         <button 
             type="button" 
             class="btn btn-sort" 
             data-sort="manufacturer"
+            :data-order="manufacturerOrder"
             @click="sortItems($event.target)">Производителю</button>
         <button 
             type="button" 
             class="btn btn-sort" 
             data-sort="rating"
+            :data-order="rateOrder"
             @click="sortItems($event.target)">Оценке</button>
       </div>
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapActions} from 'vuex'
 
 
 export default {
@@ -41,7 +44,10 @@ export default {
 
     data() {
         return {
-           
+            priceOrder: false,
+            nameOrder: false,
+            manufacturerOrder: false,
+            rateOrder: false,
         };
     },
 
@@ -51,8 +57,12 @@ export default {
     
     methods: {
        sortItems(value){
-           console.log(value.getAttribute('data-sort'), "sortItems")
-           console.log("sortItems");
+            console.log(value.getAttribute('data-sort'), "sortItems")
+            var sortAttr = value.getAttribute('data-sort');
+            var orderAttr = Boolean(value.getAttribute('data-order'));
+            value.setAttribute('data-order', !orderAttr);
+            console.log(value.getAttribute('data-order'), "sortItems")
+            this.sortItemsAction(sortAttr, orderAttr);
 
        },
 

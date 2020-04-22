@@ -258,11 +258,11 @@ export default { // actions = mehtods
     }
 
     function sortManufacturer(a, b){
-      return b.rating - a.rating;
+      return b.manufacturer - a.manufacturer;
     }
 
     function sortManufacturerReverse(a, b){
-      return a.rating - b.rating;
+      return a.manufacturer - b.manufacturer;
     }
 
 
@@ -281,32 +281,36 @@ export default { // actions = mehtods
 
       case 'rating':
         if(reverseOrder){
-          products.sort(sortPriceReverse);
+          products.sort(sortRating).reverse();
         }else{
-          products.sort(sortPrice);
+          products.sort(sortRating);
         }
 
       break;
 
       case 'name':
         if(reverseOrder){
-          products.sort(sortPriceReverse);
+          products.sort(sortName).reverse();
         }else{
-          products.sort(sortPrice);
+          products.sort(sortName);
         }
       break;
 
       case 'manufacturer':
         if(reverseOrder){
-          products.sort(sortPriceReverse);
+          products.sort(sortManufacturer).reverse();
         }else{
-          products.sort(sortPrice);
+          products.sort(sortManufacturer);
         }
       break;
 
-        
+      default:
+      break; 
 
     }
+
+    context.commit('addFilteredProducts', products);
+    context.dispatch('fetchProductsPagination');
     
 
   },
