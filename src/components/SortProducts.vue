@@ -3,7 +3,7 @@
         Сортировать по:&nbsp; 
         <button 
             type="button" 
-            class="btn active btn-sort" 
+            class="btn btn-sort" 
             data-sort="original-order"
             @click="sortItems($event.target)">Сбросить результаты</button>
         <button 
@@ -57,12 +57,44 @@ export default {
     
     methods: {
        sortItems(value){
-            console.log(value.getAttribute('data-sort'), "sortItems")
+
             var sortAttr = value.getAttribute('data-sort');
-            var orderAttr = Boolean(value.getAttribute('data-order'));
-            value.setAttribute('data-order', !orderAttr);
-            console.log(value.getAttribute('data-order'), "sortItems")
-            this.sortItemsAction(sortAttr, orderAttr);
+            var orderAttr = "";
+
+            switch (sortAttr) {
+                case "price":
+                orderAttr = this.priceOrder;
+                this.priceOrder = !this.priceOrder;
+                break;
+
+                case "name":
+                orderAttr = this.nameOrder;
+                this.nameOrder = !this.nameOrder;
+                break;
+
+                case "manufacturer":
+                orderAttr = this.manufacturerOrder;
+                this.manufacturerOrder = !this.manufacturerOrder;
+                break;
+
+                case "rating":
+                orderAttr = this.rateOrder;
+                this.rateOrder = !this.rateOrder;
+                break;
+
+                default:
+                break;
+            }
+
+            console.log(sortAttr, "sortAttr");
+            console.log(orderAttr, "orderAttr");
+
+            var sortOptions = {
+                sortAttr: sortAttr,
+                orderAttr: orderAttr,
+            };
+
+            this.sortItemsAction(sortOptions);           
 
        },
 

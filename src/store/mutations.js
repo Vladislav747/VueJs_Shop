@@ -72,8 +72,12 @@ export default { // setting and updating the state
     state.selectedItems = state.selectedItems.filter(item => item.id !== productId);
   },
 
-  addFilteredProducts(state, filterProducts){
+  setFilteredProducts(state, filterProducts){
     state.filteredItems = filterProducts;
+  },
+
+  addDefaultProducts(state, products){
+    state.defaultItems = products;
   },
 
   

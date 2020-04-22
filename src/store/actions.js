@@ -16,6 +16,7 @@ export default { // actions = mehtods
       }).then((res) => {
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
+        context.commit('addDefaultProducts', productResult);
         context.commit('setTotalItems', productResult.length);
         var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
         context.commit('setTotalPages', totalPages);
@@ -24,9 +25,9 @@ export default { // actions = mehtods
       })
     },
 
-    //clearOldResults - хочу чтобы перегенировался поиск несмотря на наличие фильтрованых элементов
-    fetchProductsPagination(context, clearOldResults){
+    fetchProductsPagination(context){
       console.log("fetchProductsPagination");
+
       //Если данные фильтруются по названию, 
       // категории, цене или другим свойствам то используем их
 
@@ -49,14 +50,19 @@ export default { // actions = mehtods
 
       if(filteredProducts.length > 0){
           currentListProducts = filteredProducts.slice(startIndex, endIndex);
+          var totalPages = Math.ceil(filteredProducts.length / context.state.displayQuantity);
+          context.commit('setTotalPages', totalPages);
+          context.commit('setTotalItems', filteredProducts.length);
       }else{
           currentListProducts = products.slice(startIndex, endIndex); 
       }
       
+
+      
+      context.commit('setCurrentPage', 1);
       context.commit("setCurrentListProducts", currentListProducts);
 
     },
-
 
   addProductToCart(context, product) {
 
@@ -75,7 +81,7 @@ export default { // actions = mehtods
   },
 
   deleteProductCart(context, product) {
-    const cartItem  = context.state.cart.find(item => item.id === product.id)
+    const cartItem  = context.state.cart.find(item => item.id === product.id);
     
     if(cartItem) {
       context.commit('popProductFromCart',product.id);
@@ -84,7 +90,6 @@ export default { // actions = mehtods
       console.log("Нет такого товара в корзине " + product.id);
     }
 
-    
   },
 
   changeDisplayQuantity(context, displayQuantity){
@@ -117,7 +122,6 @@ export default { // actions = mehtods
     context.dispatch('fetchProductsPagination');
   },
 
-
   cleanCart(context){
     context.commit('emptyCart');
   },
@@ -131,10 +135,8 @@ export default { // actions = mehtods
   fetchReviews(context, product_id){
 
     const db = firebase.firestore();
-
     const productCollection = db.collection('product_comments')
 
-      
       productCollection.where("product_id", "==", this.product_id)
       .get().then((docs)=>{
 
@@ -163,7 +165,6 @@ export default { // actions = mehtods
   },
 
   deleteSelectedItem(context, productId) {
-    console.log("deleteSelectedItem VUEX");
     const selectedItem  = context.state.selectedItems.find(item => item.id === productId);
     if(selectedItem) {
       context.commit('popSelectedFromCart',productId);
@@ -172,13 +173,12 @@ export default { // actions = mehtods
       console.log("Нет такого товара среди выделенных " + productId);
     }
 
-    
   },
 
   addFilterProducts(context, filterProducts){
-    console.log("filterProducts VUEX");
-    context.commit('addFilteredProducts', filterProducts);
-
+    
+    context.commit('setFilteredProducts', filterProducts);
+    
     context.dispatch('fetchProductsPagination');
 
   },
@@ -187,8 +187,8 @@ export default { // actions = mehtods
 
     var products = context.state.products;
     var filterProducts = products.filter(element => element.category == category);
-
-    context.commit('addFilteredProducts', filterProducts);
+    
+    context.commit('setFilteredProducts', filterProducts);
 
     context.dispatch('fetchProductsPagination');
   },
@@ -197,16 +197,16 @@ export default { // actions = mehtods
     var products = context.state.products;
     var filterProducts = products.filter(element => element.manufacturer == manufacturer);
 
-    context.commit('addFilteredProducts', filterProducts);
+    context.commit('setFilteredProducts', filterProducts);
 
     context.dispatch('fetchProductsPagination');
   },
 
-  filterSaleAction(context, sale){
+  filterSaleAction(context){
     var products = context.state.products;
     var filterProducts = products.filter(element => element.sale == true);
 
-    context.commit('addFilteredProducts', filterProducts);
+    context.commit('setFilteredProducts', filterProducts);
 
     context.dispatch('fetchProductsPagination');
   },
@@ -215,63 +215,43 @@ export default { // actions = mehtods
     var products = context.state.products;
     var filterProducts = products.filter(element => element.stock > 0);
 
-    context.commit('addFilteredProducts', filterProducts);
+    context.commit('setFilteredProducts', filterProducts);
 
     context.dispatch('fetchProductsPagination');
   },
 
   filterPriceAction(context, highprice){
     var products = context.state.products;
-    var filterProducts = products.filter(element => element.price <= highprice);
+    var filterProducts = products.filter(element => element.price < highprice);
 
-    context.commit('addFilteredProducts', filterProducts);
+    context.commit('setFilteredProducts', filterProducts);
     context.dispatch('fetchProductsPagination');
   },
 
 
-  sortItemsAction(context, sortProperty, reverseOrder){
-
+  sortItemsAction(context, sortOptions){
     var products = context.state.products;
 
     function sortPrice(a, b){
       return a.price - b.price;
-    }
-    function sortPriceReverse(a, b){
-        return b.price - a.price;
     }
 
     function sortRating(a, b){
       return a.rating - b.rating;
     }
 
-    function sortRatingReverse(a, b){
-      return b.rating - a.rating;
-    }
-
     function sortName(a, b){
-      return a.name - b.name;
-    }
-
-
-    function sortNameReverse(a, b){
-      return a.name - b.name;
+      return a.name.localeCompare(b.name);
     }
 
     function sortManufacturer(a, b){
-      return b.manufacturer - a.manufacturer;
+      return a.manufacturer.localeCompare(b.manufacturer);
     }
 
-    function sortManufacturerReverse(a, b){
-      return a.manufacturer - b.manufacturer;
-    }
-
-
-
-
-    switch(sortProperty){
+    switch(sortOptions.sortAttr){
       
       case 'price':
-        if(reverseOrder){
+        if(sortOptions.orderAttr){
           products.sort(sortPrice).reverse();
         }else{
           products.sort(sortPrice);
@@ -280,7 +260,7 @@ export default { // actions = mehtods
       break;
 
       case 'rating':
-        if(reverseOrder){
+        if(sortOptions.orderAttr){
           products.sort(sortRating).reverse();
         }else{
           products.sort(sortRating);
@@ -289,7 +269,7 @@ export default { // actions = mehtods
       break;
 
       case 'name':
-        if(reverseOrder){
+        if(sortOptions.orderAttr){
           products.sort(sortName).reverse();
         }else{
           products.sort(sortName);
@@ -297,7 +277,7 @@ export default { // actions = mehtods
       break;
 
       case 'manufacturer':
-        if(reverseOrder){
+        if(sortOptions.orderAttr){
           products.sort(sortManufacturer).reverse();
         }else{
           products.sort(sortManufacturer);
@@ -305,13 +285,12 @@ export default { // actions = mehtods
       break;
 
       default:
+        products = context.state.defaultItems;
       break; 
 
     }
 
-    context.commit('addFilteredProducts', products);
+    context.commit('setFilteredProducts', products);
     context.dispatch('fetchProductsPagination');
-    
-
   },
 }
