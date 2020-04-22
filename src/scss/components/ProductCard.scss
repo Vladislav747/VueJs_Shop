@@ -198,6 +198,7 @@
     .product-properties {
       word-wrap: break-word;
       padding: 15px;
+      text-align: center;
 
       .property-section{
         margin-bottom: 1rem;
@@ -244,7 +245,9 @@
   }
 
    @media screen and (max-width: 768px) {
-      
+    .product {
+      width: 26vw;
+    }
 
   }
 

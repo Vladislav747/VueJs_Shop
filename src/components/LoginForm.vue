@@ -1,7 +1,7 @@
 <template>
     <div class="login-form__wrapper">
         <div class="form__inner form-container ui segment piled">
-            <form 
+            <b-form
                 class="login-form ui form"
                 @submit="checkForm"
                 action="https://vuejs.org/"
@@ -10,26 +10,39 @@
 
                 <h1>{{title}}</h1>
                 <div class="field">
-                    <label 
-                        for="form__login" 
-                        style="text-transform: capitalize;">{{loginTitle}}</label>
-                    <input 
+                    <b-form-group
+                        id="input-group-1"
+                        :label="loginTitle"
+                        label-for="form__login"
+                        style="text-transform: capitalize;"
+                    />
+
+                    <b-form-input 
                         name="form__login" 
-                        id="form__login" 
-                        v-model="login">
+                        id="form__login"
+                        type="email"
+                        required
+                        placeholder="Введите логин"
+                        v-model="login" />
 
                     <p 
                         v-if="errors.login" 
                         class="error">Заполните {{loginTitle}}</p>
                 </div>
                 <div class="field">
-                        <label 
-                            for="form__pass" 
-                            style="text-transform: capitalize;" >{{passwordTitle}}</label>
-                        <input 
-                            name="form__pass" 
-                            id="form__pass" 
-                            v-model="password">
+                        <b-form-group
+                            id="input-group-1"
+                            :label="passwordTitle"
+                            label-for="form__pass"
+                            style="text-transform: capitalize;"
+                        />
+                        <b-form-input 
+                            name="form__login" 
+                            id="form__login"
+                            type="password"
+                            required
+                            placeholder="Введите пароль"
+                            v-model="password" />
                         <small 
                             v-if="errors.login" 
                             class="error">Заполните {{passwordTitle}}</small>
@@ -51,7 +64,7 @@
                             style="margin-top: 20px;">
                     </div>
                 </div>
-            </form>
+            </b-form>
         </div>
     </div>
 </template>

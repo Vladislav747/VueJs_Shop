@@ -1,5 +1,4 @@
 <template>  
-
   <div 
     v-if="!isLoading && !noTasks" 
     class="filterWrapper bg-light-green">

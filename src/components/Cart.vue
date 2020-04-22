@@ -29,10 +29,13 @@
                   >{{cart.name}}
                   </span>
               </div>
-              <img 
-                :src="require(`@/static/images/${cart.srcImage}`)" 
-                :alt="`Image of ${cart.title}`"
-              >
+              <div class="image-wrapper">
+                <img 
+                  :src="require(`@/static/images/${cart.srcImage}`)" 
+                  :alt="`Image of ${cart.title}`"
+                >
+              </div>
+              
               <div class="card-row">
                 <span class="product-price">{{cart.price}} {{currency}}</span>
               </div>

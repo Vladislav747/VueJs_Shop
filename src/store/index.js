@@ -25,7 +25,7 @@ export default new Vuex.Store({
     selectedItems:[],
     filteredItems:[],
     userBoughtItems:[],
-    defaultItems: [],
+    defaultItems: "",
   },
   getters,
   actions,

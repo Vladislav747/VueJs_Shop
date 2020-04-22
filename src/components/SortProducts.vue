@@ -5,7 +5,7 @@
             type="button" 
             class="btn btn-sort" 
             data-sort="original-order"
-            @click="sortItems($event.target)">Сбросить результаты</button>
+            @click="sortOriginalOrder()">Сбросить результаты</button>
         <button 
             type="button"  
             class="btn btn-sort"
@@ -98,8 +98,13 @@ export default {
 
        },
 
+       sortOriginalOrder(){
+           this.setOrginalOrder();
+       },
+
        ...mapActions({
            'sortItemsAction' : 'sortItemsAction',
+           'setOrginalOrder': 'setOrginalOrder',
        }),
     }
 }

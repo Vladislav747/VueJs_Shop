@@ -13,11 +13,11 @@
     .shopping-cart-items {
       display: flex;
       flex-direction: row;
-      min-width: 1000px;
+      
 
       .shopping-cart__left{
         padding: 20px;
-        width: 70%;
+        flex: 3;
         
         .shopping-cart-title{
           background: #d2eec7;
@@ -34,7 +34,6 @@
           margin-right: 40px;
           margin-bottom: 40px;
           flex-wrap: wrap;
-          max-width: 800px;
           padding: 20px;
       
           li{
@@ -64,11 +63,18 @@
             line-height: 15px;
             white-space: normal;
           }
+
+          .image-wrapper{
+
+            min-height: 300px;
+
+            img {
+              max-height: 300px;
+              max-width: 200px;
+            }
+          }
         
-          img {
-            max-height: 300px;
-            max-width: auto;
-        }
+          
         
           .cart-counter{
             margin: 0 auto;
@@ -85,10 +91,13 @@
 
       .shopping-cart__right{
         padding: 20px;
+        flex: 1;
 
         .cart-checkout {
           flex: 1;
           justify-content: center;
+          text-align: center;
+          display: flex;
 
           .cart-sum{
 
@@ -136,11 +145,88 @@
     }
     img {
       width: auto;
+      
     }
 
+  }
+
+  @media screen and (max-width: 425px) {
+
+    .shopping-cart{
+
+      .shopping-cart-items {
+        flex-direction: column;
+
+        .shopping-cart__left{
+          order: 1;
+
+          .cart-product-card{
+            li{
+              .product-top{
+                .image-wrapper{
+
+                  min-height: 200px;
+                  
+                  img{
+                    max-height: 300px;
+                    max-width: 250px;
+                  }
+                }
+              }
+            }
+          }
+
+          
+        }
+
+        .shopping-cart__right{
+          order: -1;
+        }
+
+      }
+
+      .empty-cart{
+        position: static;
+        text-align: center;
+      }
+    }
+    
   }
 
 
   @media screen and (max-width: 320px) {
 
+    .shopping-cart{
+      .shopping-cart-items {
+        flex-direction: column;
+
+        .shopping-cart__left{
+          order: 1;
+
+          .cart-product-card{
+            li{
+              .product-top{
+                .image-wrapper{
+
+                  min-height: 100px;
+
+                  img{
+                    max-height: 200px;
+                    max-width: 150px;
+                  }
+                }
+              }
+            }
+          }
+
+          
+        }
+
+        .shopping-cart__right{
+          order: -1;
+        }
+
+      }
+    }
+    
   }

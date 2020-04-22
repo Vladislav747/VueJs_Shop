@@ -16,7 +16,7 @@ export default { // actions = mehtods
       }).then((res) => {
         var productResult = JSON.parse(res);
         context.commit('setProducts', productResult);
-        context.commit('addDefaultProducts', productResult);
+        context.commit('addDefaultProducts1', productResult);
         context.commit('setTotalItems', productResult.length);
         var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
         context.commit('setTotalPages', totalPages);
@@ -26,8 +26,6 @@ export default { // actions = mehtods
     },
 
     fetchProductsPagination(context){
-      console.log("fetchProductsPagination");
-
       //Если данные фильтруются по названию, 
       // категории, цене или другим свойствам то используем их
 
@@ -56,10 +54,7 @@ export default { // actions = mehtods
       }else{
           currentListProducts = products.slice(startIndex, endIndex); 
       }
-      
 
-      
-      context.commit('setCurrentPage', 1);
       context.commit("setCurrentListProducts", currentListProducts);
 
     },
@@ -126,12 +121,6 @@ export default { // actions = mehtods
     context.commit('emptyCart');
   },
 
-  async sendFile(file){
-    await firebase.storage().ref().put(file).then(() => {
-      console.log('Uploaded a blob or file')
-    }).catch((e) => {console.log(e);})
-  },
-
   fetchReviews(context, product_id){
 
     const db = firebase.firestore();
@@ -189,7 +178,7 @@ export default { // actions = mehtods
     var filterProducts = products.filter(element => element.category == category);
     
     context.commit('setFilteredProducts', filterProducts);
-
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 
@@ -198,7 +187,7 @@ export default { // actions = mehtods
     var filterProducts = products.filter(element => element.manufacturer == manufacturer);
 
     context.commit('setFilteredProducts', filterProducts);
-
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 
@@ -207,7 +196,7 @@ export default { // actions = mehtods
     var filterProducts = products.filter(element => element.sale == true);
 
     context.commit('setFilteredProducts', filterProducts);
-
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 
@@ -216,7 +205,7 @@ export default { // actions = mehtods
     var filterProducts = products.filter(element => element.stock > 0);
 
     context.commit('setFilteredProducts', filterProducts);
-
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 
@@ -225,6 +214,7 @@ export default { // actions = mehtods
     var filterProducts = products.filter(element => element.price < highprice);
 
     context.commit('setFilteredProducts', filterProducts);
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 
@@ -284,13 +274,20 @@ export default { // actions = mehtods
         }
       break;
 
-      default:
-        products = context.state.defaultItems;
-      break; 
-
     }
-
+    
     context.commit('setFilteredProducts', products);
     context.dispatch('fetchProductsPagination');
   },
+
+  setOrginalOrder(context){
+
+    var productsItems = context.state.defaultItems;
+
+    context.commit('setFilteredProducts', productsItems);
+    context.dispatch('fetchProductsPagination');
+  },
+
+
+
 }

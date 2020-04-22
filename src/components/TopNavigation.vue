@@ -2,7 +2,7 @@
   <div class="header bg-light-green">
     <div class="max-width-block header-inner">
       <router-link 
-        id="task-list" 
+        id="product-list" 
         :to="{ name: 'product-list' }">
         <img 
           src='../assets/shopify.svg' 
@@ -14,7 +14,8 @@
         href="#" 
         class="mobile-menu"
         @click.prevent="showMobileMenu">
-          <font-awesome-icon 
+          <font-awesome-icon
+            v-if="isHome"
             icon="bars" 
             size="2x" 
             class="top-icon bars-menu"
@@ -34,7 +35,8 @@
           class="top-icon"/>
       </router-link>
 
-      <div 
+      <div
+        v-if="isHome"
         class="categories"
         :class="{'not-shown': HideMobileMenu}"
         ref="categoriesMenu">
@@ -57,11 +59,12 @@
         type="search" 
         placeholder="Искать товары..."
       />
-      <font-awesome-icon 
+      <font-awesome-icon
+        v-if="isHome" 
         icon="search" 
         size="2x" 
         class="top-icon search-icon"
-        v-if="isHome" 
+        
       />
 
       <div class="icons-block">

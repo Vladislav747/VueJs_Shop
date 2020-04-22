@@ -42,7 +42,12 @@ $menu-item-color: #579740;
 }
 
  @media screen and (max-width: 1024px) {
-      
+     .categories{
+        position: absolute;
+        top: 17%;
+        right: 10%;
+     }
+    
 
   }
 
@@ -51,6 +56,49 @@ $menu-item-color: #579740;
 
   }
 
+  @media screen and (max-width: 425px) {
+    .categories{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 142%;
+        z-index: 998;
+        animation-duration: 2s;
+        animation: slidein;
+        animation-iteration-count: infinite;
+
+        @keyframes slidein {
+
+            from {
+                height: 0%;
+                width: 0;
+            }
+
+            to{
+                height: 100%;
+                width:100%;
+            }
+            
+        }
+
+        &.not-shown{
+            height: 0;
+            width: 0%;
+        }
+
+      ul.menu-group{
+        
+
+          li{
+              border: 1px solid white;
+              width: 100%;
+          }
+      }
+    }
+
+
+}
+
 
   @media screen and (max-width: 320px) {
 
@@ -58,7 +106,7 @@ $menu-item-color: #579740;
         width: 100%;
         position: absolute;
         left: 0;
-        top: 14%;
+        top: 142%;
         z-index: 998;
         animation-duration: 2s;
         animation: slidein;

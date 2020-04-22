@@ -1,12 +1,10 @@
 .login-form__wrapper{
 
-    width: 100vw;
-    min-height: 100vh;
+   
     padding: 35px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: flex;
+  
 
     .form__inner{
         padding: 35px;
@@ -17,7 +15,7 @@
         width: 30vw;
 
         .login-form{
-            width: 20vw;
+            width: 100%;
 
             input + p.error{
                 color:red;
@@ -33,5 +31,37 @@
       
     }
 
+
+}
+
+@media screen and (max-width: 1024px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 50vw;
+        }
+    }
+}
+
+ @media screen and (max-width: 768px) {
+    
+
+}
+
+@media screen and (max-width: 425px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 80vw;
+        }
+    }
+
+}
+
+
+@media screen and (max-width: 320px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 75vw;
+        }
+    }
 
 }

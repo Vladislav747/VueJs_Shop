@@ -37,7 +37,8 @@
     .products {
       display: flex;
       flex-wrap: wrap;
-      padding: 16px 0;
+      padding: 16px 30px;
+      justify-content: center;
     }
   
     .no-tasks {
@@ -72,18 +73,22 @@
 
         .display-quantity{
           margin: 20px 0;
+          display: inline-flex;
+          justify-content: center;
         }
       }
       
- 
-   }
- }
+    }
+  }
   
   @media screen and (max-width: 768px){
-     .products{
-          justify-content: center;
-  
+
+    .productList{
+      .products{
+        justify-content: flex-start;
+      }
     }
+     
   }
 
 

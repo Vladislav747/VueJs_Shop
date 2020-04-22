@@ -244,10 +244,14 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
       border: 1px solid black;
     
       }
-    } 
+    }
+
+    @media screen and (max-width: 1024px) {
+
+    }
   
   
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 768px) {
     #filter {
       select {
         width: 40%;
@@ -263,10 +267,20 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
     }
   }
   
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 425px) {
+
+    .filterWrapper{
+      .filterIcon{
+        right: 10px;
+      }
+    }
     #filter {
       select {
         width: 60%;
       }
     }
+  }
+
+  @media screen and (max-width: 320px) {
+
   }

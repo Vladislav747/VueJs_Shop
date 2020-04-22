@@ -42,22 +42,18 @@ export default { // setting and updating the state
   },
 
   setCurrentPage(state, currentPage){
-    console.log(currentPage, 'setCurrentPage mutation');
     state.currentPage = currentPage;
   },
 
   setTotalPages(state, totalPages){
-    console.log(totalPages, 'setTotalPages mutation');
     state.totalPages = totalPages;
   },
 
   setTotalItems(state, totalQuantity){
-    console.log(totalQuantity, 'setTotalItems mutation');
     state.totalProducts = totalQuantity;
   },
 
   setCurrentListProducts(state, currentListProducts){
-    console.log(currentListProducts, 'setCurrentListProducts mutation');
     state.currentListProducts = currentListProducts;
   },
 
@@ -76,7 +72,7 @@ export default { // setting and updating the state
     state.filteredItems = filterProducts;
   },
 
-  addDefaultProducts(state, products){
+  addDefaultProducts1(state, products){
     state.defaultItems = products;
   },
 

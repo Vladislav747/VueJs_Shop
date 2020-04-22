@@ -11,9 +11,24 @@
     } 
 }
 
+@media screen and (max-width: 1024px){
+    .btn-group-sort{
+        justify-content: center;
+    }
+  }
+
+@media screen and (max-width: 425px){
+    .btn-group-sort{
+        flex-direction: column;
+        margin: 4px 5px;
+ 
+   }
+ }
+
 @media screen and (max-width: 320px){
     .btn-group-sort{
         flex-direction: column;
+        margin: 4px 5px;
         
  
    }

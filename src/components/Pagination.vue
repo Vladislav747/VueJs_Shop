@@ -6,7 +6,7 @@
                 </li>
                 <li class="page-wrapper" v-for="p in totalPages" :key="p">
                     <button
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-paginate"
                         :class="{'active' : (p == currentPage)}" 
                         @click.prevent="changeCurrentPage(p)">{{p}}
                     </button>
@@ -34,10 +34,12 @@ export default {
     computed: {
         
         hasPrev: function(){
+            console.log(this.currentPage, "hasPrev")
             return this.currentPage > 1;
         },
 
         hasNext: function(){
+            console.log(this.totalPages, "hasNext");
             return this.currentPage < this.totalPages;
         },
         ...mapState({
