@@ -8,19 +8,12 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
 
 export default {
     name: "Checkout",
 
     data() {
         return {
-            title: "Авторизация",
-            loginTitle: "Логин",
-            passwordTitle: "Пароль",
-            errors: [],
-            login:"",
-            password:"",
         };
     },
 
@@ -34,10 +27,6 @@ export default {
     
 
     methods: {
-
-        checkForm(){
-            console.log()
-        }
     }
 }
 </script>

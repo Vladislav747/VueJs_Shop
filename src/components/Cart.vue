@@ -94,12 +94,15 @@ export default {
     },
 
     computed: {
+
+        //Получить товары корзины
         getCarts(){
           var fetchCarts = localStorage.getItem("cart");
-          if(!fetchCarts && this.carts.length == 0){
+          if(!fetchCarts){
 
             return false;
-
+            
+          //при обновлении корзины
           }else if(this.cartsItems.length == 0){
              this.carts = this.mapObjectToArr("cart");
            
@@ -130,9 +133,6 @@ export default {
         cartsItems: 'cartProducts',
         cartSelected: 'cartSelected',
       }),
-      ...mapState({
-          checkoutStatus: 'checkoutStatus',
-      })
     },
 
     methods: {

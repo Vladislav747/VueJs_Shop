@@ -56,18 +56,6 @@
         </div>
 
 
-          <div class="product-section desctiption">
-
-            <div class="description__title property-title">
-                <h4>Описание:</h4>
-            </div>
-
-            <div class="description__text property-value">
-                <p>{{ product.description }}</p>
-            </div>
-        </div>
-        
-
         <div class="manufacturer product-section">
           
           <div class="manufacturer__title property-title">
@@ -89,6 +77,21 @@
               <p>{{ product.category }}</p>
           </div>
         </div>
+
+
+        <div class="product-section desctiption">
+
+          <div class="description__title property-title">
+              <h4>Описание:</h4>
+          </div>
+
+          <div class="description__text property-value">
+              <p>{{ product.description }}</p>
+          </div>
+        </div>
+        
+
+        
 
 
         <div class="product-section price-block">

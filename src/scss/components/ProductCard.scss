@@ -243,7 +243,24 @@
   
 
   @media screen and (max-width: 1024px) {
+    .product {
       
+      .product-inner{
+        .product-header{
+        
+          .product-image-wrapper{
+            .image-wrapper{
+              .product-image{
+                width: 100% !important;
+              }
+              
+            }
+          }
+        }
+        
+      }
+
+    }
 
   }
 
@@ -268,12 +285,8 @@
         }
         
       }
-      
-
 
     }
-
-    
 
   }
 
