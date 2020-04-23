@@ -188,19 +188,26 @@ html, body {
   
     #main-wrapper{
       color: white;
+
+      .shopping-cart-title{
+        background-color: #5c5b5b;
+      }
     }
+
+
   
-    .header.bg-blue{
+    .header.bg-light-green{
       background-color: #232323;
     }
+
+    
+
+
   
     .card{
       background-color: #C3C1C0;
     }
-  
-    .task{
-      background-color: #C3C1C0;
-    }
+
   
     footer {
       background-color: #232323;

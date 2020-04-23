@@ -191,13 +191,7 @@ export default {
     })
   },
 
-  mounted: function() {
-    this.$root.$on('changeTheme', this.changeTheme);
-  },
-
   computed: {
-
-   
     ...mapGetters({
       currency: 'cartCurrency',
     }),

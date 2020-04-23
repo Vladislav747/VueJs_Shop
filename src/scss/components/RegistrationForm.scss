@@ -1,7 +1,5 @@
 .login-form__wrapper{
 
-    width: 100vw;
-    min-height: 100vh;
     padding: 35px;
     display: flex;
     justify-content: center;
@@ -35,5 +33,46 @@
 
 
     
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 60vw;
+
+            .login-form{
+                width: 100%;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 80vw;
+
+            .login-form{
+                width: 100%;
+            }
+        }
+    }
+
+}
+
+
+@media screen and (max-width: 320px) {
+    .login-form__wrapper{
+        .form__inner{
+            width: 75vw;
+
+            .login-form{
+                width: 100%;
+            }
+        }
+    }
 
 }

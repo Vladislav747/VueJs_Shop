@@ -7,7 +7,6 @@
                 action="https://vuejs.org/"
                 method="post"
             >
-
                 <h1>{{title}}</h1>
                 <div class="field">
                     <b-form-group
@@ -23,7 +22,8 @@
                         type="email"
                         required
                         placeholder="Введите логин"
-                        v-model="login" />
+                        v-model="login" 
+                    />
 
                     <p 
                         v-if="errors.login" 

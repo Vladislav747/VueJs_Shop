@@ -101,7 +101,7 @@ export default {
           if(!fetchCarts){
 
             return false;
-            
+
           //при обновлении корзины
           }else if(this.cartsItems.length == 0){
              this.carts = this.mapObjectToArr("cart");
@@ -255,8 +255,6 @@ export default {
          * Сделать заказ
          */
          createOrder(carts) {
-
-            console.log("createOrder");
             
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
@@ -269,7 +267,6 @@ export default {
 
             usersCollection.where("login", "==", user)
             .get().then((foundUsers)=>{
-                console.log(foundUsers.docs, "order");
                 foundUsers.docs.forEach(function (doc) {
                   console.log(doc, "Cart");
                   var userRef = usersCollection.doc(doc.id);
@@ -278,6 +275,13 @@ export default {
                   })
                 })
             })
+
+
+            var localStorage = localStorage.getItem("boughtItems");
+
+            if(!localStorage){
+              localStorage.setItem("boughtItems", JSON.stringify(user.goods));
+            }
 
         },
 
