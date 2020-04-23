@@ -67,7 +67,6 @@
 
 <script>
 import { showNoty, generateRandomSeed } from "../utility";
-import {mapState, mapGetters, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
 
@@ -111,9 +110,10 @@ export default {
                     var user;
                     var result = foundUsers.docs.some(function (doc) {
                         user = doc.data();
-                        console.log(user);
+                        
                         if(user.login == loginUser){
-                            console.log("Такой пользователь уже есть "+ loginUser);
+                            console.log("Такой пользователь уже есть " + loginUser);
+                            showNoty("Такой пользователь уже есть "+ loginUser);
                             return true;
                         }
                     });
@@ -126,6 +126,7 @@ export default {
                             date: nowDate,
                         }
                         this.insertUsertoDatabase(user, 'users');
+                        showNoty("Вы успешно зарегистрированы "+ loginUser);
                     }
                     
                     

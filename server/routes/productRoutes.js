@@ -44,16 +44,13 @@ router.post('/', (req, res) => {
     });
 });
 
+//Для обновления рейтинга
 router.put('/', (req, res) => {
  
   product.findOneAndUpdate({
       id: req.body.id
     }, {
-      name: req.body.name,
-      category: req.body.category,
-      description: req.body.description,
-      srcImage: req.body.srcImage,
-      dateOfTask: req.body.dateOfTask,
+      rating: req.body.rating,
     })
     .then(() => {
       res.json({

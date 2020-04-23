@@ -120,6 +120,8 @@ export default {
                             localStorage.setItem("isLogined", "true");
                             localStorage.setItem("userLogin", user.login);
                             localStorage.setItem("boughtItems", JSON.stringify(user.goods));
+
+                    showNoty("Поздравляю " + user.login + " вы успешно вошли");
                         
 
                     }else{

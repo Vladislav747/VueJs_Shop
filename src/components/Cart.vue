@@ -264,7 +264,6 @@ export default {
               return element.id;
             });
 
-
             usersCollection.where("login", "==", user)
             .get().then((foundUsers)=>{
                 foundUsers.docs.forEach(function (doc) {
@@ -300,5 +299,4 @@ export default {
 
 <style lang="scss" scoped> 
 @import "../scss/components/Cart.scss";
-
 </style>

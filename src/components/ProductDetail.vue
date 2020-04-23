@@ -138,7 +138,6 @@ import {mapGetters, mapActions} from 'vuex'
 import { showNoty } from "@/utility";
 import CommentForm from '../components/CommentForm.vue'
 import StarRatingCard from '@/components/StarRatingCard.vue';
-import FirebaseShop from "@/utility/FirebaseShop.js";
 
 export default {
 

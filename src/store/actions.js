@@ -170,7 +170,6 @@ export default { // actions = mehtods
   addFilterProducts(context, filterProducts){
     
     context.commit('setFilteredProducts', filterProducts);
-    
     context.dispatch('fetchProductsPagination');
 
   },
@@ -296,6 +295,9 @@ export default { // actions = mehtods
     context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
+
+
+
 
 
 
