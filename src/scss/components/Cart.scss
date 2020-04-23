@@ -17,6 +17,8 @@
 
       .shopping-cart__left{
         padding: 20px;
+        display: flex;
+        flex-direction: column;
         flex: 3;
         
         .shopping-cart-title{
@@ -35,6 +37,8 @@
           margin-bottom: 40px;
           flex-wrap: wrap;
           padding: 20px;
+          justify-content: start;
+          
       
           li{
             padding: 20px;
@@ -48,6 +52,11 @@
             flex-direction: column;
             margin-right: 40px;
             margin-bottom: 40px;
+            
+
+            .product-top{
+              text-align: center;
+            }
           }
     
           .product-title{

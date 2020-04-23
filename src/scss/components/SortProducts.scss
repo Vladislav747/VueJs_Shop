@@ -28,7 +28,9 @@
 @media screen and (max-width: 320px){
     .btn-group-sort{
         flex-direction: column;
-        margin: 4px 5px;
+        .btn-sort{
+            margin: 4px 5px;
+        }
         
  
    }

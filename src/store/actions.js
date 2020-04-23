@@ -285,7 +285,11 @@ export default { // actions = mehtods
 
   setOrginalOrder(context){
 
-    var productsItems = context.state.defaultItems;
+    function sortOrder(a, b){
+      return a.order - b.order;
+    }
+
+    var productsItems = context.state.products.sort(sortOrder);
 
     context.commit('setFilteredProducts', []);
     context.commit('setProducts', productsItems);

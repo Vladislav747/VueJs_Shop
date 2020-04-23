@@ -175,7 +175,7 @@ export default {
 
       //Проверяем данные либо из VUEX контейнера либо из localStorage
       var localCartItems = localStorage.getItem('totalItems');
-      var cartItemsCount = (this.cartItems > 0) ? this.cartItems : localCartItems;
+      var cartItemsCount = (localCartItems) ? localCartItems : this.cartItems;
       if(cartItemsCount > 0){
         this.cartCount = cartItemsCount;
       }

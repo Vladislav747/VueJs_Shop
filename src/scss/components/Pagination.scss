@@ -46,3 +46,37 @@
         opacity: 0;
     }
 }
+
+
+        @media screen and (max-width: 768px) {
+
+        }
+
+
+
+        @media screen and (max-width: 425px) {
+
+            .pagination{
+                margin: 100px 0 60px;
+                flex-direction: column;
+
+                li{
+                    padding: 5px 0;
+                }
+
+            }
+
+        }
+        
+        @media screen and (max-width: 320px) {
+            .pagination{
+                margin: 100px 0 60px;
+                flex-direction: column;
+
+                li{
+                    padding: 5px 0;
+                }
+
+            }
+            
+        }

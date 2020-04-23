@@ -27,7 +27,10 @@
         font-weight: 600;
         padding-top: 2px;
         font-size: 18px;
-
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
   
       .product-sticker {
@@ -246,8 +249,31 @@
 
    @media screen and (max-width: 768px) {
     .product {
-      width: 26vw;
+      width: 26vw !important;
+      .product-inner{
+        .product-header{
+          &.product-header--top{
+            .product-title{
+              min-height: 50px;
+            }
+          }
+          .product-image-wrapper{
+            .image-wrapper{
+              .product-image{
+                width: 100% !important;
+              }
+              
+            }
+          }
+        }
+        
+      }
+      
+
+
     }
+
+    
 
   }
 
