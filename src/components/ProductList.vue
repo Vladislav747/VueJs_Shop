@@ -2,17 +2,10 @@
   <div class="productList max-width-block">
     
     <filter-products
-      v-bind:isLoading="isLoading"
-      v-bind:noTasks="noTasks"
-      v-on:filter_products="filterResults"
-      v-on:clear_results="filterResults"
      />
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
-    <div v-if="noTasks" class="no-tasks">
-      <h3>Товары не найдены</h3>Нажмите вверху на панели Добавить Новый Товар
-    </div>
-
+    
     <div v-else class="products-wrapper">
 
       <div class="products-list-controls">
@@ -44,8 +37,7 @@
       </div>
       <pagination />
     </div>
-
-    
+   
   </div>  
 </template>
 
@@ -67,7 +59,6 @@ export default {
     У каждого товара есть название, описание и изображение.
     На странице отображается только фиксированное кол-во товаров, реализована пагинация.
   
-  
   */
 
 
@@ -82,7 +73,6 @@ export default {
 
   data() {
     return {
-      isLoading: false,
       quantityTypes: [3, 6, 9],
       filteredItems: [],
       selected: "",
@@ -94,16 +84,20 @@ export default {
   },
 
   computed: {
-    noTasks() {
+    noProducts() {
       return (
-        this.isLoading === false && (this.tasks && this.tasks.length === 0)
+        this.filteredProducts.length === 0
       );
+    },
+
+    isLoading(){
+      return this.filteredProducts.length == 0
+      
     },
 
     filteredProducts() {
 
         return this.$store.state.currentListProducts;
-      
 
     },
     ...mapGetters({
@@ -112,46 +106,17 @@ export default {
   },
 
   created(){
-    this.isLoading = true;
-    this.fetchProducts().then(() => this.isLoading = false).catch((error) => {showNoty("Ошибка вывода списка товаров  " + error);});
-    bus.$on("filter_search", function(elements){
-      console.log(elements, "filter_search");
-      console.log(this, "filter_search");
-        if(elements.length > 0){
-          this.filteredItems = elements;
-          console.log(this.filteredItems, "blya2");
-          this.$forceUpdate();
-        }
-      
-    });
+  
+    this.fetchProducts().catch((error) => {showNoty("Ошибка вывода списка товаров  " + error);});
+
   },
 
   methods: {
-    // /**
-    //  * Получить задачи
-    //  */
-    // async getProducts() {
-    //   try {
-    //     const response = await this.$http.get("products");
-    //     this.products = response.data;
-    //     this.$emit("remove", this.products);
-    //     this.$emit("get-products", this.products);
-    //     //Создается копия массива
-    //     this.filteredProducts = this.products.slice();
-    //   } catch (error) {
-    //     showNoty("Ошибка вывода списка товаров  " + error);
-    //   }
-
-    //   this.$parent.$children[0].products = this.filteredProducts;
-    //   this.isLoading = false;
-    // },
 
     async filterResults(data){
       console.log(data);
       // this.filteredProducts = data;
     },
-
-
 
     ...mapActions({
       fetchProducts: 'fetchProducts',

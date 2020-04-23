@@ -48,7 +48,6 @@ export default { // = computed properties
   productInStock() {
     
     return(product) => {
-      console.log(product, "productInStock")
       return product.quantity > 0
     }
   }

@@ -166,8 +166,7 @@ export default {
         var totalSum = parseInt(localStorage.getItem("totalSum"));
         var totalItems = parseInt(localStorage.getItem('totalItems'));
         var newSum;
-        console.log(cart, "Товар к удалению");
-        console.log(fetchCarts);
+
         //Плохая структура массива данных поэтому приходится отлавливать
         for (let [key, value] of Object.entries(fetchCarts)) {
           if(value["0"].product.id == cart.id){
@@ -197,7 +196,6 @@ export default {
         var fetchCarts = JSON.parse(localStorage.getItem(localItem));
         
         Object.entries(fetchCarts).forEach(function (item) {
-          console.log(item);
           item[1][0]['product']['quantity'] = item[1][0]['quantity'];
           resultCarts.push(item[1][0]['product'])
         });
@@ -206,8 +204,6 @@ export default {
       },
 
       chooseItem(item){
-        console.log(item, "selected");
-        console.log(this.selectedItems);
         var selectedElement = this.selectedItems.find(el => el.id === item.id);
 
         if(selectedElement){

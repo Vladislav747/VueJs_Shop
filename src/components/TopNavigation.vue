@@ -226,7 +226,6 @@ export default {
      */
     searchText: function() {
       var products = this.products;
-      console.log(this.products, "Search")
       var searchedProducts = [];
       var str = new RegExp(this.searchText);
       products.forEach(element => {

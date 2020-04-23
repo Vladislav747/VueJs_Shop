@@ -86,9 +86,6 @@ export default {
                 break;
             }
 
-            console.log(sortAttr, "sortAttr");
-            console.log(orderAttr, "orderAttr");
-
             var sortOptions = {
                 sortAttr: sortAttr,
                 orderAttr: orderAttr,

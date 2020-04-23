@@ -34,7 +34,7 @@
 
       <div class="right-col">
         <div class="product-rating">
-          <star-rating-card
+          Оценка товара<star-rating-card
             :disabled="true"
             ref="starComponent"
           />

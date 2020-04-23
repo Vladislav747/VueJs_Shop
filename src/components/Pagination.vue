@@ -34,12 +34,10 @@ export default {
     computed: {
         
         hasPrev: function(){
-            console.log(this.currentPage, "hasPrev")
             return this.currentPage > 1;
         },
 
         hasNext: function(){
-            console.log(this.totalPages, "hasNext");
             return this.currentPage < this.totalPages;
         },
         ...mapState({

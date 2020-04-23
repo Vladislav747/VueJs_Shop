@@ -1,6 +1,6 @@
 <template>  
   <div 
-    v-if="!isLoading && !noTasks" 
+    v-if="!isLoading && !noProducts" 
     class="filterWrapper bg-light-green">
       <div 
         class="filterIcon bg-light-green" 
@@ -29,7 +29,6 @@
             <!-- Фильтр по цене  -->
             <div class="filter-property">
                 <span class="filter-property--title">Цена: {{priceData}}</span>
-                <!-- <vue-slider v-model="filterPrice"></vue-slider> -->
                 <input 
                   class="slider"
                   id="pricerange"
@@ -75,7 +74,7 @@
             
 
             <div class="clear-result__wrapper">
-              <button @click="clearResults" class="clear-results__btn">Сбросить результаты</button>
+              <button @click="setOrginalOrder" class="clear-results__btn">Сбросить результаты</button>
           </div>
 
         </div>
@@ -101,7 +100,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      noTasks: false,
+      noProducts: false,
       filteredProducts: [],
       filterCategory: "",
       filterPrice:"",
@@ -193,6 +192,7 @@ export default {
             'filterSaleAction' : 'filterSaleAction',
             'filterStockAction' : 'filterStockAction',
             'filterPriceAction' : 'filterPriceAction',
+            'setOrginalOrder' : 'setOrginalOrder',
        })
 
 

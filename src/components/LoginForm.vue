@@ -103,7 +103,7 @@ export default {
          */
         async loginForm() {
 
-            console.log((this.login, this.password),"loginForm");
+            // console.log((this.login, this.password),"loginForm");
             
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
@@ -114,9 +114,9 @@ export default {
             .get().then((docs)=>{
                 docs.forEach(function (doc) {
                     user = doc.data();
-                    console.log(user)
+                    // console.log(user)
                     if(user.password == password){
-                        console.log("Залогинен", "loginForm");
+                        // console.log("Залогинен", "loginForm");
                             localStorage.setItem("isLogined", "true");
                             localStorage.setItem("userLogin", user.login);
                             localStorage.setItem("boughtItems", JSON.stringify(user.goods));
@@ -124,6 +124,7 @@ export default {
 
                     }else{
                         console.log("Ошибка с паролем", "loginForm");
+                        
                     }
                 })
             })
@@ -131,7 +132,7 @@ export default {
         },
 
         checkForm(){
-            console.log()
+            
         }
     }
 }

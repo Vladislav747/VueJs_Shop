@@ -52,7 +52,10 @@ export default { // actions = mehtods
           context.commit('setTotalPages', totalPages);
           context.commit('setTotalItems', filteredProducts.length);
       }else{
-          currentListProducts = products.slice(startIndex, endIndex); 
+          currentListProducts = products.slice(startIndex, endIndex);
+          context.commit('setTotalItems', products.length);
+          var totalPages = Math.ceil(context.state.totalProducts / context.state.displayQuantity);
+          context.commit('setTotalPages', totalPages);
       }
 
       context.commit("setCurrentListProducts", currentListProducts);
@@ -284,7 +287,9 @@ export default { // actions = mehtods
 
     var productsItems = context.state.defaultItems;
 
-    context.commit('setFilteredProducts', productsItems);
+    context.commit('setFilteredProducts', []);
+    context.commit('setProducts', productsItems);
+    context.commit('setCurrentPage', 1);
     context.dispatch('fetchProductsPagination');
   },
 

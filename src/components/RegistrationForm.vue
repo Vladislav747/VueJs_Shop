@@ -79,8 +79,6 @@ export default {
          * Зарегистрироваться в системе
          */
         registerForm() {
-           
-            console.log(this.login, "registerForm");
 
             var seed = generateRandomSeed();
             var nowDate = new Date().toLocaleString('ru',
