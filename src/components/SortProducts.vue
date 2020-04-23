@@ -24,12 +24,7 @@
             data-sort="manufacturer"
             :data-order="manufacturerOrder"
             @click="sortItems($event.target)">Производителю</button>
-        <button 
-            type="button" 
-            class="btn btn-sort" 
-            data-sort="rating"
-            :data-order="rateOrder"
-            @click="sortItems($event.target)">Оценке</button>
+      
       </div>
 </template>
 

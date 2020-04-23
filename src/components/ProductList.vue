@@ -115,7 +115,7 @@ export default {
 
     async filterResults(data){
       console.log(data);
-      // this.filteredProducts = data;
+      
     },
 
     ...mapActions({

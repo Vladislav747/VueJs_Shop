@@ -74,6 +74,7 @@ import { showNoty } from "../utility";
 import {mapState, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
+import {bus} from '@/utility/bus.js'
 
 export default {
     name: "LoginForm",
@@ -114,19 +115,19 @@ export default {
             .get().then((docs)=>{
                 docs.forEach(function (doc) {
                     user = doc.data();
-                    // console.log(user)
+                   
                     if(user.password == password){
-                        // console.log("Залогинен", "loginForm");
+                        
                             localStorage.setItem("isLogined", "true");
                             localStorage.setItem("userLogin", user.login);
                             localStorage.setItem("boughtItems", JSON.stringify(user.goods));
 
                     showNoty("Поздравляю " + user.login + " вы успешно вошли");
-                        
+                    bus.$emit('loginStatusChanged');
 
                     }else{
                         console.log("Ошибка с паролем", "loginForm");
-                        
+                        showNoty("Неверный пароль " + user.login + " попробуйте еще раз");
                     }
                 })
             })

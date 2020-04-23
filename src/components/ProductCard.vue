@@ -76,6 +76,7 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import {bus} from '@/utility/bus.js'
 
 export default {
   name: "ProductCard",
@@ -166,6 +167,7 @@ export default {
 
           localStorage.setItem('totalSum', totalSum + productSum);
           localStorage.setItem('totalItems', totalItems + 1);
+          bus.$emit('totalItemsChanged', totalItems + 1);
         }
       } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
           var cartItems = {};
@@ -177,6 +179,8 @@ export default {
           totalItems = 1;
           
           localStorage.setItem('totalItems', totalItems);
+          //Генерируем событие для шапки и пересчета кол-ва товаров в корзине
+          bus.$emit('totalItemsChanged', totalItems);
           this.addProductToCart({product, quantity});
       }
       

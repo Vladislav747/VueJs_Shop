@@ -135,14 +135,11 @@ export default { // actions = mehtods
         var reviews = [];
 
         docs.forEach(function (doc) {
-          var reviewItem = doc.data(); 
-          console.log(reviewItem); 
+          var reviewItem = doc.data();  
           reviews.push(reviewItem)
         })
-        console.log( reviews, "Check"); 
       }).then((res) => {
         
-        console.log(res, "")
       })
          
       // reviews = reviews;

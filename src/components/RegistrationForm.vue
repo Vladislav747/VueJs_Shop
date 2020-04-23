@@ -69,6 +69,7 @@
 import { showNoty, generateRandomSeed } from "../utility";
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
+import {bus} from '@/utility/bus.js'
 
 export default {
     name: "RegistrationForm",
@@ -127,6 +128,7 @@ export default {
                         }
                         this.insertUsertoDatabase(user, 'users');
                         showNoty("Вы успешно зарегистрированы "+ loginUser);
+                        bus.$emit('loginStatusChanged');
                     }
                     
                     
@@ -151,7 +153,6 @@ export default {
             }).then(() =>{
                 console.log("Успешно зарегистрирован")
                 var loginedLocal = localStorage.getItem("isLogined");
-                console.log(loginedLocal, "loginedLocal");
                 if(!loginedLocal){
                     localStorage.setItem("isLogined", "true");
                     localStorage.setItem("userLogin", user.login);

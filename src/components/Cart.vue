@@ -275,12 +275,14 @@ export default {
                 })
             })
 
-
+            
             var localStorage = localStorage.getItem("boughtItems");
 
             if(!localStorage){
               localStorage.setItem("boughtItems", JSON.stringify(user.goods));
             }
+
+            this.deleteAllCart();
 
         },
 

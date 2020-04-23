@@ -111,18 +111,8 @@
           </router-link>
         </div>    
       </div>
-
-
-
-
       </div>
-
-      
-
-      
     </div>
-        
-    
 
   </div>
 </template>
@@ -212,6 +202,11 @@ export default {
     bus.$on('totalItemsChanged', (item)=>{
       this.cartCount = item;
     });
+    bus.$on('loginStatusChanged', ()=>{
+       this.isLogined();
+    }
+     
+    );
     
   },
 

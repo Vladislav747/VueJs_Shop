@@ -78,7 +78,6 @@ export default {
 
             if (!this.disabled) {
                 this.temp_value = value;
-                console.log(value, "StarRatingCard");
                 return this.value_stars = value;
             }
 

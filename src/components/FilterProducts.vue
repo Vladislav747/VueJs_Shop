@@ -139,7 +139,6 @@ export default {
      *
      */
     filterManufacturer(manufacturer) {
-      console.log(manufacturer, "filterManufacturer");
       
       if (manufacturer !== "") {
         this.filterManufacturerAction(manufacturer);
@@ -162,20 +161,14 @@ export default {
       divFilter.classList.toggle("show");
     },
 
-     /* Очистить результаты фильтрации */
-    clearResults() {
-      
-    },
-
     updateSale(){
-      console.log(this.sale,"updateSale");
       if(this.sale){
         this.filterSaleAction();
       }
     },
 
     updateStock(){
-      console.log(this.stock,  "updateStock");
+     
       if(this.stock){
         this.filterStockAction();
       }
@@ -183,7 +176,6 @@ export default {
     },
     
     updateHighPrice(value){
-        console.log(value, 'updateHighPrice');
         this.filterPriceAction(value);
     },
 
