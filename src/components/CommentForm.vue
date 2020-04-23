@@ -54,7 +54,6 @@
           </div>
           <div 
              class="form-rating"
-             :class="{'hidden': canUserLeaveRating}"
             >
             Оцените этот товар
             <star-rating-card
