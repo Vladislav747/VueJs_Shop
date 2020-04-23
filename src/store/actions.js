@@ -209,8 +209,10 @@ export default { // actions = mehtods
   },
 
   filterPriceAction(context, highprice){
-    var products = context.state.products;
-    var filterProducts = products.filter(element => element.price < highprice);
+    var products = [...context.state.products];
+    var filterProducts = products.filter(function(element){
+      return parseInt(element.price) < parseInt(highprice);
+    });
 
     context.commit('setFilteredProducts', filterProducts);
     context.commit('setCurrentPage', 1);
