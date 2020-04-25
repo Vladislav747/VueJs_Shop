@@ -89,12 +89,11 @@
         <div 
           class="profile-container"
           v-if="isLogined">
-            <div class="profile-inner">
-              <img 
-                :src="require(`@/static/images/avatar.jpeg`)"
-                alt="Профиль"
-                class="profile-img">
-            </div>
+          <b-avatar 
+            variant="info" 
+            :src="require(`@/static/images/avatar.jpeg`)"
+            alt="Профиль"
+            class="mr-3" />
         </div>
         
         <div 

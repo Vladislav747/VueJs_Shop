@@ -13,28 +13,23 @@
           <p>Всего в корзине товаров {{this.carts.length}}</p>
           <button class="btn-primary" @click="deleteAllCart()">Очистить корзину</button>
         </div>
-        <ul class="cart-product-card">
-          <li 
+        <b-card-group class="cart-product-card">
+          <b-card 
             v-for="cart in carts" 
-            :key="cart.id" 
+            :key="cart.id"
             :class="{'selected': isSelected(cart)}"
+            :title="cart.name"
+            :img-src="require(`@/static/images/${cart.srcImage}`)"
+            :img-alt="`Image of ${cart.title}`"
+            img-top
+            style="max-width: 33.3%;"
+            
           >
             <div 
               class="product-top"
               @click="chooseItem(cart)" 
             >
-              <div class="card-row">
-                <span 
-                  class="product-title"
-                  >{{cart.name}}
-                  </span>
-              </div>
-              <div class="image-wrapper">
-                <img 
-                  :src="require(`@/static/images/${cart.srcImage}`)" 
-                  :alt="`Image of ${cart.title}`"
-                >
-              </div>
+           
               
               <div class="card-row">
                 <span class="product-price">{{cart.price}} {{currency}}</span>
@@ -53,9 +48,9 @@
                 <span class="plus" @click="increaseQuantity(cart)" data-max="1000"></span>
               </div>
             </div>
-            <button class="btn-primary red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</button>
-          </li>
-        </ul>
+            <b-button class="btn-primary red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</b-button>
+          </b-card>
+        </b-card-group>
       </div>
       <div class="shopping-cart__right">
         <div class="cart-checkout">

@@ -29,8 +29,7 @@ Vue.use(Vuelidate);
 library.add(faPlusCircle, faFilter, faPalette, faShoppingCart, faSignInAlt, faSearch, faBars);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-import { BootstrapVue } from 'bootstrap-vue';
-Vue.use(BootstrapVue)
+
 
 const clientConfigs = require('./config/clientConfigs');
 const api = axios.create({
@@ -60,8 +59,7 @@ const firebaseConfig = {
 // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-
-
+import './plugins/bootstrap-vue';
 
 new Vue({
   el: '#app',
