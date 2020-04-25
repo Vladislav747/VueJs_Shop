@@ -122,7 +122,7 @@ export default {
                             localStorage.setItem("userLogin", user.login);
                             localStorage.setItem("boughtItems", JSON.stringify(user.goods));
 
-                    showNoty("Поздравляю " + user.login + " вы успешно вошли", "sucess");
+                    showNoty("Поздравляю " + user.login + " вы успешно вошли", "success");
                     bus.$emit('loginStatusChanged');
 
                     }else{

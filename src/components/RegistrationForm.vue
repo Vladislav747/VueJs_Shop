@@ -127,7 +127,7 @@ export default {
                             date: nowDate,
                         }
                         this.insertUsertoDatabase(user, 'users');
-                        showNoty("Вы успешно зарегистрированы "+ loginUser);
+                        showNoty("Вы успешно зарегистрированы "+ loginUser, "success");
                         bus.$emit('loginStatusChanged');
                     }
                     
@@ -151,7 +151,6 @@ export default {
                 password: user.password,
                 date_registered: user.date,
             }).then(() =>{
-                console.log("Успешно зарегистрирован")
                 var loginedLocal = localStorage.getItem("isLogined");
                 if(!loginedLocal){
                     localStorage.setItem("isLogined", "true");

@@ -93,7 +93,12 @@
             variant="info" 
             :src="require(`@/static/images/avatar.jpeg`)"
             alt="Профиль"
-            class="mr-3" />
+            class="mr-3" 
+          />
+          <b-button 
+            class="btn-logout" 
+            variant="primary"
+            @click="logout()">Выйти</b-button> 
         </div>
         
         <div 
@@ -108,7 +113,7 @@
               size="2x"
             />
           </router-link>
-        </div>    
+        </div> 
       </div>
       </div>
     </div>
@@ -146,6 +151,11 @@ export default {
 
     showMobileMenu(){
       this.HideMobileMenu = !this.HideMobileMenu;
+    },
+
+    logout(){
+      localStorage.removeItem("isLogined");
+      this.$forceUpdate();
     },
 
     ...mapActions({

@@ -2,7 +2,7 @@
     <div class="pagination__wrapper">
            <ul class="pagination">
                <li class="page-wrapper">
-                   <a href="#" v-bind:class="{ 'disabled': !hasPrev}" @click.prevent="prevPage">Предыдущая</a>
+                   <a href="#" v-bind:class="{ 'disabled': !hasPrev}" @click.prevent="prevPage">«</a>
                 </li>
                 <li class="page-wrapper" v-for="p in totalPages" :key="p">
                     <button
@@ -12,7 +12,7 @@
                     </button>
                 </li>
                 <li class="page-wrapper">
-                    <a href="#" v-bind:class="{ 'disabled': !hasNext}" @click.prevent="nextPage">Следующая</a>
+                    <a href="#" v-bind:class="{ 'disabled': !hasNext}" @click.prevent="nextPage">»</a>
                 </li>
            </ul>
     </div>
