@@ -1,9 +1,9 @@
 <template>  
   <div 
     v-if="!isLoading && !noProducts" 
-    class="filterWrapper bg-light-green">
+    class="filterWrapper element-light-green">
       <div 
-        class="filterIcon bg-light-green" 
+        class="filterIcon element-light-green" 
         @click="showFilter">
 
         <font-awesome-icon icon="filter" class="top-icon icon-size-m"/>
@@ -74,7 +74,7 @@
             
 
             <div class="clear-result__wrapper">
-              <button @click="setOrginalOrder" class="clear-results__btn">Сбросить результаты</button>
+              <button @click="setOrginalOrder" class="clear-results__btn element-black">Сбросить результаты</button>
           </div>
 
         </div>

@@ -164,7 +164,9 @@ html, body {
   
   .bg-light-green{
     background-color: #346d1f;
+   
   }
+
   
   .bg-dark{
     background-color: #232323;
@@ -182,6 +184,23 @@ html, body {
 	  background: #386129;
 	  
 	}
+  }
+
+  .element-light-green{
+    background-color: #346d1f;
+    color: #fff;
+
+    &:hover{
+      background: #92d878;
+    }
+  }
+
+  .element-black{
+    background-color: #f0f0f0;
+
+    &:hover{
+      background: #a1a1a1;
+    }
   }
   
   body.bg-dark{

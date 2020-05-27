@@ -24,11 +24,12 @@ $menu-item-color: #579740;
             color: #FFFFFF;
             display: block;
             margin: 0 5px;
-            font: bold 18px/20px sans-serif;
+            font: bold 18px/20px inherit;
             padding: 10px 15px;
             text-align: center;
             -webkit-transition: all .25s ease;
             transition: all .25s ease;
+            font-weight: 400;
     
             &:hover{
                 background: #000000;

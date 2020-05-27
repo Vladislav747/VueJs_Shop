@@ -1,3 +1,6 @@
+//vars
+$btn-hover: #579740 !default;
+
 .btn-group-sort{
     display: inline-flex;
     align-items: center;
@@ -6,7 +9,7 @@
         margin: 0 5px;
 
         &:hover{
-            background: #bebebe;
+            background: $btn-hover;
         }
     } 
 }
