@@ -21,6 +21,11 @@ export const PRODUCT_MANUFACTURES = [
   'Септолит',
 ];
 
+export const PRODUCT_CATEGORIES = [
+  'Хлеб',
+  'Молоко',
+];
+
 export const generateRandomSeed = function(){
   return Math.random().toString(36).substr(2, 10)
 }

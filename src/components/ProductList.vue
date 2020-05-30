@@ -1,8 +1,7 @@
 <template>
   <div class="productList max-width-block">
     
-    <filter-products
-     />
+    <filter-products />
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
     
@@ -11,16 +10,39 @@
       <div class="products-list-controls">
         <div class="display-quantity">
           <p>Выводить на странице:</p>
-          <select 
-            class="display-quantity__btn" 
-            @change="changeDisplayQuantity($event.target.value)"
+          <div 
+            class="display-quantity__select"
+            ref="select"
+            v-on:click="showSelectBody"
           >
-            <option
-              v-for="type in quantityTypes"
-              :value="type"
-              :key="type">{{ type }}
-            </option>
-          </select>
+            <div 
+              class="select__header"
+              ref="product"
+            >
+              <span class="select__current">{{quantityDefault}}</span>
+              <div class="select__icon">
+                <img 
+                  src='../assets/chevron-down.svg' 
+                  alt="Иконка вниз" 
+                  class="select__logo"
+                >
+              </div>
+              
+            </div>
+            
+            <div 
+              class="select__body"
+            >
+              <div 
+                class="select__item"
+                 v-for="type in quantityTypes"
+                :value="type"
+                :key="type"
+                @click="displayQuantity($event.target)"
+              >{{ type }}</div>
+              
+            </div>
+          </div>
       </div>
       
 
@@ -48,7 +70,6 @@ import FilterProducts from "./FilterProducts.vue";
 import Pagination from "./Pagination.vue";
 import SortProducts from './SortProducts.vue';
 import {mapGetters, mapActions} from 'vuex'
-import {bus} from '@/utility/bus.js'
 
 export default {
 
@@ -76,11 +97,11 @@ export default {
       quantityTypes: [3, 6, 9],
       filteredItems: [],
       selected: "",
+      quantityDefault: 3,
     };
   },
 
   props:{
-    category: "",
   },
 
   computed: {
@@ -112,10 +133,13 @@ export default {
   },
 
   methods: {
+    showSelectBody(){
+      this.$refs.select.classList.toggle('is-active');
+    },
 
-    async filterResults(data){
-      console.log(data);
-      
+    displayQuantity(el){
+      this.changeDisplayQuantity(el.getAttribute("value"));
+      this.quantityDefault = el.getAttribute("value");
     },
 
     ...mapActions({
