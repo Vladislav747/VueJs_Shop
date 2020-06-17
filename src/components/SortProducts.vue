@@ -1,31 +1,72 @@
 <template>
-    <div class="btn-group btn-group-sort" role="group" aria-label="Sort Buttons">
-        Сортировать по:&nbsp; 
-        <button 
+    <div class="btn-group btn-group-sort display-sort">
+        <div class="display-sort__title">
+            <p>Сортировать по:</p>
+        </div>
+        <div 
+            class="display-sort__select"
+            ref="select_sort"
+            v-on:click="showSelectBody"
+        >
+            <div 
+              class="select__header"
+              ref="product"
+            >
+              <span class="select__current">{{sortDefault}}</span>
+              <div class="select__icon">
+                <img 
+                  src='../assets/chevron-down.svg' 
+                  alt="Иконка вниз" 
+                  class="select__logo"
+                >
+              </div>
+              
+            </div>
+            
+            <div 
+              class="select__body"
+            >
+              <div 
+                class="select__item"
+                 v-for="type in sortTypes"
+                :value="type.value"
+                :key="type.value"
+                :data_sort="type.data_sort"
+                :data_order="type.data_order"
+                @click="sortItems($event.target)"
+              >{{ type.value }}</div>
+              
+            </div>
+          </div>
+
+        <!-- <button 
             type="button" 
             class="btn btn-sort" 
-            data-sort="original-order"
+            data_sort="original-order"
             @click="sortOriginalOrder()">Сбросить результаты</button>
+
         <button 
             type="button"  
             class="btn btn-sort"
-            data-sort="price"
-            :data-order="priceOrder"
+            data_sort="price"
+            :_order="priceOrder"
             @click="sortItems($event.target)">Цене</button>
+
         <button 
             type="button" 
             class="btn btn-sort" 
-            data-sort="name"
-            :data-order="nameOrder"
+            data_sort="name"
+            :_order="nameOrder"
             @click="sortItems($event.target)">Наименованию</button>
+
         <button 
             type="button" 
             class="btn btn-sort" 
-            data-sort="manufacturer"
-            :data-order="manufacturerOrder"
-            @click="sortItems($event.target)">Производителю</button>
+            data_sort="manufacturer"
+            :_order="manufacturerOrder"
+            @click="sortItems($event.target)">Производителю</button> -->
       
-      </div>
+    </div>
 </template>
 
 <script>
@@ -34,8 +75,6 @@ import {mapActions} from 'vuex'
 
 export default {
     name: "SortProducts",
-    props: {
-    },
 
     data() {
         return {
@@ -43,6 +82,24 @@ export default {
             nameOrder: false,
             manufacturerOrder: false,
             rateOrder: false,
+            sortDefault: "Цене",
+            sortTypes: [
+                {
+                    "data_sort": "name",
+                    "data_order": "nameOrder",
+                    "value": "Наименованию",
+                },
+                {
+                    "data_sort": "price",
+                    "data_order": "priceOrder",
+                    "value": "Цене",
+                },
+                {
+                    "data_sort": "manufacturer",
+                    "data_order": "manufacturerOrder",
+                    "value": "Производителю",
+                },
+            ],
         };
     },
 
@@ -51,9 +108,14 @@ export default {
 
     
     methods: {
+
+        showSelectBody(){
+            this.$refs.select_sort.classList.toggle('is-active');
+        },
+
        sortItems(value){
 
-            var sortAttr = value.getAttribute('data-sort');
+            var sortAttr = value.getAttribute('data_sort');
             var orderAttr = "";
 
             switch (sortAttr) {
@@ -104,4 +166,5 @@ export default {
 
 <style lang="scss" scoped> 
 @import "../scss/components/SortProducts.scss";
+
 </style>

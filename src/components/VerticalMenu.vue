@@ -11,20 +11,6 @@
         >
       </router-link>
     </div>
-    
-
-    <router-link 
-      id="product-add" 
-      v-if="isAdmin"
-      :to="{ name: 'product-add' }"
-      >
-      <span class="top-desktop">Создать товар</span>
-      <font-awesome-icon 
-        icon="plus-circle" 
-        size="2x" 
-        class="top-icon"
-      />
-    </router-link>
 
     <div class="vertical-menu__sub-menu sub-menu bg-light-green">
       <a href="#">

@@ -162,6 +162,10 @@ html, body {
     .right-panel{
       margin: 30px;
       min-width: 1300px;
+    
+      @media (max-width: 768px) {
+        min-width: 730px;
+      }
     }
   }
   
@@ -177,9 +181,7 @@ html, body {
   
   .bg-light-green{
     background-color: #346d1f;
-   
   }
-
   
   .bg-dark{
     background-color: #232323;
@@ -190,13 +192,13 @@ html, body {
   }
 
   .green-style{
-	color: #fff;
-	background: #579740;
+    color: #fff;
+    background: #579740;
 
-	&:hover{
-	  background: #386129;
-	  
-	}
+    &:hover{
+      background: #386129;
+      
+    }
   }
 
   .element-light-green{
@@ -226,21 +228,14 @@ html, body {
       }
     }
 
-
-  
     .header.bg-light-green{
       background-color: #232323;
     }
 
-    
-
-
-  
     .card{
       background-color: #C3C1C0;
     }
 
-  
     footer {
       background-color: #232323;
     }

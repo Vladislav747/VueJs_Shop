@@ -1,5 +1,5 @@
 <template>
-    <div class="login-form__wrapper">
+    <div class="registration-form__wrapper">
         <div class="form__inner form-container ui segment piled">
             <b-form 
                 class="login-form ui form"

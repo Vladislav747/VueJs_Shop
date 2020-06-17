@@ -1,7 +1,7 @@
 <template>  
   <div 
     v-if="!isLoading && !noProducts" 
-    class="filterWrapper element-light-green">
+    class="filterWrapper">
       <div 
         class="filterIcon element-light-green" 
         @click="showFilter">
@@ -150,6 +150,7 @@ export default {
      */
     showFilter() {
       var divFilter = document.getElementsByClassName("filterWrapper")[0];
+      console.log(divFilter, "FindMe");
       var overlay = this.$root.$data.showOverlay();
       divFilter.style['z-index'] = overlay.index;
       overlay.div.onclick = function(e){

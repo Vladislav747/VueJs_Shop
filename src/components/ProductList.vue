@@ -9,7 +9,10 @@
 
       <div class="products-list-controls">
         <div class="display-quantity">
-          <p>Выводить на странице:</p>
+          <div class="display-quantity__title">
+            <p>Выводить на странице:</p>
+          </div>
+          
           <div 
             class="display-quantity__select"
             ref="select"

@@ -60,6 +60,9 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
     svg {
       color: white;
     }
+    @media (max-width: 768px) {
+      right: 30px;
+    }
   }
   
   #filter {
@@ -217,10 +220,6 @@ $ie-bottom-track-color: darken($track-color, $contrast) !default;
           }
         }
      
-
-          
-
-
           .min{
             float: left;
           }

@@ -23,14 +23,16 @@
 
     .sub-menu{
         margin-top: 16px;
-        box-shadow: -1px 1px 8px rgba(126, 114, 242, 0.578726);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.170509);
         border-radius: 4px;
         text-align: center;
         padding: 12px 50px;
         cursor: pointer;
         text-transform: uppercase;
 
-        
+        a{
+            color: #fff;
+        }
     }
     .categories{
         margin-top: 50px;
