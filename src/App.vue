@@ -1,14 +1,22 @@
 <template>
   <div id="app">
     <div id="main-wrapper">
-      <top-navigation
+      <div class="left-panel">
+        <vertical-menu />
+      </div>
+      <div class="right-panel">
+        <top-navigation
         @search="updateSearch"
         @get-products="get-products"
         />
-      <div class="content-wrapper">
-        <router-view :search="searchText" />
+        <div class="content-wrapper">
+          <router-view :search="searchText" />
+        </div>
       </div>
+      
     </div>
+
+    
  
     <footer-navigation />
   
@@ -16,7 +24,8 @@
 </template>
 
 <script>
-import TopNavigation from './components/TopNavigation'
+import TopNavigation from './components/TopNavigation';
+import VerticalMenu from './components/VerticalMenu';
 import FooterNavigation from './components/FooterNavigation';
 
 export default {
@@ -25,6 +34,7 @@ export default {
   components: {
     TopNavigation,
     FooterNavigation,
+    VerticalMenu,
   },
   data () {
     return {

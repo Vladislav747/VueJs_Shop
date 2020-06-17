@@ -1,5 +1,9 @@
 
 @import url(//db.onlinewebfonts.com/c/3dad38b96d1a28deaba765fa3a16697f?family=GT+Eesti+Pro+Display);
+@import "null.scss";
+
+//vars
+$bg-color: #F9F9F9;
 
 html, body {
     box-sizing: border-box;
@@ -8,8 +12,8 @@ html, body {
     .content-wrapper{
       min-height: 500px;
       padding: 70px 0;
+      display: flex;
     }
-
 
     .icon-size-m{
       font-size: 1em;
@@ -17,12 +21,6 @@ html, body {
     
     .icon-size-xl{
       font-size: 2em;
-    }
-
-
-    a{
-      text-decoration: none;
-      color: #000;
     }
 
     ul{
@@ -149,7 +147,22 @@ html, body {
     line-height: 1.6rem;  
     min-height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    background-color: $bg-color;
+
+    .left-panel{
+      margin: 0px;
+      min-width: 15%;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .right-panel{
+      margin: 30px;
+      min-width: 1300px;
+    }
   }
   
   .max-width-block {

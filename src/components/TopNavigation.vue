@@ -1,14 +1,6 @@
 <template>
   <div class="header bg-light-green">
     <div class="max-width-block header-inner">
-      <router-link 
-        id="product-list" 
-        :to="{ name: 'product-list' }">
-        <img 
-          src='../assets/shopify.svg' 
-          alt="Логотип" 
-          class="top-logo">
-      </router-link>
 
       <a 
         href="#" 
@@ -21,34 +13,6 @@
             class="top-icon bars-menu"
           />
         </a>
-       
-
-      <router-link 
-        id="product-add" 
-        v-if="isAdmin"
-        :to="{ name: 'product-add' }"
-      >
-        <span class="top-desktop">Создать товар</span>
-        <font-awesome-icon 
-          icon="plus-circle" 
-          size="2x" 
-          class="top-icon"/>
-      </router-link>
-
-      <div
-        v-if="isHome"
-        class="categories"
-        :class="{'not-shown': HideMobileMenu}"
-        ref="categoriesMenu">
-        <ul class="menu-group">
-          <li class="menu-item" v-for="category in categoriesList" :key="category">
-            <a
-              href="#"
-              @click.prevent="chooseCategory(category)">{{category}}
-            </a>
-          </li>
-        </ul>
-      </div>
 
       <div class="spacer"/>
 
@@ -135,13 +99,6 @@ export default {
       cartCount: 0,
       acceptRoutes:[
         "/",
-      ],
-      categoriesList:[
-        "Книги",
-        "Одежда",
-        "Электроника",
-        "Еда",
-        "Медтовары"
       ],
       HideMobileMenu: true,
     };
