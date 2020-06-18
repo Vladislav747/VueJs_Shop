@@ -21,7 +21,6 @@
     <div
       v-if="isHome"
       class="categories"
-      :class="{'not-shown': HideMobileMenu}"
       ref="categoriesMenu">
         <div class="menu-item" v-for="category in categoriesList" :key="category">
           <div class="menu-item__title">

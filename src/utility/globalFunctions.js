@@ -1,19 +1,20 @@
 export default {
     showOverlay: function() {
-        var overlay = document.getElementsByClassName("overlay");
+        var divOverlay = document.getElementsByClassName("overlay");
         var index = 3000;
-        if(overlay.length) {
-            index = overlay[overlay.length - 1].style['z-index'] + 2;
+        if(divOverlay.length) {
+            index = divOverlay[divOverlay.length - 1].style['z-index'] + 2;
         }
 
-        let div = document.createElement('div');
-        div.className = "overlay";
-        div.style['z-index'] = index;
-        document.body.append(div);
+        let newDiv = document.createElement('div');
+        newDiv.className = "overlay";
+        newDiv.style['z-index'] = index;
+        let divProductList =  document.querySelector(".productList");
+        divProductList.append(newDiv);
 
         var result = {
             index: index + 1,
-            div: div,
+            div: newDiv,
         };
 
         return result;
