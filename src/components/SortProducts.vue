@@ -37,35 +37,7 @@
               >{{ type.value }}</div>
               
             </div>
-          </div>
-
-        <!-- <button 
-            type="button" 
-            class="btn btn-sort" 
-            data_sort="original-order"
-            @click="sortOriginalOrder()">Сбросить результаты</button>
-
-        <button 
-            type="button"  
-            class="btn btn-sort"
-            data_sort="price"
-            :_order="priceOrder"
-            @click="sortItems($event.target)">Цене</button>
-
-        <button 
-            type="button" 
-            class="btn btn-sort" 
-            data_sort="name"
-            :_order="nameOrder"
-            @click="sortItems($event.target)">Наименованию</button>
-
-        <button 
-            type="button" 
-            class="btn btn-sort" 
-            data_sort="manufacturer"
-            :_order="manufacturerOrder"
-            @click="sortItems($event.target)">Производителю</button> -->
-      
+        </div>
     </div>
 </template>
 
