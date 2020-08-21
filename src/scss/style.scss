@@ -151,8 +151,8 @@ html, body {
     background-color: $bg-color;
 
     .left-panel{
-      margin: 0px;
-      min-width: 15%;
+	  margin: 0px;
+	  width: 20%;
 
       @media (max-width: 768px) {
         display: none;
@@ -160,11 +160,11 @@ html, body {
     }
 
     .right-panel{
-      margin: 30px;
-      min-width: 1300px;
-    
+	  margin: 30px;
+	  width: 80%;
+		
       @media (max-width: 768px) {
-        min-width: 730px;
+        width: 100%;
       }
     }
   }
