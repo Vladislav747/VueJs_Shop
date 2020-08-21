@@ -1,9 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  // devServer: {
-  //   proxy: 'https://vue-taskmanager.herokuapp.com/'
-  // },
   configureWebpack: {
     devtool: 'source-map'
   },
@@ -11,6 +8,6 @@ module.exports = {
     '../dist/' :
     '/',
     
-    outputDir:path.resolve(__dirname, '../dist/')
+    outputDir:path.resolve(__dirname, 'vuejs_shop','../dist/')
   
 }
