@@ -10,7 +10,7 @@
     <div v-else class="shopping-cart-items">
       <div class="shopping-cart__left">
         <div class="shopping-cart-title">
-          <p>Всего в корзине товаров {{this.carts.length}}</p>
+          <p class="bold">Всего в корзине товаров: {{this.carts.length}}</p>
           <button class="btn-primary" @click="deleteAllCart()">Очистить корзину</button>
         </div>
         <b-card-group class="cart-product-card">
@@ -21,8 +21,6 @@
             :title="cart.name"
             :img-src="require(`@/static/images/${cart.srcImage}`)"
             :img-alt="`Image of ${cart.title}`"
-            img-top
-            style="max-width: 33.3%;"
             
           >
             <div 
@@ -55,7 +53,7 @@
       <div class="shopping-cart__right">
         <div class="cart-checkout">
           <div v-if="hasSum" class="cart-sum">
-            <span>Сумма корзины : </span>
+            <span class="bold">Сумма корзины : </span>
             <p class="sum">{{ total}}  {{currency}}</p>
             <button class="btn-primary  element-light-green" @click="checkout">Оформить заказ</button>
           </div>
