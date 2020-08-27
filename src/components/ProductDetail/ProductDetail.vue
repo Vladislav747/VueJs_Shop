@@ -24,9 +24,9 @@
               :title="`Title of ${product.srcImage}`" />
           </div>
 
-          <div class="product-sale" v-if="product.sale">
+          <span class="product-sale" v-if="product.sale">
               Акция
-          </div>
+          </span>
 
         </div>
         
@@ -34,11 +34,11 @@
 
       <div class="right-col">
         <div class="product-rating">
-          <h4>Оценка товара</h4>
-		  <star-rating-card
-            :disabled="true"
-            ref="starComponent"
-          />
+			<h4>Оценка товара</h4>
+			<star-rating-card
+				:disabled="true"
+				ref="starComponent"
+			/>
         </div>
 
         <div class="stock-block property-section">
@@ -56,47 +56,8 @@
           </div>
         </div>
 
-
-        <div class="manufacturer product-section">
-          
-          <div class="manufacturer__title property-title">
-              <h4>Производитель:</h4>
-          </div>
-
-          <div class="manufacturer__text property-value">
-              <p>{{ product.manufacturer }}</p>
-          </div>
-        </div>
-
-        <div class="category product-section">
-          
-          <div class="category__title property-title">
-              <h4>Категория:</h4>
-          </div>
-
-          <div class="category__text property-value">
-              <p>{{ product.category }}</p>
-          </div>
-        </div>
-
-
-        <div class="product-section desctiption">
-
-          <div class="description__title property-title">
-              <h4>Описание:</h4>
-          </div>
-
-          <div class="description__text property-value">
-              <p>{{ product.description }}</p>
-          </div>
-        </div>
-        
-
-        
-
-
-        <div class="price-section">
-          	<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
+		<div class="price-section">
+			<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
 			<div class="quantity-block">
 				<div class="counter-block">
 					<span 
@@ -114,7 +75,7 @@
 						data-max="1000"></span>
 				</div>
 			</div>
-        </div>
+		</div>
 
       
 
@@ -123,6 +84,42 @@
               @click="addProductCart(product, quantity)" 
               class="add-to-cart-btn btn-primary">Купить товар</button>
         </div>
+
+
+        <div class="manufacturer product-section">
+          
+          <div class="manufacturer__title property-title">
+              <h5>Производитель:</h5>
+          </div>
+
+          <div class="manufacturer__text property-value">
+              <h6>{{ product.manufacturer }}</h6>
+          </div>
+        </div>
+
+        <div class="category product-section">
+          
+          <div class="category__title property-title">
+              <h5>Категория:</h5>
+          </div>
+
+          <div class="category__text property-value">
+              <p>{{ product.category }}</p>
+          </div>
+        </div>
+
+
+        <div class="product-section desctiption">
+
+			<div class="description__title property-title">
+				<h5>Описание:</h5>
+			</div>
+
+			<div class="description__text property-value">
+				{{ product.description }}
+			</div>
+        </div>
+		
       </div>
     </div>
 
@@ -188,24 +185,20 @@ export default {
     
     //Только пользователь который купил этот товар может оставлять отзывы на него
     canUserLeaveReview: function(){
-      var localLogin = localStorage.getItem('userLogin');
-      var localLogged = localStorage.getItem('isLogined');
-
-      if(localLogin && localLogged){
-        this.profile_autor = localLogin;
-      }
       
-      //Товары которые клиент приобрел
-      var boughtItemsId = JSON.parse(localStorage.getItem("boughtItems"));
-      if(boughtItemsId){
-        
-          var product = this.product;
-         var ourProduct = boughtItemsId.some(function(elem){
-           return elem.id == product.id
-         })
-      }
- 
-     return ourProduct;
+		var localItems = localStorage.getItem("boughtItems")
+		
+		//Товары которые клиент приобрел
+		var boughtItemsId = JSON.parse(localItems);
+		if(boughtItemsId){
+			
+			var product = this.product;
+			var ourProduct = boughtItemsId.some(function(elem){
+			return elem.id == product.id
+			})
+		}
+
+		return ourProduct;
       
     },
 
@@ -220,6 +213,10 @@ export default {
 
   mounted() {
     this.getProduct();
+  },
+
+  updated(){
+	this.updateLoginProfile();
   },
 
   methods: {
@@ -276,13 +273,14 @@ export default {
     
     addProductCart(product, quantity){
 
-      //Заносим данные в localStorage
-      var productItem = [{product, quantity}]
-      
-      var totalItems, totalSum;
+		//Заносим данные в localStorage
+		var productItem = [{product, quantity}]
+		var productSum = 0;
+		var totalItems, totalSum;
+		var cartItems = {};
       
       if (localStorage.getItem('cart')) {
-        var cartItems = JSON.parse(localStorage.getItem('cart'));
+		cartItems = JSON.parse(localStorage.getItem('cart'));
         var cartItem = false;
 
         /* Проверяем что нет подобного объект уже в нашем localStorage */
@@ -290,7 +288,8 @@ export default {
           if(item["1"]["0"]["product"]["id"] == product.id){
            cartItem = true;
           }
-        });
+		});
+		
 
         if(!cartItem) {
           cartItems[Object.keys(cartItems).length] = productItem;
@@ -300,17 +299,17 @@ export default {
           totalSum = parseInt(localStorage.getItem('totalSum'));
           totalItems = parseInt(localStorage.getItem('totalItems'));
 
-          var productSum = parseInt(product.price) * parseInt(quantity);
+          productSum = parseInt(product.price) * parseInt(quantity);
 
           localStorage.setItem('totalSum', totalSum + productSum);
           localStorage.setItem('totalItems', totalItems + 1);
         }
       } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
-          var cartItems = {};
+         
           cartItems[Object.keys(cartItems).length] = productItem;
           localStorage.setItem('cart', JSON.stringify(cartItems));
 
-          var productSum = parseInt(product.price) * parseInt(quantity);
+          productSum = parseInt(product.price) * parseInt(quantity);
           localStorage.setItem('totalSum', productSum);
           totalItems = 1;
           
@@ -322,7 +321,17 @@ export default {
 
     inStock(stockQunatity){
       return stockQunatity > 0;
-    },
+	},
+	
+	updateLoginProfile(){
+
+		var localLogin = localStorage.getItem('userLogin');
+		var localLogged = localStorage.getItem('isLogined');
+
+		if(localLogin && localLogged){
+			this.profile_autor = localLogin;
+		}
+	},
 
 
     ...mapActions({

@@ -14,7 +14,7 @@
                 <p>{{review.autor_login}}</p>
               </div>
               <div class="review__date">
-                <h4>{{review.date}}</h4>
+                <p>{{review.date}}</p>
               </div>
               
             </div>
@@ -121,9 +121,18 @@ export default {
     },
 
     props:{
-      product_id: '',
-      profile_autor:'',
-      right_leave_review: '',
+		product_id: {
+			type: String,
+			default: '',
+		},
+		profile_autor:{
+			type: String,
+			default: '',
+		},
+		right_leave_review: {
+			type: String,
+			default: '',
+		},
     },
 
     data(){
@@ -144,7 +153,6 @@ export default {
 
       throttleGetReviews: function(){
         let DELAY = 2000;
-        console.log(this);
         throttle(this.getReviews, DELAY);
         return true;
       },
@@ -164,7 +172,6 @@ export default {
   },
 
   mounted() {
-       console.log(this.product_id, "mounted")
        this.getReviews();
     },
 
@@ -182,7 +189,7 @@ export default {
         const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
         storageRef.on(`state_changed`,snapshot=>{
           this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-        }, error=>{console.log(error.message)},
+        }, error=>{new Error(error.message)},
         ()=>{this.uploadValue=100;
           storageRef.snapshot.ref.getDownloadURL().then((url)=>{
             this.picture =url;
@@ -192,7 +199,7 @@ export default {
     },
 
     cancel(){
-      console.log("Cancel Заглушка - Доделать!"); 
+      //TODO: Заглушка доделать!
     },
 
     rateProduct(id){
@@ -204,7 +211,6 @@ export default {
 
 
     createReview(){
-      console.log("Create Review");
 
       //Очищаем форму
       document.getElementsByClassName('form-title')[0].value = '';
@@ -264,7 +270,6 @@ export default {
 
       // Вычисляем и выводим в консоль среднее значение.
       const averageRating = ratingTotal / reviewsRating.length;
-      console.log("Average rating:", averageRating);
       this.$emit('average_rating', averageRating);
     
     },

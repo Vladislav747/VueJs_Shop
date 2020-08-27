@@ -10,24 +10,7 @@
 <script>
 
 export default {
-    name: "Checkout",
-
-    data() {
-        return {
-        };
-    },
-
-    computed: {
-        
-    },
-
-    created(){
-        
-    },
-    
-
-    methods: {
-    }
+	name: "Checkout",
 }
 </script>
 

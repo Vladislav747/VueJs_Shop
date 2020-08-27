@@ -13,7 +13,7 @@
     </div>
 
     <div class="vertical-menu__sub-menu sub-menu bg-light-green">
-      <a href="/">
+      <a class="bold" href="/">
         Главная
       </a>
     </div> 

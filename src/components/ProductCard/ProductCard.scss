@@ -62,16 +62,16 @@
   
       }
 
-      .product-sale{
-        position: absolute;
-        top:2%;
-        left:2%;
-        border-radius: 10px;
-        padding: 5px;
-        background: red;
-        color: white;
-
-      }
+	  .product-sale{
+		position: absolute;
+		top:2%;
+		left:2%;
+		border-radius: 4px;
+		padding: 4px 8px;
+		background: red;
+		color: #ffffff;
+		font-weight: 600;
+	  }
     }
   
     @media screen and (max-width: 550px) {
@@ -214,7 +214,8 @@
         .stock{
           background: #ededed;
           display: inline-block;
-          font-size: 14px;
+		  font-size: 14px;
+		  font-weight: 600;
           padding: 4px 8px;
           border-radius: 4px;
           max-width: 125px;
@@ -224,7 +225,8 @@
 
           &.available{
             background: #31df21;
-            color: #ededed;
+			color: #ededed;
+			
           }
 
           &.not-available{

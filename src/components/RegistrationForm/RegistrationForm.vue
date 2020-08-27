@@ -112,14 +112,14 @@ export default {
                         user = doc.data();
                         
                         if(user.login == loginUser){
-                            console.log("Такой пользователь уже есть " + loginUser);
+                            new Error("Такой пользователь уже есть " + loginUser);
                             showNoty("Такой пользователь уже есть "+ loginUser);
                             return true;
                         }
                     });
                     
                     if(!result){
-                        var user = {
+						user = {
                             seed: seed,
                             login: loginUser,
                             password: passwordUser,
