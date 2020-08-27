@@ -25,7 +25,7 @@
               <span class="select__current">{{quantityDefault}}</span>
               <div class="select__icon">
                 <img 
-                  src='../assets/chevron-down.svg' 
+                  src='@/assets/chevron-down.svg' 
                   alt="Иконка вниз" 
                   class="select__logo"
                 >
@@ -68,10 +68,7 @@
 
 <script>
 import { showNoty } from "@/utility";
-import ProductCard from "./ProductCard.vue";
-import FilterProducts from "./FilterProducts.vue";
-import Pagination from "./Pagination.vue";
-import SortProducts from './SortProducts.vue';
+import {FilterProducts, Pagination, ProductCard, SortProducts} from "@/components";
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
@@ -159,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 
 //preloader styles
-@import "../scss/preloader.scss";
-@import "../scss/components/ProductList.scss";
+@import "@/scss/preloader.scss";
+@import "./ProductList.scss";
 
 </style>

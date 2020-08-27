@@ -64,8 +64,6 @@ export default {
         * Behaviour of the stars on mouseout.
         */
         star_out: function() {
-            var self = this;
-
             if (!this.disabled) {
                 return this.value_stars = this.temp_value;
             }
@@ -88,6 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/StarRatingCard.scss";
+@import "./StarRatingCard.scss";
 
 </style>

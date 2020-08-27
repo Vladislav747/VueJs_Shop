@@ -126,11 +126,11 @@ export default {
       this.check.close();
     },
 
-    increaseQuantity(quantity){
+    increaseQuantity(){
       this.quantity += 1;
 
     },
-    decreaseQuantity(quantity){
+    decreaseQuantity(){
       if(this.quantity > 1){
         this.quantity -= 1;
       }
@@ -207,5 +207,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../scss/components/ProductCard.scss";
+  @import "./ProductCard.scss";
 </style>

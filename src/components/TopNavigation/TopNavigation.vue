@@ -128,9 +128,9 @@ export default {
     },
 
     hasCartItems : function(){
-
-      //Проверяем данные либо из VUEX контейнера либо из localStorage
-      var localCartItems = localStorage.getItem('totalItems');
+      
+	  var localCartItems = localStorage.getItem('totalItems');
+	  //Проверяем данные либо из VUEX контейнера либо из localStorage
       var cartItemsCount = (localCartItems) ? localCartItems : this.cartItems;
       if(cartItemsCount > 0){
         this.cartCount = cartItemsCount;
@@ -202,8 +202,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/TopNavigation.scss";
-@import "../scss/components/CategoriesNavigation.scss";
+@import "./TopNavigation.scss";
+@import "./CategoriesNavigation.scss";
 
 
 </style>

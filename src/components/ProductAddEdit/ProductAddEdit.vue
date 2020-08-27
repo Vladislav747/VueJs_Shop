@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { showNoty,  PRODUCT_CATEGORIES} from "../utility";
+import { showNoty,  PRODUCT_CATEGORIES} from "@/utility";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
@@ -227,7 +227,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "../scss/components/ProductAddEdit.scss";
+@import "./ProductAddEdit.scss";
 
 
 </style>

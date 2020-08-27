@@ -10,24 +10,26 @@
       </div>
 
     <div  id="filter">
-        <p class="filterWrapper-text">Фильтр</p>
+        <h2 class="filterWrapper-text">Фильтр</h2>
 
         <div class="filter-inner">
 
             <!-- Фильтр по Производителю  -->
-            <div class="filter-property">
+            <div class="filter-property brand-property">
                 <span class="filter-property--title">Производитель:</span>
-                <select 
-                    class="filter-property--body" 
-                    @change="filterManufacturer($event.target.value)">
-                    <option 
-                      v-for="type in productManufactures" 
-                      :key="type">{{ type }}</option>
-                </select>
+                
+				<label class="checkbox-control" v-for="type in productManufactures" :key="type">
+					<p class="filter-property--title">{{ type }}</p>
+					<input 
+						type="checkbox"
+						@change="filterManufacturer($event.target.value)"
+						:value="type">
+					<span class="checkbox-box"></span> 
+              </label>
             </div>
 
             <!-- Фильтр по цене  -->
-            <div class="filter-property">
+            <div class="filter-property price-property">
                 <span class="filter-property--title">Цена: {{priceData}}</span>
                 <input 
                   class="slider"
@@ -37,44 +39,46 @@
                   :min="min"
                   :max="max"
                   step="0.1"
+				  @change="changeSliderValue($event.target.value)"
                   v-model="priceData"
+				  
                   @input="updateHighPrice($event.target.value)"
                 />
-                <span class="min">от {{ min }} руб</span>
-                <span class="max">до {{ priceData }} руб</span>
+				<div class="slider__borders">
+					<span class="min">от {{ min }} руб</span>
+                	<span class="max">до {{ priceData }} руб</span>
+				</div>
+                
             </div>
 
-            <!-- Фильтр по свойству наличию  -->
-            <div class="filter-property stock-property">
+            <!-- Фильтр по свойству наличию и Sale -->
+            <div class="filter-property">
               
               <label class="checkbox-control">
-              <p class="filter-property--title">В наличии:</p>
-              <input 
-                type="checkbox"
-                v-model="stock"
-                @change="updateStock">
-              <span class="checkbox-box"></span> 
+				<p class="filter-property--title">В наличии:</p>
+				<input 
+					type="checkbox"
+					v-model="stock"
+					@change="updateStock">
+				<span class="checkbox-box"></span> 
               </label>
 
-            </div>
-
-             <!-- Фильтр по свойству sale  -->
-            <div class="filter-property sale-property">
-              
-              <label class="checkbox-control">
-              <p class="filter-property--title">Товары Sale:</p>
-              <input 
-                type="checkbox"
-                v-model="sale"
-                @change="updateSale">
-              <span class="checkbox-box"></span> 
+			  <label class="checkbox-control">
+				<p class="filter-property--title">Товары Sale:</p>
+				<input 
+					type="checkbox"
+					v-model="sale"
+					@change="updateSale">
+				<span class="checkbox-box"></span> 
               </label>
 
             </div>
             
 
             <div class="clear-result__wrapper">
-              <button @click="setOrginalOrder" class="clear-results__btn element-black">Сбросить результаты</button>
+              <button 
+			  	@click="setOrginalOrder" 
+				class="clear-results__btn element-light-green">Сбросить результаты</button>
           </div>
 
         </div>
@@ -83,7 +87,7 @@
 </template>
 
 <script>
-import {PRODUCT_MANUFACTURES} from "../utility";
+import {PRODUCT_MANUFACTURES} from "@/utility";
 import 'vue-slider-component/theme/default.css'
 import {mapActions} from 'vuex'
 
@@ -109,7 +113,7 @@ export default {
       filteredManufacturesArray: [],
       filteredPrice:[],
       min: 0,
-      max: 10000,
+	  max: 10000,
       sale: false,
       stock: false,
       priceData: 10000,
@@ -133,13 +137,20 @@ export default {
 
   methods: {
 
+	/**
+     * Округлить значение слайдера при изменении
+     * @param {string} manufacturer - производитель
+     */
+	changeSliderValue(priceValue){
+		this.priceData = Math.round(priceValue)
+	},
+
     /**
      * Фильтровать задачу по производителю
      * @param {object} manufacturer - производитель
      *
      */
     filterManufacturer(manufacturer) {
-      
       if (manufacturer !== "") {
         this.filterManufacturerAction(manufacturer);
       }
@@ -197,6 +208,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "../scss/components/FilterProducts.scss";
+@import "./FilterProducts.scss";
 
 </style>

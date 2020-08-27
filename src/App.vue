@@ -24,9 +24,7 @@
 </template>
 
 <script>
-import TopNavigation from './components/TopNavigation';
-import VerticalMenu from './components/VerticalMenu';
-import FooterNavigation from './components/FooterNavigation';
+import {TopNavigation, VerticalMenu, FooterNavigation}  from '@/components';
 
 export default {
   

@@ -34,7 +34,8 @@
 
       <div class="right-col">
         <div class="product-rating">
-          Оценка товара<star-rating-card
+          <h4>Оценка товара</h4>
+		  <star-rating-card
             :disabled="true"
             ref="starComponent"
           />
@@ -94,27 +95,28 @@
         
 
 
-        <div class="product-section price-block">
-          <span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
+        <div class="price-section">
+          	<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
+			<div class="quantity-block">
+				<div class="counter-block">
+					<span 
+						class="minus" 
+						@click="decreaseQuantity(quantity)"></span>
+					<input 
+						type="text" 
+						v-model="quantity" 
+						class="text" 
+						name="quantity" 
+						value="1">
+					<span 
+						class="plus" 
+						@click="increaseQuantity(quantity)" 
+						data-max="1000"></span>
+				</div>
+			</div>
         </div>
 
-        <div class="quantity-block">
-          <div class="counter-block">
-            <span 
-              class="minus" 
-              @click="decreaseQuantity(quantity)"></span>
-            <input 
-              type="text" 
-              v-model="quantity" 
-              class="text" 
-              name="quantity" 
-              value="1">
-            <span 
-              class="plus" 
-              @click="increaseQuantity(quantity)" 
-              data-max="1000"></span>
-          </div>
-        </div>
+      
 
         <div class="buy-block">
             <button 
@@ -136,8 +138,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import { showNoty } from "@/utility";
-import CommentForm from '../components/CommentForm.vue'
-import StarRatingCard from '@/components/StarRatingCard.vue';
+import {CommentForm, StarRatingCard} from '@/components';
 
 export default {
 
@@ -336,6 +337,6 @@ export default {
 <style lang="scss" scoped>
 
 //preloader styles
-@import "../scss/preloader.scss";
-@import "../scss/components/ProductDetail.scss";
+@import "@/scss/preloader.scss";
+@import "./ProductDetail.scss";
 </style>

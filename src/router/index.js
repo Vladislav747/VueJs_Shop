@@ -1,13 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import ProductList from '@/components/ProductList.vue';
-import ProductAddEdit from '@/components/ProductAddEdit.vue';
-import ProductDetail from '@/components/ProductDetail.vue';
-import Cart from '@/components/Cart.vue';
-import LoginForm from '@/components/LoginForm.vue';
-import RegistrationForm from '@/components/RegistrationForm.vue';
-import Checkout from '@/components/Checkout.vue';
+import {Cart, Checkout, LoginForm, ProductDetail, ProductAddEdit, ProductList, RegistrationForm} from '@/components';
 
 
 Vue.use(Router)

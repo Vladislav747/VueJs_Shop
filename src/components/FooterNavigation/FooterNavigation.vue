@@ -12,12 +12,6 @@
 export default {
   name: "FooterNavigation",
 
-  data() {
-    return {
-     
-    };
-  },
-
   methods:{
     changeTheme() {
      this.isBlackTheme = !this.isBlackTheme;
@@ -36,7 +30,7 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "../scss/components/FooterNavigation.scss";
+@import "./FooterNavigation.scss";
 
 
 

@@ -32,6 +32,6 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/Checkout.scss";
+@import "./Checkout.scss";
 
 </style>

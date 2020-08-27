@@ -3,7 +3,7 @@
     <div v-if="!getCarts"  class="empty-cart">
       <p>Ваша корзина пуста.</p>
       <router-link to="/">
-        <button class="shop-cart">Вернуться в каталог</button>
+        <button class="btn-primary shop-cart element-light-green">Вернуться в каталог</button>
       </router-link>
     </div>
 
@@ -57,7 +57,7 @@
           <div v-if="hasSum" class="cart-sum">
             <span>Сумма корзины : </span>
             <p class="sum">{{ total}}  {{currency}}</p>
-            <button class="btn-primary green-style" @click="checkout">Оформить заказ</button>
+            <button class="btn-primary  element-light-green" @click="checkout">Оформить заказ</button>
           </div>
         </div> 
       </div>  
@@ -295,5 +295,5 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/Cart.scss";
+@import "./Cart.scss";
 </style>

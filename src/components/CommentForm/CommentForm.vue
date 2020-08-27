@@ -108,9 +108,9 @@
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import StarRatingCard from '../components/StarRatingCard.vue';
+import {StarRatingCard} from '@/components';
 import firebase from 'firebase/app';
-import {generateRandomSeed } from "../utility"
+import {generateRandomSeed } from "@/utility"
 import throttle from '@/utility/throttle.js'
 
 export default {
@@ -291,5 +291,5 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-  @import "../scss/components/CommentForm.scss";
+  @import "./CommentForm.scss";
 </style>

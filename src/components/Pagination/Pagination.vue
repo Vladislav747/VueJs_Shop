@@ -62,6 +62,5 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/Pagination.scss";
-
+@import "./Pagination.scss";
 </style>

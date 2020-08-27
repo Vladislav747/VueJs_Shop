@@ -5,7 +5,7 @@
         id="product-list" 
         :to="{ name: 'product-list' }">
         <img 
-          src='../assets/shopify.svg' 
+          src='@/assets/shopify.svg' 
           alt="Логотип" 
           class="top-logo"
         >
@@ -13,7 +13,7 @@
     </div>
 
     <div class="vertical-menu__sub-menu sub-menu bg-light-green">
-      <a href="#">
+      <a href="/">
         Главная
       </a>
     </div> 
@@ -75,12 +75,6 @@ export default {
     };
   },
 
-  methods: {
-
-   
-    
-  },
-
   watch: {
 
   },
@@ -94,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/components/VerticalMenu.scss";
+@import "./VerticalMenu.scss";
 
 
 </style>

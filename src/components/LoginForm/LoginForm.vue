@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { showNoty } from "../utility";
+import { showNoty } from "@/utility";
 import {mapState, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
@@ -142,6 +142,5 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/LoginForm.scss";
-
+@import "./LoginForm.scss";
 </style>

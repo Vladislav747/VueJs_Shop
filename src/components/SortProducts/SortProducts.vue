@@ -15,7 +15,7 @@
               <span class="select__current">{{sortDefault}}</span>
               <div class="select__icon">
                 <img 
-                  src='../assets/chevron-down.svg' 
+                  src='@/assets/chevron-down.svg' 
                   alt="Иконка вниз" 
                   class="select__logo"
                 >
@@ -137,6 +137,6 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-@import "../scss/components/SortProducts.scss";
+@import "./SortProducts.scss";
 
 </style>

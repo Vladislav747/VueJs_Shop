@@ -3,7 +3,6 @@
         <div class="form__inner form-container ui segment piled">
             <b-form 
                 class="login-form ui form"
-                @submit="checkForm"
                 action="https://vuejs.org/"
                 method="post"
             >
@@ -66,7 +65,7 @@
 </template>
 
 <script>
-import { showNoty, generateRandomSeed } from "../utility";
+import { showNoty, generateRandomSeed } from "@/utility";
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
 import {bus} from '@/utility/bus.js'
@@ -136,11 +135,6 @@ export default {
                 })
         },
 
-        checkForm(){
-            console.log("checkForm");
-
-        },
-
         insertUsertoDatabase(user, collectionName){
             const db = firebase.firestore();
             const collection = db.collection(collectionName);
@@ -164,5 +158,5 @@ export default {
 </script>
 
 <style lang="scss" scoped> 
-    @import "../scss/components/RegistrationForm.scss";
+    @import "./RegistrationForm.scss";
 </style>
