@@ -117,14 +117,17 @@
   
   
         .buy-block{
-          color: black;
-          float: right;
-          font-size: 0.9rem;
-          border-radius: 5px;
-          padding: 3px 10px 2px;
-          text-transform: uppercase;
-          border-radius: 2px;
-          margin: 1rem 0;
+			display: flex;
+			justify-content: space-around;
+			color: black;
+			float: right;
+			font-size: 0.9rem;
+			border-radius: 5px;
+			padding: 3px 10px 2px;
+			text-transform: uppercase;
+			border-radius: 2px;
+			margin: 1rem 0;
+			
         
       	}
   

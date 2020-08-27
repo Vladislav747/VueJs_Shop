@@ -22,9 +22,6 @@
         </div>
       </div>
       <div class="product-properties">
-        <div class="manufacturer property-section">
-          Производитель: {{ product.manufacturer}}
-        </div>
         <div class="stock-block property-section">
           <div 
             class="stock available"

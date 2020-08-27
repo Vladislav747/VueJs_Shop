@@ -56,30 +56,31 @@
           </div>
         </div>
 
+			
 		<div class="price-section">
 			<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
-			<div class="quantity-block">
-				<div class="counter-block">
-					<span 
-						class="minus" 
-						@click="decreaseQuantity(quantity)"></span>
-					<input 
-						type="text" 
-						v-model="quantity" 
-						class="text" 
-						name="quantity" 
-						value="1">
-					<span 
-						class="plus" 
-						@click="increaseQuantity(quantity)" 
-						data-max="1000"></span>
-				</div>
-			</div>
 		</div>
-
-      
+		
 
         <div class="buy-block">
+				<div class="quantity-block">
+					<div class="counter-block">
+						<span 
+							class="minus" 
+							@click="decreaseQuantity(quantity)"></span>
+						<input 
+							type="text" 
+							v-model="quantity" 
+							class="text" 
+							name="quantity" 
+							value="1">
+						<span 
+							class="plus" 
+							@click="increaseQuantity(quantity)" 
+							data-max="1000"></span>
+					</div>
+				
+				</div>
             <button 
               @click="addProductCart(product, quantity)" 
               class="add-to-cart-btn btn-primary">Купить товар</button>
