@@ -11,7 +11,7 @@
       <div class="shopping-cart__left">
         <div class="shopping-cart-title">
           <p class="bold">Всего в корзине товаров: {{this.carts.length}}</p>
-          <button class="btn-primary" @click="deleteAllCart()">Очистить корзину</button>
+          <button class="btn-primary btn-clean-cart element-red-style" @click="deleteAllCart()">Очистить корзину</button>
         </div>
         <b-card-group class="cart-product-card">
           <b-card 
@@ -46,7 +46,7 @@
                 <span class="plus" @click="increaseQuantity(cart)" data-max="1000"></span>
               </div>
             </div>
-            <b-button class="btn-primary red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</b-button>
+            <button class="btn-primary element-red-style" @click="deleteProductFromCart(cart)">Удалить из корзины</button>
           </b-card>
         </b-card-group>
       </div>
@@ -65,7 +65,8 @@
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import {bus} from '@/utility/bus.js'
+import {bus} from '@/utility/bus.js';
+import { showNoty } from "@/utility";
 import firebase from 'firebase/app';
 
 
@@ -234,11 +235,11 @@ export default {
 
       checkout(){
         if(this.selectedItems.length > 0){
-          console.log("Заказ оформлен только выбранные товары " + this.selectedItems);
+          showNoty("Заказ оформлен только выбранные товары " + this.selectedItems);
           this.createOrder(this.selectedItems);
           this.$router.push({ name: 'checkout'})
         }else{
-          console.log("Заказ оформлен " + this.carts);
+          showNoty("Заказ оформлен " + this.carts);
           this.$router.push({ name: 'checkout'})
           this.createOrder(this.carts);
         }
@@ -260,7 +261,6 @@ export default {
             usersCollection.where("login", "==", user)
             .get().then((foundUsers)=>{
                 foundUsers.docs.forEach(function (doc) {
-                  console.log(doc, "Cart");
                   var userRef = usersCollection.doc(doc.id);
                    userRef.update({
                      goods: idCarts

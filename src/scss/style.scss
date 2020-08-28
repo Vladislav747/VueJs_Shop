@@ -216,7 +216,17 @@ html, body {
     &:hover{
       background: #588048!important;
     }
-  }
+	}
+	
+	.element-red-style{
+		background: #e6270e!important;
+		color: #fff;
+		border: #fff !important;
+		&:hover{
+			background: #b81f0b!important;
+			color: #fff;
+		}
+	}
 
   .element-black{
     background-color: #f0f0f0;
@@ -319,17 +329,18 @@ html, body {
       }
     }
     &.btn-primary{
-      background: #005bff;
+	  background: #005bff;
+	  border: 1px solid #005bff;
+      border-radius: 4px;
       color: #fff;
       padding: 10px;
-      font-size: 13px;
+      font-size: 1em;
       outline: none;
-      border: 1px solid #005bff;
-      border-radius: 4px;
       transition: all .2s ease-in;
       opacity: 1;
       cursor: pointer;
-      font-weight: 700;
+	  font-weight: 700;
+	  width: 100%;
 
       &.active{
         background: #005bff;
@@ -346,87 +357,23 @@ html, body {
       }
 
     }
-
-    &.red-style{
-      background: #e6270e;
-      color: #fff;
-      border-color: #e6270e;
-      &:hover{
-        background: #b81f0b;
-        color: #fff;
-      }
-    }
   }
 
-  /*Input counter block styles*/
-  .counter-block{
-    box-sizing: border-box;
-    border: 1px solid #f3f3f5;
-    background: #f3f3f5;
-    display: inline-block;
-    border-radius: 2px;
-    padding: 5px;
-    
-    >span:before{
-      display: inline-block;
-      content: "";
-      width: 14px;
-      height: 17px;
-      vertical-align: middle;
-    }
+ 
 
-    input[type="text"]{
-      width: 34px;
-      border: 0;
-      border-left: 1px solid #f3f3f5;
-      border-right: 1px solid #f3f3f5;
-      background: #f3f3f5;
-      color: #666;
-      font-size: 13px;
-      height: 34px;
-      border-radius: 0;
-      text-align: center;
-      vertical-align: top;
-      line-height: 13px;
-      padding: 20px 3px;
-      font-weight: 700;
-    }
-
-    .minus{
-      line-height: 40px;
-      display: inline-block;
-      cursor: pointer;
-      vertical-align: top;
-
-      &:before{
-        background: url(./assets/minus-solid.svg);
-        vertical-align: middle;
-      }
-    }
-
-    .plus{
-      line-height: 40px;
-      display: inline-block;
-      cursor: pointer;
-
-      &:before{
-        background: url(./assets/plus-solid.svg);
-        vertical-align: middle;
-      }
-    }  
-  }
-
-  span.price{
-    font-weight: 700;
-    font-family: "GTEestiProDisplay";
-    font-size: 20px;
-    line-height: 15px;
-    white-space: normal;
-  }
+  
 
   .price-block{
     justify-content: center;
-    align-items: center;
+		align-items: center;
+		
+		span.price{
+			font-weight: 700;
+			font-family: "GTEestiProDisplay";
+			font-size: 1.8em;
+			line-height: 1em;
+			white-space: normal;
+		}
   }
 
 

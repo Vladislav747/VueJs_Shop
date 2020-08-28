@@ -4,9 +4,9 @@
 
   <div v-else class="product-container">
     
-    <div class="product">
+    <div class="product-detail">
 
-      <div class="left-col">
+      <div class="product-detail__top">
 
         <div class="header-product">
           <div class="header-title">
@@ -32,13 +32,13 @@
         
       </div>
 
-      <div class="right-col">
+      <div class="product-detail__bottom">
         <div class="product-rating">
-			<h4>Оценка товара</h4>
-			<star-rating-card
-				:disabled="true"
-				ref="starComponent"
-			/>
+					<h4>Оценка товара</h4>
+					<star-rating-card
+						:disabled="true"
+						ref="starComponent"
+					/>
         </div>
 
         <div class="stock-block property-section">
@@ -57,34 +57,36 @@
         </div>
 
 			
-		<div class="price-section">
-			<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
-		</div>
+			<div class="price-block">
+				<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
+			</div>
 		
 
-        <div class="buy-block">
-				<div class="quantity-block">
-					<div class="counter-block">
-						<span 
-							class="minus" 
-							@click="decreaseQuantity(quantity)"></span>
-						<input 
-							type="text" 
-							v-model="quantity" 
-							class="text" 
-							name="quantity" 
-							value="1">
-						<span 
-							class="plus" 
-							@click="increaseQuantity(quantity)" 
-							data-max="1000"></span>
-					</div>
-				
+		<div class="buy-block">
+		
+			<div class="counter-block">
+				<span 
+					class="minus" 
+					@click="decreaseQuantity(quantity)"></span>
+				<input 
+					type="text" 
+					v-model="quantity" 
+					class="text" 
+					name="quantity" 
+					value="1">
+				<span 
+					class="plus" 
+					@click="increaseQuantity(quantity)" 
+					data-max="1000"></span>
+			</div>
+		
+				<div class="cart-block">
+					<button 
+						@click="addProductCart(product, quantity)" 
+						class="add-to-cart-btn btn-primary">Купить товар</button>
 				</div>
-            <button 
-              @click="addProductCart(product, quantity)" 
-              class="add-to-cart-btn btn-primary">Купить товар</button>
-        </div>
+				
+		</div>
 
 
         <div class="manufacturer product-section">

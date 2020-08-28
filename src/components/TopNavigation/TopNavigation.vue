@@ -203,7 +203,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "./TopNavigation.scss";
-@import "./CategoriesNavigation.scss";
+// @import "./CategoriesNavigation.scss";
 
 
 </style>
