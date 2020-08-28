@@ -1,9 +1,10 @@
 <template>
     <div class="pagination__wrapper">
+			<div class="page-prev">
+				<a href="#" v-bind:class="{ 'disabled': !hasPrev}" @click.prevent="prevPage"></a>
+			</div>
            <ul class="pagination">
-               <li class="page-wrapper">
-                   <a href="#" v-bind:class="{ 'disabled': !hasPrev}" @click.prevent="prevPage">«</a>
-                </li>
+               
                 <li class="page-wrapper" v-for="p in totalPages" :key="p">
                     <button
                         class="btn btn-primary btn-paginate"
@@ -11,10 +12,11 @@
                         @click.prevent="changeCurrentPage(p)">{{p}}
                     </button>
                 </li>
-                <li class="page-wrapper">
-                    <a href="#" v-bind:class="{ 'disabled': !hasNext}" @click.prevent="nextPage">»</a>
-                </li>
+               
            </ul>
+		    <div class="page-next">
+                    <a href="#" v-bind:class="{ 'disabled': !hasNext}" @click.prevent="nextPage"></a>
+			</div>
     </div>
 </template>
 
@@ -24,13 +26,6 @@ import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
     name: "Pagination",
-
-    data() {
-        return {
-            
-        };
-    },
-
     computed: {
         
         hasPrev: function(){

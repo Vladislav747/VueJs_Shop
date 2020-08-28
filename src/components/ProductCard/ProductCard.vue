@@ -129,7 +129,7 @@ export default {
     },
     decreaseQuantity(){
       if(this.quantity > 1){
-        this.quantity -= 1;
+				this.quantity -= 1;
       }
     },
     // TODO: Изменение количества одного и того же товара - изменение в localStorage и vuex 
@@ -138,7 +138,7 @@ export default {
 
       //Заносим данные в localStorage
       var productItem = [{product, quantity}]
-      
+      var productSum = 0;
       var totalItems, totalSum;
       
       if (localStorage.getItem('cart')) {
@@ -154,13 +154,14 @@ export default {
 
         if(!cartItem) {
           cartItems[Object.keys(cartItems).length] = productItem;
-          localStorage.setItem('cart', JSON.stringify(cartItems));
+					localStorage.setItem('cart', JSON.stringify(cartItems));
+					
           this.addProductToCart({product, quantity});
 
           totalSum = parseInt(localStorage.getItem('totalSum'));
           totalItems = parseInt(localStorage.getItem('totalItems'));
 
-          var productSum = parseInt(product.price) * parseInt(quantity);
+          productSum = parseInt(product.price) * parseInt(quantity);
 
           localStorage.setItem('totalSum', totalSum + productSum);
           localStorage.setItem('totalItems', totalItems + 1);
@@ -171,7 +172,7 @@ export default {
           cartItems[Object.keys(cartItems).length] = productItem;
           localStorage.setItem('cart', JSON.stringify(cartItems));
 
-          var productSum = parseInt(product.price) * parseInt(quantity);
+          productSum = parseInt(product.price) * parseInt(quantity);
           localStorage.setItem('totalSum', productSum);
           totalItems = 1;
           

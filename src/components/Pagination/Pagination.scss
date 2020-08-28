@@ -1,81 +1,88 @@
-.pagination{
-    width: 100%;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 60px;
-    padding: 0 15px;
-    justify-content: center;
+//Vars
+$track-color: #346d1f !default;
 
-    &__left, &__right{
-        width: 20%;
-    }
+.pagination__wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 44px;
+	margin: 20px auto;
 
-    li{
-        margin: 0 5px;
-    }
+	.pagination{
+		width: min-content;
+		margin: 0 15px;
+		background: #EDEDED;
+		border-radius: 20px;
+	
+		.page-wrapper{		
+			margin: 0 1%;	
 
-    a, span {
-        display: block;
-        text-align: center;
-        font-weight: 300;
-        height: 44px;
-        color: #999;
-        font-size: 13px;
-        padding: 10px;
-        min-width:44px;
-        min-height:44px;
-        background-color: transparent;
-        border-radius: 4px;
-        border: 1px solid rgb(129, 128, 128);
-        box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
+			.btn-paginate{
+				padding: 10px 15px;
+				border-radius: 100px;
+				border-color: #EDEDED;
+				background: none;
 
-        &:hover{
-            border-color: #005bff;
-            color: #005bff;
-        }
-    }
+				&:hover{
+					background: $track-color;
+					
+				}
+			}
+		}
+	
+		.disabled{
+			opacity: 0;
+		}
+	}
+	.page-prev, .page-next {
+		display: block;
+		text-align: center;
+		font-weight: 300;
+		height: 40px;
+		width: 40px;
+		color: #999;
+		font-size: 0.9em;
+		padding: 10px;
+		background-color: transparent;
+		border-radius: 100px;
+		border: 1px solid rgb(129, 128, 128);
+		box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,.35);
+		cursor: pointer;
 
-    .btn-paginate{
-        padding: 10px 15px;
-    }
+		&:hover{
+			background: #ccc;
+			color: #005bff;
+		}
+	}
 
-    .disabled{
-        opacity: 0;
-    }
+	.page-prev a{
+		background: url('../../assets/chevron-left.svg') no-repeat center center;
+		min-width: 100%;
+		min-height: 100%;
+		display: block;
+	}
+
+	.page-next a{
+		background: url('../../assets/chevron-right.svg') no-repeat center center;
+		min-width: 100%;
+		min-height: 100%;
+		display: block;
+	}
 }
 
 
-        @media screen and (max-width: 768px) {
-
-        }
 
 
+@media screen and (max-width: 425px) {
 
-        @media screen and (max-width: 425px) {
+	.pagination{
+		margin: 100px 0 60px;
+		flex-direction: column;
 
-            .pagination{
-                margin: 100px 0 60px;
-                flex-direction: column;
+		.page-wrapper{
+			padding: 5px 0;
+		}
 
-                li{
-                    padding: 5px 0;
-                }
+	}
 
-            }
-
-        }
-        
-        @media screen and (max-width: 320px) {
-            .pagination{
-                margin: 100px 0 60px;
-                flex-direction: column;
-
-                li{
-                    padding: 5px 0;
-                }
-
-            }
-            
-        }
+}

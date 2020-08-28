@@ -133,7 +133,7 @@ export default {
 	  //Проверяем данные либо из VUEX контейнера либо из localStorage
       var cartItemsCount = (localCartItems) ? localCartItems : this.cartItems;
       if(cartItemsCount > 0){
-        this.cartCount = cartItemsCount;
+				this.cartCount = cartItemsCount;
       }
       return cartItemsCount > 0
     },

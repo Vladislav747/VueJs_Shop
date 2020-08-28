@@ -197,16 +197,10 @@
           &:hover{
             opacity: 1;
           }
-				}
-				
-				 
-
-
+		}
+			
       }
   
-    
-  
-    
   
     .image,
     .spacer {
@@ -290,9 +284,10 @@
 
   }
 
-   @media screen and (max-width: 768px) {
+   @media screen and (max-width: 767px) {
     .product {
-      width: 24vw;
+	  max-width: 100%;
+	  flex: 0 0 100%;
       .product-inner{
         .product-header{
           &.product-header--top{
@@ -303,7 +298,7 @@
           .product-image-wrapper{
             .image-wrapper{
               .product-image{
-                width: 100% !important;
+                // width: 100% !important;
               }
               
             }
