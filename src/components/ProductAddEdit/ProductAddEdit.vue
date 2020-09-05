@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { showNoty,  PRODUCT_CATEGORIES} from "@/utility";
+import { showNoty,  PRODUCT_CATEGORIES} from "@/helpers";
 import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {

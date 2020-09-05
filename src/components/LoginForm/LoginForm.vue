@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import { showNoty } from "@/utility";
+import { showNoty } from "@/helpers";
 import {mapState, mapActions} from 'vuex'
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
-import {bus} from '@/utility/bus.js'
+import {bus} from '@/helpers/bus.js'
 
 export default {
     name: "LoginForm",

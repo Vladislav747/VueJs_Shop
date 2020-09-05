@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { showNoty } from "@/utility";
+import { showNoty } from "@/helpers";
 import {FilterProducts, Pagination, ProductCard, SortProducts} from "@/components";
 import {mapGetters, mapActions} from 'vuex'
 

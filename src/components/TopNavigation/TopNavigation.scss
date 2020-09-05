@@ -124,14 +124,10 @@
   
   }
 
-
-  @media screen and (max-width: 1024px) {
-      
-
-  }
-
    @media screen and (max-width: 768px) {
-      
+      .header{
+				margin: 10px 15px;
+			}
 
   }
 
@@ -181,16 +177,8 @@
   
   @media screen and (max-width: 320px) {
 
-    .header{
-      z-index: 999;
-      position: relative;
-    }
-
     .header .header-inner {
-      z-index: 999;
-      align-items: end;
-      position: relative;
-
+     
       #product-list{
         margin-right: 20px;
       }

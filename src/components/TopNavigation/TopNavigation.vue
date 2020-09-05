@@ -87,7 +87,7 @@
 
 <script>
 import {mapState, mapActions} from 'vuex'
-import {bus} from '@/utility/bus.js'
+import {bus} from '@/helpers/bus.js'
 
 export default {
   name: "TopNavigation",

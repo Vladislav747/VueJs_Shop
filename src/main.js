@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuelidate from "vuelidate";
 import App from './App';
 import router from './router';
-import globalData from './utility/globalFunctions';
+import globalData from './helpers/globalFunctions';
 import store from '@/store/index'
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {

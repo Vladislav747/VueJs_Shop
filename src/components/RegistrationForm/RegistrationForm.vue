@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import { showNoty, generateRandomSeed } from "@/utility";
+import { showNoty, generateRandomSeed } from "@/helpers";
 import 'semantic-ui-css/semantic.min.css';
 import firebase from 'firebase/app';
-import {bus} from '@/utility/bus.js'
+import {bus} from '@/helpers/bus.js'
 
 export default {
     name: "RegistrationForm",

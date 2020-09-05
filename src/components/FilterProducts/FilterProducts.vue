@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import {PRODUCT_MANUFACTURES} from "@/utility";
+import {PRODUCT_MANUFACTURES} from "@/helpers";
 import 'vue-slider-component/theme/default.css'
 import {mapActions} from 'vuex'
 

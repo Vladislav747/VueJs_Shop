@@ -65,8 +65,8 @@
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import {bus} from '@/utility/bus.js';
-import { showNoty } from "@/utility";
+import {bus} from '@/helpers/bus.js';
+import { showNoty } from "@/helpers";
 import firebase from 'firebase/app';
 
 

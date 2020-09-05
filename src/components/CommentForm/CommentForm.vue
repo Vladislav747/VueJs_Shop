@@ -110,8 +110,8 @@
 import {mapState, mapGetters, mapActions} from 'vuex'
 import {StarRatingCard} from '@/components';
 import firebase from 'firebase/app';
-import {generateRandomSeed } from "@/utility"
-import throttle from '@/utility/throttle.js'
+import {generateRandomSeed } from "@/helpers"
+import {throttle} from '@/helpers'
 
 export default {
     name: "CommentForm",
