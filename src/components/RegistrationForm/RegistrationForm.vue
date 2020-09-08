@@ -64,9 +64,10 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+import 'semantic-ui-css/semantic.min.css';
 
 import { showNoty, generateRandomSeed } from "@/helpers";
-import 'semantic-ui-css/semantic.min.css';
 import {bus} from '@/helpers/bus.js'
 
 
@@ -101,7 +102,7 @@ export default {
                 year: 'numeric'
             });
 
-            const db = this.$root.$data.firebase.firestore();
+            const db = firebase.firestore();
             const usersCollection = db.collection('users')
 
             

@@ -188,7 +188,7 @@ export default {
 
       onUpload(){
        this.picture=null;
-        const storageRef=this.$root.$data.firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+        const storageRef = firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
         storageRef.on(`state_changed`,snapshot=>{
           this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
         }, error=>{new Error(error.message)},

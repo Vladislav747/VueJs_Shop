@@ -71,6 +71,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import firebase from 'firebase/app';
 import 'semantic-ui-css/semantic.min.css';
 
 import { showNoty } from "@/helpers";
@@ -103,7 +104,7 @@ export default {
          * Залогиниться задачи
          */
         async loginForm() {
-            const db = this.$root.$data.firebase.firestore();
+            const db = firebase.firestore();
             const usersCollection = db.collection('users')
             var user;
             var password = this.password;
