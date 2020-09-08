@@ -1,6 +1,16 @@
-# Test
-Сначала запускаем сервер npm run start
-Закачиваем туда данные для примера
+# Проект Интернет Магазина VUE
+ [Demo](https://napoleon-shop.herokuapp.com/)
 
-# Deploy Version
-Deploy тут https://napoleon-shop.herokuapp.com/ 
+**Stack:**
+
+* Vue
+* Vuex
+* Поддержка перезагрузки страницы(При перезагрузке некоторые данные не теряются например данные корзины(механизм localStorage))
+* Bootstrap
+
+# Server
+
+Для запуска проекта сначала запускаем сервер npm run start на Node
+
+# Front
+Для запуска Фронтенд части  запускаем  npm run serve
