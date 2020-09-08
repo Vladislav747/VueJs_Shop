@@ -6,10 +6,13 @@
 $bg-color: #F9F9F9;
 
 html, body {
-    box-sizing: border-box;
+	box-sizing: border-box;
 	height: 100vh;
 	line-height: 1.6rem;
-	font-size: 15px;
+	font-size: 14px;
+
+
+
 
 	h1,h2,h3,h4,h5{
 		font-weight: 600;
@@ -128,7 +131,14 @@ html, body {
 
 
     
-  }
+}
+
+@media (max-width: 768px) {
+	html, body{
+		font-size: 12px;
+	}
+
+}
   
   *,
   *:before,
@@ -371,10 +381,21 @@ html, body {
 		span.price{
 			font-weight: 700;
 			font-family: "GTEestiProDisplay";
-			font-size: 1.8em;
+			font-size: 1.6em;
 			line-height: 1em;
 			white-space: normal;
 		}
+
+		@media screen and (max-width: 1024px){
+			span.price{
+				font-size: 1.4em;
+			}
+	 
+		 }
+
+		
+
+
   }
 
 

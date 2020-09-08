@@ -70,10 +70,11 @@
 </template>
 
 <script>
-import { showNoty } from "@/helpers";
-import {mapState, mapActions} from 'vuex'
-import 'semantic-ui-css/semantic.min.css';
+import {mapState} from 'vuex'
 import firebase from 'firebase/app';
+import 'semantic-ui-css/semantic.min.css';
+
+import { showNoty } from "@/helpers";
 import {bus} from '@/helpers/bus.js'
 
 export default {
@@ -103,8 +104,6 @@ export default {
          * Залогиниться задачи
          */
         async loginForm() {
-
-            // console.log((this.login, this.password),"loginForm");
             
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
@@ -126,8 +125,9 @@ export default {
                     bus.$emit('loginStatusChanged');
 
                     }else{
-                        console.log("Ошибка с паролем", "loginForm");
-                        showNoty("Неверный пароль " + user.login + " попробуйте еще раз");
+						showNoty("Неверный пароль " + user.login + " попробуйте еще раз");
+                        throw new Error("Ошибка с паролем", "loginForm");
+                       
                     }
                 })
             })

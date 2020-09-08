@@ -108,7 +108,9 @@
 
 <script>
 import {mapState, mapGetters, mapActions} from 'vuex'
-import {StarRatingCard} from '@/components';
+
+import StarRatingCard from '@/components/StarRatingCard/StarRatingCard.vue';
+
 import firebase from 'firebase/app';
 import {generateRandomSeed } from "@/helpers"
 import {throttle} from '@/helpers'

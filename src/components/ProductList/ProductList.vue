@@ -1,5 +1,5 @@
 <template>
-  <div class="productList max-width-block">
+  <div class="product-list max-width-block">
     
     <filter-products />
     <!-- Если есть isLoading то ставим Loader -->
@@ -67,9 +67,14 @@
 </template>
 
 <script>
-import { showNoty } from "@/helpers";
-import {FilterProducts, Pagination, ProductCard, SortProducts} from "@/components";
 import {mapGetters, mapActions} from 'vuex'
+
+import { showNoty } from "@/helpers";
+
+import SortProducts from '@/components/SortProducts/SortProducts.vue';
+import Pagination from '@/components/Pagination/Pagination.vue';
+import ProductCard from '@/components/ProductCard/ProductCard.vue';
+import FilterProducts from '@/components/FilterProducts/FilterProducts.vue';
 
 export default {
 

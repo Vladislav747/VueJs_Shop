@@ -1,3 +1,4 @@
+import firebase from 'firebase/app';
 export default {
     showOverlay: function() {
         var divOverlay = document.getElementsByClassName("overlay");
@@ -18,5 +19,7 @@ export default {
         };
 
         return result;
-    }
+	},
+	
+	firebase: firebase,
 }

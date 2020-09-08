@@ -138,7 +138,9 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import { showNoty } from "@/helpers";
-import {CommentForm, StarRatingCard} from '@/components';
+
+import CommentForm from '@/components/CommentForm/CommentForm.vue';
+import StarRatingCard from '@/components/StarRatingCard/StarRatingCard.vue';
 
 export default {
 

@@ -1,5 +1,4 @@
 import firebase from "firebase/app";
-// import 'firebase/storage';
 import {baseURLDevelopment, baseURLProduction} from '../config/clientConfigs.js';
 
 export default { // actions = mehtods

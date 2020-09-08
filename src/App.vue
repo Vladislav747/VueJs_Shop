@@ -24,7 +24,9 @@
 </template>
 
 <script>
-import {TopNavigation, VerticalMenu, FooterNavigation}  from '@/components';
+import TopNavigation from '@/components/TopNavigation/TopNavigation.vue';
+import FooterNavigation from '@/components/FooterNavigation/FooterNavigation.vue';
+import VerticalMenu from '@/components/VerticalMenu/VerticalMenu.vue';
 
 export default {
   

@@ -16,7 +16,6 @@
                     />
                      <b-form-input 
                         name="form__login" 
-                        id="form__login"
                         type="email"
                         required
                         placeholder="Введите логин"
@@ -32,12 +31,12 @@
                             style="text-transform: capitalize;"
                         />
                         <b-form-input 
-                            name="form__login" 
-                            id="form__login"
+                            name="form__login"
                             type="password"
                             required
                             placeholder="Введите пароль"
-                            v-model="password" 
+                            v-model="password"
+							autoComplete="current-password"
                         />
                         <small 
                             v-if="errors.login" 
@@ -65,10 +64,12 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+
 import { showNoty, generateRandomSeed } from "@/helpers";
 import 'semantic-ui-css/semantic.min.css';
-import firebase from 'firebase/app';
 import {bus} from '@/helpers/bus.js'
+
 
 export default {
     name: "RegistrationForm",
@@ -91,6 +92,8 @@ export default {
          */
         registerForm() {
 
+			var loginUser = this.login;
+            var passwordUser = this.password;
             var seed = generateRandomSeed();
             var nowDate = new Date().toLocaleString('ru',
             {
@@ -102,8 +105,7 @@ export default {
             const db = firebase.firestore();
             const usersCollection = db.collection('users')
 
-            var loginUser = this.login;
-            var passwordUser = this.password;
+            
             
             usersCollection.where("login", "==", loginUser)
                 .get().then((foundUsers)=>{
@@ -135,6 +137,7 @@ export default {
                 })
         },
 
+		//Добавить нового пользователя в БД
         insertUsertoDatabase(user, collectionName){
             const db = firebase.firestore();
             const collection = db.collection(collectionName);

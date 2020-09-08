@@ -1,4 +1,4 @@
-.productList {
+.product-list {
     z-index: 1;
   
     .products-wrapper{
@@ -108,8 +108,8 @@
     .products {
       display: flex;
       padding: 16px 30px;
-	  justify-content: flex-start;
-	  flex-wrap: wrap;
+			justify-content: flex-start;
+			flex-wrap: wrap;
     }
   
     .no-products {
@@ -137,26 +137,34 @@
   }
 
   @media screen and (max-width: 1024px){
-    .productList{
+    .product-list{
 
-      .products-list-controls{
-        display: flex;
+			.products-wrapper{
+				.products-list-controls{
+					display: flex;
+	
+					.display-quantity{
+						display: inline-flex;
+						justify-content: center;
+					}
+				}
+			}
 
-        .display-quantity{
-          display: inline-flex;
-          justify-content: center;
-        }
-      }
+     
       
     }
   }
   
   @media screen and (max-width: 768px){
 
-    .productList{
-      .products{
-        justify-content: flex-start;
-      }
+    .product-list{
+			.products-wrapper{
+				.products{
+					justify-content: flex-start;
+					flex-direction: column;
+				}
+			}
+      
     }
      
   }

@@ -41,7 +41,10 @@
         </div>
       </div> 
      
-      <div class="product-footer">
+     
+        
+    </div>
+		 <div class="product-footer">
        
         <div class="counter_block">
           <span 
@@ -62,17 +65,16 @@
         <div class="buy-block">
           <button 
             @click="addProductCart(product, quantity)" 
-            class="add-to-cart-btn btn-primary">В корзину</button>
+            class="btn-primary add-to-cart-btn">В корзину</button>
         </div>
         
       </div>
-        
-    </div>
   </section>
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+
 import {bus} from '@/helpers/bus.js'
 
 export default {
@@ -139,10 +141,11 @@ export default {
       //Заносим данные в localStorage
       var productItem = [{product, quantity}]
       var productSum = 0;
-      var totalItems, totalSum;
+			var totalItems, totalSum;
+			var cartItems = {};
       
       if (localStorage.getItem('cart')) {
-        var cartItems = JSON.parse(localStorage.getItem('cart'));
+        cartItems = JSON.parse(localStorage.getItem('cart'));
         var cartItem = false;
 
         /* Проверяем что нет подобного объект уже в нашем localStorage */
@@ -168,7 +171,7 @@ export default {
           bus.$emit('totalItemsChanged', totalItems + 1);
         }
       } else if(!localStorage.getItem('totalSum') && !localStorage.getItem('totalItems')) {
-          var cartItems = {};
+          
           cartItems[Object.keys(cartItems).length] = productItem;
           localStorage.setItem('cart', JSON.stringify(cartItems));
 
