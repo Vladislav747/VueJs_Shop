@@ -188,7 +188,7 @@ export default {
 
       onUpload(){
        this.picture=null;
-        const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+        const storageRef=this.$root.$data.firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
         storageRef.on(`state_changed`,snapshot=>{
           this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
         }, error=>{new Error(error.message)},
@@ -218,7 +218,7 @@ export default {
       document.getElementsByClassName('form-title')[0].value = '';
       document.getElementsByClassName('textarea-control')[0].value = '';
       
-      const db = firebase.firestore();
+      const db = this.$root.$data.firebase.firestore();
       var id_review = generateRandomSeed();
       var nowDate = new Date().toLocaleString('ru',
         {
@@ -243,7 +243,7 @@ export default {
 
     async getReviews(){
 
-      const db = firebase.firestore();
+      const db = this.$root.$data.firebase.firestore();
       this.reviews = [];
       var _this = this;
       const productCollection = db.collection('product_comments')

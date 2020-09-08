@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import firebase from 'firebase/app';
 
 import { showNoty, generateRandomSeed } from "@/helpers";
 import 'semantic-ui-css/semantic.min.css';
@@ -102,7 +101,7 @@ export default {
                 year: 'numeric'
             });
 
-            const db = firebase.firestore();
+            const db = this.$root.$data.firebase.firestore();
             const usersCollection = db.collection('users')
 
             
@@ -139,7 +138,7 @@ export default {
 
 		//Добавить нового пользователя в БД
         insertUsertoDatabase(user, collectionName){
-            const db = firebase.firestore();
+            const db = this.$root.$data.firebase.firestore();
             const collection = db.collection(collectionName);
 
             collection.doc('user_'+ user.seed).set({

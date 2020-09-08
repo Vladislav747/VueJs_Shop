@@ -17,11 +17,11 @@
                     />
 
                     <b-form-input 
-                        name="form__login" 
-                        id="form__login"
+                        name="form__login"
                         type="email"
                         required
                         placeholder="Введите логин"
+						autoComplete="current-password"
                         v-model="login" 
                     />
 
@@ -37,11 +37,11 @@
                             style="text-transform: capitalize;"
                         />
                         <b-form-input 
-                            name="form__login" 
-                            id="form__login"
+                            name="form__login"
                             type="password"
                             required
                             placeholder="Введите пароль"
+							autoComplete="current-password"
                             v-model="password" />
                         <small 
                             v-if="errors.login" 
@@ -71,7 +71,6 @@
 
 <script>
 import {mapState} from 'vuex'
-import firebase from 'firebase/app';
 import 'semantic-ui-css/semantic.min.css';
 
 import { showNoty } from "@/helpers";
@@ -104,8 +103,7 @@ export default {
          * Залогиниться задачи
          */
         async loginForm() {
-            
-            const db = firebase.firestore();
+            const db = this.$root.$data.firebase.firestore();
             const usersCollection = db.collection('users')
             var user;
             var password = this.password;
