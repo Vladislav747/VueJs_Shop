@@ -161,7 +161,9 @@ export default {
      * Показывать/Скрывать блок фильтра
      */
     showFilter() {
-      var divFilter = document.getElementsByClassName("filterWrapper")[0];
+			console.log(document.getElementsByClassName("filterWrapper")[0], "divFilter");
+			var divFilter = document.getElementsByClassName("filterWrapper")[0];
+			
       var overlay = this.$root.$data.showOverlay();
       divFilter.style['z-index'] = overlay.index;
       overlay.div.onclick = function(e){

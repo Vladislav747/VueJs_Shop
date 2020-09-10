@@ -10,7 +10,7 @@ export default {
         let newDiv = document.createElement('div');
         newDiv.className = "overlay";
         newDiv.style['z-index'] = index;
-        let divProductList =  document.querySelector(".productList");
+        let divProductList =  document.querySelector(".product-list");
         divProductList.append(newDiv);
 
         var result = {
