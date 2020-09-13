@@ -38,8 +38,8 @@ $btn-hover: #579740 !default;
             }
     
             .select__current{
-                font-size: 18px;
-                line-height: 24px;
+                font-size: 1em;
+                line-height: 1.5em;
                 padding: 8px;
             }
     
@@ -69,8 +69,8 @@ $btn-hover: #579740 !default;
     
             .select__item{
                 cursor: pointer;
-                font-size: 16px;
-                line-height: 24px;
+                font-size: 1em;
+                line-height: 1.5em;
                 padding: 8px;
     
                 &:hover{

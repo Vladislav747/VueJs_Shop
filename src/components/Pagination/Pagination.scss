@@ -67,20 +67,3 @@ $track-color: #346d1f !default;
 		display: block;
 	}
 }
-
-
-
-
-@media screen and (max-width: 425px) {
-
-	.pagination{
-		margin: 100px 0 60px;
-		flex-direction: column;
-
-		.page-wrapper{
-			padding: 5px 0;
-		}
-
-	}
-
-}

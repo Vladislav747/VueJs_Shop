@@ -133,15 +133,61 @@
 
   @media screen and (max-width: 425px) {
 
+    .mobile-menu{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      cursor: pointer;
+      transition: all .5s ease-in-out;
+
+      &__burger{
+        width: 40px;
+        height: 6px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(255,101,47,.2);
+        transition: all .5s ease-in-out;
+
+        &::before, &::after{
+          content: '';
+          position: absolute;
+          width: 40px;
+          height: 6px;
+          background: #fff;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(255,101,47,.2);
+          transition: all .5s ease-in-out;
+        }
+
+        &::before{
+          transform: translateY(-16px);
+        }
+        &::after{
+          transform: translateY(16px);
+        }
+      }
+    }
+
+    /* ANIMATION */
+    .mobile-menu.open .mobile-menu__burger {
+      transform: translateX(-50px);
+      background: transparent;
+      box-shadow: none;
+    }
+    .mobile-menu.open .mobile-menu__burger::before {
+      transform: rotate(45deg) translate(35px, -35px);
+    }
+    .mobile-menu.open .mobile-menu__burger::after {
+      transform: rotate(-45deg) translate(35px, 35px);
+    }
+
     .header{
       z-index: 999;
       position: relative;
     }
 
-    .header .header-inner {
-      z-index: 999;
-      align-items: end;
-      position: relative;
+    .header {
       
   
       input {
@@ -177,8 +223,9 @@
   
   @media screen and (max-width: 320px) {
 
-    .header .header-inner {
-     
+    .header  {
+
+      
       #product-list{
         margin-right: 20px;
       }

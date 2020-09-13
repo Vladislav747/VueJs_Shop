@@ -1,18 +1,21 @@
 <template>
   <div class="header bg-light-green">
     <div class="max-width-block header-inner">
-
-      <a 
-        href="#" 
-        class="mobile-menu"
-        @click.prevent="showMobileMenu">
-          <font-awesome-icon
-            v-if="isHome"
-            icon="bars" 
-            size="2x" 
-            class="top-icon bars-menu"
-          />
-        </a>
+      <div class="mobile-menu">
+        <div
+          href="#" 
+          class="mobile-menu__burger"
+          v-if="isHome"
+          @click.prevent="showMobileMenu">
+            <!-- <font-awesome-icon
+              v-if="isHome"
+              icon="bars" 
+              size="2x" 
+              class="top-icon bars-menu"
+            /> -->
+        </div>
+      </div>
+      
 
       <div class="spacer"/>
 
@@ -107,6 +110,13 @@ export default {
   methods: {
 
     showMobileMenu(){
+      const menuBtn = document.querySelector('.mobile-menu');
+      console.log(this.HideMobileMenu)
+      if(!this.HideMobileMenu) {
+        menuBtn.classList.add('open');
+      } else {
+        menuBtn.classList.remove('open');
+      }
       this.HideMobileMenu = !this.HideMobileMenu;
     },
 
