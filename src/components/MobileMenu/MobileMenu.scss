@@ -1,0 +1,18 @@
+.mobile-menu-wrapper{
+	position: fixed;
+    background: #fff;
+    z-index: 3001;
+    padding: 20px;
+	visibility: visible;
+	transition: all 0.3s linear;
+	opacity: 0;
+	left: -100%;
+	width: 200px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.19);
+
+	&.show{
+		display: block;
+		left: 0;
+		opacity: 1;
+	}
+}

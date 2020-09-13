@@ -9,6 +9,7 @@
         @search="updateSearch"
         @get-products="get-products"
         />
+        <mobile-menu />
         <div class="content-wrapper">
           <router-view :search="searchText" />
         </div>
@@ -27,6 +28,7 @@
 import TopNavigation from '@/components/TopNavigation/TopNavigation.vue';
 import FooterNavigation from '@/components/FooterNavigation/FooterNavigation.vue';
 import VerticalMenu from '@/components/VerticalMenu/VerticalMenu.vue';
+import MobileMenu from '@/components/MobileMenu/MobileMenu.vue';
 
 export default {
   
@@ -35,6 +37,7 @@ export default {
     TopNavigation,
     FooterNavigation,
     VerticalMenu,
+    MobileMenu,
   },
   data () {
     return {

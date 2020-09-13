@@ -7,12 +7,6 @@
           class="mobile-menu__burger"
           v-if="isHome"
           @click.prevent="showMobileMenu">
-            <!-- <font-awesome-icon
-              v-if="isHome"
-              icon="bars" 
-              size="2x" 
-              class="top-icon bars-menu"
-            /> -->
         </div>
       </div>
       
@@ -111,11 +105,15 @@ export default {
 
     showMobileMenu(){
       const menuBtn = document.querySelector('.mobile-menu');
+      const mobileMenu = document.querySelector('.mobile-menu-wrapper');
       console.log(this.HideMobileMenu)
       if(!this.HideMobileMenu) {
         menuBtn.classList.add('open');
+        mobileMenu.classList.add('show');
+
       } else {
         menuBtn.classList.remove('open');
+        mobileMenu.classList.remove('show');
       }
       this.HideMobileMenu = !this.HideMobileMenu;
     },
