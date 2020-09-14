@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import firebase from 'firebase/app';
 
 import {bus} from '@/helpers/bus.js';
@@ -247,39 +247,40 @@ export default {
         }
       },
 
-      /**
-         * Сделать заказ
-         */
-         createOrder(carts) {
-            
-            const db = firebase.firestore();
-            const usersCollection = db.collection('users')
-            const user = localStorage.getItem("userLogin");
+			/**
+			 * Создать заказ
+			 * @param {array} carts - товары
+			*/
+			createOrder(carts) {
+				
+				const db = firebase.firestore();
+				const usersCollection = db.collection('users')
+				const user = localStorage.getItem("userLogin");
 
-            var idCarts = carts.map(function(element) {
-              return element.id;
-            });
+				var idCarts = carts.map(function(element) {
+					return element.id;
+				});
 
-            usersCollection.where("login", "==", user)
-            .get().then((foundUsers)=>{
-                foundUsers.docs.forEach(function (doc) {
-                  var userRef = usersCollection.doc(doc.id);
-                   userRef.update({
-                     goods: idCarts
-                  })
-                })
-            })
+				usersCollection.where("login", "==", user)
+				.get().then((foundUsers)=>{
+						foundUsers.docs.forEach(function (doc) {
+							var userRef = usersCollection.doc(doc.id);
+								userRef.update({
+									goods: idCarts
+							})
+						})
+				})
 
-            
-            var localStorage = localStorage.getItem("boughtItems");
+				
+				var localStorage = localStorage.getItem("boughtItems");
 
-            if(!localStorage){
-              localStorage.setItem("boughtItems", JSON.stringify(user.goods));
-            }
+				if(!localStorage){
+					localStorage.setItem("boughtItems", JSON.stringify(user.goods));
+				}
 
-            this.deleteAllCart();
+				this.deleteAllCart();
 
-        },
+			},
 
       ...mapActions({
         fetchProducts: 'fetchProducts',

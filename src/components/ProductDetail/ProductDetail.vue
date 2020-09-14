@@ -57,71 +57,71 @@
         </div>
 
 			
-			<div class="price-block">
-				<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
-			</div>
-		
-
-		<div class="buy-block">
-		
-			<div class="counter-block">
-				<span 
-					class="minus" 
-					@click="decreaseQuantity(quantity)"></span>
-				<input 
-					type="text" 
-					v-model="quantity" 
-					class="text" 
-					name="quantity" 
-					value="1">
-				<span 
-					class="plus" 
-					@click="increaseQuantity(quantity)" 
-					data-max="1000"></span>
-			</div>
-		
-				<div class="cart-block">
-					<button 
-						@click="addProductCart(product, quantity)" 
-						class="add-to-cart-btn btn-primary">Купить товар</button>
+				<div class="price-block">
+					<span class="price">{{product.price}} <span class="currency">{{currency}}</span></span>
 				</div>
+		
+
+				<div class="buy-block">
 				
-		</div>
+					<div class="counter-block">
+						<span 
+							class="minus" 
+							@click="decreaseQuantity(quantity)"></span>
+						<input 
+							type="text" 
+							v-model="quantity" 
+							class="text" 
+							name="quantity" 
+							value="1">
+						<span 
+							class="plus" 
+							@click="increaseQuantity(quantity)" 
+							data-max="1000"></span>
+					</div>
+				
+						<div class="cart-block">
+							<button 
+								@click="addProductCart(product, quantity)" 
+								class="add-to-cart-btn btn-primary">Купить товар</button>
+						</div>
+						
+				</div>
 
 
-        <div class="manufacturer product-section">
-          
-          <div class="manufacturer__title property-title">
-              <h5>Производитель:</h5>
-          </div>
+				<div class="manufacturer product-section">
+					
+					<div class="manufacturer__title property-title">
+							<h5>Производитель:</h5>
+					</div>
 
-          <div class="manufacturer__text property-value">
-              <h6>{{ product.manufacturer }}</h6>
-          </div>
-        </div>
+					<div class="manufacturer__text property-value">
+							<h6>{{ product.manufacturer }}</h6>
+					</div>
+				</div>
 
-        <div class="category product-section">
-          
-          <div class="category__title property-title">
-              <h5>Категория:</h5>
-          </div>
+				<div class="category product-section">
+					
+					<div class="category__title property-title">
+						<h5>Категория:</h5>
+					</div>
 
-          <div class="category__text property-value">
-              <p>{{ product.category }}</p>
-          </div>
-        </div>
+					<div class="category__text property-value">
+						<p>{{ product.category }}</p>
+					</div>
+				</div>
 
 
-        <div class="product-section desctiption">
+				<div class="product-section desctiption">
 
-			<div class="description__title property-title">
-				<h5>Описание:</h5>
-			</div>
+					<div class="description__title property-title">
+						<h5>Описание:</h5>
+					</div>
 
-			<div class="description__text property-value">
-				{{ product.description }}
-			</div>
-        </div>
+					<div class="description__text property-value">
+						{{ product.description }}
+					</div>
+				</div>
 		
       </div>
     </div>

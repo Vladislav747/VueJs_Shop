@@ -28,7 +28,7 @@
             >
               <div 
                 class="select__item"
-                 v-for="type in sortTypes"
+				v-for="type in sortTypes"
                 :value="type.value"
                 :key="type.value"
                 :data_sort="type.data_sort"
@@ -74,10 +74,6 @@ export default {
             ],
         };
     },
-
-    created(){
-    },
-
     
     methods: {
 
@@ -92,23 +88,23 @@ export default {
 
             switch (sortAttr) {
                 case "price":
-                orderAttr = this.priceOrder;
-                this.priceOrder = !this.priceOrder;
+					orderAttr = this.priceOrder;
+					this.priceOrder = !this.priceOrder;
                 break;
 
                 case "name":
-                orderAttr = this.nameOrder;
-                this.nameOrder = !this.nameOrder;
+					orderAttr = this.nameOrder;
+					this.nameOrder = !this.nameOrder;
                 break;
 
                 case "manufacturer":
-                orderAttr = this.manufacturerOrder;
-                this.manufacturerOrder = !this.manufacturerOrder;
+					orderAttr = this.manufacturerOrder;
+					this.manufacturerOrder = !this.manufacturerOrder;
                 break;
 
                 case "rating":
-                orderAttr = this.rateOrder;
-                this.rateOrder = !this.rateOrder;
+					orderAttr = this.rateOrder;
+					this.rateOrder = !this.rateOrder;
                 break;
 
                 default:

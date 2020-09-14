@@ -65,7 +65,6 @@
 
 <script>
 import firebase from 'firebase/app';
-import 'semantic-ui-css/semantic.min.css';
 
 import { showNoty, generateRandomSeed } from "@/helpers";
 import {bus} from '@/helpers/bus.js'

@@ -17,7 +17,7 @@
             class="display-quantity__select"
             ref="select"
             v-on:click="showSelectBody"
-          >
+						>
             <div 
               class="select__header"
               ref="product"
@@ -30,35 +30,31 @@
                   class="select__logo"
                 >
               </div>
-              
             </div>
             
             <div 
               class="select__body"
-            >
+							>
               <div 
                 class="select__item"
-                 v-for="type in quantityTypes"
+								v-for="type in quantityTypes"
                 :value="type"
                 :key="type"
                 @click="displayQuantity($event.target)"
               >{{ type }}</div>
               
             </div>
-          </div>
-      </div>
-      
-
-      <sort-products />
+					</div>
+				</div>
+				<sort-products />
 
       </div>
-      
 
       <div  class="products">
         <product-card 
-            v-for="product in filteredProducts" 
-            :key="product._id" 
-            :product="product"/>
+					v-for="product in filteredProducts" 
+					:key="product._id" 
+					:product="product"/>
       </div>
       <pagination />
     </div>
@@ -104,9 +100,6 @@ export default {
       selected: "",
       quantityDefault: 3,
     };
-  },
-
-  props:{
   },
 
   computed: {

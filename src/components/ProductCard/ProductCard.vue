@@ -44,31 +44,31 @@
      
         
     </div>
-		 <div class="product-footer">
+		<div class="product-footer">
        
-        <div class="counter_block">
-          <span 
-            class="minus" 
-            @click="decreaseQuantity(quantity)"></span>
-          <input 
-            type="text" 
-            v-model="quantity" 
-            class="text" 
-            name="quantity" 
-            value="1">
-          <span 
-            class="plus" 
-            @click="increaseQuantity(quantity)" 
-            data-max="1000"></span>
-        </div>
+			<div class="counter_block">
+				<span 
+					class="minus" 
+					@click="decreaseQuantity(quantity)"></span>
+				<input 
+					type="text" 
+					v-model="quantity" 
+					class="text" 
+					name="quantity" 
+					value="1">
+				<span 
+					class="plus" 
+					@click="increaseQuantity(quantity)" 
+					data-max="1000"></span>
+			</div>
 
-        <div class="buy-block">
-          <button 
-            @click="addProductCart(product, quantity)" 
-            class="btn-primary add-to-cart-btn">В корзину</button>
-        </div>
+			<div class="buy-block">
+				<button 
+					@click="addProductCart(product, quantity)" 
+					class="btn-primary add-to-cart-btn">В корзину</button>
+			</div>
         
-      </div>
+		</div>
   </section>
 </template>
 

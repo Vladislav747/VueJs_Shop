@@ -1,5 +1,5 @@
 <template>
-<div class="form-wrapper">
+	<div class="form-wrapper">
     <form v-if="product" class="form-add-edit">
       <h2>
         Создать новый товар

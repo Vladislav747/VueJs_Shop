@@ -4,6 +4,7 @@
             <label 
                 class="star-rating__star" 
                 v-for="rating in ratings" 
+				v-bind:key="rating"
                 :class="{'is-selected': ((value_stars >= rating) && value_stars != null), 'is-disabled': disabled}" 
                 v-on:click="set(rating)" 
                 v-on:mouseover="star_over(rating)" 
@@ -21,16 +22,23 @@
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from 'vuex'
-
 
 export default {
     name: "StarRatingCard",
 
     props: {
-        value: "",
-        disabled: false,
-        name: "",
+		value: {
+			type: Number,
+			default: "",
+		},
+        disabled: {
+			type: Boolean,
+			default: false,
+		},
+        name: {
+			type: String,
+			default: "",
+		},
     },
 
     data() {

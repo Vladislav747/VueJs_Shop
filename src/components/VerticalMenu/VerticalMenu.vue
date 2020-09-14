@@ -39,8 +39,6 @@
             </li>
           </div>
         </div>
-
-
     </div>
   </div>
 </template>
@@ -56,21 +54,21 @@ export default {
     return {
       acceptRoutes:[
         "/",
-      ],
-       categoriesList:[
-        "Книги",
-        "Одежда",
-        "Электроника",
-        "Еда",
-        "Медтовары"
+			],
+			
+			categoriesList:[
+			"Книги",
+			"Одежда",
+			"Электроника",
+			"Еда",
+			"Медтовары"
       ],
 
       subCategoriesList:[
-          "Детские книги",
-          "Учебники",
-          "Художественные книги",
-          "Комиксы и манга"
-      
+				"Детские книги",
+				"Учебники",
+				"Художественные книги",
+				"Комиксы и манга"
       ],
     };
   },
@@ -89,7 +87,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "./VerticalMenu.scss";
-
-
 </style>
 

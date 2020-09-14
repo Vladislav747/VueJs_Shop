@@ -72,7 +72,7 @@
 <script>
 import {mapState} from 'vuex'
 import firebase from 'firebase/app';
-import 'semantic-ui-css/semantic.min.css';
+// import 'semantic-ui-css/semantic.min.css';
 
 import { showNoty } from "@/helpers";
 import {bus} from '@/helpers/bus.js'
@@ -93,7 +93,7 @@ export default {
 
     computed: {
         ...mapState({
-        checkoutStatus: 'checkoutStatus'
+        	checkoutStatus: 'checkoutStatus'
         })
     },
     
@@ -132,10 +132,6 @@ export default {
             })
 
         },
-
-        checkForm(){
-            
-        }
     }
 }
 </script>
