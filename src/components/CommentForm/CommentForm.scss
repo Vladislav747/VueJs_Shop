@@ -4,7 +4,9 @@ $border-form-btn: #ABABAB;
 
 .form-review{
     margin-top: 30px;
-    padding: 10px 30px;
+	padding: 10px 30px;
+	margin: 0 auto;
+	width: 50%;
 
     .form-header{
         display: flex;
@@ -35,20 +37,28 @@ $border-form-btn: #ABABAB;
 
     .form-body{
         margin-top: 10px;
-        font-size: 15px;
+		font-size: 15px;
+		
+		input[type=text], input[type=email], input[type=tel],input[type=password], textarea {
+			width: 100%;
+			background: #eeeeee;
+			border-radius: 3px;
+			border: none;
+			color: #424242;
+			font-size: 1.15em;
+			outline: none;
+			padding: 10px 20px;
+		}
 
         .form-title{
             float: left;
-            width: 100%;
-            padding: 6px 8px;
         }
 
         .textarea-control{
-            padding-right: 25%;
-            padding: 6px 8px;
-            width: 100%;
+            
             box-sizing: border-box;
-            margin: 15px 0;
+			margin: 15px 0;
+			resize: none;
         }
 
         .form-actions{
@@ -64,15 +74,8 @@ $border-form-btn: #ABABAB;
             padding: 0;
 
             .form-btn{
-               color: $color-form-btn;
-               border-color: $border-form-btn;
-               margin: 0 10px 0 0;
-               background: $background-form-btn;
-
-               &:hover{
-                   color: $background-form-btn;
-                   background: $color-form-btn;
-               }
+				width: 40%;
+				margin: 0 20px;
             }
         }
     }
@@ -92,7 +95,8 @@ $border-form-btn: #ABABAB;
 }
 .reviews{
     padding: 10px 30px;
-    
+    margin: 0 auto;
+	width: 50%;
     
 
     .review{

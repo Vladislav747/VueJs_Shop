@@ -34,27 +34,31 @@
 
       <div class="product-detail__bottom">
         <div class="product-rating">
-					<h4>Оценка товара</h4>
+					<!-- <h4>Оценка товара</h4> -->
+
+					<div class="stock-block property-section">
+						<div 
+							class="stock available"
+							v-if="inStock(product.stock)"
+							>
+							В наличии
+						</div>
+						<div 
+							class="stock not-available" 
+							v-else
+							>
+							Нет в наличии
+						</div>
+					</div>
+
 					<star-rating-card
 						:disabled="true"
 						ref="starComponent"
 					/>
+					
         </div>
 
-        <div class="stock-block property-section">
-          <div 
-            class="stock available"
-            v-if="inStock(product.stock)"
-          >
-            В наличии
-          </div>
-          <div 
-            class="stock not-available" 
-            v-else
-          >
-            Нет в наличии
-          </div>
-        </div>
+       
 
 			
 				<div class="price-block">

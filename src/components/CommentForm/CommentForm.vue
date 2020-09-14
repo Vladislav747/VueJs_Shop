@@ -82,7 +82,7 @@
 
 				</span>
 				
-				<div class="form-actions" >
+				<div class="form-actions">
 					<button 
 							type="submit"
 							class="btn-primary form-btn"
