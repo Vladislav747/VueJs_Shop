@@ -105,6 +105,11 @@
       width: auto;
       height: 40px;
       position: relative;
+      display: flex;
+
+      span.b-avatar{
+        width: 4.5em;
+      }
       
       .profile-inner{
         text-align: center;
