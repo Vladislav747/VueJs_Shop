@@ -167,7 +167,7 @@ export default {
 	},
 
 	mounted() {
-			this.getReviews();
+		this.getReviews();
 	},
 
 
@@ -189,107 +189,106 @@ export default {
 				storageRef.snapshot.ref.getDownloadURL().then((url)=>{
 					this.picture =url;
 				});
-		}
-		);
-	},
+			}
+			);
+		},
 
-	cancel(){
+		cancel(){
 		//TODO: Заглушка доделать!
-	},
+		},
 
-	rateProduct(id){
-		this.product_rating = id;
-	},
-
-	
+		rateProduct(id){
+			this.product_rating = id;
+		},
 
 
 
-	createReview(){
 
-		//Очищаем форму
-		document.getElementsByClassName('form-title')[0].value = '';
-		document.getElementsByClassName('textarea-control')[0].value = '';
-		
-		const db = this.$root.$data.firebase.firestore();
-		var id_review = generateRandomSeed();
-		var nowDate = new Date().toLocaleString('ru',
-			{
-				day: 'numeric',
-				month: 'long',
-				year: 'numeric'
-			});
-		db.collection("product_comments").doc(id_review).set({
-			id_review: id_review,
-			title: this.product_review_title,
-			text: this.product_comment,
-			product_id: this.product_id,
-			rating: this.product_rating,
-			autor_login: this.profile_autor,
-			date: nowDate,
-		})
+
+		createReview(){
+
+			//Очищаем форму
+			document.getElementsByClassName('form-title')[0].value = '';
+			document.getElementsByClassName('textarea-control')[0].value = '';
+
+			const db = this.$root.$data.firebase.firestore();
+			var id_review = generateRandomSeed();
+			var nowDate = new Date().toLocaleString('ru',
+				{
+					day: 'numeric',
+					month: 'long',
+					year: 'numeric'
+				});
+			db.collection("product_comments").doc(id_review).set({
+				id_review: id_review,
+				title: this.product_review_title,
+				text: this.product_comment,
+				product_id: this.product_id,
+				rating: this.product_rating,
+				autor_login: this.profile_autor,
+				date: nowDate,
+			})
 
 			//Обновляем отзывы
 			this.getReviews()
-	},
+		},
 
 
-	async getReviews(){
+		async getReviews(){
 
-		const db = this.$root.$data.firebase.firestore();
-		this.reviews = [];
-		var _this = this;
-		const productCollection = db.collection('product_comments')
+			const db = this.$root.$data.firebase.firestore();
+			this.reviews = [];
+			var _this = this;
+			const productCollection = db.collection('product_comments')
 
-		await productCollection.where("product_id", "==", this.product_id)
-		.get().then((docs)=>{
-
-			docs.forEach(function (doc) {
-				var reviewItem = doc.data(); 
-				_this.reviews.push(reviewItem)
-			})
-		})
-					
-		if(_this.reviews.length > 0){
-			this.getAverageRating(_this.reviews);
-		}
+			await productCollection.where("product_id", "==", this.product_id)
+				.get().then((docs)=>{
+					docs.forEach(function (doc) {
+						var reviewItem = doc.data(); 
+						_this.reviews.push(reviewItem)
+					})
+				})
+						
+			if(_this.reviews.length > 0){
+				this.getAverageRating(_this.reviews);
+			}
 			
-	},
+		},
 
-	//Получить среднюю оценку по товару
-	getAverageRating(reviews){
+		//Получить среднюю оценку по товару
+		getAverageRating(reviews){
 
-		const reviewsRating = reviews.map(this.getRating);
+			const reviewsRating = reviews.map(this.getRating);
 
-		const ratingTotal = reviewsRating.reduce(this.addRating, 0);
+			const ratingTotal = reviewsRating.reduce(this.addRating, 0);
 
-		// Вычисляем и выводим в консоль среднее значение.
-		const averageRating = ratingTotal / reviewsRating.length;
-		this.$emit('average_rating', averageRating);
-	
-	},
+			// Вычисляем и выводим в консоль среднее значение.
+			const averageRating = ratingTotal / reviewsRating.length;
+			this.$emit('average_rating', averageRating);
 
-	//Выбрать именно rating
-	getRating(review) {
-		return review.rating;
-	},
+		},
 
-	addRating(prev, next) {
-		return prev + next;
-	},
+		//Выбрать именно rating
+		getRating(review) {
+			return review.rating;
+		},
 
-	canUserLeaveRating(){
-		return this.right_leave_review == false;
-	},
-		
-	...mapActions({
+		addRating(prev, next) {
+			return prev + next;
+		},
+
+		canUserLeaveRating(){
+			return this.right_leave_review == false;
+		},
+
+		...mapActions({
 			sendFile: 'sendFile',
-	})
-},
+		})
+	},
 
 };
 </script>
 
 <style lang="scss" scoped> 
-  @import "./CommentForm.scss";
+@import "./CommentForm.scss";
 </style>

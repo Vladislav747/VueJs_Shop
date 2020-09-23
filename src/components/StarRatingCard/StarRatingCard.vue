@@ -24,72 +24,72 @@
 <script>
 
 export default {
-    name: "StarRatingCard",
+	name: "StarRatingCard",
 
-    props: {
+	props: {
 		value: {
 			type: Number,
-			default: "",
+			default: 0,
 		},
-        disabled: {
+		disabled: {
 			type: Boolean,
 			default: false,
 		},
-        name: {
+		name: {
 			type: String,
 			default: "",
 		},
-    },
+	},
 
-    data() {
-        return {
-            temp_value: null,
-            ratings: [1, 2, 3, 4, 5],
-            value_stars: 0,
-        };
-    },
+	data() {
+		return {
+			temp_value: null,
+			ratings: [1, 2, 3, 4, 5],
+			value_stars: 0,
+		};
+	},
 
-    created(){
-        this.value_stars = this.value;
-    },
+	created(){
+		this.value_stars = this.value;
+	},
 
-    
-    methods: {
-        /*
-        * Behaviour of the stars on mouseover.
-        */
-        star_over: function(index) {
-            var self = this;
 
-            if (!this.disabled) {
-                this.temp_value = this.value_stars;
-                return this.value_stars = index;
-            }
+	methods: {
+		/*
+		* Behaviour of the stars on mouseover.
+		*/
+		star_over: function(index) {
+			var self = this;
 
-        },
+			if (!this.disabled) {
+				this.temp_value = this.value_stars;
+				return this.value_stars = index;
+			}
 
-        /*
-        * Behaviour of the stars on mouseout.
-        */
-        star_out: function() {
-            if (!this.disabled) {
-                return this.value_stars = this.temp_value;
-            }
-        },
+		},
 
-        /*
-        * Set the rating.
-        */
-        set: function(value) {
+		/*
+		* Behaviour of the stars on mouseout.
+		*/
+		star_out: function() {
+			if (!this.disabled) {
+				return this.value_stars = this.temp_value;
+			}
+		},
 
-            if (!this.disabled) {
-                this.temp_value = value;
-                return this.value_stars = value;
-            }
+		/*
+		* Set the rating.
+		*/
+		set: function(value) {
 
-            this.$emit('star_rating', value);
-        }
-    }
+			if (!this.disabled) {
+				this.temp_value = value;
+				return this.value_stars = value;
+			}
+
+			this.$emit('star_rating', value);
+		}
+	}
 }
 </script>
 

@@ -78,61 +78,56 @@ import { showNoty } from "@/helpers";
 import {bus} from '@/helpers/bus.js'
 
 export default {
-    name: "LoginForm",
+	name: "LoginForm",
 
-    data() {
-        return {
-            title: "Авторизация",
-            loginTitle: "Логин",
-            passwordTitle: "Пароль",
-            errors: [],
-            login:"",
-            password:"",
-        };
-    },
+	data() {
+		return {
+			title: "Авторизация",
+			loginTitle: "Логин",
+			passwordTitle: "Пароль",
+			errors: [],
+			login:"",
+			password:"",
+		};
+	},
 
-    computed: {
-        ...mapState({
-        	checkoutStatus: 'checkoutStatus'
-        })
-    },
-    
+	computed: {
+		...mapState({
+			checkoutStatus: 'checkoutStatus'
+		})
+	},
 
-    methods: {
-      
-        /**
-         * Залогиниться задачи
-         */
-        async loginForm() {
-            const db = firebase.firestore();
-            const usersCollection = db.collection('users')
-            var user;
-            var password = this.password;
 
-            usersCollection.where("login", "==", this.login)
-            .get().then((docs)=>{
-                docs.forEach(function (doc) {
-                    user = doc.data();
-                   
-                    if(user.password == password){
-                        
-                            localStorage.setItem("isLogined", "true");
-                            localStorage.setItem("userLogin", user.login);
-                            localStorage.setItem("boughtItems", JSON.stringify(user.goods));
+	methods: {		
+		/**
+		 * Залогиниться задачи
+		 */
+		async loginForm() {
+			const db = firebase.firestore();
+			const usersCollection = db.collection('users')
+			var user;
+			var password = this.password;
+			usersCollection.where("login", "==", this.login)
+				.get()
+				.then((docs)=>{
+					docs.forEach(function (doc) {
+						user = doc.data();
+						if (user.password === password){
+							localStorage.setItem("isLogined", "true");
+							localStorage.setItem("userLogin", user.login);
+							localStorage.setItem("boughtItems", JSON.stringify(user.goods));
 
-                    showNoty("Поздравляю " + user.login + " вы успешно вошли", "success");
-                    bus.$emit('loginStatusChanged');
+							showNoty("Поздравляю " + user.login + " вы успешно вошли", "success");
+							bus.$emit('loginStatusChanged');
 
-                    }else{
-						showNoty("Неверный пароль " + user.login + " попробуйте еще раз");
-                        throw new Error("Ошибка с паролем", "loginForm");
-                       
-                    }
-                })
-            })
-
-        },
-    }
+						} else {
+							showNoty("Неверный пароль " + user.login + " попробуйте еще раз");
+							throw new Error("Ошибка с паролем", "loginForm");
+						}
+					});
+				});
+		},
+	}
 }
 </script>
 

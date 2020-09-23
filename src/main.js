@@ -12,7 +12,7 @@ import {
 	faShoppingCart,
 	faSignInAlt,
 	faSearch,
-	faBars
+	faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -42,14 +42,14 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 const clientConfigs = require("./config/clientConfigs");
 const api = axios.create({
-	baseURL: clientConfigs.baseURLProduction
+	baseURL: clientConfigs.baseURLProduction,
 });
 
 // change base Vue http plugin to axios plugin with our url
 Object.defineProperty(Vue.prototype, "$http", {
 	get() {
 		return api;
-	}
+	},
 });
 
 //Set up false turn off  warning about work in production mode when we launch volume.
@@ -63,7 +63,7 @@ const firebaseConfig = {
 	storageBucket: "users-napoleon-it.appspot.com",
 	messagingSenderId: "594737634380",
 	appId: "1:594737634380:web:8e05c384009733afcbe8e9",
-	measurementId: "G-R4SZ0K0DG1"
+	measurementId: "G-R4SZ0K0DG1",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -75,5 +75,5 @@ new Vue({
 	data: globalData,
 	router,
 	render: h => h(App),
-	store
+	store,
 });

@@ -71,94 +71,86 @@ import {bus} from '@/helpers/bus.js'
 
 
 export default {
-    name: "RegistrationForm",
+	name: "RegistrationForm",
 
-    data() {
-        return {
-            title: "Регистрация",
-            loginTitle: "Email (Логин)",
-            passwordTitle: "Пароль",
-            errors: [],
-            login:"",
-            password:"",
-        };
-    },
-    
-    methods: {
-      
-        /**
-         * Зарегистрироваться в системе
-         */
-        registerForm() {
+	data() {
+		return {
+			title: "Регистрация",
+			loginTitle: "Email (Логин)",
+			passwordTitle: "Пароль",
+			errors: [],
+			login:"",
+			password:"",
+		};
+	},
 
+	methods: {
+		/**
+		 * Зарегистрироваться в системе
+		 */
+		registerForm() {
 			var loginUser = this.login;
-            var passwordUser = this.password;
-            var seed = generateRandomSeed();
-            var nowDate = new Date().toLocaleString('ru',
-            {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
+			var passwordUser = this.password;
+			var seed = generateRandomSeed();
+			var nowDate = new Date().toLocaleString(
+				'ru',
+				{
+					day: 'numeric',
+					month: 'long',
+					year: 'numeric'
+				});
 
-            const db = firebase.firestore();
-            const usersCollection = db.collection('users')
+			const db = firebase.firestore();
+			const usersCollection = db.collection('users')
 
-            
-            
-            usersCollection.where("login", "==", loginUser)
-                .get().then((foundUsers)=>{
-                    var user;
-                    var result = foundUsers.docs.some(function (doc) {
-                        user = doc.data();
-                        
-                        if(user.login == loginUser){
-                            new Error("Такой пользователь уже есть " + loginUser);
-                            showNoty("Такой пользователь уже есть "+ loginUser);
-                            return true;
-                        }
-                    });
-                    
-                    if(!result){
+			usersCollection
+				.where("login", "==", loginUser)
+				.get().then((foundUsers)=>{
+					var user;
+					var result = foundUsers.docs.some(function (doc) {
+						user = doc.data();
+						if (user.login == loginUser) {
+							new Error("Такой пользователь уже есть " + loginUser);
+							showNoty("Такой пользователь уже есть "+ loginUser);
+							return true;
+						}
+					});
+					if (!result) {
 						user = {
-                            seed: seed,
-                            login: loginUser,
-                            password: passwordUser,
-                            date: nowDate,
-                        }
-                        this.insertUsertoDatabase(user, 'users');
-                        showNoty("Вы успешно зарегистрированы "+ loginUser, "success");
-                        bus.$emit('loginStatusChanged');
-                    }
-                    
-                    
-        
-                })
-        },
+							seed: seed,
+							login: loginUser,
+							password: passwordUser,
+							date: nowDate,
+						};
+						this.insertUsertoDatabase(user, 'users');
+						showNoty("Вы успешно зарегистрированы "+ loginUser, "success");
+						bus.$emit('loginStatusChanged');
+					}
+				});
+		},
 
 		//Добавить нового пользователя в БД
-        insertUsertoDatabase(user, collectionName){
-            const db = this.$root.$data.firebase.firestore();
-            const collection = db.collection(collectionName);
+		insertUsertoDatabase(user, collectionName){
+			const db = this.$root.$data.firebase.firestore();
+			const collection = db.collection(collectionName);
 
-            collection.doc('user_'+ user.seed).set({
-                id_user: 'user_'+ user.seed,
-                login: user.login,
-                password: user.password,
-                date_registered: user.date,
-            }).then(() =>{
-                var loginedLocal = localStorage.getItem("isLogined");
-                if(!loginedLocal){
-                    localStorage.setItem("isLogined", "true");
-                    localStorage.setItem("userLogin", user.login);
-                }
-            })
-        },
-    },
-}
-
+			collection.doc('user_'+ user.seed).set({
+				id_user: 'user_'+ user.seed,
+				login: user.login,
+				password: user.password,
+				date_registered: user.date,
+			}).then(() =>{
+				var loginedLocal = localStorage.getItem("isLogined");
+				if(!loginedLocal){
+					localStorage.setItem("isLogined", "true");
+					localStorage.setItem("userLogin", user.login);
+				}
+			})
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped> 
-    @import "./RegistrationForm.scss";
+@import "./RegistrationForm.scss";
 </style>

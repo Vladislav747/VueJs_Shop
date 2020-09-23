@@ -1,6 +1,6 @@
 <template>
   <div class="product-list max-width-block">
-    
+    <enter-banner v-if="!showEnterBanner"/>
     <filter-products />
     <!-- Если есть isLoading то ставим Loader -->
     <div v-if="isLoading" class="lds-dual-ring"></div>
@@ -71,90 +71,74 @@ import SortProducts from '@/components/SortProducts/SortProducts.vue';
 import Pagination from '@/components/Pagination/Pagination.vue';
 import ProductCard from '@/components/ProductCard/ProductCard.vue';
 import FilterProducts from '@/components/FilterProducts/FilterProducts.vue';
+import EnterBanner from '@/components/EnterBanner/EnterBanner.vue';
 
 export default {
+	name: "ProductList",
 
-  /* TODO:
-  
-    Страница товаров. Общая для всех покупателей, на ней по категориям разбиты товары, 
-    их можно фильтровать и сортировать по цене, наименованию или производителю и пользовательской оценке. 
-    У каждого товара есть название, описание и изображение.
-    На странице отображается только фиксированное кол-во товаров, реализована пагинация.
-  
-  */
+	components: {
+		ProductCard,
+		FilterProducts,
+		Pagination,
+		SortProducts,
+		EnterBanner,
+	},
 
+	data() {
+		return {
+			quantityTypes: [3, 6, 9],
+			filteredItems: [],
+			selected: "",
+			quantityDefault: 3,
+		};
+	},
 
-  name: "ProductList",
+	computed: {
+		noProducts() {
+			return this.filteredProducts.length === 0;
+		},
 
-  components: {
-    ProductCard,
-    FilterProducts,
-    Pagination,
-    SortProducts,
-  },
+		isLoading() {
+			return this.filteredProducts.length == 0;
+		},
 
-  data() {
-    return {
-      quantityTypes: [3, 6, 9],
-      filteredItems: [],
-      selected: "",
-      quantityDefault: 3,
-    };
-  },
+		showEnterBanner(){
+			var localStorageBanner = localStorage.getItem("enterBanner");
+			return localStorageBanner;
+		},
 
-  computed: {
-    noProducts() {
-      return (
-        this.filteredProducts.length === 0
-      );
-    },
+		filteredProducts() {
+			return this.$store.state.currentListProducts;
+		},
+		...mapGetters({
+			productInStock: 'productInStock',
+		}),
+	},
 
-    isLoading(){
-      return this.filteredProducts.length == 0
-      
-    },
+	created() {
+		this.fetchProducts().catch((error) => {showNoty("Ошибка вывода списка товаров  " + error);});
+	},
 
-    filteredProducts() {
+	methods: {
+		showSelectBody(){
+			this.$refs.select.classList.toggle('is-active');
+		},
 
-        return this.$store.state.currentListProducts;
+		displayQuantity(el){
+			this.changeDisplayQuantity(el.getAttribute("value"));
+			this.quantityDefault = el.getAttribute("value");
+		},
 
-    },
-    ...mapGetters({
-      productInStock: 'productInStock',
-    }),
-  },
-
-  created(){
-  
-    this.fetchProducts().catch((error) => {showNoty("Ошибка вывода списка товаров  " + error);});
-
-  },
-
-  methods: {
-    showSelectBody(){
-      this.$refs.select.classList.toggle('is-active');
-    },
-
-    displayQuantity(el){
-      this.changeDisplayQuantity(el.getAttribute("value"));
-      this.quantityDefault = el.getAttribute("value");
-    },
-
-    ...mapActions({
-      fetchProducts: 'fetchProducts',
-      changeDisplayQuantity: 'changeDisplayQuantity',
-    })
-
-  },
-
-  
+		...mapActions({
+			fetchProducts: 'fetchProducts',
+			changeDisplayQuantity: 'changeDisplayQuantity',
+		}),
+	},
 };
 </script>
 
 <style lang="scss" scoped>
-
 //preloader styles
 @import "@/scss/preloader.scss";
 @import "./ProductList.scss";
-
 </style>

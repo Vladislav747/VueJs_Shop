@@ -78,7 +78,6 @@
       </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -87,132 +86,118 @@ import {mapState, mapActions} from 'vuex'
 import {bus} from '@/helpers/bus.js'
 
 export default {
-  name: "TopNavigation",
+	name: "TopNavigation",
 
-  data() {
-    return {
-      searchText: "",
-      blackTheme: false,
-      cartCount: 0,
-      acceptRoutes:[
-        "/",
-      ],
-      HideMobileMenu: true,
-    };
-  },
+	data() {
+		return {
+			searchText: "",
+			blackTheme: false,
+			cartCount: 0,
+			acceptRoutes:["/"],
+			HideMobileMenu: true,
+		};
+	},
 
-  methods: {
+	methods: {
+		showMobileMenu(){
+			const menuBtn = document.querySelector('.mobile-menu');
+			const mobileMenu = document.querySelector('.mobile-menu-wrapper');
+			if(!this.HideMobileMenu) {
+				menuBtn.classList.add('open');
+				mobileMenu.classList.add('show');
 
-    showMobileMenu(){
-      const menuBtn = document.querySelector('.mobile-menu');
-      const mobileMenu = document.querySelector('.mobile-menu-wrapper');
-      console.log(this.HideMobileMenu)
-      if(!this.HideMobileMenu) {
-        menuBtn.classList.add('open');
-        mobileMenu.classList.add('show');
+			} else {
+				menuBtn.classList.remove('open');
+				mobileMenu.classList.remove('show');
+			}
+			this.HideMobileMenu = !this.HideMobileMenu;
+		},
 
-      } else {
-        menuBtn.classList.remove('open');
-        mobileMenu.classList.remove('show');
-      }
-      this.HideMobileMenu = !this.HideMobileMenu;
-    },
+		logout(){
+			localStorage.removeItem("isLogined");
+			this.$forceUpdate();
+		},
 
-    logout(){
-      localStorage.removeItem("isLogined");
-      this.$forceUpdate();
-    },
+		...mapActions({
+			addFilterProducts: 'addFilterProducts',
+			chooseCategory: 'chooseCategory',
+		})
 
-    ...mapActions({
-      addFilterProducts: 'addFilterProducts',
-      chooseCategory: 'chooseCategory',
-    })
+	},
 
-  },
+	computed: {
+		isHome() {
+			return this.acceptRoutes.includes(this.$route.path);
+		},
 
-  computed: {
-    isHome() {
-      return this.acceptRoutes.includes(this.$route.path);
-    },
-
-    hasCartItems : function(){
-      
-	  var localCartItems = localStorage.getItem('totalItems');
-	  //Проверяем данные либо из VUEX контейнера либо из localStorage
-      var cartItemsCount = (localCartItems) ? localCartItems : this.cartItems;
-      if(cartItemsCount > 0){
+		hasCartItems : function(){
+			var localCartItems = localStorage.getItem('totalItems');
+			//Проверяем данные либо из VUEX контейнера либо из localStorage
+			var cartItemsCount = (localCartItems) ? localCartItems : this.cartItems;
+			if(cartItemsCount > 0){
 				this.cartCount = cartItemsCount;
-      }
-      return cartItemsCount > 0
-    },
-
-  
-    isLogined(){
-      var loginedLocal = localStorage.getItem("isLogined");
-      if(loginedLocal){
-        return loginedLocal == 'true';
-      } else{
-        return false;
-      }
-    },
-
-    isAdmin(){
-       var adminLocal = localStorage.getItem("isAdmin");
-      if(adminLocal){
-        return adminLocal == 'true';
-      } else{
-        return false;
-      }
-    },
-    ...mapState({
-      cartItems: state => state.cartItems,
-      products: state => state.products,
-
-    }),
-  },
-
-  created(){
-    //Ловим событие для шапки и пересчета корзины
-    bus.$on('totalItemsChanged', (item)=>{
-      this.cartCount = item;
-    });
-    bus.$on('loginStatusChanged', ()=>{
-       this.isLogined();
-    }
-     
-    );
-    
-  },
-
-  watch: {
-
-    /**
-     * Поиск задач по имени (name)
-     */
-    searchText: function() {
-      var products = this.products;
-      var searchedProducts = [];
-      var str = new RegExp(this.searchText);
-      products.forEach(element => {
-        var found = str.test(element.name);
-        if (found) {
-          searchedProducts.push(element);
-        }
-      });
-
-      bus.$emit("filter_search", searchedProducts);
-      this.addFilterProducts(searchedProducts);
+			}
+			return cartItemsCount > 0
+		},
 
 
-    },
-  }
+		isLogined(){
+			var loginedLocal = localStorage.getItem("isLogined");
+			if(loginedLocal){
+				return loginedLocal == 'true';
+			} else{
+				return false;
+			}
+		},
+
+		isAdmin(){
+			var adminLocal = localStorage.getItem("isAdmin");
+			if(adminLocal){
+				return adminLocal == 'true';
+			} else{
+				return false;
+			}
+		},
+		...mapState({
+			cartItems: state => state.cartItems,
+			products: state => state.products,
+
+		}),
+	},
+
+	created(){
+		//Ловим событие для шапки и пересчета корзины
+		bus.$on('totalItemsChanged', (item)=>{
+			this.cartCount = item;
+		});
+		bus.$on('loginStatusChanged', ()=>{
+			this.isLogined();
+		}
+		);
+	},
+
+	watch: {
+		/**
+		 * Поиск задач по имени (name)
+		 */
+		searchText: function() {
+			var products = this.products;
+			var searchedProducts = [];
+			var str = new RegExp(this.searchText);
+			products.forEach(element => {
+				var found = str.test(element.name);
+				if (found) {
+					searchedProducts.push(element);
+				}
+			});
+
+			bus.$emit("filter_search", searchedProducts);
+			this.addFilterProducts(searchedProducts);
+		},
+	}
 };
 </script>
 
 <style lang="scss" scoped>
 @import "./TopNavigation.scss";
-// @import "./CategoriesNavigation.scss";
-
-
 </style>
-

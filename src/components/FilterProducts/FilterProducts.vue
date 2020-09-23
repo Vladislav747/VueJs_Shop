@@ -94,17 +94,17 @@ import {PRODUCT_MANUFACTURES} from "@/helpers";
 import {mapActions} from 'vuex'
 
 export default {
-  name: "FilterProducts",
+	name: "FilterProducts",
 
-  props:{
-    products: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  
-  data() {
-    return {
+	props:{
+		products: {
+			type: Array,
+			default: () => [],
+		},
+	},
+
+	data() {
+		return {
 			isLoading: false,
 			noProducts: false,
 			filteredProducts: [],
@@ -119,89 +119,85 @@ export default {
 			sale: false,
 			stock: false,
 			priceData: 10000,
-    };
-  },
+		};
+	},
 
 
-  computed:{
-    highPrice() {
-      return this.$store.state.highprice
-    },
-    minPrice() {
-      return this.$store.state.highprice
-    },
-    checked() {
-      return this.$store.state.sale;
-    },
+	computed:{
+		highPrice() {
+			return this.$store.state.highprice
+		},
+		minPrice() {
+			return this.$store.state.highprice
+		},
+		checked() {
+			return this.$store.state.sale;
+		},
+	},
 
-
-  },
-
-  methods: {
-
+	methods: {
 		/**
-			 * Округлить значение слайдера при изменении
-			 * @param {string} manufacturer - производитель
+		 * Округлить значение слайдера при изменении
+		 * @param {string} manufacturer - производитель
 		*/
 		changeSliderValue(priceValue){
 			this.priceData = Math.round(priceValue)
 		},
 
-    /**
-     * Фильтровать задачу по производителю
-     * @param {object} manufacturer - производитель
-     *
-     */
-    filterManufacturer(manufacturer) {
-      if (manufacturer !== "") {
-        this.filterManufacturerAction(manufacturer);
-      }
-    },
+		/**
+		 * Фильтровать задачу по производителю
+		 * @param {object} manufacturer - производитель
+		 *
+		 */
+		filterManufacturer(manufacturer) {
+			if (manufacturer !== "") {
+				this.filterManufacturerAction(manufacturer);
+			}
+		},
 
-    /**
-     * Показывать/Скрывать блок фильтра
-		*/
-    showFilter() {
+		/**
+		 * Показывать/Скрывать блок фильтра
+			*/
+		showFilter() {
 			var divFilter = document.getElementsByClassName("filterWrapper")[0];
+				
+			var overlay = this.$root.$data.showOverlay();
+			divFilter.style['z-index'] = overlay.index;
+			overlay.div.onclick = function(e){
+				if(typeof(e.target.remove) == 'function') {
+					e.target.remove();
+					divFilter.classList.toggle("show");
+				}
+			}
+			divFilter.classList.toggle("show");
+		},
+
+		updateSale(){
+			if(this.sale){
+				this.filterSaleAction();
+			}
+		},
+
+		updateStock(){
 			
-      var overlay = this.$root.$data.showOverlay();
-      divFilter.style['z-index'] = overlay.index;
-      overlay.div.onclick = function(e){
-        if(typeof(e.target.remove) == 'function') {
-          e.target.remove();
-          divFilter.classList.toggle("show");
-        }
-      }
-      divFilter.classList.toggle("show");
-    },
+			if(this.stock){
+				this.filterStockAction();
+			}
+			
+		},
 
-    updateSale(){
-      if(this.sale){
-        this.filterSaleAction();
-      }
-    },
+		updateHighPrice(value){
+			this.filterPriceAction(value);
+		},
 
-    updateStock(){
-     
-      if(this.stock){
-        this.filterStockAction();
-      }
-      
-    },
-    
-    updateHighPrice(value){
-        this.filterPriceAction(value);
-    },
-
-    ...mapActions({
+		...mapActions({
 			'filterManufacturerAction' :  'filterManufacturerAction',
 			'filterSaleAction' : 'filterSaleAction',
 			'filterStockAction' : 'filterStockAction',
 			'filterPriceAction' : 'filterPriceAction',
 			'setOrginalOrder' : 'setOrginalOrder',
-		})
-  },
-
+		}),
+	},
 };
 </script>
 

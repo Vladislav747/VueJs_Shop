@@ -48,40 +48,33 @@
 
 
 export default {
-  name: "VerticalMenu",
+	name: "VerticalMenu",
 
-  data() {
-    return {
-      acceptRoutes:[
-        "/",
-			],
-			
+	data() {
+		return {
+			acceptRoutes: ["/"],
 			categoriesList:[
-			"Книги",
-			"Одежда",
-			"Электроника",
-			"Еда",
-			"Медтовары"
-      ],
+				"Книги",
+				"Одежда",
+				"Электроника",
+				"Еда",
+				"Медтовары"
+			],
 
-      subCategoriesList:[
+			subCategoriesList:[
 				"Детские книги",
 				"Учебники",
 				"Художественные книги",
 				"Комиксы и манга"
-      ],
-    };
-  },
+			],
+		};
+	},
 
-  watch: {
-
-  },
-
-  computed: {
-    isHome() {
-      return this.acceptRoutes.includes(this.$route.path);
-    },
-  },
+	computed: {
+		isHome() {
+			return this.acceptRoutes.includes(this.$route.path);
+		},
+	},
 };
 </script>
 

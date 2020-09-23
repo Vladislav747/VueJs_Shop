@@ -10,25 +10,23 @@
 
 <script>
 export default {
-  name: "FooterNavigation",
+	name: "FooterNavigation",
 
-  methods:{
-    changeTheme() {
-     this.isBlackTheme = !this.isBlackTheme;
-     var bodyElement = document.body;
+	methods: {
+		changeTheme() {
+			this.isBlackTheme = !this.isBlackTheme;
+			var bodyElement = document.body;
 
-      if(this.isBlackTheme){
-        bodyElement.classList.toggle("bg-dark");
-      } else {
-        bodyElement.classList.toggle("bg-dark");
-      }
-
-    },
-  }
+			if(this.isBlackTheme){
+				bodyElement.classList.toggle("bg-dark");
+			} else {
+				bodyElement.classList.toggle("bg-dark");
+			}
+		},
+	},
 };
 </script>
 
 <style lang="scss" scoped>
 @import "./FooterNavigation.scss";
 </style>
-

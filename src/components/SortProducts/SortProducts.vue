@@ -46,89 +46,89 @@ import {mapActions} from 'vuex'
 
 
 export default {
-    name: "SortProducts",
+	name: "SortProducts",
 
-    data() {
-        return {
-            priceOrder: false,
-            nameOrder: false,
-            manufacturerOrder: false,
-            rateOrder: false,
-            sortDefault: "Цене",
-            sortTypes: [
-                {
-                    "data_sort": "name",
-                    "data_order": "nameOrder",
-                    "value": "Наименованию",
-                },
-                {
-                    "data_sort": "price",
-                    "data_order": "priceOrder",
-                    "value": "Цене",
-                },
-                {
-                    "data_sort": "manufacturer",
-                    "data_order": "manufacturerOrder",
-                    "value": "Производителю",
-                },
-            ],
-        };
-    },
-    
-    methods: {
+	data() {
+		return {
+			priceOrder: false,
+			nameOrder: false,
+			manufacturerOrder: false,
+			rateOrder: false,
+			sortDefault: "Цене",
+			sortTypes: [
+				{
+					"data_sort": "name",
+					"data_order": "nameOrder",
+					"value": "Наименованию",
+				},
+				{
+					"data_sort": "price",
+					"data_order": "priceOrder",
+					"value": "Цене",
+				},
+				{
+					"data_sort": "manufacturer",
+					"data_order": "manufacturerOrder",
+					"value": "Производителю",
+				},
+			],
+		};
+	},
 
-        showSelectBody(){
-            this.$refs.select_sort.classList.toggle('is-active');
-        },
+	methods: {
 
-       sortItems(value){
+		showSelectBody(){
+			this.$refs.select_sort.classList.toggle('is-active');
+		},
 
-            var sortAttr = value.getAttribute('data_sort');
-            var orderAttr = "";
+		sortItems(value){
 
-            switch (sortAttr) {
-                case "price":
-					orderAttr = this.priceOrder;
-					this.priceOrder = !this.priceOrder;
-                break;
+			var sortAttr = value.getAttribute('data_sort');
+			var orderAttr = "";
 
-                case "name":
-					orderAttr = this.nameOrder;
-					this.nameOrder = !this.nameOrder;
-                break;
+			switch (sortAttr) {
+			case "price":
+				orderAttr = this.priceOrder;
+				this.priceOrder = !this.priceOrder;
+				break;
 
-                case "manufacturer":
-					orderAttr = this.manufacturerOrder;
-					this.manufacturerOrder = !this.manufacturerOrder;
-                break;
+			case "name":
+				orderAttr = this.nameOrder;
+				this.nameOrder = !this.nameOrder;
+				break;
 
-                case "rating":
-					orderAttr = this.rateOrder;
-					this.rateOrder = !this.rateOrder;
-                break;
+			case "manufacturer":
+				orderAttr = this.manufacturerOrder;
+				this.manufacturerOrder = !this.manufacturerOrder;
+				break;
 
-                default:
-                break;
-            }
+			case "rating":
+				orderAttr = this.rateOrder;
+				this.rateOrder = !this.rateOrder;
+				break;
 
-            var sortOptions = {
-                sortAttr: sortAttr,
-                orderAttr: orderAttr,
-            };
+			default:
+				break;
+			}
 
-            this.sortItemsAction(sortOptions);           
+			var sortOptions = {
+				sortAttr: sortAttr,
+				orderAttr: orderAttr,
+			};
 
-       },
+			this.sortItemsAction(sortOptions);           
 
-       sortOriginalOrder(){
-           this.setOrginalOrder();
-       },
+		},
 
-       ...mapActions({
-           'sortItemsAction' : 'sortItemsAction',
-           'setOrginalOrder': 'setOrginalOrder',
-       }),
-    }
+		sortOriginalOrder(){
+			this.setOrginalOrder();
+		},
+
+		...mapActions({
+			'sortItemsAction' : 'sortItemsAction',
+			'setOrginalOrder': 'setOrginalOrder',
+		}),
+	}
 }
 </script>
 
