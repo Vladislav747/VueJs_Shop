@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuelidate from "vuelidate";
+
+import "./plugins/bootstrap-vue";
 import App from "./App";
 import router from "./router";
 import globalData from "./helpers/globalFunctions";
@@ -23,7 +25,6 @@ import "firebase/database";
 import "firebase/storage";
 import "firebase/firestore";
 
-//Global css
 import "semantic-ui-css/semantic.min.css";
 import "vue-slider-component/theme/default.css";
 
@@ -40,19 +41,16 @@ library.add(
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-const clientConfigs = require("./config/clientConfigs");
 const api = axios.create({
-	baseURL: clientConfigs.baseURLProduction,
+	baseURL: process.env.VUE_APP_BASE_URL,
 });
 
-// change base Vue http plugin to axios plugin with our url
 Object.defineProperty(Vue.prototype, "$http", {
 	get() {
 		return api;
 	},
 });
 
-//Set up false turn off  warning about work in production mode when we launch volume.
 Vue.config.productionTip = false;
 
 const firebaseConfig = {
@@ -65,10 +63,8 @@ const firebaseConfig = {
 	appId: "1:594737634380:web:8e05c384009733afcbe8e9",
 	measurementId: "G-R4SZ0K0DG1",
 };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
-import "./plugins/bootstrap-vue";
+firebase.initializeApp(firebaseConfig);
 
 new Vue({
 	el: "#app",
