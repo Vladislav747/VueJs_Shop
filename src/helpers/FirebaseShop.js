@@ -7,11 +7,11 @@ class FirebaseShop {
 	//     this.commentsCollection = this.db.collection('product_comments');
 	// }
 	// userBoughtGoods(localLogin) {
-	//     var goods = [];
+	//     let goods = [];
 	//     this.usersCollection.where("login", "==", localLogin)
 	//     .get().then((foundLogin)=>{
 	//         foundLogin.docs.forEach(function (doc) {
-	//         var user = doc.data();
+	//         let user = doc.data();
 	//          goods.push(user)
 	//         })
 	//         if(goods.length > 0){
@@ -28,7 +28,7 @@ class FirebaseShop {
 	//         password: user.password,
 	//         date_registered: user.date,
 	//     }).then(() =>{
-	// 		var loginedLocal = localStorage.getItem("isLogined");
+	// 		let loginedLocal = localStorage.getItem("isLogined");
 	//         if(!loginedLocal){
 	//             localStorage.setItem("isLogined", "true");
 	//             localStorage.setItem("userLogin", user.login);

@@ -29,7 +29,7 @@ export const generateRandomSeed = function() {
 };
 
 export function throttle(callback, limit) {
-	var wait = false;
+	let wait = false;
 	return function() {
 		if (!wait) {
 			callback.call();

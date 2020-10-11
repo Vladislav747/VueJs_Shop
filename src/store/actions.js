@@ -13,15 +13,14 @@ export default {
 			mode: "cors",
 		})
 			.then(products => {
-				var result = products.text();
-				return result;
+				return products.text();
 			})
 			.then(res => {
-				var productResult = JSON.parse(res);
+				const productResult = JSON.parse(res);
 				context.commit("setProducts", productResult);
 				context.commit("addDefaultProducts1", productResult);
 				context.commit("setTotalItems", productResult.length);
-				var totalPages = Math.ceil(
+				let totalPages = Math.ceil(
 					context.state.totalProducts / context.state.displayQuantity
 				);
 				context.commit("setTotalPages", totalPages);
@@ -34,12 +33,12 @@ export default {
 		//Если данные фильтруются по названию,
 		// категории, цене или другим свойствам то используем их
 
-		var products = context.state.products;
-		var filteredProducts = context.state.filteredItems;
-		var currentPage = context.state.currentPage;
-		var displayPerPage = context.state.displayQuantity;
-		var totalProducts = context.state.totalProducts;
-		var startIndex, endIndex;
+		let products = context.state.products;
+		let filteredProducts = context.state.filteredItems;
+		let currentPage = context.state.currentPage;
+		let displayPerPage = context.state.displayQuantity;
+		let totalProducts = context.state.totalProducts;
+		let startIndex, endIndex;
 
 		if (currentPage > 1) {
 			startIndex = (currentPage - 1) * displayPerPage;
@@ -49,11 +48,11 @@ export default {
 			endIndex = displayPerPage;
 		}
 
-		var currentListProducts = [];
+		let currentListProducts = [];
 
 		if (filteredProducts.length > 0) {
 			currentListProducts = filteredProducts.slice(startIndex, endIndex);
-			var totalPages = Math.ceil(
+			let totalPages = Math.ceil(
 				filteredProducts.length / context.state.displayQuantity
 			);
 			context.commit("setTotalPages", totalPages);
@@ -61,7 +60,7 @@ export default {
 		} else {
 			currentListProducts = products.slice(startIndex, endIndex);
 			context.commit("setTotalItems", products.length);
-			var totalPages = Math.ceil(
+			let totalPages = Math.ceil(
 				context.state.totalProducts / context.state.displayQuantity
 			);
 			context.commit("setTotalPages", totalPages);
@@ -71,13 +70,11 @@ export default {
 	},
 
 	addProductToCart(context, product) {
-		var productMod = product.product;
+		let productMod = product.product;
 		productMod.quantity = product.quantity;
 
 		if (context.getters.productInStock(productMod)) {
-			const cartItem = context.state.cart.find(
-				item => item.id === productMod.id
-			);
+			const cartItem = context.state.cart.find(item => item.id === productMod.id);
 			if (!cartItem) {
 				context.commit("pushProductToCart", productMod);
 			} else {
@@ -87,9 +84,7 @@ export default {
 	},
 
 	deleteProductCart(context, product) {
-		const cartItem = context.state.cart.find(
-			item => item.id === product.id
-		);
+		const cartItem = context.state.cart.find(item => item.id === product.id);
 
 		if (cartItem) {
 			context.commit("popProductFromCart", product.id);
@@ -100,7 +95,7 @@ export default {
 
 	changeDisplayQuantity(context, displayQuantity) {
 		context.commit("setDisplayPerPage", Number.parseInt(displayQuantity));
-		var totalPages = Math.ceil(
+		const totalPages = Math.ceil(
 			context.state.totalProducts / context.state.displayQuantity
 		);
 		context.commit("setTotalPages", totalPages);
@@ -114,14 +109,14 @@ export default {
 	},
 
 	changePrevPage(context) {
-		var currentPage = context.state.currentPage;
+		let currentPage = context.state.currentPage;
 		currentPage--;
 		context.commit("setCurrentPage", currentPage);
 		context.dispatch("fetchProductsPagination");
 	},
 
 	changeNextPage(context) {
-		var currentPage = context.state.currentPage;
+		let currentPage = context.state.currentPage;
 		currentPage++;
 		context.commit("setCurrentPage", currentPage);
 		context.dispatch("fetchProductsPagination");
@@ -139,10 +134,10 @@ export default {
 			.where("product_id", "==", this.product_id)
 			.get()
 			.then(docs => {
-				var reviews = [];
+				let reviews = [];
 
 				docs.forEach(function(doc) {
-					var reviewItem = doc.data();
+					let reviewItem = doc.data();
 					reviews.push(reviewItem);
 				});
 			})
@@ -175,8 +170,8 @@ export default {
 	},
 
 	chooseCategory(context, category) {
-		var products = context.state.products;
-		var filterProducts = products.filter(
+		let products = context.state.products;
+		const filterProducts = products.filter(
 			element => element.category == category
 		);
 
@@ -186,8 +181,8 @@ export default {
 	},
 
 	filterManufacturerAction(context, manufacturer) {
-		var products = context.state.products;
-		var filterProducts = products.filter(
+		let products = context.state.products;
+		const filterProducts = products.filter(
 			element => element.manufacturer == manufacturer
 		);
 
@@ -197,8 +192,8 @@ export default {
 	},
 
 	filterSaleAction(context) {
-		var products = context.state.products;
-		var filterProducts = products.filter(element => element.sale == true);
+		let products = context.state.products;
+		const filterProducts = products.filter(element => element.sale == true);
 
 		context.commit("setFilteredProducts", filterProducts);
 		context.commit("setCurrentPage", 1);
@@ -206,8 +201,8 @@ export default {
 	},
 
 	filterStockAction(context) {
-		var products = context.state.products;
-		var filterProducts = products.filter(element => element.stock > 0);
+		let products = context.state.products;
+		const filterProducts = products.filter(element => element.stock > 0);
 
 		context.commit("setFilteredProducts", filterProducts);
 		context.commit("setCurrentPage", 1);
@@ -215,8 +210,8 @@ export default {
 	},
 
 	filterPriceAction(context, highprice) {
-		var products = [...context.state.products];
-		var filterProducts = products.filter(function(element) {
+		let products = [...context.state.products];
+		const filterProducts = products.filter(function(element) {
 			return parseInt(element.price) < parseInt(highprice);
 		});
 
@@ -226,7 +221,7 @@ export default {
 	},
 
 	sortItemsAction(context, sortOptions) {
-		var products = context.state.products;
+		let products = context.state.products;
 
 		function sortPrice(a, b) {
 			return a.price - b.price;
@@ -247,37 +242,37 @@ export default {
 		switch (sortOptions.sortAttr) {
 			case "price":
 				if (sortOptions.orderAttr) {
-				products.sort(sortPrice).reverse();
+					products.sort(sortPrice).reverse();
 				} else {
-				products.sort(sortPrice);
-			}
+					products.sort(sortPrice);
+				}
 
-			break;
+				break;
 
 			case "rating":
 				if (sortOptions.orderAttr) {
-				products.sort(sortRating).reverse();
+					products.sort(sortRating).reverse();
 				} else {
-				products.sort(sortRating);
-			}
+					products.sort(sortRating);
+				}
 
-			break;
+				break;
 
 			case "name":
 				if (sortOptions.orderAttr) {
-				products.sort(sortName).reverse();
+					products.sort(sortName).reverse();
 				} else {
-				products.sort(sortName);
-			}
-			break;
+					products.sort(sortName);
+				}
+				break;
 
 			case "manufacturer":
 				if (sortOptions.orderAttr) {
-				products.sort(sortManufacturer).reverse();
+					products.sort(sortManufacturer).reverse();
 				} else {
-				products.sort(sortManufacturer);
-			}
-			break;
+					products.sort(sortManufacturer);
+				}
+				break;
 		}
 
 		context.commit("setFilteredProducts", products);
@@ -289,7 +284,7 @@ export default {
 			return a.order - b.order;
 		}
 
-		var productsItems = context.state.products.sort(sortOrder);
+		const productsItems = context.state.products.sort(sortOrder);
 
 		context.commit("setFilteredProducts", []);
 		context.commit("setProducts", productsItems);

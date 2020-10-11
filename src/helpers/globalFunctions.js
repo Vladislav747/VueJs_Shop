@@ -1,8 +1,8 @@
 import firebase from "firebase/app";
 export default {
 	showOverlay: function() {
-		var divOverlay = document.getElementsByClassName("overlay");
-		var index = 3000;
+		const divOverlay = document.getElementsByClassName("overlay");
+		let index = 3000;
 		if (divOverlay.length) {
 			index = divOverlay[divOverlay.length - 1].style["z-index"] + 2;
 		}
@@ -13,7 +13,7 @@ export default {
 		let divProductList = document.querySelector(".product-list");
 		divProductList.append(newDiv);
 
-		var result = {
+		const result = {
 			index: index + 1,
 			div: newDiv,
 		};
