@@ -89,7 +89,7 @@ export default {
 		if (cartItem) {
 			context.commit("popProductFromCart", product.id);
 		} else {
-			console.log("Нет такого товара в корзине " + product.id);
+			console.error("Нет такого товара в корзине " + product.id);
 		}
 	},
 
@@ -160,7 +160,7 @@ export default {
 		if (selectedItem) {
 			context.commit("popSelectedFromCart", productId);
 		} else {
-			console.log("Нет такого товара среди выделенных " + productId);
+			console.error("Нет такого товара среди выделенных " + productId);
 		}
 	},
 
