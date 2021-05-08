@@ -80,6 +80,11 @@ export default {
 		context.commit("setCurrentListProducts", currentListProducts);
 	},
 
+	/**
+	 * Добавить товар на сервер
+	 * @param {*} context
+	 * @param {*} product
+	 */
 	addProductToCart(context, product) {
 		let productMod = product.product;
 		productMod.quantity = product.quantity;
@@ -96,6 +101,11 @@ export default {
 		}
 	},
 
+	/**
+	 * Удалить товар из store
+	 * @param {*} context
+	 * @param {*} product
+	 */
 	deleteProductCart(context, product) {
 		const cartItem = context.state.cart.find(item => item.id === product.id);
 

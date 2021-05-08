@@ -46,6 +46,93 @@ router.post("/", (req, res) => {
 		});
 });
 
+/**
+ * Create fake items
+ */
+router.post("/init", (req, res) => {
+	const arr = [
+		{
+			name: "Мужской спортивный костюм",
+			category: "Одежда",
+			price: 120,
+			srcImage:
+				"https://max-demo.ru/upload/resize_cache/iblock/fbe/450_450_140cd750bba9870f18aada2478b24840a/fbe57995f6082c1b45eb8788627748ee.jpg",
+			manufacturer: "Германия",
+			dateOfTask: new Date(Date.now()),
+		},
+		{
+			name: "Мужские шорты с карманами",
+			category: "Одежда",
+			price: 200,
+			srcImage:
+				"https://max-demo.ru/upload/resize_cache/iblock/d9b/450_450_140cd750bba9870f18aada2478b24840a/d9b926aa427b6cdd321bf30d8bac9b70.jpg",
+			manufacturer: "США",
+			dateOfTask: new Date(Date.now()),
+		},
+		{
+			name: "Мужской свитшот с принтом",
+			category: "Одежда",
+			price: 1200,
+			srcImage:
+				"https://max-demo.ru/upload/resize_cache/iblock/ab4/450_450_140cd750bba9870f18aada2478b24840a/ab4c90512553ed5d7502dad355618bcd.jpg",
+			manufacturer: "Германия",
+			dateOfTask: new Date(Date.now()),
+		},
+		{
+			name: "Стул с металлическим каркасом",
+			category: "Мебель",
+			price: 250,
+			srcImage:
+				"https://max-demo.ru/upload/resize_cache/iblock/ea9/600_450_140cd750bba9870f18aada2478b24840a/ea9ed7b55266847b830aee5cbca2f667.jpg",
+			manufacturer: "Германия",
+			dateOfTask: new Date(Date.now()),
+		},
+		{
+			name: "Шкаф угловой",
+			category: "Мебель",
+			price: 2250,
+			srcImage:
+				"https://max-demo.ru/upload/resize_cache/iblock/f37/450_600_140cd750bba9870f18aada2478b24840a/f37297196c581d99ba810808bacb9530.jpg",
+			manufacturer: "Россия",
+			dateOfTask: new Date(Date.now()),
+		},
+	];
+
+	product
+		.insertMany(arr)
+		.then(product => {
+			res.json({
+				message: "success",
+				name: product.name,
+			});
+		})
+		.catch(errors => {
+			res.json({
+				message: "error",
+				errors: errors.errors,
+			});
+		});
+});
+
+/**
+ * Clean all collection
+ */
+router.delete("/all", (req, res) => {
+	product
+		.deleteMany({})
+		.then(() => {
+			res.json({
+				message: "Коллеция успешно очищена",
+			});
+		})
+		.catch(errors => {
+			res.json({
+				message: "error",
+				errors: errors.errors,
+			});
+		});
+});
+
 //Для обновления рейтинга
 router.put("/", (req, res) => {
 	product
