@@ -4,11 +4,18 @@ import {
 	baseURLProduction,
 } from "../config/clientConfigs.js";
 
-export default {
-	// actions = mehtods
+const productsUrl =
+	process.env.NODE_ENV == "development"
+		? baseURLDevelopment
+		: baseURLProduction;
 
+export default {
+	/**
+	 * Получить данные с сервера о товарах
+	 * @param {*} context
+	 */
 	fetchProducts(context) {
-		fetch(baseURLDevelopment + "products", {
+		fetch(productsUrl + "products", {
 			method: "GET",
 			mode: "cors",
 		})

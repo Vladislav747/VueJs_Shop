@@ -5,8 +5,9 @@ let mongoose = require("mongoose");
 
 router.get("/", (req, res) => {
 	product
-		.find({})
+		.find()
 		.then(products => {
+			console.log(products, "products");
 			res.json(products);
 		})
 		.catch(errors => {

@@ -9,7 +9,7 @@
 					<div class="image-wrapper">
 						<img
 							class="product-image"
-							:src="require(`@/static/images/${product.srcImage}`)"
+							:src="`${product.srcImage}`"
 							:alt="`Image of ${product.srcImage}`"
 							:title="`Title of ${product.srcImage}`"
 						/>
@@ -22,12 +22,15 @@
 			</div>
 			<div class="product-properties">
 				<div class="stock-block property-section">
-					<div class="stock available" v-if="inStock(product.stock)">В наличии</div>
+					<div class="stock available" v-if="inStock(product.stock)">
+						В наличии
+					</div>
 					<div class="stock not-available" v-else>Нет в наличии</div>
 				</div>
 				<div class="price-block">
 					<span class="price"
-						>{{ product.price }} <span class="currency">{{ currency }}</span></span
+						>{{ product.price }}
+						<span class="currency">{{ currency }}</span></span
 					>
 				</div>
 			</div>
