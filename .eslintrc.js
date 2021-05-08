@@ -19,10 +19,8 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: "module",
 	},
-	plugins: ["vue"],
+	plugins: ["vue", "prettier"],
 	rules: {
-		"linebreak-style": 0,
-		indent: ["error", "tab"],
 		"no-unused-vars": "warn",
 	},
 };

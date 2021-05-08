@@ -8,7 +8,7 @@ export default {
 	// actions = mehtods
 
 	fetchProducts(context) {
-		fetch(baseURLProduction + "products", {
+		fetch(baseURLDevelopment + "products", {
 			method: "GET",
 			mode: "cors",
 		})
@@ -29,6 +29,10 @@ export default {
 			});
 	},
 
+	/**
+	 * Получить данные пагинации
+	 * @param {*} context
+	 */
 	fetchProductsPagination(context) {
 		//Если данные фильтруются по названию,
 		// категории, цене или другим свойствам то используем их
@@ -74,7 +78,9 @@ export default {
 		productMod.quantity = product.quantity;
 
 		if (context.getters.productInStock(productMod)) {
-			const cartItem = context.state.cart.find(item => item.id === productMod.id);
+			const cartItem = context.state.cart.find(
+				item => item.id === productMod.id
+			);
 			if (!cartItem) {
 				context.commit("pushProductToCart", productMod);
 			} else {
