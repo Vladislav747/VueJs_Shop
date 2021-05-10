@@ -1,108 +1,104 @@
 //vars
 $btn-hover: #579740 !default;
 
-.btn-group-sort{
-    display: inline-flex;
-    align-items: center;
+.btn-group-sort {
+	display: inline-flex;
+	align-items: center;
 
-    .btn-sort{
-        margin: 0 5px;
+	.btn-sort {
+		margin: 0 5px;
 
-        &:hover{
-            background: $btn-hover;
-        }
-    }
+		&:hover {
+			background: $btn-hover;
+		}
+	}
 
-    /* CUSTOM SELECT */
+	/* CUSTOM SELECT */
 
-    .display-sort{
-        &__title{
-            margin-right: 20px;
-        }
+	.display-sort {
+		&__title {
+			margin-right: 20px;
+		}
 
-        &__select{
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+		&__select {
+			margin: 0 auto;
+			position: relative;
+			box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
 
-            &.is-active .select__body{
-                display: block;
-            }
-    
-    
-            .select__header{
-                display: flex;
-                border: 1px solid #ccc;
-                cursor: pointer;
-                border-radius: 3px;
-            }
-    
-            .select__current{
-                font-size: 1em;
-                line-height: 1.5em;
-                padding: 8px;
-            }
-    
-            .select__icon{
-                align-items: center;
-                display: flex;
-                justify-content: center;
-                height: 40px;
-                text-align: center;
-                width: 40px;
-                margin-left: auto;
-                flex-shrink: 0;
-            }
-    
-            .select__body{
-                border: 1px solid #cccccc;
-                background: #fff;
-                border-top: 0;
-                left: 0;
-                right: 0;
-                position: absolute;
-                display: none;
-                top: 100%;
-                transition: all 2s linear;
-                border-radius: 3px;
-            }
-    
-            .select__item{
-                cursor: pointer;
-                font-size: 1em;
-                line-height: 1.5em;
-                padding: 8px;
-    
-                &:hover{
-                background-color: #f2f2f2;
-                }
-            }
-        }
-    }
+			&.is-active .select__body {
+				display: block;
+			}
 
+			.select__header {
+				display: flex;
+				border: 1px solid #ccc;
+				cursor: pointer;
+				border-radius: 3px;
+				width: 125px;
+			}
+
+			.select__current {
+				font-size: 1em;
+				line-height: 1.5em;
+				padding: 8px;
+			}
+
+			.select__icon {
+				align-items: center;
+				display: flex;
+				justify-content: center;
+				height: 40px;
+				text-align: center;
+				width: 40px;
+				margin-left: auto;
+				flex-shrink: 0;
+			}
+
+			.select__body {
+				border: 1px solid #cccccc;
+				background: #fff;
+				border-top: 0;
+				left: 0;
+				right: 0;
+				position: absolute;
+				display: none;
+				top: 100%;
+				transition: all 2s linear;
+				border-radius: 3px;
+			}
+
+			.select__item {
+				cursor: pointer;
+				font-size: 1em;
+				line-height: 1.5em;
+				padding: 8px;
+
+				&:hover {
+					background-color: #f2f2f2;
+				}
+			}
+		}
+	}
 }
 
-@media screen and (max-width: 1024px){
-    .btn-group-sort{
-        justify-content: center;
-    }
-  }
+@media screen and (max-width: 1024px) {
+	.btn-group-sort {
+		justify-content: center;
+	}
+}
 
-@media screen and (max-width: 425px){
-    .btn-group-sort{
-        flex-direction: column;
-        margin: 4px 5px;
- 
-   }
- }
+@media screen and (max-width: 425px) {
+	.btn-group-sort {
+		flex-direction: column;
+		margin: 4px 5px;
+	}
+}
 
-@media screen and (max-width: 320px){
-    .btn-group-sort{
-        flex-direction: column;
-        .btn-sort{
-            margin: 4px 5px;
-        }
-        
- 
-   }
- }
+@media screen and (max-width: 320px) {
+	.btn-group-sort {
+		flex-direction: column;
+		.btn-sort {
+			margin: 4px 5px;
+		}
+	}
+}
