@@ -1,66 +1,156 @@
-footer{
-    padding: 20px;
-  
-      .footer-icon{
-          margin: 0 10px;
-          color: color;
-      }
+footer {
+  padding: 20px;
+
+  .footer-icon {
+    margin: 0 10px;
+    color: color;
   }
-  
-  //Checkbox theme switcher
-  .theme-switch {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-      margin: 10px 10px 0 20px;
+
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  
-  .theme-switch + label {
-      position: relative;
-      padding: 0 0 0 60px;
-      cursor: pointer;
+}
+
+//Checkbox theme switcher
+.theme-switch {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 10px 0 20px;
+}
+
+.theme-switch + label {
+  position: relative;
+  padding: 0 0 0 60px;
+  cursor: pointer;
+}
+
+.theme-switch + label:before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 50px;
+  height: 26px;
+  border-radius: 13px;
+  background: #cdd1da;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+}
+
+.theme-switch + label:after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: 0.2s;
+}
+.theme-switch:checked + label:before {
+  background: #000000;
+}
+.theme-switch:checked + label:after {
+  left: 26px;
+}
+.theme-switch:focus + label:before {
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(255, 255, 0, 0.7);
+}
+
+.footer__icons {
+  display: inline-flex;
+
+  .icon {
+    position: relative;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 15px;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  
-  
-  .theme-switch + label:before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: 0;
-      width: 50px;
-      height: 26px;
-      border-radius: 13px;
-      background: #CDD1DA;
-      box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
-      transition: .2s;
+
+  .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  
-  .theme-switch + label:after {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: 2px;
-      width: 22px;
-      height: 22px;
-      border-radius: 10px;
-      background: #FFF;
-      box-shadow: 0 2px 5px rgba(0,0,0,.3);
-      transition: .2s;
+
+  .tooltip::before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background-color: #ffffff;
+    bottom: -3px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
-  .theme-switch:checked + label:before {
-      background: #000000;
+
+  .icon:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
-  .theme-switch:checked + label:after {
-      left: 26px;
+
+  .footer__svg {
+    height: 30px;
   }
-  .theme-switch:focus + label:before {
-      box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+
+  .icon:hover span,
+  .icon:hover .tooltip {
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
   }
-  
-  @media screen and (max-width: 768px){
-  
+
+  .facebook:hover,
+  .facebook:hover .tooltip,
+  .facebook:hover .tooltip::before {
+    background-color: #3b5999;
+    color: #ffffff;
   }
-  
-  @media screen and (max-width: 425px) {
-    
+
+  .instagram:hover,
+  .instagram:hover .tooltip,
+  .instagram:hover .tooltip::before {
+    background-color: #e1306c;
+    color: #ffffff;
   }
+
+  .github:hover,
+  .github:hover .tooltip,
+  .github:hover .tooltip::before {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  .youtube:hover,
+  .youtube:hover .tooltip,
+  .youtube:hover .tooltip::before {
+    background-color: #de463b;
+    color: #ffffff;
+  }
+}
