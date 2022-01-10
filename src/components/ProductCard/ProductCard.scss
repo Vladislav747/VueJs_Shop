@@ -80,10 +80,11 @@
 			word-wrap: break-word;
 			padding: 15px 0;
 			align-items: center;
+			justify-content: space-between;
 			display: flex;
 
 			.price-block {
-				margin: 0 auto;
+				//margin: 0 auto;
 				padding: 15px;
 				text-align: center;
 			}

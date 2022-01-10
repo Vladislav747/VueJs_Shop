@@ -161,7 +161,6 @@
 			.products-wrapper{
 				.products{
 					justify-content: flex-start;
-					flex-direction: column;
 				}
 			}
       
@@ -174,20 +173,20 @@
     .product-list{
 			.products-wrapper{
 				.products-list-controls{
-          flex-direction: column;
+                  flex-direction: column;
 
-          .display-quantity{
-            margin: 10px;
+                  .display-quantity{
+                    margin: 10px;
 
-            .select__body{
-              z-index: 999;
-            }
-          }
-          
-          .display-sort{
-            flex-direction: row;
-            margin: 10px;
-          }
+                    .select__body{
+                      z-index: 999;
+                    }
+                  }
+
+                  .display-sort{
+                    flex-direction: row;
+                    margin: 10px;
+                  }
 				}
 			}
       

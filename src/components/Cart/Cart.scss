@@ -1,9 +1,15 @@
 .shopping-cart{
-   padding: 20px;
+  padding: 20px;
+  width: 100%;
+
+  .shopping-cart__title{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
 
 		.empty-cart {
 			position: relative;
-			left: 45%;
 			
 			.btn-shop-cart{
 				padding: 10px 30px;
@@ -21,26 +27,51 @@
 			}
     }
   
-    .shopping-cart-items {
+    .shopping-cart__bottom {
       display: flex;
       flex-direction: row;
+      box-sizing: border-box;
+      flex-wrap: wrap;
+      margin-bottom: -24px;
+      margin-left: -24px;
+      max-width: calc(100% + 24px);
+      width: calc(100% + 24px);
       
 
       .shopping-cart__left{
         padding: 20px;
         display: flex;
         flex-direction: column;
-        flex: 3;
-        
+        flex-basis: calc(66.6666% - 24px);
+        max-width: calc(66.6666% - 24px);
+
+        .shopping-cart__controls{
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 10px 0;
+          border-bottom: 1px solid #5c5b5b;
+
+          .choose-all{
+            font-weight: 400;
+            margin-right: 20px;
+            cursor: pointer;
+          }
+
+          .delete-chosen{
+            color: #f91155;
+            cursor: pointer;
+          }
+        }
+
         .shopping-cart-title{
-          background: #d2eec7;
           border-radius: 10px;
           padding: 20px;
-					text-align: center;
-					
-					.btn-clean-cart{
-						width: 50%;
-					}
+          text-align: center;
+
+          .btn-clean-cart{
+              width: 50%;
+          }
         }
 
         .cart-product-card {
@@ -101,7 +132,8 @@
 
       .shopping-cart__right{
         padding: 20px;
-        flex: 1;
+        flex-basis: calc(33.3333% - 24px);
+        max-width: calc(33.3333% - 24px);
 
         .cart-checkout {
           flex: 1;
@@ -144,7 +176,7 @@
   }
 
    @media screen and (max-width: 768px) {
-    .shopping-cart-items {
+    .shopping-cart__bottom {
       flex-direction: column;
     }
     .cart-product-card {
@@ -164,7 +196,7 @@
 
     .shopping-cart{
 
-      .shopping-cart-items {
+      .shopping-cart__bottom {
         flex-direction: column;
 
         .shopping-cart__left{
@@ -207,7 +239,7 @@
   @media screen and (max-width: 320px) {
 
     .shopping-cart{
-      .shopping-cart-items {
+      .shopping-cart__bottom {
         flex-direction: column;
 
         .shopping-cart__left{

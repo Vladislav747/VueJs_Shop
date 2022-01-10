@@ -10,8 +10,8 @@
 						<img
 							class="product-image"
 							:src="`${product.srcImage}`"
-							:alt="`Image of ${product.srcImage}`"
-							:title="`Title of ${product.srcImage}`"
+							:alt="`Image of product`"
+							:title="`Title of image`"
 						/>
 					</div>
 

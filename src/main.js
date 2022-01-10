@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuelidate from "vuelidate";
 
+import LogRocket from 'logrocket';
+
 import "./plugins/bootstrap-vue";
 import App from "./App";
 import router from "./router";
@@ -65,6 +67,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+LogRocket.init('qnilg7/cams');
 
 new Vue({
   el: "#app",
